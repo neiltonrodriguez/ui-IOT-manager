@@ -1,0 +1,1196 @@
+<template>
+    <div>
+        <h3 class="detalhes">DETALHES SENSORES</h3>
+    </div>
+    <div class="divide-x my-5">
+        <hr>
+    </div>
+    <div class="container-fluid p-5">
+        <div class="flex flex-wrap">
+            <div class="w-full">
+                <ul class="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row">
+                    <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
+                        <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal"
+                            v-on:click="toggleTabs(1)"
+                            v-bind:class="{ 'text-gray-800 bg-gray-300': openTab !== 1, 'text-white bg-gray-800': openTab === 1 }">
+                            Detalhes do Sensor
+                        </a>
+                    </li>
+                    <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
+                        <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal"
+                            v-on:click="toggleTabs(2)"
+                            v-bind:class="{ 'text-gray-800 bg-gray-300': openTab !== 2, 'text-white bg-gray-800': openTab === 2 }">
+                            Sensor scripts
+                        </a>
+                    </li>
+                    <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
+                        <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal"
+                            v-on:click="toggleTabs(3)"
+                            v-bind:class="{ 'text-gray-800 bg-gray-300': openTab !== 3, 'text-white bg-gray-800': openTab === 3 }">
+                            Dados lidos
+                        </a>
+                    </li>
+
+                </ul>
+                <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
+                    <div class="px-4 py-5 flex-auto">
+                        <div class="tab-content tab-space">
+
+                            <div v-bind:class="{ 'hidden': openTab !== 1, 'block': openTab === 1 }">
+
+                                <form class="row g-3" v-on:submit.prevent="store(sensor)">
+                                    <div class="grid gap-6 mb-6 md:grid-cols-2">
+                                        <div>
+                                            <label
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nome</label>
+                                            <input type="text" v-model="sensor.nome" v-on:keyup="habilitarSalvar()"
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 disabled:bg-red-50"
+                                                placeholder="" required>
+                                        </div>
+                                        <div v-if="user.tipo == 4">
+                                            <label
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Conta</label>
+                                            <select v-model="sensor.conta" disabled class="edit-form">
+                                                <option value="" disabled selected>Escolha a conta</option>
+                                                <option v-for="c in contas" :key="c.id" :value="c.conta">{{ c.conta }}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descrição</label>
+                                            <input type="text" v-model="sensor.descricao" v-on:keyup="habilitarSalvar()"
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 disabled:bg-red-50"
+                                                placeholder="">
+                                        </div>
+                                        <div>
+                                            <label
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Serial</label>
+                                            <input type="text" v-model="sensor.serial" v-on:keyup="habilitarSalvar()"
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 disabled:bg-red-50"
+                                                placeholder="">
+                                        </div>
+                                        <div v-if="user.tipo == 4">
+                                            <label
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Criado
+                                                por</label>
+                                            <input type="text" v-model="sensor.criadopor" disabled
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 disabled:bg-red-50"
+                                                placeholder="">
+                                        </div>
+                                        <div v-if="user.tipo == 4">
+                                            <label
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Modificado
+                                                por</label>
+                                            <input type="text" v-model="sensor.modificadopor" disabled
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 disabled:bg-red-50"
+                                                placeholder="" required>
+                                        </div>
+                                        <div>
+                                            <label
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Empresa</label>
+                                            <select class="edit-form" v-model="sensor.empresa"
+                                                @change="habilitarSalvar()">
+                                                <option value="" disabled>Escolha uma empresa</option>
+                                                <template v-for="e in empresas" :key="e.id">
+                                                    <option selected v-if="e.id == sensor.empresa" :value="e.id">{{
+                                                        e.nome
+                                                        }}</option>
+                                                </template>
+                                            </select>
+                                        </div>
+
+                                        <div>
+                                            <label
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Departamento</label>
+                                            <select v-model="sensor.departamento" @change="habilitarSalvar()"
+                                                class="edit-form">
+                                                <option value="" disabled selected>Escolha a conta</option>
+                                                <option v-for="dp in departamentos" :key="dp.id" :value="dp.id">{{
+                                                    dp.titulo
+                                                    }}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fabricante</label>
+                                            <select v-model="sensor.fabricante" @change="habilitarSalvar()"
+                                                class="edit-form">
+                                                <option value="" disabled selected>Escolha a conta</option>
+                                                <option v-for="f in fabricantes" :key="f.id" :value="f.id">{{ f.titulo
+                                                    }}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Modelo</label>
+                                            <select v-model="sensor.modelo" @change="habilitarSalvar()"
+                                                class="edit-form">
+                                                <option value="" disabled selected>Escolha a conta</option>
+                                                <option v-for="m in modelos" :key="m.id" :value="m.id">{{ m.titulo }}
+                                                </option>
+                                            </select>
+                                        </div>
+
+                                        <div>
+                                            <label
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ativos</label>
+                                            <select v-model="sensor.ativo" class="edit-form"
+                                                @change="habilitarSalvar()">
+                                                <option value="" disabled selected>Escolha um</option>
+                                                <option v-for="v in ativos" :key="v.id" :value="v.id">{{ v.nome
+                                                    }}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Habilitado</label>
+                                            <select class="edit-form" v-model="sensor.is_active"
+                                                @change="habilitarSalvar()">
+                                                <option :value="true">Sim</option>
+                                                <option :value="false">Não</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Sensor
+                                                em alerta</label>
+                                            <select class="edit-form" v-model="sensor.sensoremalerta"
+                                                @change="habilitarSalvar()">
+                                                <option :value="true">Sim</option>
+                                                <option :value="false">Não</option>
+                                            </select>
+                                        </div>
+
+                                        <div>
+                                            <label
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Grupo
+                                                do sensor</label>
+                                            <select class="edit-form" v-model="sensor.grupo"
+                                                @change="habilitarSalvar()">
+                                                <option selected value="" disabled>Escolha um grupo</option>
+                                                <option v-for="sg in sensorgrupos" :value="sg.id" :key="sg.id">{{
+                                                    sg.nome
+                                                    }}</option>
+                                            </select>
+                                        </div>
+
+                                        <div>
+                                            <label
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tipo</label>
+                                            <select v-model="sensor.tipo" @change="habilitarSalvar()" class="edit-form">
+                                                <option value="" disabled selected>Escolha a conta</option>
+                                                <option v-for="t in tipos" :key="t.id" :value="t.id">{{ t.nome }}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gateway
+                                                IOT</label>
+                                            <select required v-model="sensor.gatewayiot" @change="habilitarSalvar()"
+                                                class="edit-form">
+                                                <option value="" disabled selected>Escolha a conta</option>
+                                                <option v-for="t in gatewayiot" :key="t.id" :value="t.id">{{ t.titulo }}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div v-if="sensor.atributos.valor_ref1">
+                                            <label
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{
+                                                sensor.atributos.valor_ref1.label }}</label>
+                                            <input type="text" v-model="sensor.valor_ref1" class="edit-form"
+                                                placeholder="" required>
+                                        </div>
+                                        <div v-if="sensor.atributos.valor_ref2">
+                                            <label
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{
+                                                sensor.atributos.valor_ref2.label }}</label>
+                                            <input type="text" v-model="sensor.valor_ref2" class="edit-form"
+                                                placeholder="" required>
+                                        </div>
+                                        <div v-if="sensor.atributos.valor_ref3">
+                                            <label
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{
+                                                sensor.atributos.valor_ref3.label }}</label>
+                                            <input type="text" v-model="sensor.valor_ref3" class="edit-form"
+                                                placeholder="" required>
+                                        </div>
+                                        <div v-if="sensor.atributos.valor_ref4">
+                                            <label
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{
+                                                sensor.atributos.valor_ref4.label }}</label>
+                                            <input type="text" v-model="sensor.valor_ref4" class="edit-form"
+                                                placeholder="" required>
+                                        </div>
+                                        <div v-if="sensor.atributos.valor_ref5">
+                                            <label
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{
+                                                sensor.atributos.valor_ref5.label }}</label>
+                                            <input type="text" v-model="sensor.valor_ref5" class="edit-form"
+                                                placeholder="" required>
+                                        </div>
+                                        <div v-if="sensor.atributos.valor_ref6">
+                                            <label
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{
+                                                sensor.atributos.valor_ref6.label }}</label>
+                                            <input type="text" v-model="sensor.valor_ref6" class="edit-form"
+                                                placeholder="" required>
+                                        </div>
+                                        <div v-if="sensor.atributos.valor_ref7">
+                                            <label
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{
+                                                sensor.atributos.valor_ref7.label }}</label>
+                                            <input type="text" v-model="sensor.valor_ref7" class="edit-form"
+                                                placeholder="" required>
+                                        </div>
+                                        <div v-if="sensor.atributos.valor_ref8">
+                                            <label
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{
+                                                sensor.atributos.valor_ref8.label }}</label>
+                                            <input type="text" v-model="sensor.valor_ref8" class="edit-form"
+                                                placeholder="" required>
+                                        </div>
+                                        <div v-if="sensor.atributos.valor_ref9">
+                                            <label
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{
+                                                sensor.atributos.valor_ref9.label }}</label>
+                                            <input type="text" v-model="sensor.valor_ref9" class="edit-form"
+                                                placeholder="" required>
+                                        </div>
+                                        <div v-if="sensor.atributos.valor_ref10">
+                                            <label
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{
+                                                sensor.atributos.valor_ref10.label }}</label>
+                                            <input type="text" v-model="sensor.valor_ref10" class="edit-form"
+                                                placeholder="" required>
+                                        </div>
+                                        <div>
+                                            <a class="cursor-pointer" @click="mostrarModalMapa()"><img
+                                                    src="../../assets/img/map.png"
+                                                    class="duration-200 w-20 hover:scale-110"></a>
+
+                                        </div>
+
+
+
+                                    </div>
+                                    <div v-if="modal" class="mb-3">
+                                        <div>
+                                            <Iframe :link="sensor.mapa" />
+                                        </div>
+
+                                    </div>
+                                    <button type="submit" v-bind:disabled="isDisabled"
+                                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 disabled:bg-gray-300">Salvar</button>
+                                    <button type="button" @click="cancelar()"
+                                        class="text-white bg-red-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mx-3">Cancelar</button>
+                                </form>
+                            </div>
+                            <div v-bind:class="{ 'hidden': openTab !== 2, 'block': openTab === 2 }">
+                                <div>
+
+                                    <button
+                                        class="mx-3 my-5 px-4 py-2 font-semibold text-sm bg-green-800 text-white rounded-md shadow-sm"
+                                        @click="mostrarFormScript()">Adicionar scripts</button>
+                                </div>
+                                <div v-if="mostrarFormSC">
+                                    <form class="row g-3" v-on:submit.prevent="createSensorScript(sc)">
+
+                                        <div class="grid gap-6 mb-6 md:grid-cols-2">
+                                            <div>
+                                                <label
+                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Título</label>
+                                                <input v-on:keyup="habilitarSalvar()" type="text" v-model="sc.titulo"
+                                                    class="edit-form" placeholder="" required>
+
+                                            </div>
+                                            <div>
+                                                <label
+                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Regra</label>
+                                                <input v-on:keyup="habilitarSalvar()" type="text" v-model="sc.regra"
+                                                    class="edit-form" placeholder="" required>
+
+                                            </div>
+                                            <div>
+                                                <label
+                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ação</label>
+                                                <input v-on:keyup="habilitarSalvar()" type="text" v-model="sc.acao"
+                                                    class="edit-form" placeholder="" required>
+
+                                            </div>
+                                            <div>
+                                                <label
+                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descrição</label>
+                                                <input v-on:keyup="habilitarSalvar()" type="text" v-model="sc.descricao"
+                                                    class="edit-form" placeholders="" required>
+
+                                            </div>
+                                            <div>
+                                                <label
+                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Enviar
+                                                    Notificação</label>
+                                                <select class="edit-form" v-model="sc.enviar_notificacao"
+                                                    @change="habilitarSalvar()">
+                                                    <option :value="true">Sim</option>
+                                                    <option :value="false">Não</option>
+                                                </select>
+                                            </div>
+
+                                            <div v-if="sc.id">
+                                                <label
+                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Habilitado</label>
+                                                <select class="edit-form" v-model="sc.is_active"
+                                                    @change="habilitarSalvar()">
+                                                    <option :value="true">Sim</option>
+                                                    <option :value="false">Não</option>
+                                                </select>
+                                            </div>
+                                            <div>
+                                                <label
+                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Enviar
+                                                    Notificação</label>
+                                                <select @change="listarNotificacoes()" class="edit-form"
+                                                    v-model="sc.enviar_notificacao">
+                                                    <option :value="true">Sim</option>
+                                                    <option :value="false">Não</option>
+                                                </select>
+                                            </div>
+                                            <div v-if="notificacoes.length != 0">
+                                                <label
+                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Notificações</label>
+                                                <select v-model="sc.notificacao" class="edit-form">
+                                                    <option value="" disabled selected>Escolha a conta</option>
+                                                    <option v-for="c in notificacoes" :key="c.id" :value="c.conta">{{
+                                                        c.conta }}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div>
+                                                <label
+                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Alerta</label>
+                                                <select class="edit-form" v-model="sc.alerta">
+                                                    <option :value="true">Sim</option>
+                                                    <option :value="false">Não</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+
+                                        <button type="submit" :disabled="isDisabled"
+                                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">salvar</button>
+                                        <button type="button" @click="mostrarFormScript()"
+                                            class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 mx-3 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">fechar</button>
+
+
+
+                                    </form>
+                                </div>
+                                <table class="border-collapse table-fixed w-full">
+                                    <thead>
+                                        <tr>
+
+                                            <th
+                                                class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
+                                                Título</th>
+                                            <th
+                                                class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
+                                                Regra</th>
+                                            <th
+                                                class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
+                                                Ação</th>
+                                            <th
+                                                class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
+                                                Habilitado</th>
+                                            <th
+                                                class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
+                                                Ação</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="bg-white dark:bg-slate-800">
+                                        <tr v-for="u in sensorscripts" :key="u.id">
+                                            <td
+                                                class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                                                {{ u.titulo }}
+                                            </td>
+                                            <td
+                                                class="border-b border-slate-100  dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400 ">
+                                                {{ u.regra }}
+                                            </td>
+                                            <td
+                                                class="border-b border-slate-100  dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400 ">
+                                                {{ u.acao }}
+                                            </td>
+
+                                            <td
+                                                class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                                                <template v-if="u.is_active">
+                                                    <div class="flex items-center">
+                                                        <div class="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div>
+                                                        Sim
+                                                    </div>
+                                                </template>
+                                                <template v-else>
+                                                    <div class="flex items-center">
+                                                        <div class="h-2.5 w-2.5 rounded-full bg-red-500 mr-2"></div> Não
+                                                    </div>
+                                                </template>
+                                            </td>
+                                            <td
+                                                class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                                                <button @click="detailsSC(u.id)" class="btn">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                        viewBox="0 0 24 24" stroke-width="1" stroke="currentColor"
+                                                        class="w-6 h-6">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                    </svg>
+                                                </button>
+                                                <button @click="deleteSC(u.id)" class="btn">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                        viewBox="0 0 24 24" stroke-width="1" stroke="currentColor"
+                                                        class="w-6 h-6">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                                                    </svg>
+
+
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="py-4">
+                                    <button v-for="(page, index) in pages" :key="page"
+                                        class="px-3 mx-1 py-2 text-sm bg-blue-700 hover:bg-blue-900 focus:bg-violet-700 text-white"
+                                        :class="{ current: page === current }" @click="changePage(index)">
+                                        {{ page }}
+                                    </button>
+                                    <span class="mx-4 text-xd font-semibold text-blue-700">total de registros:</span> {{
+                                    total }}
+                                </div>
+                                <button type="button" @click="cancelar()"
+                                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Voltar</button>
+                            </div>
+                            <div v-bind:class="{ 'hidden': openTab !== 3, 'block': openTab === 3 }">
+
+                                <div class="w-full mb-2" v-for="d in dados" :key="d">
+                                    <div class="bg-slate-200 p-2 duration-200
+                                        rounded-md">
+
+                                        <table class="border-collapse table-fixed w-full">
+
+                                            <tr>
+                                                <th v-for="x in d.leituras" :key="x"
+                                                    class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
+                                                    {{ x.label }}</th>
+
+                                            </tr>
+
+                                            <tbody class="bg-white dark:bg-slate-800">
+                                                <tr>
+                                                    <td v-for="x in d.leituras" :key="x"
+                                                        class="border-b border-r-2 border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+
+                                                        <template v-if="x.label == 'Link'">
+                                                            <a class="text-red-600" target="_blank" :href="x.valor">Ver
+                                                                mapa</a>
+                                                        </template>
+                                                        <template v-else>
+
+                                                            {{ x.valor }}
+                                                        </template>
+                                                    </td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                                <div class="py-4">
+                                    <button v-for="(page, index) in pages1" :key="page"
+                                        class="px-3 mx-1 py-2 text-sm bg-blue-700 hover:bg-blue-900 focus:bg-violet-700 text-white"
+                                        :class="{ current: page === current1 }" @click="changePage1(index)">
+                                        {{ page }}
+                                    </button>
+                                    <span class="mx-4 text-xd font-semibold text-blue-700">total de registros:</span> {{
+                                    total1 }}
+                                </div>
+                                <hr>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+import http from '../../services/http.js'
+import { ref } from 'vue'
+import router from '../../router'
+import { useAuth } from '../../stores/auth.js'
+import Iframe from '../../components/Iframe.vue'
+
+const auth = useAuth();
+
+export default {
+    components: {
+        Iframe
+    },
+    data() {
+        return {
+            modal: false,
+            contas: [],
+            mostrarFormSC: false,
+            inputSC: 1,
+            notificacoes: [],
+            sc: {
+                enviar_notificacao: false,
+                notificacao: null
+            },
+            dadoslidos: [],
+            sensor: {
+                valor_ref1: '',
+                valor_ref2: '',
+                valor_ref3: '',
+                valor_ref4: '',
+                valor_ref5: '',
+                valor_ref6: '',
+                valor_ref7: '',
+                valor_ref8: '',
+                valor_ref9: '',
+                valor_ref10: '',
+                atributos: {
+                    valor_ref1: {
+                        label: "",
+                        parametro: ""
+                    },
+                    valor_ref2: {
+                        label: "",
+                        parametro: ""
+                    },
+                    valor_ref3: {
+                        label: "",
+                        parametro: ""
+                    },
+                    valor_ref4: {
+                        label: "",
+                        parametro: ""
+                    },
+                    valor_ref5: {
+                        label: "",
+                        parametro: ""
+                    },
+                    valor_ref6: {
+                        label: "",
+                        parametro: ""
+                    },
+                    valor_ref7: {
+                        label: "",
+                        parametro: ""
+                    },
+                    valor_ref8: {
+                        label: "",
+                        parametro: ""
+                    },
+                    valor_ref9: {
+                        label: "",
+                        parametro: ""
+                    },
+                    valor_ref10: {
+                        label: "",
+                        parametro: ""
+                    }
+                },
+                complemento: "",
+                fabricante: "",
+                modelo: "",
+                tipo: "",
+                ativo: "",
+                departamento: "",
+                gatewayiot: ""
+            },
+            sensorgrupos: [],
+            departamentos: [],
+            tipos: [],
+            fabricantes: [],
+            modelos: [],
+            openTab: 1,
+            user: {},
+            empresas: [],
+            isDisabled: true,
+            isDisabled2: true,
+            sensorscripts: [],
+            ativos: [],
+            offset: 0,
+            limit: 5,
+            pages: [],
+            total: 0,
+            offset1: 0,
+            limit1: 5,
+            pages1: [],
+            total1: 0,
+            gatewayiot: [],
+            dados: [],
+            mostrarLeituras: false
+        };
+    },
+    methods: {
+        listarNotificacoes(){
+            if(this.sc.enviar_notificacao){
+                this.getNotificacoes();
+            } else {
+                this.notificacoes  = null
+            }
+        },
+        getNotificacoes() {
+            let query = `?so_ativos=true`
+            if (this.user.tipo == 4) {
+                query = `?conta=${this.sc.conta}&so_ativos=true`
+            }
+            const url = `/listaitens/notificacao/lista${query}`
+            http.get(url)
+                .then(res => {
+                    this.notificacoes = res.data.results
+                })
+                .catch(e => {
+                    this.$swal("Oops...", e.response.data.detail, "error");
+                    if (e.response.data.detail == "Você não tem permissão para executar essa ação.") {
+                        this.$router.push('/')
+                    }
+                });
+        },
+        mostrarModalMapa() {
+            this.modal = !this.modal
+        },
+        store(formD) {
+            let formData = new FormData()
+            formData.append('nome', formD.nome)
+            formData.append('descricao', formD.descricao)
+            formData.append('serial', formD.serial)
+            formData.append('is_active', formD.is_active)
+            formData.append('sensoremalerta', formD.sensoremalerta)
+            formData.append('gatewayiot', formD.gatewayiot)
+            if (formD.valor_ref1 != "") {
+                formData.append('valor_ref1', formD.valor_ref1)
+            }
+            if (formD.valor_ref2 != "") {
+                formData.append('valor_ref2', formD.valor_ref2)
+            }
+            if (formD.valor_ref3 != "") {
+                formData.append('valor_ref3', formD.valor_ref3)
+            }
+            if (formD.valor_ref4 != "") {
+                formData.append('valor_ref4', formD.valor_ref4)
+            }
+            if (formD.valor_ref5 != "") {
+                formData.append('valor_ref5', formD.valor_ref5)
+            }
+            if (formD.valor_ref6 != "") {
+                formData.append('valor_ref6', formD.valor_ref6)
+            }
+            if (formD.valor_ref7 != "") {
+                formData.append('valor_ref7', formD.valor_ref7)
+            }
+            if (formD.valor_ref8 != "") {
+                formData.append('valor_ref8', formD.valor_ref8)
+            }
+            if (formD.valor_ref9 != "") {
+                formData.append('valor_ref9', formD.valor_ref9)
+            }
+            if (formD.valor_ref10 != "") {
+                formData.append('valor_ref10', formD.valor_ref10)
+            }
+            if (formD.empresa != "" && formD.empresa != null) {
+                formData.append('empresa', formD.empresa)
+            }
+            if (formD.departamento != '' && formD.departamento != null) {
+                formData.append('departamento', formD.departamento)
+            }
+            if (formD.grupo != '' && formD.grupo != null) {
+                formData.append('grupo', formD.grupo)
+            }
+            if (formD.fabricante != '' && formD.fabricante != null) {
+                formData.append('fabricante', formD.fabricante)
+            }
+            if (formD.modelo != '' && formD.modelo != null) {
+                formData.append('modelo', formD.modelo)
+            }
+            if (formD.tipo != '' && formD.tipo != null) {
+                formData.append('tipo', formD.tipo)
+            }
+            if (formD.ativo != '' && formD.ativo != null) {
+                formData.append('ativo', formD.ativo)
+            }
+            formData.append('valorreferencia', formD.valorreferencia)
+            const headers = { 'Content-Type': 'multipart/form-data' };
+            http.put('/sensores/' + this.sensor.id + '/', formData, { headers })
+                .then(res => {
+                    this.sensor = res.data
+                    this.toggleTabs(2);
+                })
+                .catch(e => {
+                    console.log(e.response);
+                    this.$swal("Oops...", e.response.data.detail, "error");
+                    if (e.response.data.detail == "Você não tem permissão para executar essa ação.") {
+                        this.$router.push('/')
+                    }
+                });
+        },
+        verLeituras(hora) {
+            if (document.getElementById('mostrar' + hora).style.display === "none") {
+                document.getElementById('mostrar' + hora).style.display = "block"
+            } else {
+                document.getElementById('mostrar' + hora).style.display = "none"
+            }
+        },
+        getGatewayIot() {
+            let query = '?'
+            if (this.user.tipo == 4) {
+                query = `?conta=${this.sensor.conta}&`
+            }
+
+            const url = `/listaitens/gatewayiot/lista/${query}so_ativos=true`;
+            http.get(url)
+                .then(res => {
+                    this.gatewayiot = res.data.results
+                })
+                .catch(e => {
+                    this.$swal("Oops...", e.response.data.detail, "error");
+                    if (e.response.data.detail == "Você não tem permissão para executar essa ação.") {
+                        this.$router.push('/')
+                    }
+                });
+
+        },
+        getDadosLidos(i = null) {
+            this.dados = []
+            if (i) {
+                this.offset1 = i
+            }
+            console.log(i)
+            const url = `/sensores/${this.sensor.id}/dadoslidos?limit=${this.limit1}&offset=${this.limit1 * this.offset1}&ordering=-id`
+            http.get(url)
+                .then(res => {
+                    this.dadoslidos = res.data.results
+                    this.total1 = res.data.count
+                    const qty = Math.ceil(this.total1 / this.limit1);
+                    if (qty <= 1) return [1];
+                    this.pages1 = Array.from(Array(qty).keys(), (i) => i + 1);
+                    this.montarDadosLidos();
+
+                })
+                .catch(e => {
+                    this.$swal("Oops...", e.response.data.detail, "error");
+                    if (e.response.data.detail == "Você não tem permissão para executar essa ação.") {
+                        this.$router.push('/')
+                    }
+                });
+        },
+        habilitarSalvar() {
+            this.isDisabled = false
+        },
+        changePage(i) {
+            this.getSensorScripts(i);
+            this.offset = 0
+        },
+        changePage1(i) {
+            this.getDadosLidos(i);
+            this.offset1 = 0
+        },
+        toggleTabs: function (tabNumber) {
+            if (tabNumber == 1) {
+                this.openTab = tabNumber
+            }
+            if (tabNumber == 2) {
+                this.getSensorScripts();
+                this.openTab = tabNumber
+            }
+            if (tabNumber == 3) {
+                this.montarDadosLidos();
+                this.openTab = tabNumber
+            }
+        },
+        montarDadosLidos() {
+            this.dados = []
+            let arr = []
+            for (let i = 0; i < this.dadoslidos.length; i++) {
+                let x = this.dadoslidos[i]
+                let a = {
+                    horaregistro: x.horaregistro,
+                    leituras: []
+                }
+                if (x.atributos.valor_lido1) {
+                    let b = {
+                        label: x.atributos.valor_lido1,
+                        valor: x.valor_lido1
+                    }
+                    a.leituras.push(b)
+                }
+                if (x.atributos.valor_lido2) {
+                    let b = {
+                        label: x.atributos.valor_lido2,
+                        valor: x.valor_lido2
+                    }
+                    a.leituras.push(b)
+                }
+                if (x.atributos.valor_lido3) {
+                    let b = {
+                        label: x.atributos.valor_lido3,
+                        valor: x.valor_lido3
+                    }
+                    a.leituras.push(b)
+                }
+                // arr.push(a);
+                this.dados.push(a)
+            }
+            this.acrescentarLinkMap();
+
+
+        },
+        acrescentarLinkMap() {
+            let long = ""
+            let lat = ""
+
+            for (let i = 0; i < this.dados.length; i++) {
+                for (let x = 0; x < this.dados[i].leituras.length; x++) {
+                    if (this.dados[i].leituras[x].label == 'Longitude') {
+                        long = this.dados[i].leituras[x].valor
+                    } else if (this.dados[i].leituras[x].label == 'Latitude') {
+                        lat = this.dados[i].leituras[x].valor
+                    }
+
+                }
+                if (long != "" && lat != "") {
+                    let link = `https://maps.google.com/maps?q=${lat}%2C${long}&z=17&hl=pt-BR`
+                    let b = {
+                        label: 'Link',
+                        valor: link
+                    }
+                    this.dados[i].leituras.push(b)
+                }
+            }
+
+
+
+        },
+        current() {
+            return this.offset ? this.offset + 1 : 1;
+        },
+        current1() {
+            return this.offset1 ? this.offset1 + 1 : 1;
+        },
+        mostrarFormScript() {
+            this.mostrarFormSC = !this.mostrarFormSC
+        },
+        setSensor() {
+            http.get('/sensores/' + this.$route.params.id)
+                .then(res => {
+                    this.sensor = res.data
+                    this.getSensorGrupos();
+                    this.getDepartamentos();
+                    this.getModelos();
+                    this.getTipos();
+                    this.getFabricantes();
+                    this.getAtivos();
+                    this.getGatewayIot();
+                    this.getDadosLidos();
+
+                })
+                .catch(e => {
+                    this.$swal("Oops...", e.response.data.detail, "error");
+                    if (e.response.data.detail == "Você não tem permissão para executar essa ação.") {
+                        this.$router.push('/')
+                    }
+                });
+        },
+        createSensorScript(sc) {
+            if (sc.id) {
+                this.updateSensorScripts(sc);
+            } else {
+                http.post('/sensores/' + this.sensor.id + '/sensorscripts/', sc)
+                    .then(res => {
+                        this.$swal.fire({
+                            icon: 'success',
+                            title: 'Criado com sucesso',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                        this.getSensorScripts()
+                        this.sc = {
+                            titulo: "",
+                            regra: "",
+                            acao: "",
+                            descricao: "",
+                            enviar_notificacao: false
+                        }
+                    })
+                    .catch(e => {
+                        this.$swal("Oops...", e.response.data.detail, "error");
+                        if (e.response.data.detail == "Você não tem permissão para executar essa ação.") {
+                            this.$router.push('/')
+                        }
+                    });
+            }
+        },
+        cancelar() {
+            this.$router.push('/sensores');
+        },
+        editarInputSensor() {
+            this.isDisabled2 = !this.isDisabled2
+        },
+        getAtivos() {
+            let query = `?conta=${this.user.conta}`
+            if (this.user.tipo == 4) {
+                query = `?conta=${this.sensor.conta}`
+            }
+            http.get('/ativos' + query)
+                .then(res => {
+                    this.ativos = res.data.results
+                })
+                .catch(e => {
+                    this.$swal("Oops...", e.response.data.detail, "error");
+                    if (e.response.data.detail == "Você não tem permissão para executar essa ação.") {
+                        this.$router.push('/')
+                    }
+                });
+
+        },
+        getEmpresas() {
+            let query = '?'
+            if (this.user.tipo == 4) {
+                query = `?conta=${this.user.conta}&`
+            }
+
+            const url = `/listaitens/empresa/lista${query}so_ativos=true`;
+            http.get(url)
+                .then(res => {
+                    this.empresas = res.data.results
+                })
+                .catch(e => {
+                    this.$swal("Oops...", e.response.data.detail, "error");
+                    if (e.response.data.detail == "Você não tem permissão para executar essa ação.") {
+                        this.$router.push('/')
+                    }
+                });
+
+        },
+        chamadasGet() {
+            if (this.user.tipo == 4) {
+                this.getContas();
+            }
+        },
+        setUser() {
+            const u = ref(auth.user)
+            this.user = u.value
+        },
+        getContas() {
+            http.get('listaitens/conta/lista?so_ativos=true')
+                .then(res => {
+                    this.contas = res.data.results
+                })
+                .catch(e => {
+                    this.$swal("Oops...", e.response.data.detail, "error");
+                    if (e.response.data.detail == "Você não tem permissão para executar essa ação.") {
+                        this.$router.push('/')
+                    }
+                });
+        },
+        getSensorScripts(i = null) {
+            if (i) {
+                this.offset = i
+            }
+
+            const url = `/sensores/${this.$route.params.id}/sensorscripts/?limit=${this.limit}&offset=${this.limit * this.offset}&ordering=-id`
+            http.get(url)
+                .then(res => {
+                    this.sensorscripts = res.data.results
+                    this.total = res.data.count
+                    const qty = Math.ceil(this.total / this.limit);
+                    if (qty <= 1) return [1];
+                    this.pages = Array.from(Array(qty).keys(), (i) => i + 1);
+                })
+                .catch(e => {
+                    this.$swal("Oops...", e.response.data.detail, "error");
+                    if (e.response.data.detail == "Você não tem permissão para executar essa ação.") {
+                        this.$router.push('/')
+                    }
+                });
+        },
+        updateSensorScripts(form) {
+
+            const u = {
+                is_active: form.is_active,
+                titulo: form.titulo,
+                descricao: form.descricao,
+                regra: form.regra,
+                acao: form.acao,
+            }
+            http.put('sensores/' + this.$route.params.id + '/sensorscripts/' + form.id + '/', u)
+                .then(res => {
+                    this.getSensorScripts();
+                    this.sc = {}
+                    this.mostrarFormSC = false
+                })
+                .catch(e => {
+                    this.$swal("Oops...", e.response.data.detail, "error");
+                    if (e.response.data.detail == "Você não tem permissão para executar essa ação.") {
+                        this.$router.push('/')
+                    }
+                });
+        },
+        detailsSC(id) {
+
+            http.get('sensores/' + this.$route.params.id + '/sensorscripts/' + id)
+                .then(res => {
+                    this.mostrarFormSC = true
+                    this.sc = res.data
+                    this.listarNotificacoes();
+                })
+                .catch(e => {
+                    this.$swal("Oops...", e.response.data.detail, "error");
+                    if (e.response.data.detail == "Você não tem permissão para executar essa ação.") {
+                        this.$router.push('/')
+                    }
+                });
+        },
+        deleteSC(id) {
+            this.$swal.fire({
+                title: 'Deseja Realmente Excluir?',
+                text: "Essa ação não pode ser revertida!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Cancelar',
+                confirmButtonText: 'Sim, excluir!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    http.delete('sensores/' + this.$route.params.id + '/sensorscripts/' + id)
+                        .then(res => {
+                            this.getSensorScripts();
+                            this.$swal.fire({
+                                icon: 'success',
+                                title: res.data.detail,
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+                        })
+                        .catch(e => {
+                            this.$swal("Oops...", e.response.data.detail, "error");
+                            if (e.response.data.detail == "Você não tem permissão para executar essa ação.") {
+                                this.$router.push('/')
+                            }
+                        });
+                }
+            })
+        },
+        getSensorGrupos() {
+            let query = '?'
+            if (this.user.tipo == 4) {
+                query = `?conta=${this.sensor.conta}&`
+            }
+            const url = `/listaitens/sensorgrupo/lista${query}so_ativos=true`
+            http.get(url)
+                .then(res => {
+                    this.sensorgrupos = res.data.results
+                })
+                .catch(e => {
+                    this.$swal("Oops...", e.response.data.detail, "error");
+                    if (e.response.data.detail == "Você não tem permissão para executar essa ação.") {
+                        this.$router.push('/')
+                    }
+                });
+        },
+        getDepartamentos() {
+            let query = '?modulo=sensor'
+            if (this.user.tipo == 4) {
+                query = `?conta=${this.sensor.conta}&modulo=sensor`
+            }
+            const url = `/listaitens/departamento/lista${query}&so_ativos=true`
+            http.get(url)
+                .then(res => {
+                    this.departamentos = res.data.results
+                })
+                .catch(e => {
+                    this.$swal("Oops...", e.response.data.detail, "error");
+                    if (e.response.data.detail == "Você não tem permissão para executar essa ação.") {
+                        this.$router.push('/')
+                    }
+                });
+        },
+        getModelos() {
+            let query = '?modulo=sensor'
+            if (this.user.tipo == 4) {
+                query = `?conta=${this.sensor.conta}&modulo=sensor`
+            }
+            const url = `/listaitens/modelo/lista${query}&so_ativos=true`
+            http.get(url)
+                .then(res => {
+                    this.modelos = res.data.results
+                })
+                .catch(e => {
+                    this.$swal("Oops...", e.response.data.detail, "error");
+                    if (e.response.data.detail == "Você não tem permissão para executar essa ação.") {
+                        this.$router.push('/')
+                    }
+                });
+        },
+        getFabricantes() {
+            let query = '?modulo=sensor'
+            if (this.user.tipo == 4) {
+                query = `?conta=${this.sensor.conta}&modulo=sensor`
+            }
+            const url = `/listaitens/fabricante/lista${query}&so_ativos=true`
+            http.get(url)
+                .then(res => {
+                    this.fabricantes = res.data.results
+                })
+                .catch(e => {
+                    this.$swal("Oops...", e.response.data.detail, "error");
+                    if (e.response.data.detail == "Você não tem permissão para executar essa ação.") {
+                        this.$router.push('/')
+                    }
+                });
+        },
+        getTipos() {
+            let query = '?'
+            if (this.user.tipo == 4) {
+                query = `?conta=${this.sensor.conta}&`
+            }
+            const url = `/listaitens/sensortipo/lista${query}so_ativos=true`
+            http.get(url)
+                .then(res => {
+                    this.tipos = res.data.results
+                })
+                .catch(e => {
+                    this.$swal("Oops...", e.response.data.detail, "error");
+                    if (e.response.data.detail == "Você não tem permissão para executar essa ação.") {
+                        this.$router.push('/')
+                    }
+                });
+        },
+    },
+    created() {
+        this.setSensor();
+    },
+    mounted() {
+        this.setUser();
+        this.chamadasGet();
+        this.getEmpresas();
+
+    }
+}
+
+</script>
+
+
+<style scoped></style>

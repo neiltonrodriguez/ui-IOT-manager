@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.body {
+    @apply bg-gray-50;
+}
+@layer components {
+    .base-container-teste {
+        @apply grid container mx-auto gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 sm:p-8 bg-blue-200;
+    }
+
+    .list-teste {
+        @apply bg-gray-500 text-yellow-100 items-center flex justify-center w-full h-52;
+        @apply rounded-md shadow-lg;
+    }
+}
+
+.list-teste.highlight {
+    @apply bg-gradient-to-r from-blue-700 to-purple-700;
+    @apply text-gray-50 text-2xl;
+    text-shadow: 3px 3px 0 black;
+}
+
+.edit-form {
+    @apply bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 disabled:bg-red-50 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500
+}
+
+.label-form{
+    @apply block mb-2 text-sm font-medium text-gray-900 dark:text-white
+}
+
+.detalhes {
+    @apply text-start font-bold text-2xl text-blue-800 shadow-md
+}
+
+.tooltip {
+    @apply invisible absolute;
+}
+
+.has-tooltip:hover .tooltip {
+    @apply visible z-50;
+}
