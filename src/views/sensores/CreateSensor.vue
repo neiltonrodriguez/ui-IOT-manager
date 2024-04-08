@@ -77,7 +77,7 @@
                                             <select v-model="formData.grupo" class="edit-form">
                                                 <option value="" disabled selected>Escolha um</option>
                                                 <option v-for="sg in sensorgrupos" :key="sg.id" :value="sg.id">{{
-                                sg.nome }}</option>
+                                                    sg.nome }}</option>
                                             </select>
                                         </div>
                                         <div>
@@ -86,8 +86,8 @@
                                             <select v-model="formData.departamento" class="edit-form">
                                                 <option value="" disabled selected>Escolha um</option>
                                                 <option v-for="dp in departamentos" :key="dp.id" :value="dp.id">{{
-                                dp.titulo
-                            }}
+                                                    dp.titulo
+                                                    }}
                                                 </option>
                                             </select>
                                         </div>
@@ -147,70 +147,70 @@
                                         <div v-if="valorRefs.valor_ref1.label !== ''">
                                             <label
                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{
-                                valorRefs.valor_ref1.label }}</label>
+                                                valorRefs.valor_ref1.label }}</label>
                                             <input type="text" v-model="formData.valor_ref1" class="edit-form"
                                                 placeholder="" required>
                                         </div>
                                         <div v-if="valorRefs.valor_ref2.label !== ''">
                                             <label
                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{
-                                valorRefs.valor_ref2.label }}</label>
+                                                valorRefs.valor_ref2.label }}</label>
                                             <input type="text" v-model="formData.valor_ref2" class="edit-form"
                                                 placeholder="" required>
                                         </div>
                                         <div v-if="valorRefs.valor_ref3.label !== ''">
                                             <label
                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{
-                                valorRefs.valor_ref3.label }}</label>
+                                                valorRefs.valor_ref3.label }}</label>
                                             <input type="text" v-model="formData.valor_ref3" class="edit-form"
                                                 placeholder="" required>
                                         </div>
                                         <div v-if="valorRefs.valor_ref4.label !== ''">
                                             <label
                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{
-                                valorRefs.valor_ref4.label }}</label>
+                                                valorRefs.valor_ref4.label }}</label>
                                             <input type="text" v-model="formData.valor_ref4" class="edit-form"
                                                 placeholder="" required>
                                         </div>
                                         <div v-if="valorRefs.valor_ref5.label !== ''">
                                             <label
                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{
-                                valorRefs.valor_ref5.label }}</label>
+                                                valorRefs.valor_ref5.label }}</label>
                                             <input type="text" v-model="formData.valor_ref5" class="edit-form"
                                                 placeholder="" required>
                                         </div>
                                         <div v-if="valorRefs.valor_ref6.label !== ''">
                                             <label
                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{
-                                valorRefs.valor_ref6.label }}</label>
+                                                valorRefs.valor_ref6.label }}</label>
                                             <input type="text" v-model="formData.valor_ref6" class="edit-form"
                                                 placeholder="" required>
                                         </div>
                                         <div v-if="valorRefs.valor_ref7.label !== ''">
                                             <label
                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{
-                                valorRefs.valor_ref7.label }}</label>
+                                                valorRefs.valor_ref7.label }}</label>
                                             <input type="text" v-model="formData.valor_ref7" class="edit-form"
                                                 placeholder="" required>
                                         </div>
                                         <div v-if="valorRefs.valor_ref8.label !== ''">
                                             <label
                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{
-                                valorRefs.valor_ref8.label }}</label>
+                                                valorRefs.valor_ref8.label }}</label>
                                             <input type="text" v-model="formData.valor_ref8" class="edit-form"
                                                 placeholder="" required>
                                         </div>
                                         <div v-if="valorRefs.valor_ref9.label !== ''">
                                             <label
                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{
-                                valorRefs.valor_ref9.label }}</label>
+                                                valorRefs.valor_ref9.label }}</label>
                                             <input type="text" v-model="formData.valor_ref9" class="edit-form"
                                                 placeholder="" required>
                                         </div>
                                         <div v-if="valorRefs.valor_ref10.label !== ''">
                                             <label
                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{
-                                valorRefs.valor_ref10.label }}</label>
+                                                valorRefs.valor_ref10.label }}</label>
                                             <input type="text" v-model="formData.valor_ref10" class="edit-form"
                                                 placeholder="" required>
                                         </div>
@@ -234,7 +234,7 @@
                                         <div v-if="user.tipo == 4">
                                             <label
                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Conta</label>
-                                            <select v-model="formDataSC.conta" class="edit-form">
+                                            <select v-model="formDataSC.conta" disabled class="edit-form">
                                                 <option value="" disabled selected>Escolha a conta</option>
                                                 <option v-for="c in contas" :key="c.id" :value="c.conta">{{ c.conta }}
                                                 </option>
@@ -262,18 +262,19 @@
                                             <label
                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Enviar
                                                 Notificação</label>
-                                            <select @change="listarNotificacoes()" class="edit-form" v-model="formDataSC.enviar_notificacao">
+                                            <select @change="listarNotificacoes()" class="edit-form"
+                                                v-model="formDataSC.enviar_notificacao">
                                                 <option :value="true">Sim</option>
                                                 <option :value="false">Não</option>
                                             </select>
                                         </div>
-                                        <div v-if="notificacoes.length != 0">
+                                        <div v-if="mostrarNotificacoes">
                                             <label
                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Notificações</label>
                                             <select v-model="formDataSC.notificacao" class="edit-form">
                                                 <option value="" disabled selected>Escolha a conta</option>
-                                                <option v-for="c in notificacoes" :key="c.id" :value="c.conta">{{
-                                c.conta }}
+                                                <option v-for="c in notificacoes" :key="c.id" :value="c.id">{{
+                                                    c.titulo }}
                                                 </option>
                                             </select>
                                         </div>
@@ -281,8 +282,9 @@
                                             <label
                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Alerta</label>
                                             <select class="edit-form" v-model="formDataSC.alerta">
-                                                <option :value="true">Sim</option>
-                                                <option :value="false">Não</option>
+                                                <option :value="0">Não alterar</option>
+                                                <option :value="1">Gerar alerta</option>
+                                                <option :value="2">Remover alerta</option>
                                             </select>
                                         </div>
 
@@ -386,7 +388,8 @@ export default {
                     label: "",
                     parametro: ""
                 }
-            }
+            },
+            mostrarNotificacoes: false
 
         };
     },
@@ -396,6 +399,7 @@ export default {
             http.post('/sensores/', result)
                 .then(res => {
                     this.idSensor = res.data.id
+                    this.formDataSC.conta = res.data.conta
                     this.teste2 = true
                     this.toggleTabs(2);
                 })
@@ -462,9 +466,10 @@ export default {
         },
         listarNotificacoes(){
             if (this.formDataSC.enviar_notificacao) {
+                this.mostrarNotificacoes = true
                 this.getNotificacoes();
             } else {
-                this.notificacoes = null
+                this.mostrarNotificacoes = false
             }
         },
 

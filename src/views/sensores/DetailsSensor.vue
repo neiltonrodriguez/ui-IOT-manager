@@ -329,16 +329,7 @@
                                                     class="edit-form" placeholders="" required>
 
                                             </div>
-                                            <div>
-                                                <label
-                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Enviar
-                                                    Notificação</label>
-                                                <select class="edit-form" v-model="sc.enviar_notificacao"
-                                                    @change="habilitarSalvar()">
-                                                    <option :value="true">Sim</option>
-                                                    <option :value="false">Não</option>
-                                                </select>
-                                            </div>
+
 
                                             <div v-if="sc.id">
                                                 <label
@@ -359,30 +350,33 @@
                                                     <option :value="false">Não</option>
                                                 </select>
                                             </div>
-                                            <div v-if="notificacoes.length != 0">
+                                            <div v-if="mostrarNotificacoes">
                                                 <label
                                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Notificações</label>
-                                                <select v-model="sc.notificacao" class="edit-form">
+                                                <select v-model="sc.notificacao" @change="habilitarSalvar()"
+                                                    class="edit-form">
                                                     <option value="" disabled selected>Escolha a conta</option>
-                                                    <option v-for="c in notificacoes" :key="c.id" :value="c.conta">{{
-                                                        c.conta }}
+                                                    <option v-for="c in notificacoes" :key="c.id" :value="c.id">{{
+                                                        c.titulo }}
                                                     </option>
                                                 </select>
                                             </div>
                                             <div>
                                                 <label
                                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Alerta</label>
-                                                <select class="edit-form" v-model="sc.alerta">
-                                                    <option :value="true">Sim</option>
-                                                    <option :value="false">Não</option>
+                                                <select class="edit-form" @change="habilitarSalvar()"
+                                                    v-model="sc.alerta">
+                                                    <option :value="0">Não alterar</option>
+                                                    <option :value="1">Gerar alerta</option>
+                                                    <option :value="2">Remover alerta</option>
                                                 </select>
                                             </div>
                                         </div>
 
 
                                         <button type="submit" :disabled="isDisabled"
-                                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">salvar</button>
-                                        <button type="button" @click="mostrarFormScript()"
+                                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 disabled:bg-gray-300">salvar</button>
+                                        <button type=" button" @click="mostrarFormScript()"
                                             class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 mx-3 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">fechar</button>
 
 
@@ -640,15 +634,19 @@ export default {
             total1: 0,
             gatewayiot: [],
             dados: [],
-            mostrarLeituras: false
+            mostrarLeituras: false,
+            mostrarNotificacoes: false
         };
     },
     methods: {
         listarNotificacoes(){
             if(this.sc.enviar_notificacao){
+                this.mostrarNotificacoes = true
+                this.isDisabled = false
                 this.getNotificacoes();
             } else {
-                this.notificacoes  = null
+                this.mostrarNotificacoes = false
+
             }
         },
         getNotificacoes() {
@@ -1033,6 +1031,9 @@ export default {
                 descricao: form.descricao,
                 regra: form.regra,
                 acao: form.acao,
+                alerta: form.alerta,
+                enviar_notificacao: form.enviar_notificacao,
+                notificacao: form.notificacao
             }
             http.put('sensores/' + this.$route.params.id + '/sensorscripts/' + form.id + '/', u)
                 .then(res => {
