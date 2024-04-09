@@ -16,7 +16,7 @@
                 </div>
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descrição</label>
-                    <input type="text" v-model="formData.descricao" class="edit-form" placeholder="">
+                    <textarea rows="4" v-model="formData.descricao" class="edit-form" placeholder=""></textarea>
                 </div>
                 <div v-if="user.tipo == 4">
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Conta</label>

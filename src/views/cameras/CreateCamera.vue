@@ -187,8 +187,8 @@
                                         <div>
                                             <label
                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descrição</label>
-                                            <input type="text" v-model="formDataAgend.descricao" class="edit-form"
-                                                placeholder="" required>
+                                            <textarea rows="4" v-model="formDataAgend.descricao" class="edit-form"
+                                                placeholder="" required></textarea>
                                         </div>
                                         <div>
                                             <label

@@ -54,7 +54,7 @@
                 </div>
                 <div>
                     <label class="label-form">Descrição</label>
-                    <textarea id="message" rows="4" v-model="empresa.descricao" class="edit-form"
+                    <textarea  rows="4" v-model="empresa.descricao" class="edit-form"
                         v-on:keyup="habilitarSalvar()" placeholder="" required></textarea>
                 </div>
                 <div v-if="user.tipo == 4">

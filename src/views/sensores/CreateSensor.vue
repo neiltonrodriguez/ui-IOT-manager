@@ -50,8 +50,8 @@
                                         <div>
                                             <label
                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descrição</label>
-                                            <input type="text" v-model="formData.descricao" class="edit-form"
-                                                placeholder="">
+                                            <textarea rows="4" v-model="formData.descricao" class="edit-form"
+                                                placeholder=""></textarea>
                                         </div>
 
                                         <div>
@@ -243,14 +243,14 @@
                                         <div>
                                             <label
                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descrição</label>
-                                            <input type="text" v-model="formDataSC.descricao" class="edit-form"
-                                                placeholder="" required>
+                                            <textarea rows="4" v-model=" formDataSC.descricao" class="edit-form"
+                                                placeholder="" required></textarea>
                                         </div>
                                         <div>
                                             <label
                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Regra</label>
-                                            <input type="text" v-model="formDataSC.regra" class="edit-form"
-                                                placeholder="" required>
+                                            <textarea rows="4" v-model="formDataSC.regra" class="edit-form"
+                                                placeholder="" required></textarea>
                                         </div>
                                         <div>
                                             <label

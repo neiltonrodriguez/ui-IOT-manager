@@ -74,7 +74,7 @@
                                         </div>
                                         <div>
                                             <label class="label-form">Descrição</label>
-                                            <textarea id="message" rows="4" v-model="grupousuario.descricao"
+                                            <textarea rows="4" v-model="grupousuario.descricao"
                                                 class="edit-form" v-on:keyup="habilitarSalvar()" placeholder=""></textarea>
                                         </div>
                                         <div>
