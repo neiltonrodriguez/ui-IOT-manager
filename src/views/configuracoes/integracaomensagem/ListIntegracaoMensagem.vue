@@ -1,5 +1,5 @@
 <template>
-    <div class="border py-5 px-5 border-gray-300 rounded-lg">
+    <div>
         <button type="button" @click="mostrarSearch()"
             class="px-4 w-full py-2 my-3 font-semibold text-sm bg-blue-700  hover:bg-blue-900 text-white rounded-md shadow-sm">{{
                 titleBtn }}</button>

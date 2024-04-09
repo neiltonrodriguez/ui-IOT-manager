@@ -1,24 +1,22 @@
 <template>
-    <div class="border py-5 px-5 border-gray-300 rounded-lg ">
-        <form v-on:submit.prevent="enviarParaPai()">
-            <div class="grid grid-cols-3 gap-4">
+    <button title="pesquisar dados nessa tela" type="button" @click="mostrarFiltro()"
+        class="px-10 py-2 mb-3 font-semibold text-sm bg-blue-700  hover:bg-blue-900 text-white rounded-md shadow-sm">{{
+        textButtonFiltro }}</button>
+    <div class="border-gray-300 border rounded-lg ">
+
+        <form class="m-0" v-if="showFilter" v-on:submit.prevent="enviarParaPai()">
+            <div class="grid grid-cols-3">
                 <div>
-                    <div class="relative">
-                        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                            </svg>
-                        </div>
+                    <div class="flex items-center  mx-2 my-2">
+
                         <input type="search" id="default-search" v-model="filter.search"
-                            class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="digite o termo da sua pesquisa">
+                            class="block w-full p-2.5 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="digite o termo da pesquisa">
 
                     </div>
                 </div>
                 <div v-if="filterEmpresa">
-                    <div class="flex items-center  mx-8 my-2">
+                    <div class="flex items-center  mx-2 my-2">
                         <select v-model="filter.empresa"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option value="0" disabled selected>Filtrar por empresa</option>
@@ -29,7 +27,7 @@
                     </div>
                 </div>
                 <div v-if="filterUf">
-                    <div class="flex items-center mx-8 my-2">
+                    <div class="flex items-center mx-2 my-2">
                         <select v-model="filter.uf"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option value="" disabled selected>Filtrar por UF</option>
@@ -64,7 +62,7 @@
                     </div>
                 </div>
                 <div v-if="filterConta && user.tipo == 4">
-                    <div class="flex items-center  mx-8 my-2">
+                    <div class="flex items-center  mx-2 my-2">
                         <select v-model="filter.conta"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option value="" disabled selected>Filtrar por conta</option>
@@ -75,7 +73,7 @@
                     </div>
                 </div>
                 <div v-if="filterDepartamentoAtivo">
-                    <div class="flex items-center  mx-8 my-2">
+                    <div class="flex items-center  mx-2 my-2">
                         <select v-model="filter.departamentoAtivo"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option value="0" disabled selected>Filtrar por departamento</option>
@@ -86,7 +84,7 @@
                     </div>
                 </div>
                 <div v-if="filterDepartamentoSensor">
-                    <div class="flex items-center  mx-8 my-2">
+                    <div class="flex items-center  mx-2 my-2">
                         <select v-model="filter.departamentoSensor"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option value="0" disabled selected>Filtrar por departamento</option>
@@ -96,10 +94,19 @@
                         </select>
                     </div>
                 </div>
-
-
+                <div v-if="filterDepartamentoUsuario">
+                    <div class="flex items-center  mx-2 my-2">
+                        <select v-model="filter.departamentoUsuario"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option value="0" disabled selected>Filtrar por departamento</option>
+                            <option v-for="c in departamentoUsuarios" :key="c.id" :value="c.id">
+                                {{ c.titulo }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
                 <div v-if="filterDepartamento">
-                    <div class="flex items-center  mx-8 my-2">
+                    <div class="flex items-center  mx-2 my-2">
                         <select v-model="filter.departamento"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option value="0" disabled selected>Filtrar por departamento</option>
@@ -110,7 +117,7 @@
                     </div>
                 </div>
                 <div v-if="filterTipo">
-                    <div class="flex items-center  mx-8 my-2">
+                    <div class="flex items-center  mx-2 my-2">
                         <select v-model="filter.tipo"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option value="0" disabled selected>Escolha uma tipo</option>
@@ -120,7 +127,7 @@
                     </div>
                 </div>
                 <div v-if="filterTipoUsuario">
-                    <div class="flex items-center  mx-8 my-2">
+                    <div class="flex items-center  mx-2 my-2">
                         <select v-model="filter.tipoUsuario"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option value="0" disabled selected>Tipo de usuário</option>
@@ -132,7 +139,7 @@
                     </div>
                 </div>
                 <div v-if="filterGrupoSensor">
-                    <div class="flex items-center  mx-8 my-2">
+                    <div class="flex items-center  mx-2 my-2">
                         <select v-model="filter.sensorgrupo"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option value="0" disabled selected>Filtrar por grupo de sensor</option>
@@ -153,7 +160,7 @@
 
                 </div>
             </div>
-            <div class="mx-auto px-6 py-2">
+            <div class="mx-auto px-2 py-2">
                 <button type="submit"
                     class="px-20 py-2 font-semibold text-sm bg-blue-700  hover:bg-blue-900 text-white rounded-md shadow-sm">Pesquisa</button>
                 <span> </span>
@@ -183,6 +190,7 @@ export default {
         filterEmpresa: Boolean,
         filterStatus: Boolean,
         filterDepartamento: Boolean,
+        filterDepartamentoUsuario: Boolean,
         filterGrupoSensor: Boolean,
         filterUf: Boolean,
         filterTipo: Boolean,
@@ -192,11 +200,13 @@ export default {
     },
     data() {
         return {
+            showFilter: false,
             sensores: [],
             sensorgrupos: [],
             empresas: [],
             contas: [],
             user: {},
+            textButtonFiltro: "Mostrar filtro",
             departamentoAtivos: [],
             departamentoSensores: [],
             usuariogrupos: [],
@@ -205,6 +215,7 @@ export default {
                 departamento: 0,
                 departamentoAtivo: 0,
                 departamentoSensor: 0,
+                departamentoUsuario: 0,
                 sensorgrupo: 0,
                 empresa: 0,
                 is_active: false,
@@ -219,6 +230,14 @@ export default {
         enviarParaPai() {
             this.$emit('meu-evento', this.filter)
         },
+        mostrarFiltro(){
+            this.showFilter = !this.showFilter
+            if(this.showFilter){
+                this.textButtonFiltro = "Ocultar filtro"
+            } else {
+                this.textButtonFiltro = "Mostrar filtro"
+            }
+        },
 
         limparFiltro() {
             this.filter.search = '';
@@ -231,6 +250,7 @@ export default {
             this.filter.tipoUsuario = 0;
             this.filter.uf = '';
             this.filter.departamentoAtivo = 0;
+            this.filter.departamentoUsuario = 0;
             this.enviarParaPai();
         },
 
@@ -291,6 +311,24 @@ export default {
                     }
                 });
         },
+        getDepartamentoUsuario() {
+            let query = '?modulo=usuario'
+            if (this.user.tipo == 4) {
+                query = `?conta=${this.user.conta}&modulo=usuario`
+            }
+
+            const url = `/listaitens/departamento/lista/${query}&so_ativos=true`;
+            http.get(url)
+                .then(res => {
+                    this.departamentoUsuarios = res.data.results
+                })
+                .catch(e => {
+                    this.$swal("Oops...", e.response.data.detail, "error");
+                    if (e.response.data.detail == "Você não tem permissão para executar essa ação.") {
+                        this.$router.push('/')
+                    }
+                });
+        },
         getContas() {
             http.get('listaitens/conta/lista?so_ativos=false')
                 .then(res => {
@@ -328,6 +366,7 @@ export default {
         this.chamadasGet();
         this.getDepartamentoAtivos();
         this.getDepartamentoSensores();
+        this.getDepartamentoUsuario();
     },
 };
 </script>

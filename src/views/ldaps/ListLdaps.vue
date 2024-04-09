@@ -1,5 +1,5 @@
 <template>
-    <div class="border py-5 px-5 border-gray-300 rounded-lg">
+    <div >
 
         <Filtro @meu-evento="filtrar" :filterConta="false" :filterUf="false" :filterEmpresa="true"
             :filterGrupoSensor="false" :filterDepartamento="false" :filterStatus="false" :filterTipo="false" />

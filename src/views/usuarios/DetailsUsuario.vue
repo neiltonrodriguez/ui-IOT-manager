@@ -7,81 +7,81 @@
 
         <form class="row g-3" v-on:submit.prevent="store(usuario)">
             <div class="grid gap-6 mb-6 md:grid-cols-2">
-                <div class="flex flex-col items-center justify-center">
-                    <template v-if="usuario.foto == null"><img
-                            class="border-2 max-h-36 border-gray-500  shadow-md duration-200"
-                            src="../../assets/img/sem-foto.png"> </template>
-                    <template v-else>
-                        <img class="border-2 max-h-36 border-gray-500  shadow-md duration-200" :src="usuario.foto"
-                            width="150">
+                <div class="flex flex-col items-start">
+                    <div class="flex flex-col items-center justify-center">
+                        <template v-if="usuario.foto == null">
+                            <img class="border-2 max-h-36 border-gray-500  shadow-md duration-200"
+                                src="../../assets/img/sem-foto.png">
+                        </template>
+                        <template v-else>
+                            <img class="border-2 max-h-36 border-gray-500  shadow-md duration-200" :src="usuario.foto"
+                                width="150">
 
-                    </template>
-                    <div>
-                        <label title="Click to upload" for="file"
-                            class="bg-gray-200 py-1 text-sm font-semibold rounded-md px-5 cursor-pointer hover:bg-gray-300 duration-200">
-                            Escolher imagem
-                        </label>
+                        </template>
+                        <div>
+                            <label title="Click to upload" for="file"
+                                class="bg-gray-200 py-1 text-sm font-semibold rounded-md px-5 cursor-pointer hover:bg-gray-300 duration-200">
+                                Escolher imagem
+                            </label>
 
 
-                        <input @change="uploadFile()" hidden="" name="inputFoto" type="file" ref="file" id="file">
+                            <input @change="uploadFile()" hidden="" name="inputFoto" type="file" ref="file" id="file">
+                        </div>
+                        {{ img.name ? img.name : '' }}
                     </div>
-                    {{ img.name ? img.name : '' }}
-
-                </div>
-
-                <div>
-                    <div>
-                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Primeiro
-                            Nome</label>
-                        <input type="text" v-model="usuario.first_name" v-on:keyup="habilitarSalvar()"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 disabled:bg-red-50"
-                            placeholder="" required>
-                    </div>
-                    <div>
-                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Sobrenome</label>
-                        <input type="text" v-model="usuario.last_name" v-on:keyup="habilitarSalvar()"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 disabled:bg-red-50"
-                            placeholder="" required>
-                    </div>
-
                 </div>
             </div>
             <div class="grid gap-6 mb-6 md:grid-cols-2">
                 <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Primeiro
+                        Nome</label>
+                    <input type="text" v-model="usuario.first_name" v-on:keyup="habilitarSalvar()"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 disabled:bg-red-50"
+                        placeholder="" required>
+                </div>
+                <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Sobrenome</label>
+                    <input type="text" v-model="usuario.last_name" v-on:keyup="habilitarSalvar()"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 disabled:bg-red-50"
+                        placeholder="">
+                </div>
+
+
+
+                <div>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
                     <input type="email" v-model="usuario.email" v-on:keyup="habilitarSalvar()"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 disabled:bg-red-50"
-                        placeholder="" required>
+                        placeholder="">
                 </div>
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Login</label>
                     <input type="text" v-model="usuario.usuario" disabled v-on:keyup="habilitarSalvar()"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500  disabled:bg-red-50"
-                        placeholder="" required>
+                        placeholder="">
                 </div>
                 <div v-if="usuario.origemusuario !== 'ldap'">
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Senha</label>
                     <input type="password" v-model="password" v-on:keyup="habilitarSalvar()"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500  disabled:bg-red-50"
-                        placeholder="" required>
+                        placeholder="">
                 </div>
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">CPF</label>
                     <input type="text" v-model="usuario.cpf" disabled v-mask="'###.###.###-##'"
                         v-on:keyup="habilitarSalvar()"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500  disabled:bg-red-50"
-                        placeholder="" required>
+                        placeholder="">
                 </div>
 
                 <div v-if="user.tipo == 4">
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Conta</label>
                     <input type="text" v-model="usuario.conta" disabled
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500  disabled:bg-red-50"
-                        placeholder="" required>
+                        placeholder="">
 
                 </div>
-            </div>
-            <div class="grid gap-6 mb-6 md:grid-cols-3">
+
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Empresa</label>
                     <select v-model="usuario.empresa" @change="habilitarSalvar()" class="edit-form">
@@ -90,10 +90,13 @@
                         </option>
                     </select>
                 </div>
+            </div>
+            <div class="grid gap-6 mb-6 md:grid-cols-2">
+
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tipo
                         de usuário</label>
-                    <select v-model="usuario.tipo" @change="habilitarSalvar()" class="edit-form">
+                    <select v-model="usuario.tipo" required @change="habilitarSalvar()" class="edit-form">
                         <option value="0" disabled selected>Tipo de usuário</option>
                         <option value="1">Comun</option>
                         <option value="2">Monitor</option>
@@ -110,7 +113,7 @@
                     </select>
                 </div>
             </div>
-            <div class="grid gap-6 mb-6 md:grid-cols-3">
+            <div class="grid gap-6 mb-6 md:grid-cols-2">
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Telefone
                         1</label>
@@ -127,20 +130,21 @@
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500  disabled:bg-red-50"
                         placeholder="">
                 </div>
+
+            </div>
+            <div class="grid gap-6 mb-6 md:grid-cols-2">
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Cep</label>
-                    <input @blur="buscarCep()"  type="text" v-model="usuario.cep" v-mask="'##.###-###'"
+                    <input @blur="buscarCep()" type="text" v-model="usuario.cep" v-mask="'##.###-###'"
                         v-on:keyup="habilitarSalvar()"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500  disabled:bg-red-50"
-                        placeholder="" required>
+                        placeholder="">
                 </div>
-            </div>
-            <div class="mb-6">
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Endereço</label>
                     <input type="text" v-model="usuario.logradouro" v-on:keyup="habilitarSalvar()"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500  disabled:bg-red-50"
-                        placeholder="" required>
+                        placeholder="">
                 </div>
             </div>
             <div class="grid gap-6 mb-6 md:grid-cols-3">
@@ -148,13 +152,13 @@
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Bairro</label>
                     <input type="text" v-model="usuario.bairro" v-on:keyup="habilitarSalvar()"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500  disabled:bg-red-50"
-                        placeholder="" required>
+                        placeholder="">
                 </div>
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Cidade</label>
                     <input type="text" v-model="usuario.cidade" v-on:keyup="habilitarSalvar()"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500  disabled:bg-red-50"
-                        placeholder="" required>
+                        placeholder="">
                 </div>
                 <div>
                     <label for="confirm_password"
@@ -203,7 +207,7 @@
                     <label for="confirm_password"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Número</label>
                     <input type="text" v-model="usuario.numero" v-on:keyup="habilitarSalvar()" class="edit-form"
-                        placeholder="" required>
+                        placeholder="">
                 </div>
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Departamento</label>

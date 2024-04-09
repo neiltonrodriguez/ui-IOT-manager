@@ -1,7 +1,13 @@
 <template>
-    <div class="border py-5 px-5 border-gray-300 rounded-lg">
-        <Filtro @meu-evento="filtrar" :filterConta="false" :filterUf="true" :filterEmpresa="false"
-            :filterGrupoSensor="false" :filterDepartamento="false" :filterStatus="true" />
+    <div>
+        <Filtro @meu-evento="filtrar" 
+        :filterConta="true" 
+        :filterUf="true" 
+        :filterTipoUsuario="true"
+        :filterEmpresa="true"
+        :filterGrupoSensor="false" 
+        :filterDepartamentoUsuario="true" 
+        :filterStatus="true" />
     </div>
     <div class="shadow-sm overflow-hidden my-8">
         <div class="py-4">
@@ -39,9 +45,7 @@
                 </tr>
             </thead>
             <tbody class="bg-white dark:bg-slate-800">
-                <tr v-for="u in usuarios" :key="u.id">
-
-
+                <tr class="hover:bg-gray-100 cursor-pointer duration-200" v-for="u in usuarios" :key="u.id" @click="viewUser(u.id)">
                     <td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
                         <template v-if="u.foto == null"><img class="rounded-lg shadow-md duration-200 hover:scale-105"
                                 width="100" src="../../assets/img/sem-foto.png"> </template>
@@ -125,11 +129,12 @@ export default {
             total: 0,
             filter: {
                 search: '',
-                departamento: 0,
+                departamentoUsuario: 0,
                 sensorgrupo: 0,
                 empresa: 0,
                 tipo: 0,
                 is_active: false,
+                tipoUsuario: 0,
                 conta: '',
                 uf: ''
             }
@@ -155,7 +160,17 @@ export default {
                 is_active = `&is_active=1`
                 this.pages = []
             }
-            const url = `/usuarios/?limit=${this.limit}&offset=${this.limit * this.offset}${search}${uf}${is_active}&ordering=-id`;
+            let tipo = ""
+            if (this.filter.tipoUsuario) {
+                tipo = `&tipo=${this.filter.tipoUsuario}`
+                this.pages = []
+            }
+            let departamento = ""
+            if (this.filter.departamentoUsuario) {
+                departamento = `&departamento=${this.filter.departamentoUsuario}`
+                this.pages = []
+            }
+            const url = `/usuarios/?limit=${this.limit}&offset=${this.limit * this.offset}${search}${uf}${is_active}${tipo}${departamento}&ordering=-id`;
             http.get(url)
                 .then(res => {
                     this.usuarios = res.data.results

@@ -1,6 +1,6 @@
 <template>
     <div class="w-[400px] h-full  bg-gray-200 text-white " v-show="showSide">
-        <div class="h-auto w-auto bg-gray-900 flex justify-center  items-center py-5">
+        <div @click="home()" title="Voltar para HOME" class="cursor-pointer duration-200 hover:bg-slate-500 h-auto w-auto bg-gray-900 flex justify-center  items-center py-5">
             <div class="px-[20px]">
                 <!-- <img class="flex items-center justify-center" src="./../assets/img/logomarca.jpg" alt=""> -->
                 <h3 class="font-bold text-xl">Admin Dashboard</h3>
@@ -278,6 +278,9 @@ export default {
         }
     },
     methods: {
+        home(){
+            this.$router.push('/')
+        },
         fecharMenus(){
             this.subMenuUsuario = false
             this.subMenuLdap = false

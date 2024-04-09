@@ -652,7 +652,7 @@ export default {
         getNotificacoes() {
             let query = `?so_ativos=true`
             if (this.user.tipo == 4) {
-                query = `?conta=${this.sc.conta}&so_ativos=true`
+                query = `?conta=${this.sensor.conta}&so_ativos=true`
             }
             const url = `/listaitens/notificacao/lista${query}`
             http.get(url)
