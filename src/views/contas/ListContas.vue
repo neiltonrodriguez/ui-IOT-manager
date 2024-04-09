@@ -1,9 +1,8 @@
 <template>
     <div>
-      
-        <Filtro @meu-evento="filtrar" :filterConta="false" :filterUf="true"
-            :filterEmpresa="false" :filterGrupoSensor="false" :filterDepartamento="false" :filterStatus="true"
-            :filterTipo="false" />
+
+        <Filtro @meu-evento="filtrar" :filterConta="false" :filterUf="true" :filterEmpresa="false"
+            :filterGrupoSensor="false" :filterDepartamento="false" :filterStatus="true" :filterTipo="false" />
     </div>
     <div class="shadow-sm overflow-hidden my-8">
         <div class="py-4">
@@ -15,8 +14,8 @@
             <thead>
                 <tr>
                     <th
-                            class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
-                            Logo</th>
+                        class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
+                        Logo</th>
                     <th
                         class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
                         Titulo</th>
@@ -34,7 +33,7 @@
                         Criado por</th>
                     <th
                         class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
-                        Habilitado</th>         
+                        Habilitado</th>
                     <th
                         class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
                         Ação</th>
@@ -42,43 +41,52 @@
                 </tr>
             </thead>
             <tbody class="bg-white dark:bg-slate-800">
-                <tr v-for="c in  contas " :key="c.id">
+                <tr class="hover:bg-gray-100 cursor-pointer duration-200" @click="viewConta(c.id)" v-for="c in  contas "
+                    :key="c.id">
                     <td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
-                            <template v-if="c.logo == null"><img class="rounded-lg shadow-md duration-200 hover:scale-105"
-                                    width="100" src="../../assets/img/sem-foto.png"> </template>
-                            <template v-else>
-                                <img class="rounded-lg shadow-md duration-200 hover:scale-105" :src="c.logo" width="100">
-                            </template>
-                        </td>
-                    <td class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                        <template v-if="c.logo == null"><img class="rounded-lg shadow-md duration-200 hover:scale-105"
+                                width="100" src="../../assets/img/sem-foto.png"> </template>
+                        <template v-else>
+                            <img class="rounded-lg shadow-md duration-200 hover:scale-105" :src="c.logo" width="100">
+                        </template>
+                    </td>
+                    <td
+                        class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ c.titulo }}</td>
-                    <td class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                    <td
+                        class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ c.descricao }}</td>
-                    <td class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                    <td
+                        class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ c.conta }}</td>
-                    <td class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                    <td
+                        class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ c.cnpj }}</td>
-                    <td class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                    <td
+                        class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ c.criadopor }}</td>
-                    <td class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                    <td
+                        class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         <template v-if="c.is_active">
                             <div class="flex items-center">
-                                <div class="h-2.5 w-2.5 rounded-full                     bg-green-500 mr-2"></div> Sim               
+                                <div class="h-2.5 w-2.5 rounded-full                     bg-green-500 mr-2"></div> Sim
                             </div>
                         </template>
                         <template v-else>
                             <div class="flex items-center">
-                                <div class="h-2.5 w-2.5 rounded-full bg-red-500 mr-2"></div> Não            
+                                <div class="h-2.5 w-2.5 rounded-full bg-red-500 mr-2"></div> Não
                             </div>
                         </template>
                     </td>
-                    <td class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                    <td
+                        class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         <button @click="viewConta(c.id)" class="btn">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1"
                                 stroke="currentColor" class="w-6 h-6">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                             </svg>
                         </button>
                         <button @click="deleteConta(c.id)" class="btn">

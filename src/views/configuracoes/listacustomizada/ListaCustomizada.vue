@@ -13,7 +13,7 @@
                 <select v-model="lista" class="edit-form" @change="mostrarLista(lista)">
                     <option value="" disabled selected>Escolha o tipo de lista</option>
                     <option v-for="list in listacustomizada" :value="list.id" :key="list.id">{{ list.label }}</option>
-                    
+
                 </select>
             </div>
         </div>
@@ -40,7 +40,7 @@
 
                         <span class="label-form" v-for="m in modulos" :key="m.id"><input @change="prepareArray()"
                                 class="mx-3" v-model="mod" type="checkbox" :value="m.id">{{ m.nome
-                                }}</span>
+                            }}</span>
 
                     </div>
 
@@ -69,7 +69,7 @@
                             Criado por</th>
                         <th
                             class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
-                            Habilitado</th>         
+                            Habilitado</th>
                         <th
                             class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
                             Ação</th>
@@ -77,8 +77,9 @@
                     </tr>
                 </thead>
                 <tbody class="bg-white dark:bg-slate-800">
-                    <tr v-for="li in  listas" :key="li.id">
-                       
+                    <tr class="hover:bg-gray-100 cursor-pointer duration-200" @click="detailsLista(li.id)"
+                        v-for="li in  listas" :key="li.id">
+
                         <td
                             class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                             {{ li.titulo }}</td>
@@ -98,12 +99,13 @@
                             class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                             <template v-if="li.is_active">
                                 <div class="flex items-center">
-                                    <div class="h-2.5 w-2.5 rounded-full                     bg-green-500 mr-2"></div> Sim               
+                                    <div class="h-2.5 w-2.5 rounded-full                     bg-green-500 mr-2"></div>
+                                    Sim
                                 </div>
                             </template>
                             <template v-else>
                                 <div class="flex items-center">
-                                    <div class="h-2.5 w-2.5 rounded-full bg-red-500 mr-2"></div> Não            
+                                    <div class="h-2.5 w-2.5 rounded-full bg-red-500 mr-2"></div> Não
                                 </div>
                             </template>
                         </td>

@@ -405,7 +405,8 @@
                                         </tr>
                                     </thead>
                                     <tbody class="bg-white dark:bg-slate-800">
-                                        <tr v-for="u in sensorscripts" :key="u.id">
+                                        <tr class="hover:bg-gray-100 cursor-pointer duration-200"
+                                            @click="detailsSC(u.id)" v-for="u in sensorscripts" :key="u.id">
                                             <td
                                                 class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                                                 {{ u.titulo }}

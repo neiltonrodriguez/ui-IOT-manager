@@ -12,7 +12,7 @@
         <table class="border-collapse table-fixed w-full text-sm">
             <thead>
                 <tr>
-                   
+
                     <th
                         class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
                         Título</th>
@@ -35,8 +35,9 @@
                 </tr>
             </thead>
             <tbody class="bg-white dark:bg-slate-800">
-                <tr v-for="m in monitoriot" :key="m.id">
-                    
+                <tr class="hover:bg-gray-100 cursor-pointer duration-200" @click="detailsMonitorIot(m.id)"
+                    v-for="m in monitoriot" :key="m.id">
+
                     <td
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ m.titulo }}</td>

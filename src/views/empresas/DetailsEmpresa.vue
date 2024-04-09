@@ -10,47 +10,38 @@
         </div>
         <form class="row g-3" v-on:submit.prevent="store(empresa)">
             <div class="grid gap-6 mb-6 md:grid-cols-2">
-                <div class="flex flex-col items-center justify-between">
-                    <template v-if="empresa.logo == null"><img
-                            class="border-2 max-h-36 border-gray-500 shadow-md duration-200"
-                            src="../../assets/img/sem-foto.png"> </template>
-                    <template v-else>
-                        <img class="border-2 max-h-36 border-gray-500 shadow-md duration-200"
-                            :src="empresa.logo" width="150">
-                    </template>
-                    <div>
-                        <label title="Click to upload" for="file"
-                            class="bg-gray-200 py-1 text-sm font-semibold rounded-md px-5 cursor-pointer hover:bg-gray-300 duration-200">
-                            Escolher imagem
-                        </label>
-                        <input @change="uploadFile()" hidden="" name="inputFoto" type="file" ref="file" id="file">
-                    </div>
-                    {{ img.name ? img.name : '' }}
-                </div>
-                <div>
-                    <div>
-                        <label class="label-form">Nome</label>
-                        <input v-on:keyup="habilitarSalvar()" type="text" v-model="empresa.nome" class="edit-form"
-                            placeholder="" required>
-                    </div>
-                    <div>
-                        <label class="label-form">Descrição</label>
-                        <input type="text" v-model="empresa.descricao" class="edit-form" v-on:keyup="habilitarSalvar()"
-                            placeholder="" required>
+                <div class="flex flex-col items-start">
+                    <div class="flex flex-col items-center justify-center">
+                        <template v-if="empresa.foto == null">
+                            <img class="border-2 max-h-36 border-gray-500  shadow-md duration-200"
+                                src="../../assets/img/sem-foto.png">
+                        </template>
+                        <template v-else>
+                            <img class="border-2 max-h-36 border-gray-500  shadow-md duration-200" :src="empresa.foto"
+                                width="150">
+
+                        </template>
+                        <div>
+                            <label title="Click to upload" for="file"
+                                class="bg-gray-200 py-1 text-sm font-semibold rounded-md px-5 cursor-pointer hover:bg-gray-300 duration-200">
+                                Escolher imagem
+                            </label>
+
+
+                            <input @change="uploadFile()" hidden="" name="inputFoto" type="file" ref="file" id="file">
+                        </div>
+                        {{ img.name ? img.name : '' }}
                     </div>
                 </div>
             </div>
             <div class="grid gap-6 mb-6 md:grid-cols-2">
-                
-                <div v-if="user.tipo == 4">
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Conta</label>
-                    <select v-model="empresa.conta" disabled class="edit-form" @change="habilitarSalvar()">
-                        <option value="" disabled selected>Escolha a conta</option>
-                        <option v-for="c in contas" :key="c.id" :value="c.conta">{{ c.conta }}</option>
-                    </select>
+
+
+                <div>
+                    <label class="label-form">Nome</label>
+                    <input v-on:keyup="habilitarSalvar()" type="text" v-model="empresa.nome" class="edit-form"
+                        placeholder="" required>
                 </div>
-            </div>
-            <div class="grid gap-6 mb-6 md:grid-cols-3">
                 <div>
                     <label class="label-form">Razão social</label>
                     <input v-on:keyup="habilitarSalvar()" type="text" disabled v-model="empresa.razaosocial"
@@ -60,6 +51,18 @@
                     <label class="label-form">CNPJ</label>
                     <input type="text" v-model="empresa.cnpj" v-mask="'##.###.###/####-##'" class="edit-form"
                         v-on:keyup="habilitarSalvar()" placeholder="" required disabled>
+                </div>
+                <div>
+                    <label class="label-form">Descrição</label>
+                    <textarea id="message" rows="4" v-model="empresa.descricao" class="edit-form"
+                        v-on:keyup="habilitarSalvar()" placeholder="" required></textarea>
+                </div>
+                <div v-if="user.tipo == 4">
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Conta</label>
+                    <select v-model="empresa.conta" disabled class="edit-form" @change="habilitarSalvar()">
+                        <option value="" disabled selected>Escolha a conta</option>
+                        <option v-for="c in contas" :key="c.id" :value="c.conta">{{ c.conta }}</option>
+                    </select>
                 </div>
 
                 <div>
@@ -87,15 +90,17 @@
                         class="edit-form" placeholder="" v-on:keyup="habilitarSalvar()">
                 </div>
                 <div>
-                    <label class="label-form">Cep</label>
-                    <input type="text" v-model="empresa.cep" v-mask="'##.###-###'" class="edit-form" placeholder=""
-                        v-on:keyup="habilitarSalvar()" required>
-                </div>
-            </div>
-            <div class="grid gap-6 mb-6 md:grid-cols-2">
-                <div>
                     <label class="label-form">Contato</label>
                     <input type="contato" v-model="empresa.contato" class="edit-form" placeholder="pessoa para contato"
+                        v-on:keyup="habilitarSalvar()" required>
+                </div>
+
+            </div>
+            <div class="grid gap-6 mb-6 md:grid-cols-2">
+
+                <div>
+                    <label class="label-form">Cep</label>
+                    <input type="text" v-model="empresa.cep" v-mask="'##.###-###'" class="edit-form" placeholder=""
                         v-on:keyup="habilitarSalvar()" required>
                 </div>
                 <div>

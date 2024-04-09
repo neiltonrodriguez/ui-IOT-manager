@@ -9,6 +9,22 @@
 
         <form class="row g-3" v-on:submit.prevent="createConta(formD)">
             <div class="grid gap-6 mb-6 md:grid-cols-2">
+                <div class="flex flex-col items-start">
+                    <div class="flex flex-col items-center justify-center">
+                        <img class="border-2 max-h-36 border-gray-500  shadow-md duration-200"
+                            src="../../assets/img/sem-foto.png">
+                        <div>
+                            <label title="Click to upload" for="file"
+                                class="bg-gray-200 py-1 text-sm font-semibold rounded-md px-5 cursor-pointer hover:bg-gray-300 duration-200">
+                                Escolher imagem
+                            </label>
+                            <input @change="uploadFile()" hidden="" name="inputFoto" type="file" ref="file" id="file">
+                        </div>
+                        {{ img.name ? img.name : '' }}
+                    </div>
+                </div>
+            </div>
+            <div class="grid gap-6 mb-6 md:grid-cols-2">
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Titulo</label>
                     <input type="text" v-model="formD.titulo"
@@ -28,26 +44,16 @@
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="" required>
                 </div>
-                <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descrição</label>
-                    <input type="text" v-model="formD.descricao"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="">
-                </div>
+
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Conta</label>
                     <input type="text" v-model="formD.conta"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="" required>
                 </div>
-                <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Logomarca</label>
-                    <input @change="uploadFile()" type="file" ref="file" id="file"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="">
-                </div>
-            </div>
-            <div class="grid gap-6 mb-6 md:grid-cols-3">
+                
+
+
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Telefone
                         1</label>
@@ -63,44 +69,55 @@
                         placeholder="">
                 </div>
                 <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descrição</label>
+                    <textarea id="message" rows="4" v-model="formD.descricao"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder=""></textarea>
+                </div>
+                <div>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contato</label>
                     <input type="contato" v-model="formD.contato"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="pessoa para contato" required>
                 </div>
-
-            </div>
-            <div class="grid gap-6 mb-6 md:grid-cols-2">
-
+                <div>
+                    <label class="label-form">Habilitado</label>
+                    <select v-model="formD.is_active" disabled class="edit-form" @change="habilitarSalvar()">
+                        <option :value="true">Sim</option>
+                        <option :value="false">Não</option>
+                    </select>
+                </div>
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
                     <input type="email" id="email" v-model="formD.email"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="seuemail@email.com" required>
                 </div>
+
+            </div>
+
+            <div class="grid gap-6 mb-6 md:grid-cols-2">
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Cep</label>
                     <input @blur="buscarCep()" type="text" v-model="formD.cep" v-mask="'##.###-###'"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="" required>
                 </div>
-            </div>
-            <div class="grid gap-6 mb-6 md:grid-cols-2">
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Endereço</label>
                     <input type="text" v-model="formD.logradouro"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="" required>
                 </div>
+
+            </div>
+            <div class="grid gap-6 mb-6 md:grid-cols-3">
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Bairro</label>
                     <input type="text" v-model="formD.bairro"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="" required>
                 </div>
-            </div>
-            <div class="grid gap-6 mb-6 md:grid-cols-3">
-
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Cidade</label>
                     <input type="text" v-model="formD.cidade"
@@ -141,6 +158,8 @@
                         <option value="TO">Tocantins</option>
                     </select>
                 </div>
+            </div>
+            <div class="grid gap-6 mb-6 md:grid-cols-2">
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Complemento</label>
                     <select v-model="formD.complemento"
@@ -161,9 +180,9 @@
 
                 <div class="flex my-5">
 
-                    <span class="label-form" v-for="m in modulos" :key="m.id"><input @change="prepareArray()" class="mx-3"
-                            v-model="mod" type="checkbox" :value="m.id">{{ m.nome
-                            }}</span>
+                    <span class="label-form" v-for="m in modulos" :key="m.id"><input @change="prepareArray()"
+                            class="mx-3" v-model="mod" type="checkbox" :value="m.id">{{ m.nome
+                        }}</span>
 
                 </div>
             </div>

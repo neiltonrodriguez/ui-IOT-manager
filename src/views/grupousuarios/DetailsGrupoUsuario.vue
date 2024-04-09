@@ -30,7 +30,8 @@
                             Membros
                         </a>
                     </li>
-                    <li v-if="user.tipo === 4 && grupousuario.tipo == 4" class="-mb-px mr-2 last:mr-0 flex-auto text-center">
+                    <li v-if="user.tipo === 4 && grupousuario.tipo == 4"
+                        class="-mb-px mr-2 last:mr-0 flex-auto text-center">
                         <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal"
                             v-on:click="toggleTabs(4)"
                             v-bind:class="{ 'text-gray-800 bg-gray-300': openTab !== 4, 'text-white bg-gray-800': openTab === 4 }">
@@ -47,8 +48,9 @@
                                     <div class="grid gap-6 mb-6 md:grid-cols-2">
                                         <div>
                                             <label class="label-form">Nome</label>
-                                            <input type="text" v-model="grupousuario.nome" v-on:keyup="habilitarSalvar()"
-                                                class="edit-form" placeholder="" disabled>
+                                            <input type="text" v-model="grupousuario.nome"
+                                                v-on:keyup="habilitarSalvar()" class="edit-form" placeholder=""
+                                                disabled>
                                         </div>
                                         <div v-if="user.tipo == 4">
                                             <label class="label-form">Conta</label>
@@ -72,8 +74,8 @@
                                         </div>
                                         <div>
                                             <label class="label-form">Descrição</label>
-                                            <input type="text" v-model="grupousuario.descricao" class="edit-form"
-                                                v-on:keyup="habilitarSalvar()" placeholder="">
+                                            <textarea id="message" rows="4" v-model="grupousuario.descricao"
+                                                class="edit-form" v-on:keyup="habilitarSalvar()" placeholder=""></textarea>
                                         </div>
                                         <div>
                                             <label class="label-form">Habilitado</label>
