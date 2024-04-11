@@ -32,20 +32,20 @@
                 </tr>
             </thead>
             <tbody class="bg-white dark:bg-slate-800">
-                <tr class="hover:bg-gray-100 cursor-pointer duration-200" @click="detailsGrupoCamera(ca.id)"
+                <tr class="hover:bg-gray-100 cursor-pointer duration-200" 
                     v-for="ca in  grupocameras" :key="ca.id">
 
-                    <td
+                    <td @click="detailsGrupoCamera(ca.id)"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ ca.nome }}</td>
-                    <td v-if="user.tipo == 4"
+                    <td @click="detailsGrupoCamera(ca.id)" v-if="user.tipo == 4"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ ca.conta }}</td>
-                    <td
+                    <td @click="detailsGrupoCamera(ca.id)"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ ca.descricao }}</td>
 
-                    <td
+                    <td @click="detailsGrupoCamera(ca.id)"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         <template v-if="ca.is_active">
                             <div class="flex items-center">

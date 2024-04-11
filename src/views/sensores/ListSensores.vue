@@ -45,38 +45,38 @@
                 </tr>
             </thead>
             <tbody class="bg-white dark:bg-slate-800">
-                <tr class="hover:bg-gray-100 cursor-pointer duration-200" @click="detailsSensor(s.id)"
+                <tr class="hover:bg-gray-100 cursor-pointer duration-200" 
                     v-for="s in  sensores" :key="s.id">
 
-                    <td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
+                    <td @click="detailsSensor(s.id)" class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
                         <template v-if="s.icone == null"><img class="rounded-lg shadow-md duration-200 hover:scale-105"
                                 width="100" src="../../assets/img/sem-foto.png"> </template>
                         <template v-else>
                             <img class="rounded-lg shadow-md duration-200 hover:scale-105" :src="s.icone" width="100">
                         </template>
                     </td>
-                    <td
+                    <td @click="detailsSensor(s.id)"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ s.nome }}</td>
-                    <td v-if="user.tipo == 4"
+                    <td @click="detailsSensor(s.id)" v-if="user.tipo == 4"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ s.conta }}</td>
-                    <td
+                    <td @click="detailsSensor(s.id)"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ s.descricao }}</td>
-                    <td v-if="user.tipo == 4"
+                    <td @click="detailsSensor(s.id)" v-if="user.tipo == 4"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ s.criadopor }}</td>
-                    <td
+                    <td @click="detailsSensor(s.id)"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ s.serial }}</td>
 
-                    <td
+                    <td @click="detailsSensor(s.id)"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         <span v-for="e in empresas" :key="e.id">{{ s.empresa === e.id ? e.nome : '' }}</span>
                     </td>
 
-                    <td
+                    <td @click="detailsSensor(s.id)"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         <template v-if="s.is_active">
                             <div class="flex items-center">

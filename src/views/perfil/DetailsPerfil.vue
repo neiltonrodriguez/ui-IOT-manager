@@ -35,19 +35,19 @@
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Sobrenome</label>
                     <input type="text" v-model="perfil.last_name" v-on:keyup="habilitarSalvar()"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  disabled:bg-red-50 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="" required>
+                        placeholder="">
                 </div>
                 <div>
                     <label class="label-form">Login</label>
                     <input type="text" v-model="perfil.usuario" disabled
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  disabled:bg-red-50 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="" required>
+                        placeholder="">
                 </div>
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
                     <input type="email" v-model="perfil.email" disabled
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  disabled:bg-red-50 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="" required>
+                        placeholder="">
                 </div>
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Empresa</label>
@@ -64,7 +64,7 @@
                     <input type="text" v-model="perfil.telefone1" v-on:keyup="habilitarSalvar()"
                         v-mask="['(##) ####-####', '(##) #####-####']"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  disabled:bg-red-50 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="" required>
+                        placeholder="">
                 </div>
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Telefone 2</label>
@@ -77,14 +77,14 @@
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Cep</label>
                     <input type="text" v-model="perfil.cep" v-mask="'##.###-###'" v-on:keyup="habilitarSalvar()"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="" required>
+                        placeholder="">
                 </div>
                 <div class="mb-6">
                     <div>
                         <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Endereço</label>
                         <input type="text" v-model="perfil.logradouro" v-on:keyup="habilitarSalvar()"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="" required>
+                            placeholder="">
                     </div>
                 </div>
 
@@ -92,13 +92,13 @@
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Bairro</label>
                     <input type="text" v-model="perfil.bairro" v-on:keyup="habilitarSalvar()"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="" required>
+                        placeholder="">
                 </div>
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Cidade</label>
                     <input type="text" v-model="perfil.cidade" v-on:keyup="habilitarSalvar()"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="" required>
+                        placeholder="">
                 </div>
                 <div>
                     <label for="confirm_password"
@@ -149,7 +149,7 @@
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Número</label>
                     <input type="text" v-model="perfil.numero" v-on:keyup="habilitarSalvar()"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="" required>
+                        placeholder="">
                 </div>
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Departamento</label>

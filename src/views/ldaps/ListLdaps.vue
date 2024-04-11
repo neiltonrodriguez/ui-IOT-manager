@@ -45,34 +45,34 @@
                 </tr>
             </thead>
             <tbody class="bg-white dark:bg-slate-800">
-                <tr class="hover:bg-gray-100 cursor-pointer duration-200" @click="detailsLdap(ld.id)"
+                <tr class="hover:bg-gray-100 cursor-pointer duration-200"
                     v-for="ld in  ldaps" :key="ld.id">
-                    <td v-if="user.tipo == 4"
+                    <td  @click="detailsLdap(ld.id)" v-if="user.tipo == 4"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ ld.conta }}</td>
-                    <td
+                    <td  @click="detailsLdap(ld.id)"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ ld.ldap_tipo }}</td>
-                    <td
+                    <td  @click="detailsLdap(ld.id)"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         <span v-for="e in empresas" :key="e.id">{{ ld.empresa === e.id ? e.nome : '' }}</span>
                     </td>
-                    <td
+                    <td  @click="detailsLdap(ld.id)"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ ld.titulo }}</td>
-                    <td
+                    <td  @click="detailsLdap(ld.id)"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ ld.host }}</td>
-                    <td
+                    <td  @click="detailsLdap(ld.id)"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ ld.porta }}</td>
-                    <td
+                    <td  @click="detailsLdap(ld.id)"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ ld.dominio }}</td>
-                    <td
+                    <td  @click="detailsLdap(ld.id)"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ ld.usuario }}</td>
-                    <td
+                    <td  @click="detailsLdap(ld.id)"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         <template v-if="ld.is_active">
                             <div class="flex items-center">

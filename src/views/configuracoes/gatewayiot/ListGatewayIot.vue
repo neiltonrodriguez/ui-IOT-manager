@@ -35,22 +35,22 @@
                 </tr>
             </thead>
             <tbody class="bg-white dark:bg-slate-800">
-                <tr class="hover:bg-gray-100 cursor-pointer duration-200"  @click="detailsGatewayIot(m.id)"
+                <tr class="hover:bg-gray-100 cursor-pointer duration-200" 
                     v-for="m in gatewayiot" :key="m.id">
 
-                    <td
+                    <td  @click="detailsGatewayIot(m.id)"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ m.titulo }}</td>
-                    <td
+                    <td  @click="detailsGatewayIot(m.id)"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ m.descricao }}</td>
-                    <td v-if="user.tipo == 4"
+                    <td  @click="detailsGatewayIot(m.id)" v-if="user.tipo == 4"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ m.conta }}</td>
-                    <td v-if="user.tipo == 4"
+                    <td  @click="detailsGatewayIot(m.id)" v-if="user.tipo == 4"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ m.criadopor }}</td>
-                    <td
+                    <td  @click="detailsGatewayIot(m.id)"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         <template v-if="m.is_active">
                             <div class="flex items-center">

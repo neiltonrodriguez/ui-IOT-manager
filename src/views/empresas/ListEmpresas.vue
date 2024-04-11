@@ -44,35 +44,35 @@
                 </tr>
             </thead>
             <tbody class="bg-white dark:bg-slate-800">
-                <tr class="hover:bg-gray-100 cursor-pointer duration-200" @click="detailsEmpresa(e.id)"
+                <tr class="hover:bg-gray-100 cursor-pointer duration-200" 
                     v-for="e in  empresas " :key="e.id">
 
-                    <td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
+                    <td @click="detailsEmpresa(e.id)" class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
                         <template v-if="e.logo == null"><img class="rounded-lg shadow-md duration-200 hover:scale-105"
                                 width="100" src="../../assets/img/sem-foto.png"> </template>
                         <template v-else>
                             <img class="rounded-lg shadow-md duration-200 hover:scale-105" :src="e.logo" width="100">
                         </template>
                     </td>
-                    <td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
+                    <td @click="detailsEmpresa(e.id)" class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
                         {{
                         e.nome }}</td>
-                    <td v-if="user.tipo == 4"
+                    <td @click="detailsEmpresa(e.id)" v-if="user.tipo == 4"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ e.conta }}</td>
-                    <td
+                    <td @click="detailsEmpresa(e.id)"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ e.cnpj }}</td>
-                    <td
+                    <td @click="detailsEmpresa(e.id)"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ e.contato }}</td>
-                    <td
+                    <td @click="detailsEmpresa(e.id)"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ e.cidade }}</td>
-                    <td
+                    <td @click="detailsEmpresa(e.id)"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ e.telefone1 }}</td>
-                    <td
+                    <td @click="detailsEmpresa(e.id)"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         <template v-if="e.is_active">
                             <div class="flex items-center">

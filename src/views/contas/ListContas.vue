@@ -41,31 +41,31 @@
                 </tr>
             </thead>
             <tbody class="bg-white dark:bg-slate-800">
-                <tr class="hover:bg-gray-100 cursor-pointer duration-200" @click="viewConta(c.id)" v-for="c in  contas "
+                <tr class="hover:bg-gray-100 cursor-pointer duration-200"  v-for="c in  contas "
                     :key="c.id">
-                    <td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
+                    <td @click="viewConta(c.id)" class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
                         <template v-if="c.logo == null"><img class="rounded-lg shadow-md duration-200 hover:scale-105"
                                 width="100" src="../../assets/img/sem-foto.png"> </template>
                         <template v-else>
                             <img class="rounded-lg shadow-md duration-200 hover:scale-105" :src="c.logo" width="100">
                         </template>
                     </td>
-                    <td
+                    <td @click="viewConta(c.id)"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ c.titulo }}</td>
-                    <td
+                    <td @click="viewConta(c.id)"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ c.descricao }}</td>
-                    <td
+                    <td @click="viewConta(c.id)"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ c.conta }}</td>
-                    <td
+                    <td @click="viewConta(c.id)"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ c.cnpj }}</td>
-                    <td
+                    <td @click="viewConta(c.id)"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ c.criadopor }}</td>
-                    <td
+                    <td @click="viewConta(c.id)"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         <template v-if="c.is_active">
                             <div class="flex items-center">

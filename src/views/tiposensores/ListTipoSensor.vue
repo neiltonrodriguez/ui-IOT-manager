@@ -37,28 +37,28 @@
                 </tr>
             </thead>
             <tbody class="bg-white dark:bg-slate-800">
-                <tr class="hover:bg-gray-100 cursor-pointer duration-200" @click="detailsTipoSensor(ts.id)"
+                <tr class="hover:bg-gray-100 cursor-pointer duration-200"
                     v-for="ts in  tiposensores" :key="ts.id">
-                    <td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
+                    <td @click="detailsTipoSensor(ts.id)" class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
                         <template v-if="ts.icone == null"><img class="rounded-lg shadow-md duration-200 hover:scale-105"
                                 width="100" src="../../assets/img/sem-foto.png"> </template>
                         <template v-else>
                             <img class="rounded-lg shadow-md duration-200 hover:scale-105" :src="ts.icone" width="100">
                         </template>
                     </td>
-                    <td
+                    <td @click="detailsTipoSensor(ts.id)"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ ts.nome }}</td>
-                    <td v-if="user.tipo == 4"
+                    <td @click="detailsTipoSensor(ts.id)" v-if="user.tipo == 4"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ ts.conta }}</td>
-                    <td
+                    <td @click="detailsTipoSensor(ts.id)"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ ts.descricao }}</td>
-                    <td v-if="user.tipo == 4"
+                    <td @click="detailsTipoSensor(ts.id)" v-if="user.tipo == 4"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ ts.criadopor }}</td>
-                    <td
+                    <td @click="detailsTipoSensor(ts.id)"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         <template v-if="ts.is_active">
                             <div class="flex items-center">

@@ -55,7 +55,7 @@
                 <div>
                     <label class="label-form">Descrição</label>
                     <textarea  rows="4" v-model="empresa.descricao" class="edit-form"
-                        v-on:keyup="habilitarSalvar()" placeholder="" required></textarea>
+                        v-on:keyup="habilitarSalvar()" placeholder="" ></textarea>
                 </div>
                 <div v-if="user.tipo == 4">
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Conta</label>
@@ -67,7 +67,7 @@
 
                 <div>
                     <label class="label-form">Habilitado</label>
-                    <select v-model="empresa.is_active" class="edit-form" @change="habilitarSalvar()">
+                    <select required v-model="empresa.is_active" class="edit-form" @change="habilitarSalvar()">
                         <option :value="true">Sim</option>
                         <option :value="false">Não</option>
 
@@ -101,24 +101,24 @@
                 <div>
                     <label class="label-form">Cep</label>
                     <input type="text" v-model="empresa.cep" v-mask="'##.###-###'" class="edit-form" placeholder=""
-                        v-on:keyup="habilitarSalvar()" required>
+                        v-on:keyup="habilitarSalvar()">
                 </div>
                 <div>
                     <label class="label-form">Endereço</label>
                     <input type="text" v-model="empresa.logradouro" class="edit-form" placeholder=""
-                        v-on:keyup="habilitarSalvar()" required>
+                        v-on:keyup="habilitarSalvar()">
                 </div>
             </div>
             <div class="grid gap-6 mb-6 md:grid-cols-3">
                 <div>
                     <label class="label-form">Bairro</label>
                     <input type="text" v-model="empresa.bairro" v-on:keyup="habilitarSalvar()" class="edit-form"
-                        placeholder="" required>
+                        placeholder="">
                 </div>
                 <div>
                     <label class="label-form">Cidade</label>
                     <input type="text" v-model="empresa.cidade" v-on:keyup="habilitarSalvar()" class="edit-form"
-                        placeholder="" required>
+                        placeholder="">
                 </div>
                 <div>
                     <label for="confirm_password" class="label-form">Estado</label>
@@ -166,7 +166,7 @@
                 <div>
                     <label for="confirm_password" class="label-form">Número</label>
                     <input type="text" v-model="empresa.numero" class="edit-form" v-on:keyup="habilitarSalvar()"
-                        placeholder="" required>
+                        placeholder="">
                 </div>
             </div>
 

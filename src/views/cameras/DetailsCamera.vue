@@ -368,14 +368,51 @@
                             </div>
                         </div>
                         <div v-bind:class="{ 'hidden': openTab !== 3, 'block': openTab === 3 }">
-                            <div class="w-full mb-2" v-for="d in dadoslidos" :key="d">
-                                <div @click="verLeituras(d.horaregistro)" class="bg-slate-200 hover:scale-95 p-2 duration-200
-                                        hover:bg-slate-100 rounded-md cursor-pointer">{{
-                            d.horaregistro }}</div>
-                                <div class="teste" :id="'mostrar' + d.horaregistro" style="display: none;">
-                                    <p><span class="font-bold">Hora Início:</span> {{ d.horainicio }}</p>
-                                    <p><span class="font-bold">Hora Fim:</span> {{ d.horafim }}</p>
-                                    <p><span class="font-bold">Quantidade de Imagens:</span> {{ d.qtdimagens }}</p>
+                            <div class="w-full mb-2">
+                                <div class="bg-slate-200 p-2 duration-200
+                                        rounded-md">
+                                    <table class="border-collapse table-fixed w-full">
+
+                                        <tr>
+                                            <th
+                                                class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
+                                                Hora Início</th>
+                                            <th
+                                                class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
+                                                Hora Fim</th>
+                                            <th
+                                                class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
+                                                Quantidade de Imagens</th>
+                                            <th
+                                                class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
+                                                Hora do Registro</th>
+
+                                        </tr>
+
+                                        <tbody class="bg-white dark:bg-slate-800">
+                                            <tr v-for="x in dadoslidos" :key="x">
+                                                <td
+                                                    class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                                                    {{ x.horainicio }}
+
+                                                </td>
+                                                <td
+                                                    class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                                                    {{ x.horafim }}
+
+                                                </td>
+                                                <td
+                                                    class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                                                    {{ x.qtdimagens }} </td>
+                                                <td
+                                                    class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                                                    {{ x.horaregistro }}
+
+                                                </td>
+
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                             <div class="py-4">
@@ -384,8 +421,9 @@
                                     :class="{ current: page === current1 }" @click="changePage1(index)">
                                     {{ page }}
                                 </button>
-                                <span class="mx-4 text-xd font-semibold text-blue-700">total de registros:</span> {{
-                                total1 }}
+                                <span class="mx-4 text-xd font-semibold text-blue-700">total de
+                                    registros:</span> {{
+                            total1 }}
                             </div>
                         </div>
                     </div>
@@ -401,6 +439,7 @@ import http from '../../services/http.js'
 import { ref } from 'vue'
 import router from '../../router'
 import { useAuth } from '../../stores/auth.js'
+import moment from 'moment'
 
 const auth = useAuth();
 
@@ -492,13 +531,13 @@ export default {
     },
     methods: {
         mostrarForm() {
-            if(!this.mostrarFormAgenda) {
+            if (!this.mostrarFormAgenda) {
                 this.mostrarFormAgenda = true
             }
             this.agenda = {}
             this.agenda.conta = this.camera.conta
             this.agenda.camera = this.camera.id
-            for(let i = 0; i < this.diasSemana.length; i++){
+            for (let i = 0; i < this.diasSemana.length; i++) {
                 this.diasSemana[i].ativo = false;
             }
         },
@@ -523,7 +562,7 @@ export default {
                         showConfirmButton: false,
                         timer: 1500
                     })
-                    
+
                     this.mostrarFormAgenda = false
                     this.getAgendamentos();
                 })
@@ -622,12 +661,12 @@ export default {
             const url = `/cameras/${this.camera.id}/dadoslidos?limit=${this.limit1}&offset=${this.limit1 * this.offset1}&ordering=-id`
             http.get(url)
                 .then(res => {
-                    this.dadoslidos = res.data.results
+                    this.montarDadosLidos(res.data.results);
                     this.total1 = res.data.count
                     const qty = Math.ceil(this.total1 / this.limit1);
                     if (qty <= 1) return [1];
                     this.pages1 = Array.from(Array(qty).keys(), (i) => i + 1);
-                    this.montarDadosLidos();
+                    // this.montarDadosLidos();
 
                 })
                 .catch(e => {
@@ -636,6 +675,20 @@ export default {
                         this.$router.push('/')
                     }
                 });
+        },
+        montarDadosLidos(data){
+            let arr = []
+            for(let i = 0; i < data.length; i++){
+                let datar = moment(data[i].horaregistro).format('DD/MM/YYYY hh:mm:ss');
+                let horainicio = data[i].horainicio.slice(0, 8);
+                let horafim = data[i].horafim.slice(0, 8);
+                data[i].horaregistro = datar;
+                data[i].horainicio = horainicio;
+                data[i].horafim = horafim;
+
+                arr.push(data[i]);
+            }
+            this.dadoslidos = arr
         },
         escolherDia() {
             let str = []

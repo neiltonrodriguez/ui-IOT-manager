@@ -36,22 +36,22 @@
                 </tr>
             </thead>
             <tbody class="bg-white dark:bg-slate-800">
-                <tr class="hover:bg-gray-100 cursor-pointer duration-200" @click="detailsGrupoAtivo(a.id)"
+                <tr class="hover:bg-gray-100 cursor-pointer duration-200" 
                     v-for="a in grupoativos" :key="a.id">
 
-                    <td
+                    <td @click="detailsGrupoAtivo(a.id)"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ a.nome }}</td>
-                    <td
+                    <td @click="detailsGrupoAtivo(a.id)"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ a.descricao }}</td>
-                    <td v-if="user.tipo == 4"
+                    <td @click="detailsGrupoAtivo(a.id)" v-if="user.tipo == 4"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ a.conta }}</td>
-                    <td v-if="user.tipo == 4"
+                    <td @click="detailsGrupoAtivo(a.id)" v-if="user.tipo == 4"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ a.criadopor }}</td>
-                    <td
+                    <td @click="detailsGrupoAtivo(a.id)"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         <template v-if="a.is_active">
                             <div class="flex items-center">

@@ -38,7 +38,7 @@
 
                 <div>
                     <label class="label-form">Titulo</label>
-                    <input type="text" v-model="conta.titulo" v-on:keyup="habilitarSalvar()" class="edit-form"
+                    <input required type="text" v-model="conta.titulo" v-on:keyup="habilitarSalvar()" class="edit-form"
                         placeholder="">
                 </div>
 
@@ -47,12 +47,12 @@
                 <div>
                     <label class="label-form">Razão
                         social</label>
-                    <input type="text" v-model="conta.razaosocial" v-on:keyup="habilitarSalvar()" class="edit-form"
+                    <input required type="text" v-model="conta.razaosocial" v-on:keyup="habilitarSalvar()" class="edit-form"
                         placeholder="">
                 </div>
                 <div>
                     <label class="label-form">CNPJ</label>
-                    <input type="text" v-model="conta.cnpj" v-mask="'##.###.###/####-##'" v-on:keyup="habilitarSalvar()"
+                    <input required type="text" v-model="conta.cnpj" v-mask="'##.###.###/####-##'" v-on:keyup="habilitarSalvar()"
                         class="edit-form" placeholder="">
                 </div>
 
@@ -66,7 +66,7 @@
                 <div>
                     <label class="label-form">Telefone
                         1</label>
-                    <input type="text" v-model="conta.telefone1" v-mask="['(##) ####-####', '(##) #####-####']"
+                    <input required type="text" v-model="conta.telefone1" v-mask="['(##) ####-####', '(##) #####-####']"
                         v-on:keyup="habilitarSalvar()" class="edit-form" placeholder="">
                 </div>
                 <div>
@@ -90,7 +90,7 @@
             <div class="grid gap-6 mb-6 md:grid-cols-2">
                 <div>
                     <label class="label-form">Habilitado</label>
-                    <select v-model="conta.is_active" class="edit-form" @change="habilitarSalvar()">
+                    <select required v-model="conta.is_active" class="edit-form" @change="habilitarSalvar()">
                         <option :value="true">Sim</option>
                         <option :value="false">Não</option>
                     </select>
@@ -180,7 +180,7 @@
                 <div class="flex my-5">
 
                     <span class="label-form" v-for="m in modulos" :key="m.id">
-                        <input :id='"check" + m.id' @change="prepareArray()" class="mx-3" :checked="m.is_active"
+                        <input required :id='"check" + m.id' @change="prepareArray()" class="mx-3" :checked="m.is_active"
                             type="checkbox" :value="m.id">{{ m.nome
                         }}
                     </span>

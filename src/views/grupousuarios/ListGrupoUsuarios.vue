@@ -40,27 +40,27 @@
                 </tr>
             </thead>
             <tbody class="bg-white dark:bg-slate-800">
-                <tr class="hover:bg-gray-100 cursor-pointer duration-200" @click="detailsGrupoUsuario(g.id)"
+                <tr class="hover:bg-gray-100 cursor-pointer duration-200" 
                     v-for="g in  grupos " :key="g.id">
-                    <td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
+                    <td @click="detailsGrupoUsuario(g.id)" class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
                         {{
                         g.nome }}</td>
                     <template v-for="t in tipos_usuario" :key="t.id">
-                        <td v-if="g.tipo == t.id"
+                        <td @click="detailsGrupoUsuario(g.id)" v-if="g.tipo == t.id"
                             class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                             {{ t.nome }}</td>
                     </template>
-                    <td
+                    <td @click="detailsGrupoUsuario(g.id)"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ g.descricao }}</td>
 
-                    <td v-if="user.tipo == 4"
+                    <td @click="detailsGrupoUsuario(g.id)" v-if="user.tipo == 4"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ g.criadopor }}</td>
-                    <td v-if="user.tipo == 4"
+                    <td @click="detailsGrupoUsuario(g.id)" v-if="user.tipo == 4"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ g.modificadopor }}</td>
-                    <td
+                    <td @click="detailsGrupoUsuario(g.id)"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         <template v-if="g.is_active">
                             <div class="flex items-center">

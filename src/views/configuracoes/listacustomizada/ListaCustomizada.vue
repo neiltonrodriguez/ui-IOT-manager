@@ -77,25 +77,25 @@
                     </tr>
                 </thead>
                 <tbody class="bg-white dark:bg-slate-800">
-                    <tr class="hover:bg-gray-100 cursor-pointer duration-200" @click="detailsLista(li.id)"
+                    <tr class="hover:bg-gray-100 cursor-pointer duration-200" 
                         v-for="li in  listas" :key="li.id">
 
-                        <td
+                        <td @click="detailsLista(li.id)"
                             class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                             {{ li.titulo }}</td>
-                        <td
+                        <td @click="detailsLista(li.id)"
                             class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                             {{ li.descricao }}</td>
-                        <td
+                        <td @click="detailsLista(li.id)"
                             class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                             {{ li.tipolista }}</td>
-                        <td v-if="user.tipo == 4"
+                        <td @click="detailsLista(li.id)" v-if="user.tipo == 4"
                             class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                             {{ li.conta }}</td>
-                        <td v-if="user.tipo == 4"
+                        <td @click="detailsLista(li.id)" v-if="user.tipo == 4"
                             class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                             {{ li.criadopor }}</td>
-                        <td
+                        <td @click="detailsLista(li.id)"
                             class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                             <template v-if="li.is_active">
                                 <div class="flex items-center">

@@ -312,7 +312,8 @@
                                                 <label
                                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Regra</label>
                                                 <textarea rows="4" v-on:keyup="habilitarSalvar()" type="text"
-                                                    v-model="sc.regra" class="edit-form" placeholder="" required></textarea>
+                                                    v-model="sc.regra" class="edit-form" placeholder=""
+                                                    required></textarea>
 
                                             </div>
                                             <div>
@@ -326,7 +327,8 @@
                                                 <label
                                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descrição</label>
                                                 <textarea rows="4" v-on:keyup="habilitarSalvar()" type="text"
-                                                    v-model="sc.descricao" class="edit-form" placeholders="" required></textarea>
+                                                    v-model="sc.descricao" class="edit-form" placeholders=""
+                                                    required></textarea>
 
                                             </div>
 
@@ -406,21 +408,21 @@
                                     </thead>
                                     <tbody class="bg-white dark:bg-slate-800">
                                         <tr class="hover:bg-gray-100 cursor-pointer duration-200"
-                                            @click="detailsSC(u.id)" v-for="u in sensorscripts" :key="u.id">
-                                            <td
+                                            v-for="u in sensorscripts" :key="u.id">
+                                            <td @click="detailsSC(u.id)"
                                                 class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                                                 {{ u.titulo }}
                                             </td>
-                                            <td
+                                            <td @click="detailsSC(u.id)"
                                                 class="border-b border-slate-100  dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400 ">
                                                 {{ u.regra }}
                                             </td>
-                                            <td
+                                            <td @click="detailsSC(u.id)"
                                                 class="border-b border-slate-100  dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400 ">
                                                 {{ u.acao }}
                                             </td>
 
-                                            <td
+                                            <td @click="detailsSC(u.id)"
                                                 class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                                                 <template v-if="u.is_active">
                                                     <div class="flex items-center">
@@ -473,14 +475,17 @@
                                     class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Voltar</button>
                             </div>
                             <div v-bind:class="{ 'hidden': openTab !== 3, 'block': openTab === 3 }">
-                                {{ dados }}
-                                <div class="w-full mb-2" v-for="d in dados" :key="d">
+
+                                <div class="w-full mb-2" v-for="(d, index) in dados" :key="d">
                                     <div class="bg-slate-200 p-2 duration-200
                                         rounded-md">
 
                                         <table class="border-collapse table-fixed w-full">
 
-                                            <tr>
+                                            <tr v-if="index === 0">
+                                                <th
+                                                    class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
+                                                    Hora do registro</th>
                                                 <th v-for="x in d.leituras" :key="x"
                                                     class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
                                                     {{ x.label }}</th>
@@ -489,6 +494,12 @@
 
                                             <tbody class="bg-white dark:bg-slate-800">
                                                 <tr>
+                                                    <td 
+                                                        class="border-b border-r-2 border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+
+                                                            {{ d.horaregistro }}
+                                                       
+                                                    </td>
                                                     <td v-for="x in d.leituras" :key="x"
                                                         class="border-b border-r-2 border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
 
@@ -533,6 +544,7 @@ import { ref } from 'vue'
 import router from '../../router'
 import { useAuth } from '../../stores/auth.js'
 import Iframe from '../../components/Iframe.vue'
+import moment from 'moment'
 
 const auth = useAuth();
 
@@ -824,7 +836,7 @@ export default {
             for (let i = 0; i < this.dadoslidos.length; i++) {
                 let x = this.dadoslidos[i]
                 let a = {
-                    horaregistro: x.horaregistro,
+                    horaregistro: moment(x.horaregistro).format('DD/MM/YYYY hh:mm:ss'),
                     leituras: []
                 }
                 if (x.atributos.valor_lido1) {
@@ -852,8 +864,6 @@ export default {
                 this.dados.push(a)
             }
             this.acrescentarLinkMap();
-
-
         },
         acrescentarLinkMap() {
             let long = ""

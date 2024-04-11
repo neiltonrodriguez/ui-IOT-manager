@@ -57,9 +57,9 @@
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Telefone
                         1</label>
-                    <input type="text" v-model="formD.telefone1" v-mask="['(##) ####-####', '(##) #####-####']"
+                    <input required type="text" v-model="formD.telefone1" v-mask="['(##) ####-####', '(##) #####-####']"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="" required>
+                        placeholder="">
                 </div>
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Telefone
@@ -76,9 +76,9 @@
                 </div>
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contato</label>
-                    <input type="contato" v-model="formD.contato"
+                    <input type="contato" v-model="formD.contato" required
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="pessoa para contato" required>
+                        placeholder="pessoa para contato">
                 </div>
                 <div>
                     <label class="label-form">Habilitado</label>
@@ -91,7 +91,7 @@
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
                     <input type="email" id="email" v-model="formD.email"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="seuemail@email.com" required>
+                        placeholder="seuemail@email.com">
                 </div>
 
             </div>
@@ -101,13 +101,13 @@
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Cep</label>
                     <input @blur="buscarCep()" type="text" v-model="formD.cep" v-mask="'##.###-###'"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="" required>
+                        placeholder="">
                 </div>
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Endereço</label>
                     <input type="text" v-model="formD.logradouro"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="" required>
+                        placeholder="">
                 </div>
 
             </div>
@@ -116,13 +116,13 @@
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Bairro</label>
                     <input type="text" v-model="formD.bairro"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="" required>
+                        placeholder="">
                 </div>
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Cidade</label>
                     <input type="text" v-model="formD.cidade"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="" required>
+                        placeholder="">
                 </div>
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Estado</label>
@@ -173,7 +173,7 @@
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Número</label>
                     <input type="text" v-model="formD.numero"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="" required>
+                        placeholder="">
                 </div>
             </div>
             <div class="mb-6">
@@ -183,6 +183,8 @@
                     <span class="label-form" v-for="m in modulos" :key="m.id"><input @change="prepareArray()"
                             class="mx-3" v-model="mod" type="checkbox" :value="m.id">{{ m.nome
                         }}</span>
+{{ modString }}
+                        <input required type="hidden"  :value="modString">
 
                 </div>
             </div>
@@ -223,7 +225,6 @@ export default {
             formData.append('logo', this.img)
             formData.append('titulo', formD.titulo)
             formData.append('conta', formD.conta)
-            formData.append('email', formD.email)
             formData.append('razaosocial', formD.razaosocial)
             formData.append('cnpj', formD.cnpj)
             formData.append('contato', formD.contato)
@@ -234,10 +235,19 @@ export default {
             formData.append('logradouro', formD.logradouro)
             formData.append('bairro', formD.bairro)
             formData.append('cidade', formD.cidade)
-            formData.append('uf', formD.uf)
             formData.append('numero', formD.numero)
+            if (formD.email != undefined) {
+                formData.append('email', formD.email)
+            }
+            if (formD.uf != undefined) {
+                formData.append('uf', formD.uf)
+            }
             if (formD.complemento != "") {
                 formData.append('complemento', formD.complemento)
+            }
+            if (this.modString.length < 2) {
+                this.$swal("Oops...", "escolha pelo menos 1 módulo", "error");
+                return;
             }
             formData.append('modulos', this.modString)
             const headers = { 'Content-Type': 'multipart/form-data' };

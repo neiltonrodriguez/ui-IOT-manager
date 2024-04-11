@@ -45,7 +45,7 @@
                 </tr>
             </thead>
             <tbody class="bg-white dark:bg-slate-800">
-                <tr class="hover:bg-gray-100 cursor-pointer duration-200" v-for="u in usuarios" :key="u.id" @click="viewUser(u.id)">
+                <tr class="hover:bg-gray-100 cursor-pointer duration-200" v-for="u in usuarios" :key="u.id" >
                     <td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
                         <template v-if="u.foto == null"><img class="rounded-lg shadow-md duration-200 hover:scale-105"
                                 width="100" src="../../assets/img/sem-foto.png"> </template>
@@ -53,15 +53,15 @@
                             <img class="rounded-lg shadow-md duration-200 hover:scale-105" :src="u.foto" width="100">
                         </template>
                     </td>
-                    <td class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                    <td @click="viewUser(u.id)" class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ u.nomecompleto }}</td>
-                    <td class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                    <td @click="viewUser(u.id)" class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ u.usuario }}</td>
-                    <td class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                    <td @click="viewUser(u.id)" class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ u.email }}</td>
-                    <td class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                    <td @click="viewUser(u.id)" class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ u.origemusuario }}</td>
-                    <td class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                    <td @click="viewUser(u.id)" class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         <template v-if="u.is_active">
                             <div class="flex items-center">
                                 <div class="h-2.5 w-2.5 rounded-full                     bg-green-500 mr-2"></div> Sim

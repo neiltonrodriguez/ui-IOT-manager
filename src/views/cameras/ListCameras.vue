@@ -42,32 +42,31 @@
                 </tr>
             </thead>
             <tbody class="bg-white dark:bg-slate-800">
-                <tr @click="detailsCamera(ca.id)"  class="hover:bg-gray-100 cursor-pointer duration-200"
-                    v-for="ca in  cameras" :key="ca.id">
+                <tr class="hover:bg-gray-100 cursor-pointer duration-200" v-for="ca in  cameras" :key="ca.id">
 
 
-                    <td
+                    <td @click="detailsCamera(ca.id)"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ ca.titulo }}</td>
-                    <td v-if="user.tipo == 4"
+                    <td @click="detailsCamera(ca.id)" v-if="user.tipo == 4"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ ca.conta }}</td>
-                    <td
+                    <td @click="detailsCamera(ca.id)"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ ca.descricao }}</td>
-                    <td v-if="user.tipo == 4"
+                    <td @click="detailsCamera(ca.id)" v-if="user.tipo == 4"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ ca.criadopor }}</td>
-                    <td
+                    <td @click="detailsCamera(ca.id)"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ ca.serial }}</td>
 
-                    <td
+                    <td @click="detailsCamera(ca.id)"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         <span v-for="e in empresas" :key="e.id">{{ ca.empresa === e.id ? e.nome : '' }}</span>
                     </td>
 
-                    <td
+                    <td @click="detailsCamera(ca.id)"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         <template v-if="ca.is_active">
                             <div class="flex items-center">

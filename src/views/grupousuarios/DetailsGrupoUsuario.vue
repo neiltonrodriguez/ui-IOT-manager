@@ -79,7 +79,7 @@
                                         </div>
                                         <div>
                                             <label class="label-form">Habilitado</label>
-                                            <select v-model="grupousuario.is_active" class="edit-form"
+                                            <select v-model="grupousuario.is_active" required class="edit-form"
                                                 @change="habilitarSalvar()">
                                                 <option :value="true">Sim</option>                                      
                                                 <option :value="false">Não</option>                                    

@@ -35,19 +35,19 @@
                 </tr>
             </thead>
             <tbody class="bg-white dark:bg-slate-800">
-                <tr class="hover:bg-gray-100 cursor-pointer duration-200" @click="detailsGrupoSensor(sg.id)"
+                <tr class="hover:bg-gray-100 cursor-pointer duration-200" 
                     v-for="sg in  sensorgrupos " :key="sg.id">
 
-                    <td
+                    <td @click="detailsGrupoSensor(sg.id)"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ sg.nome }}</td>
-                    <td
+                    <td @click="detailsGrupoSensor(sg.id)"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ sg.descricao }}</td>
-                    <td v-if="user.tipo == 4"
+                    <td @click="detailsGrupoSensor(sg.id)" v-if="user.tipo == 4"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ sg.conta }}</td>
-                    <td
+                    <td @click="detailsGrupoSensor(sg.id)"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         <template v-if="sg.is_active">
                             <div class="flex items-center">

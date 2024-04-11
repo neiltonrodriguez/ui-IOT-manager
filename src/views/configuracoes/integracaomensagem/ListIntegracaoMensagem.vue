@@ -40,24 +40,24 @@
                 </tr>
             </thead>
             <tbody class="bg-white dark:bg-slate-800">
-                <tr class="hover:bg-gray-100 cursor-pointer duration-200" @click="detailsIntegracaoMensagem(i.id)"
+                <tr class="hover:bg-gray-100 cursor-pointer duration-200" 
                     v-for="i in  mensagemintegracao" :key="i.id">
 
-                    <td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
+                    <td @click="detailsIntegracaoMensagem(i.id)" class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
                         {{
                         i.titulo }}</td>
 
-                    <td
+                    <td @click="detailsIntegracaoMensagem(i.id)"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ i.descricao }}</td>
 
-                    <td v-if="user.tipo == 4"
+                    <td @click="detailsIntegracaoMensagem(i.id)" v-if="user.tipo == 4"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ i.criadopor }}</td>
-                    <td v-if="user.tipo == 4"
+                    <td @click="detailsIntegracaoMensagem(i.id)" v-if="user.tipo == 4"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ i.modificadopor }}</td>
-                    <td
+                    <td @click="detailsIntegracaoMensagem(i.id)"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         <template v-if="i.is_active">
                             <div class="flex items-center">

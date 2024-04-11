@@ -37,24 +37,24 @@
                 </tr>
             </thead>
             <tbody class="bg-white dark:bg-slate-800">
-                <tr class="hover:bg-gray-100 cursor-pointer duration-200" @click="detailsNotificacao(n.id)"
+                <tr class="hover:bg-gray-100 cursor-pointer duration-200"
                     v-for="n in  notificacoes" :key="n.id">
 
-                    <td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
+                    <td  @click="detailsNotificacao(n.id)" class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
                         {{
                         n.titulo }}</td>
 
-                    <td
+                    <td  @click="detailsNotificacao(n.id)"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ n.descricao }}</td>
 
-                    <td v-if="user.tipo == 4"
+                    <td  @click="detailsNotificacao(n.id)" v-if="user.tipo == 4"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ n.criadopor }}</td>
-                    <td v-if="user.tipo == 4"
+                    <td  @click="detailsNotificacao(n.id)" v-if="user.tipo == 4"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ n.modificadopor }}</td>
-                    <td
+                    <td  @click="detailsNotificacao(n.id)"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         <template v-if="n.is_active">
                             <div class="flex items-center">
