@@ -42,26 +42,26 @@
             <tbody class="bg-white dark:bg-slate-800">
                 <tr class="hover:bg-gray-100 cursor-pointer duration-200" 
                     v-for="g in  grupos " :key="g.id">
-                    <td @click="detailsGrupoUsuario(g.id)" class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
+                    <td @click="detailsGrupoUsuario(g.id)" class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
                         {{
                         g.nome }}</td>
                     <template v-for="t in tipos_usuario" :key="t.id">
                         <td @click="detailsGrupoUsuario(g.id)" v-if="g.tipo == t.id"
-                            class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                            class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
                             {{ t.nome }}</td>
                     </template>
                     <td @click="detailsGrupoUsuario(g.id)"
-                        class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                        class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
                         {{ g.descricao }}</td>
 
                     <td @click="detailsGrupoUsuario(g.id)" v-if="user.tipo == 4"
-                        class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                        class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
                         {{ g.criadopor }}</td>
                     <td @click="detailsGrupoUsuario(g.id)" v-if="user.tipo == 4"
-                        class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                        class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
                         {{ g.modificadopor }}</td>
                     <td @click="detailsGrupoUsuario(g.id)"
-                        class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                        class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
                         <template v-if="g.is_active">
                             <div class="flex items-center">
                                 <div class="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div> Sim
@@ -74,7 +74,7 @@
                         </template>
                     </td>
                     <td
-                        class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                        class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
                         <button @click="detailsGrupoUsuario(g.id)" class="btn">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1"
                                 stroke="currentColor" class="w-6 h-6">
@@ -151,7 +151,7 @@ export default {
                 },
             ],
             offset: 0,
-            limit: 5,
+            limit: 10,
             pages: [],
             total: 0,
             filter: {

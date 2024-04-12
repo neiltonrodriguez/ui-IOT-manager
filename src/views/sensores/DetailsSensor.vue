@@ -491,10 +491,10 @@
 
                                                 <tr v-if="index === 0">
                                                     <td
-                                                        class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
+                                                        class="border-b dark:border-slate-600 font-medium pt-0 text-slate-400 dark:text-slate-200 text-left">
                                                         Hora do registro</td>
                                                     <td v-for="x in d.leituras" :key="x"
-                                                        class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
+                                                        class="border-b dark:border-slate-600 font-medium pt-0 text-slate-400 dark:text-slate-200 text-left">
                                                         {{ x.label }}</td>
 
                                                 </tr>
@@ -502,13 +502,13 @@
                                                 <tbody class="bg-white dark:bg-slate-800">
                                                     <tr :class="d.alerta ? 'bg-red-300' : ''">
                                                         <td
-                                                            class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                                                            class="border-b border-slate-100 dark:border-slate-700 text-slate-500 dark:text-slate-400">
 
                                                             {{ d.horaregistro }}
 
                                                         </td>
                                                         <td v-for="x in d.leituras" :key="x"
-                                                            class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                                                            class="border-b border-slate-100 dark:border-slate-700 text-slate-500 dark:text-slate-400">
 
                                                             <template v-if="x.label == 'Link'">
                                                                 <a class="text-red-600" target="_blank"
@@ -529,7 +529,7 @@
                                     </div>
                                 </div>
                                 <div class="py-4">
-                                    {{ atual }}
+                            
                                     <template v-for="(page, index) in pages1" :key="page">
                                         <!-- <button v-if="page == 1" :disabled="atual == 1"
                                             @click="changePage1Decrement(atual--)"
@@ -674,7 +674,7 @@ export default {
             pages: [],
             total: 0,
             offset1: 0,
-            limit1: 5,
+            limit1: 20,
             pages1: [],
             total1: 0,
             gatewayiot: [],

@@ -46,22 +46,22 @@
             </thead>
             <tbody class="bg-white dark:bg-slate-800">
                 <tr class="hover:bg-gray-100 cursor-pointer duration-200" v-for="u in usuarios" :key="u.id" >
-                    <td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
+                    <td class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
                         <template v-if="u.foto == null"><img class="rounded-lg shadow-md duration-200 hover:scale-105"
-                                width="100" src="../../assets/img/sem-foto.png"> </template>
+                                width="40" src="../../assets/img/sem-foto.png"> </template>
                         <template v-else>
-                            <img class="rounded-lg shadow-md duration-200 hover:scale-105" :src="u.foto" width="100">
+                            <img class="rounded-lg shadow-md duration-200 hover:scale-105" :src="u.foto" width="40">
                         </template>
                     </td>
-                    <td @click="viewUser(u.id)" class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                    <td @click="viewUser(u.id)" class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
                         {{ u.nomecompleto }}</td>
-                    <td @click="viewUser(u.id)" class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                    <td @click="viewUser(u.id)" class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
                         {{ u.usuario }}</td>
-                    <td @click="viewUser(u.id)" class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                    <td @click="viewUser(u.id)" class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
                         {{ u.email }}</td>
-                    <td @click="viewUser(u.id)" class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                    <td @click="viewUser(u.id)" class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
                         {{ u.origemusuario }}</td>
-                    <td @click="viewUser(u.id)" class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                    <td @click="viewUser(u.id)" class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
                         <template v-if="u.is_active">
                             <div class="flex items-center">
                                 <div class="h-2.5 w-2.5 rounded-full                     bg-green-500 mr-2"></div> Sim
@@ -73,7 +73,7 @@
                             </div>
                         </template>
                     </td>
-                    <td class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                    <td class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
                         <button @click="viewUser(u.id)" class="btn">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1"
                                 stroke="currentColor" class="w-6 h-6">
@@ -124,7 +124,7 @@ export default {
             usuario: {},
             users: [],
             offset: 0,
-            limit: 5,
+            limit: 10,
             pages: [],
             total: 0,
             filter: {

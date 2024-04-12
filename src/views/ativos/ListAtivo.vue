@@ -39,28 +39,28 @@
             <tbody class="bg-white dark:bg-slate-800">
                 <tr class="hover:bg-gray-100 cursor-pointer duration-200" v-for="a in ativos" :key="a.id">
                     <td @click="detailsAtivo(a.id)"
-                        class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
+                        class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
                         <template v-if="a.icone == null"><img class="rounded-lg shadow-md duration-200 hover:scale-105"
-                                width="100" src="../../assets/img/sem-foto.png"> </template>
+                                width="40" src="../../assets/img/sem-foto.png"> </template>
                         <template v-else>
-                            <img class="rounded-lg shadow-md duration-200 hover:scale-105" :src="a.icone" width="100">
+                            <img class="rounded-lg shadow-md duration-200 hover:scale-105" :src="a.icone" width="40">
                         </template>
 
                     </td>
                     <td @click="detailsAtivo(a.id)"
-                        class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                        class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
                         dat {{ a.nome }}</td>
                     <td @click="detailsAtivo(a.id)"
-                        class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                        class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
                         {{ a.serial }}</td>
                     <td @click="detailsAtivo(a.id)" v-if="user.tipo == 4"
-                        class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                        class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
                         {{ a.conta }}</td>
                     <td @click="detailsAtivo(a.id)" v-if="user.tipo == 4"
-                        class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                        class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
                         {{ a.criadopor }}</td>
                     <td @click="detailsAtivo(a.id)"
-                        class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                        class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
                         <template v-if="a.is_active">
                             <div class="flex items-center">
                                 <div class="h-2.5 w-2.5 rounded-full                     bg-green-500 mr-2"></div> Sim
@@ -73,7 +73,7 @@
                         </template>
                     </td>
                     <td
-                        class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                        class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
                         <button @click="detailsAtivo(a.id)" class="btn">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1"
                                 stroke="currentColor" class="w-6 h-6">
@@ -129,7 +129,7 @@ export default {
             contas: [],
             empresas: [],
             offset: 0,
-            limit: 5,
+            limit: 10,
             pages: [],
             total: 0,
             filter: {

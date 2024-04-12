@@ -46,28 +46,28 @@
 
 
                     <td @click="detailsCamera(ca.id)"
-                        class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                        class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
                         {{ ca.titulo }}</td>
                     <td @click="detailsCamera(ca.id)" v-if="user.tipo == 4"
-                        class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                        class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
                         {{ ca.conta }}</td>
                     <td @click="detailsCamera(ca.id)"
-                        class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                        class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
                         {{ ca.descricao }}</td>
                     <td @click="detailsCamera(ca.id)" v-if="user.tipo == 4"
-                        class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                        class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
                         {{ ca.criadopor }}</td>
                     <td @click="detailsCamera(ca.id)"
-                        class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                        class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
                         {{ ca.serial }}</td>
 
                     <td @click="detailsCamera(ca.id)"
-                        class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                        class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
                         <span v-for="e in empresas" :key="e.id">{{ ca.empresa === e.id ? e.nome : '' }}</span>
                     </td>
 
                     <td @click="detailsCamera(ca.id)"
-                        class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                        class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
                         <template v-if="ca.is_active">
                             <div class="flex items-center">
                                 <div class="h-2.5 w-2.5 rounded-full                     bg-green-500 mr-2"></div> Sim
@@ -80,7 +80,7 @@
                         </template>
                     </td>
                     <td
-                        class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                        class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
                         <button @click="detailsCamera(ca.id)" class="btn">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1"
                                 stroke="currentColor" class="w-6 h-6">

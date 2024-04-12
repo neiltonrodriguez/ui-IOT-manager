@@ -17,9 +17,7 @@
                     <th
                         class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
                         Nome</th>
-                    <th
-                        class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
-                        Descrição</th>
+                    
                     <th v-if="user.tipo == 4"
                         class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
                         Conta</th>
@@ -40,19 +38,17 @@
                     v-for="a in grupoativos" :key="a.id">
 
                     <td @click="detailsGrupoAtivo(a.id)"
-                        class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                        class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
                         {{ a.nome }}</td>
-                    <td @click="detailsGrupoAtivo(a.id)"
-                        class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
-                        {{ a.descricao }}</td>
+                    
                     <td @click="detailsGrupoAtivo(a.id)" v-if="user.tipo == 4"
-                        class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                        class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
                         {{ a.conta }}</td>
                     <td @click="detailsGrupoAtivo(a.id)" v-if="user.tipo == 4"
-                        class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                        class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
                         {{ a.criadopor }}</td>
                     <td @click="detailsGrupoAtivo(a.id)"
-                        class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                        class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
                         <template v-if="a.is_active">
                             <div class="flex items-center">
                                 <div class="h-2.5 w-2.5 rounded-full                     bg-green-500 mr-2"></div> Sim
@@ -65,7 +61,7 @@
                         </template>
                     </td>
                     <td
-                        class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                        class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
                         <button @click="detailsGrupoAtivo(a.id)" class="btn">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1"
                                 stroke="currentColor" class="w-6 h-6">
@@ -124,7 +120,7 @@ export default {
             contas: [],
             empresas: [],
             offset: 0,
-            limit: 5,
+            limit: 10,
             pages: [],
             total: 0,
             filter: {

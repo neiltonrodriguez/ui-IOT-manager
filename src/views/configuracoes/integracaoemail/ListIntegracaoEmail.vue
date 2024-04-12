@@ -18,9 +18,7 @@
                         class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
                         Titulo</th>
 
-                    <th
-                        class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
-                        Descrição</th>
+                    
 
                     <th v-if="user.tipo == 4"
                         class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
@@ -40,22 +38,20 @@
             <tbody class="bg-white dark:bg-slate-800">
                 <tr @click="detailsIntegracao(i.id)" class="hover:bg-gray-100 cursor-pointer duration-200"  v-for="i in  integracao" :key="i.id">
 
-                    <td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
+                    <td class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
                         {{
                         i.titulo }}</td>
 
-                    <td
-                        class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
-                        {{ i.descricao }}</td>
+                   
 
                     <td v-if="user.tipo == 4"
-                        class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                        class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
                         {{ i.criadopor }}</td>
                     <td v-if="user.tipo == 4"
-                        class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                        class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
                         {{ i.modificadopor }}</td>
                     <td
-                        class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                        class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
                         <template v-if="i.is_active">
                             <div class="flex items-center">
                                 <div class="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div> Sim
@@ -68,7 +64,7 @@
                         </template>
                     </td>
                     <td
-                        class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                        class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
                         <button @click="detailsIntegracao(i.id)" class="btn">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1"
                                 stroke="currentColor" class="w-6 h-6">
@@ -121,7 +117,7 @@ export default {
             integracao: [],
             contas: [],
             offset: 0,
-            limit: 5,
+            limit: 10,
             pages: [],
             total: 0,
             filter: {

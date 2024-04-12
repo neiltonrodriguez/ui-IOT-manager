@@ -208,25 +208,23 @@
                                         <th
                                             class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
                                             Ação</th>
-
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white dark:bg-slate-800">
                                     <tr v-for="li in agendamentos" :key="li.id">
-
                                         <td
-                                            class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                                            class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
                                             {{ li.titulo }}</td>
                                         <td
-                                            class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                                            class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
                                             {{ li.diascaptura }}</td>
 
 
                                         <td v-if="user.tipo == 4"
-                                            class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                                            class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
                                             {{ li.criadopor }}</td>
                                         <td
-                                            class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                                            class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
                                             <template v-if="li.is_active">
                                                 <div class="flex items-center">
                                                     <div
@@ -241,7 +239,7 @@
                                             </template>
                                         </td>
                                         <td
-                                            class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                                            class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
                                             <button @click="detailsAgendamento(li.id)" class="btn">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                     stroke-width="1" stroke="currentColor" class="w-6 h-6">
@@ -380,16 +378,16 @@
 
                                         <tr>
                                             <th
-                                                class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
+                                                class="border-b dark:border-slate-600 font-medium p-2 text-slate-400 dark:text-slate-200 text-left">
                                                 Hora Início</th>
                                             <th
-                                                class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
+                                                class="border-b dark:border-slate-600 font-medium p-2 text-slate-400 dark:text-slate-200 text-left">
                                                 Hora Fim</th>
                                             <th
-                                                class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
+                                                class="border-b dark:border-slate-600 font-medium p-2 text-slate-400 dark:text-slate-200 text-left">
                                                 Quantidade de Imagens</th>
                                             <th
-                                                class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
+                                                class="border-b dark:border-slate-600 font-medium p-2 text-slate-400 dark:text-slate-200 text-left">
                                                 Hora do Registro</th>
 
                                         </tr>
@@ -397,20 +395,20 @@
                                         <tbody class="bg-white dark:bg-slate-800">
                                             <tr v-for="x in dadoslidos" :key="x">
                                                 <td
-                                                    class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                                                    class="border-b border-slate-100 dark:border-slate-700 text-slate-500 dark:text-slate-400">
                                                     {{ x.horainicio }}
 
                                                 </td>
                                                 <td
-                                                    class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                                                    class="border-b border-slate-100 dark:border-slate-700 text-slate-500 dark:text-slate-400">
                                                     {{ x.horafim }}
 
                                                 </td>
                                                 <td
-                                                    class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                                                    class="border-b border-slate-100 dark:border-slate-700 text-slate-500 dark:text-slate-400">
                                                     {{ x.qtdimagens }} </td>
                                                 <td
-                                                    class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                                                    class="border-b border-slate-100 dark:border-slate-700 text-slate-500 dark:text-slate-400">
                                                     {{ x.horaregistro }}
 
                                                 </td>
@@ -528,7 +526,7 @@ export default {
             dadoslidos: [],
             dados: [],
             offse1t: 0,
-            limit1: 5,
+            limit1: 20,
             pages1: [],
             total1: 0,
 
