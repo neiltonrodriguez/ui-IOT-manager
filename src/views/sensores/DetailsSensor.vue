@@ -201,70 +201,70 @@
                                         <div v-if="sensor.atributos.valor_ref1">
                                             <label
                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{
-                                                sensor.atributos.valor_ref1.label }}</label>
+                                                    sensor.atributos.valor_ref1.label }}</label>
                                             <input type="text" v-model="sensor.valor_ref1" class="edit-form"
                                                 placeholder="" required>
                                         </div>
                                         <div v-if="sensor.atributos.valor_ref2">
                                             <label
                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{
-                                                sensor.atributos.valor_ref2.label }}</label>
+                                                    sensor.atributos.valor_ref2.label }}</label>
                                             <input type="text" v-model="sensor.valor_ref2" class="edit-form"
                                                 placeholder="" required>
                                         </div>
                                         <div v-if="sensor.atributos.valor_ref3">
                                             <label
                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{
-                                                sensor.atributos.valor_ref3.label }}</label>
+                                                    sensor.atributos.valor_ref3.label }}</label>
                                             <input type="text" v-model="sensor.valor_ref3" class="edit-form"
                                                 placeholder="" required>
                                         </div>
                                         <div v-if="sensor.atributos.valor_ref4">
                                             <label
                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{
-                                                sensor.atributos.valor_ref4.label }}</label>
+                                                    sensor.atributos.valor_ref4.label }}</label>
                                             <input type="text" v-model="sensor.valor_ref4" class="edit-form"
                                                 placeholder="" required>
                                         </div>
                                         <div v-if="sensor.atributos.valor_ref5">
                                             <label
                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{
-                                                sensor.atributos.valor_ref5.label }}</label>
+                                                    sensor.atributos.valor_ref5.label }}</label>
                                             <input type="text" v-model="sensor.valor_ref5" class="edit-form"
                                                 placeholder="" required>
                                         </div>
                                         <div v-if="sensor.atributos.valor_ref6">
                                             <label
                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{
-                                                sensor.atributos.valor_ref6.label }}</label>
+                                                    sensor.atributos.valor_ref6.label }}</label>
                                             <input type="text" v-model="sensor.valor_ref6" class="edit-form"
                                                 placeholder="" required>
                                         </div>
                                         <div v-if="sensor.atributos.valor_ref7">
                                             <label
                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{
-                                                sensor.atributos.valor_ref7.label }}</label>
+                                                    sensor.atributos.valor_ref7.label }}</label>
                                             <input type="text" v-model="sensor.valor_ref7" class="edit-form"
                                                 placeholder="" required>
                                         </div>
                                         <div v-if="sensor.atributos.valor_ref8">
                                             <label
                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{
-                                                sensor.atributos.valor_ref8.label }}</label>
+                                                    sensor.atributos.valor_ref8.label }}</label>
                                             <input type="text" v-model="sensor.valor_ref8" class="edit-form"
                                                 placeholder="" required>
                                         </div>
                                         <div v-if="sensor.atributos.valor_ref9">
                                             <label
                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{
-                                                sensor.atributos.valor_ref9.label }}</label>
+                                                    sensor.atributos.valor_ref9.label }}</label>
                                             <input type="text" v-model="sensor.valor_ref9" class="edit-form"
                                                 placeholder="" required>
                                         </div>
                                         <div v-if="sensor.atributos.valor_ref10">
                                             <label
                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{
-                                                sensor.atributos.valor_ref10.label }}</label>
+                                                    sensor.atributos.valor_ref10.label }}</label>
                                             <input type="text" v-model="sensor.valor_ref10" class="edit-form"
                                                 placeholder="" required>
                                         </div>
@@ -469,64 +469,95 @@
                                         {{ page }}
                                     </button>
                                     <span class="mx-4 text-xd font-semibold text-blue-700">total de registros:</span> {{
-                                    total }}
+                                        total }}
                                 </div>
                                 <button type="button" @click="cancelar()"
                                     class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Voltar</button>
                             </div>
                             <div v-bind:class="{ 'hidden': openTab !== 3, 'block': openTab === 3 }">
 
-                                <div class="w-full mb-2" v-for="(d, index) in dados" :key="d">
+                                <div class="w-full mb-2">
+                                    <button type="button" @click="getDadosLidos()"
+                                        class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mb-3">Atualizar
+                                        lista
+                                    </button>
                                     <div class="bg-slate-200 p-2 duration-200
                                         rounded-md">
+                                        
+                                        <template v-for="(d, index) in dados" :key="d">
 
-                                        <table class="border-collapse table-fixed w-full">
 
-                                            <tr v-if="index === 0">
-                                                <th
-                                                    class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
-                                                    Hora do registro</th>
-                                                <th v-for="x in d.leituras" :key="x"
-                                                    class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
-                                                    {{ x.label }}</th>
+                                            <table class="border-collapse table-fixed w-full">
 
-                                            </tr>
-
-                                            <tbody class="bg-white dark:bg-slate-800">
-                                                <tr>
-                                                    <td 
-                                                        class="border-b border-r-2 border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
-
-                                                            {{ d.horaregistro }}
-                                                       
-                                                    </td>
+                                                <tr v-if="index === 0">
+                                                    <td
+                                                        class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
+                                                        Hora do registro</td>
                                                     <td v-for="x in d.leituras" :key="x"
-                                                        class="border-b border-r-2 border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
-
-                                                        <template v-if="x.label == 'Link'">
-                                                            <a class="text-red-600" target="_blank" :href="x.valor">Ver
-                                                                mapa</a>
-                                                        </template>
-                                                        <template v-else>
-
-                                                            {{ x.valor }}
-                                                        </template>
-                                                    </td>
+                                                        class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
+                                                        {{ x.label }}</td>
 
                                                 </tr>
-                                            </tbody>
-                                        </table>
+
+                                                <tbody class="bg-white dark:bg-slate-800">
+                                                    <tr :class="d.alerta ? 'bg-red-300' : ''">
+                                                        <td
+                                                            class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+
+                                                            {{ d.horaregistro }}
+
+                                                        </td>
+                                                        <td v-for="x in d.leituras" :key="x"
+                                                            class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+
+                                                            <template v-if="x.label == 'Link'">
+                                                                <a class="text-red-600" target="_blank"
+                                                                    :href="x.valor">Ver
+                                                                    mapa</a>
+                                                            </template>
+                                                            <template v-else>
+
+                                                                {{ x.valor }}
+                                                            </template>
+                                                        </td>
+
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </template>
 
                                     </div>
                                 </div>
                                 <div class="py-4">
-                                    <button v-for="(page, index) in pages1" :key="page"
-                                        class="px-3 mx-1 py-2 text-sm bg-blue-700 hover:bg-blue-900 focus:bg-violet-700 text-white"
-                                        :class="{ current: page === current1 }" @click="changePage1(index)">
-                                        {{ page }}
-                                    </button>
+                                    {{ atual }}
+                                    <template v-for="(page, index) in pages1" :key="page">
+                                        <!-- <button v-if="page == 1" :disabled="atual == 1"
+                                            @click="changePage1Decrement(atual--)"
+                                            class="px-3 mx-1 py-2 text-sm disabled:bg-gray-300 bg-blue-700 hover:bg-blue-900 focus:bg-violet-700 text-white">
+                                            Anterior
+                                        </button> -->
+                                        <template v-if="page === '.....'">
+                                            {{ page }}
+                                        </template>
+
+                                        <template v-else>
+                                            <button
+                                                class="px-3 mx-1 py-2 text-sm bg-blue-700 hover:bg-blue-900 focus:bg-violet-700 text-white"
+                                                :class="{ current: page === current1 }" @click="changePage1(page)">
+                                                {{ page }}
+                                            </button>
+                                        </template>
+
+                                        <!-- <button v-if="page == pages1.length" :disabled="atual == pages1.length"
+                                            @click="changePage1(atual++)"
+                                            class="px-3 mx-1 py-2 text-sm bg-blue-700 hover:bg-blue-900 focus:bg-violet-700 text-white">
+                                            Próximo
+                                        </button> -->
+                                    </template>
+
+
                                     <span class="mx-4 text-xd font-semibold text-blue-700">total de registros:</span> {{
-                                    total1 }}
+                                        total1 }}
                                 </div>
                                 <hr>
 
@@ -554,6 +585,7 @@ export default {
     },
     data() {
         return {
+            atual: 1,
             modal: false,
             contas: [],
             mostrarFormSC: false,
@@ -652,8 +684,8 @@ export default {
         };
     },
     methods: {
-        listarNotificacoes(){
-            if(this.sc.enviar_notificacao){
+        listarNotificacoes() {
+            if (this.sc.enviar_notificacao) {
                 this.mostrarNotificacoes = true
                 this.isDisabled = false
                 this.getNotificacoes();
@@ -782,6 +814,36 @@ export default {
                 });
 
         },
+        updatePages() {
+            let currentPage = 1; // Página atual
+            const qty = 100; // quantidade total de páginas
+            const firstPages = 10; // número de páginas para manter no início
+            const lastPages = 10;
+            let pages = [];
+            for (let i = 1; i <= qty; i++) {
+                if (i <= firstPages || i > qty - lastPages || Math.abs(i - currentPage) <= 2) {
+                    pages.push(i);
+                } else if (i === firstPages + 1 || i === qty - lastPages + 1) {
+                    pages.push("...");
+                }
+            }
+            this.pages1 = pages;
+        },
+        abreviarPages() {
+            const qty = this.pages1.length; // quantidade total de páginas
+            const firstPages = 7; // número de páginas para manter no início
+            const lastPages = 7; // número de páginas para manter no final
+
+            let pages = [];
+            for (let i = 1; i <= qty; i++) {
+                if (i <= firstPages || i > qty - lastPages) {
+                    pages.push(i);
+                } else if (i === firstPages + 1) {
+                    pages.push(".....");
+                }
+            }
+            this.pages1 = pages
+        },
         getDadosLidos(i = null) {
             this.dados = []
             if (i) {
@@ -796,6 +858,7 @@ export default {
                     const qty = Math.ceil(this.total1 / this.limit1);
                     if (qty <= 1) return [1];
                     this.pages1 = Array.from(Array(qty).keys(), (i) => i + 1);
+                    this.abreviarPages();
                     this.montarDadosLidos();
 
                 })
@@ -811,12 +874,21 @@ export default {
         },
         changePage(i) {
             this.getSensorScripts(i);
-            this.offset = 0
+            this.offset = 0;
+
         },
         changePage1(i) {
             this.getDadosLidos(i);
             this.offset1 = 0
+            // this.updatePages();
+            this.atual = i;
         },
+        // changePage1Decrement(i) {
+        //     this.offset1 = i--;
+        //     this.getDadosLidos(i);
+        //     // this.offset1 = i;
+        //     this.atual = i--;
+        // },
         toggleTabs: function (tabNumber) {
             if (tabNumber == 1) {
                 this.openTab = tabNumber
@@ -826,6 +898,7 @@ export default {
                 this.openTab = tabNumber
             }
             if (tabNumber == 3) {
+                this.getDadosLidos();
                 this.montarDadosLidos();
                 this.openTab = tabNumber
             }
@@ -837,6 +910,7 @@ export default {
                 let x = this.dadoslidos[i]
                 let a = {
                     horaregistro: moment(x.horaregistro).format('DD/MM/YYYY hh:mm:ss'),
+                    alerta: x.sensoremalerta,
                     leituras: []
                 }
                 if (x.atributos.valor_lido1) {
@@ -857,6 +931,55 @@ export default {
                     let b = {
                         label: x.atributos.valor_lido3,
                         valor: x.valor_lido3
+                    }
+                    a.leituras.push(b)
+                }
+                if (x.atributos.valor_lido4) {
+                    let b = {
+                        label: x.atributos.valor_lido4,
+                        valor: x.valor_lido4
+                    }
+                    a.leituras.push(b)
+                }
+                if (x.atributos.valor_lido5) {
+                    let b = {
+                        label: x.atributos.valor_lido5,
+                        valor: x.valor_lido5
+                    }
+                    a.leituras.push(b)
+                }
+                if (x.atributos.valor_lido6) {
+                    let b = {
+                        label: x.atributos.valor_lido6,
+                        valor: x.valor_lido6
+                    }
+                    a.leituras.push(b)
+                }
+                if (x.atributos.valor_lido7) {
+                    let b = {
+                        label: x.atributos.valor_lido7,
+                        valor: x.valor_lido7
+                    }
+                    a.leituras.push(b)
+                }
+                if (x.atributos.valor_lido8) {
+                    let b = {
+                        label: x.atributos.valor_lido8,
+                        valor: x.valor_lido8
+                    }
+                    a.leituras.push(b)
+                }
+                if (x.atributos.valor_lido9) {
+                    let b = {
+                        label: x.atributos.valor_lido9,
+                        valor: x.valor_lido9
+                    }
+                    a.leituras.push(b)
+                }
+                if (x.atributos.valor_lido10) {
+                    let b = {
+                        label: x.atributos.valor_lido10,
+                        valor: x.valor_lido10
                     }
                     a.leituras.push(b)
                 }
@@ -900,6 +1023,7 @@ export default {
         mostrarFormScript() {
             this.mostrarFormSC = !this.mostrarFormSC
         },
+
         setSensor() {
             http.get('/sensores/' + this.$route.params.id)
                 .then(res => {
@@ -911,7 +1035,7 @@ export default {
                     this.getFabricantes();
                     this.getAtivos();
                     this.getGatewayIot();
-                    this.getDadosLidos();
+                    // this.getDadosLidos();
 
                 })
                 .catch(e => {

@@ -84,7 +84,7 @@
                                     <div>
                                         <label
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Senha</label>
-                                        <input type="text" v-model="camera.senha" v-on:keyup="habilitarSalvar()"
+                                        <input type="password" v-model="camera.senha" v-on:keyup="habilitarSalvar()"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  disabled:bg-red-50 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                             placeholder="" required>
                                     </div>
@@ -102,8 +102,8 @@
                                             <option value="" disabled>Escolha uma empresa</option>
                                             <template v-for="e in empresas" :key="e.id">
                                                 <option selected v-if="e.id == camera.empresa" :value="e.id">{{
-                            e.nome
-                        }}</option>
+                                                    e.nome
+                                                }}</option>
                                             </template>
                                         </select>
                                     </div>
@@ -135,8 +135,8 @@
                                             class="edit-form">
                                             <option value="" disabled selected>Escolha a conta</option>
                                             <option v-for="dp in departamentos" :key="dp.id" :value="dp.id">{{
-                            dp.titulo
-                        }}
+                                                dp.titulo
+                                            }}
                                             </option>
                                         </select>
                                     </div>
@@ -146,8 +146,8 @@
                                         <select v-model="camera.grupo" @change="habilitarSalvar()" class="edit-form">
                                             <option value="" disabled selected>Escolha a conta</option>
                                             <option v-for="gp in grupos" :key="gp.id" :value="gp.id">{{
-                            gp.nome
-                        }}
+                                                gp.nome
+                                            }}
                                             </option>
                                         </select>
                                     </div>
@@ -212,7 +212,7 @@
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white dark:bg-slate-800">
-                                    <tr v-for="li in  agendamentos" :key="li.id">
+                                    <tr v-for="li in agendamentos" :key="li.id">
 
                                         <td
                                             class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
@@ -270,7 +270,7 @@
                                     {{ page }}
                                 </button>
                                 <span class="mx-4 text-xd font-semibold text-blue-700">total de registros:</span> {{
-                            total }}
+                                    total }}
                             </div>
 
                             <div v-if="mostrarFormAgenda">
@@ -369,8 +369,13 @@
                         </div>
                         <div v-bind:class="{ 'hidden': openTab !== 3, 'block': openTab === 3 }">
                             <div class="w-full mb-2">
+                                <button type="button" @click="getDadosLidos()"
+                                        class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mb-3">Atualizar
+                                        lista
+                                    </button>
                                 <div class="bg-slate-200 p-2 duration-200
                                         rounded-md">
+                                    
                                     <table class="border-collapse table-fixed w-full">
 
                                         <tr>
@@ -423,7 +428,7 @@
                                 </button>
                                 <span class="mx-4 text-xd font-semibold text-blue-700">total de
                                     registros:</span> {{
-                            total1 }}
+                                        total1 }}
                             </div>
                         </div>
                     </div>
@@ -666,7 +671,6 @@ export default {
                     const qty = Math.ceil(this.total1 / this.limit1);
                     if (qty <= 1) return [1];
                     this.pages1 = Array.from(Array(qty).keys(), (i) => i + 1);
-                    // this.montarDadosLidos();
 
                 })
                 .catch(e => {
@@ -676,9 +680,9 @@ export default {
                     }
                 });
         },
-        montarDadosLidos(data){
+        montarDadosLidos(data) {
             let arr = []
-            for(let i = 0; i < data.length; i++){
+            for (let i = 0; i < data.length; i++) {
                 let datar = moment(data[i].horaregistro).format('DD/MM/YYYY hh:mm:ss');
                 let horainicio = data[i].horainicio.slice(0, 8);
                 let horafim = data[i].horafim.slice(0, 8);
@@ -707,6 +711,7 @@ export default {
                 this.openTab = tabNumber
                 this.getAgendamentos();
             } else if (tabNumber == 3) {
+                this.getDadosLidos();
                 this.openTab = tabNumber
             }
 
@@ -782,7 +787,7 @@ export default {
                     this.getAtivos();
                     this.getGrupos();
                     this.getEmpresas();
-                    this.getDadosLidos();
+                    // this.getDadosLidos();
                     this.getGatewayIot();
                     this.getAgendamentos();
                 })

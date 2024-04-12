@@ -183,7 +183,6 @@
                     <span class="label-form" v-for="m in modulos" :key="m.id"><input @change="prepareArray()"
                             class="mx-3" v-model="mod" type="checkbox" :value="m.id">{{ m.nome
                         }}</span>
-{{ modString }}
                         <input required type="hidden"  :value="modString">
 
                 </div>

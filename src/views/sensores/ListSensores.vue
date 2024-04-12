@@ -23,9 +23,7 @@
                     <th v-if="user.tipo == 4"
                         class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
                         Conta</th>
-                    <th
-                        class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
-                        Descrição</th>
+
                     <th v-if="user.tipo == 4"
                         class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
                         Criado por</th>
@@ -61,9 +59,7 @@
                     <td @click="detailsSensor(s.id)" v-if="user.tipo == 4"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ s.conta }}</td>
-                    <td @click="detailsSensor(s.id)"
-                        class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
-                        {{ s.descricao }}</td>
+
                     <td @click="detailsSensor(s.id)" v-if="user.tipo == 4"
                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                         {{ s.criadopor }}</td>
