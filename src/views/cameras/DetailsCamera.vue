@@ -103,7 +103,7 @@
                                             <template v-for="e in empresas" :key="e.id">
                                                 <option selected v-if="e.id == camera.empresa" :value="e.id">{{
                                                     e.nome
-                                                }}</option>
+                                                    }}</option>
                                             </template>
                                         </select>
                                     </div>
@@ -136,7 +136,7 @@
                                             <option value="" disabled selected>Escolha a conta</option>
                                             <option v-for="dp in departamentos" :key="dp.id" :value="dp.id">{{
                                                 dp.titulo
-                                            }}
+                                                }}
                                             </option>
                                         </select>
                                     </div>
@@ -147,7 +147,7 @@
                                             <option value="" disabled selected>Escolha a conta</option>
                                             <option v-for="gp in grupos" :key="gp.id" :value="gp.id">{{
                                                 gp.nome
-                                            }}
+                                                }}
                                             </option>
                                         </select>
                                     </div>
@@ -368,12 +368,12 @@
                         <div v-bind:class="{ 'hidden': openTab !== 3, 'block': openTab === 3 }">
                             <div class="w-full mb-2">
                                 <button type="button" @click="getDadosLidos()"
-                                        class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mb-3">Atualizar
-                                        lista
-                                    </button>
+                                    class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mb-3">Atualizar
+                                    lista
+                                </button>
                                 <div class="bg-slate-200 p-2 duration-200
                                         rounded-md">
-                                    
+
                                     <table class="border-collapse table-fixed w-full">
 
                                         <tr>
@@ -419,14 +419,36 @@
                                 </div>
                             </div>
                             <div class="py-4">
-                                <button v-for="(page, index) in pages1" :key="page"
-                                    class="px-3 mx-1 py-2 text-sm bg-blue-700 hover:bg-blue-900 focus:bg-violet-700 text-white"
-                                    :class="{ current: page === current1 }" @click="changePage1(index)">
-                                    {{ page }}
+
+                                <button :disabled="prev1 == null" @click="nextPage('previous')"
+                                    class="px-3 mx-1 py-2 text-sm bg-blue-700 hover:bg-blue-900 disabled:bg-gray-300 focus:bg-violet-700 text-white">
+                                    Anterior
                                 </button>
-                                <span class="mx-4 text-xd font-semibold text-blue-700">total de
-                                    registros:</span> {{
-                                        total1 }}
+                                <template v-for="(page, index) in pages1" :key="page">
+
+                                    <template v-if="page === '.....'">
+                                        {{ page }}
+                                    </template>
+
+                                    <template v-else>
+                                        <button
+                                            class="px-3 mx-1 py-2 text-sm bg-blue-700 hover:bg-blue-900 focus:bg-violet-700 text-white"
+                                            :class="page === atual ? 'bg-violet-700' : 'bg-blue-700'"
+                                            @click="changePage1(page)">
+                                            {{ page }}
+                                        </button>
+                                    </template>
+
+
+                                </template>
+
+                                <button :disabled="next1 == null" @click="nextPage('next')"
+                                    class="px-3 mx-1 py-2 text-sm bg-blue-700 hover:bg-blue-900 disabled:bg-gray-300 focus:bg-violet-700 text-white">
+                                    Próximo
+                                </button>
+
+                                <span class="mx-4 text-xd font-semibold text-blue-700">total: </span> {{
+                                    total1 }}
                             </div>
                         </div>
                     </div>
@@ -449,7 +471,10 @@ const auth = useAuth();
 export default {
     data() {
         return {
+            next1: null,
+            prev1: null,
             mostrarFormAgenda: false,
+            dadosCamera: [],
             camera: {
                 complemento: "",
                 fabricante: "",
@@ -525,14 +550,51 @@ export default {
             diasStr: "",
             dadoslidos: [],
             dados: [],
-            offse1t: 0,
+            offset1: 0,
             limit1: 20,
             pages1: [],
             total1: 0,
+            atual: 1
 
         };
     },
     methods: {
+        nextPage(n) {
+            let i = 0;
+            if (n === "next") {
+                let x = this.next1.indexOf("&");
+                i = this.next1.substring(x + 8, 100).trim();
+            } else {
+                let x = this.prev1.indexOf("&");
+                if (x != -1) {
+                    i = this.prev1.substring(x + 8, 100).trim();
+                }
+                //console.log(x);
+
+            }
+            if (i === 0) {
+                this.offset1 = 0;
+                this.getDadosLidos();
+            } else {
+                this.getDadosLidos(i / this.limit1);
+            }
+
+        },
+        abreviarPages() {
+            const qty = this.pages1.length; // quantidade total de páginas
+            const firstPages = 15; // número de páginas para manter no início
+            const lastPages = 3; // número de páginas para manter no final
+
+            let pages = [];
+            for (let i = 1; i <= qty; i++) {
+                if (i <= firstPages || i > qty - lastPages) {
+                    pages.push(i);
+                } else if (i === firstPages + 1) {
+                    pages.push(".....");
+                }
+            }
+            this.pages1 = pages
+        },
         mostrarForm() {
             if (!this.mostrarFormAgenda) {
                 this.mostrarFormAgenda = true
@@ -660,15 +722,20 @@ export default {
             if (i) {
                 this.offset1 = i
             }
-            console.log(i)
+
             const url = `/cameras/${this.camera.id}/dadoslidos?limit=${this.limit1}&offset=${this.limit1 * this.offset1}&ordering=-id`
             http.get(url)
                 .then(res => {
-                    this.montarDadosLidos(res.data.results);
+                    this.dadosCamera = res.data.results
                     this.total1 = res.data.count
                     const qty = Math.ceil(this.total1 / this.limit1);
                     if (qty <= 1) return [1];
                     this.pages1 = Array.from(Array(qty).keys(), (i) => i + 1);
+
+                    this.next1 = res.data.next;
+                    this.prev1 = res.data.previous;
+                    this.abreviarPages();
+                    this.montarDadosLidos();
 
                 })
                 .catch(e => {
@@ -678,17 +745,19 @@ export default {
                     }
                 });
         },
-        montarDadosLidos(data) {
+        montarDadosLidos() {
             let arr = []
-            for (let i = 0; i < data.length; i++) {
-                let datar = moment(data[i].horaregistro).format('DD/MM/YYYY hh:mm:ss');
-                let horainicio = data[i].horainicio.slice(0, 8);
-                let horafim = data[i].horafim.slice(0, 8);
-                data[i].horaregistro = datar;
-                data[i].horainicio = horainicio;
-                data[i].horafim = horafim;
+            console.log(this.dadosCamera)
+            for (let i = 0; i < this.dadosCamera.length; i++) {
 
-                arr.push(data[i]);
+                let x = moment(this.dadosCamera[i].horaregistro).format('DD/MM/YYYY hh:mm:ss');
+                let horainicio = this.dadosCamera[i].horainicio.slice(0, 8);
+                let horafim = this.dadosCamera[i].horafim.slice(0, 8);
+                this.dadosCamera[i].horaregistro = x;
+                this.dadosCamera[i].horainicio = horainicio;
+                this.dadosCamera[i].horafim = horafim;
+
+                arr.push(this.dadosCamera[i]);
             }
             this.dadoslidos = arr
         },
@@ -804,8 +873,16 @@ export default {
             return this.offset ? this.offset + 1 : 1;
         },
         changePage1(i) {
-            this.getDadosLidos(i);
-            this.offset1 = 0
+            if (i == 1) {
+                this.getDadosLidos(0);
+                this.atual = 1;
+            } else {
+                this.getDadosLidos(i - 1);
+                this.atual = i;
+            }
+
+            this.offset1 = 0;
+
         },
         current1() {
             return this.offset1 ? this.offset1 + 1 : 1;

@@ -1,13 +1,7 @@
 <template>
     <div>
-        <Filtro @meu-evento="filtrar" 
-        :filterConta="true" 
-        :filterUf="true" 
-        :filterTipoUsuario="true"
-        :filterEmpresa="true"
-        :filterGrupoSensor="false" 
-        :filterDepartamentoUsuario="true" 
-        :filterStatus="true" />
+        <Filtro @meu-evento="filtrar" :filterConta="true" :filterUf="true" :filterTipoUsuario="true"
+            :filterEmpresa="true" :filterGrupoSensor="false" :filterDepartamentoUsuario="true" :filterStatus="true" />
     </div>
     <div class="shadow-sm overflow-hidden my-8">
         <div class="py-4">
@@ -37,7 +31,7 @@
                         Origem</th>
                     <th
                         class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
-                        Habilitado</th>         
+                        Habilitado</th>
                     <th
                         class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
                         Ação</th>
@@ -45,7 +39,7 @@
                 </tr>
             </thead>
             <tbody class="bg-white dark:bg-slate-800">
-                <tr class="hover:bg-gray-100 cursor-pointer duration-200" v-for="u in usuarios" :key="u.id" >
+                <tr class="hover:bg-gray-100 cursor-pointer duration-200" v-for="u in usuarios" :key="u.id">
                     <td class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
                         <template v-if="u.foto == null"><img class="rounded-lg shadow-md duration-200 hover:scale-105"
                                 width="40" src="../../assets/img/sem-foto.png"> </template>
@@ -53,15 +47,20 @@
                             <img class="rounded-lg shadow-md duration-200 hover:scale-105" :src="u.foto" width="40">
                         </template>
                     </td>
-                    <td @click="viewUser(u.id)" class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
+                    <td @click="viewUser(u.id)"
+                        class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
                         {{ u.nomecompleto }}</td>
-                    <td @click="viewUser(u.id)" class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
+                    <td @click="viewUser(u.id)"
+                        class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
                         {{ u.usuario }}</td>
-                    <td @click="viewUser(u.id)" class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
+                    <td @click="viewUser(u.id)"
+                        class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
                         {{ u.email }}</td>
-                    <td @click="viewUser(u.id)" class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
+                    <td @click="viewUser(u.id)"
+                        class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
                         {{ u.origemusuario }}</td>
-                    <td @click="viewUser(u.id)" class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
+                    <td @click="viewUser(u.id)"
+                        class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
                         <template v-if="u.is_active">
                             <div class="flex items-center">
                                 <div class="h-2.5 w-2.5 rounded-full                     bg-green-500 mr-2"></div> Sim
@@ -69,7 +68,7 @@
                         </template>
                         <template v-else>
                             <div class="flex items-center">
-                                <div class="h-2.5 w-2.5 rounded-full bg-red-500 mr-2"></div> Não            
+                                <div class="h-2.5 w-2.5 rounded-full bg-red-500 mr-2"></div> Não
                             </div>
                         </template>
                     </td>
@@ -79,7 +78,8 @@
                                 stroke="currentColor" class="w-6 h-6">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                             </svg>
                         </button>
                         <button @click="deleteUser(u.id)" class="btn">
@@ -97,12 +97,33 @@
             </tbody>
         </table>
         <div class="py-4">
-            <button v-for="(page, index) in pages" :key="page"
-                class="px-3 mx-1 py-2 text-sm bg-blue-700 hover:bg-blue-900 focus:bg-violet-700 text-white"
-                :class="{ current: page === current }" @click="changePage(index)">
-                {{ page }}
+            <button :disabled="prev1 == null" @click="nextPage('previous')"
+                class="px-3 mx-1 py-2 text-sm bg-blue-700 hover:bg-blue-900 disabled:bg-gray-300 focus:bg-violet-700 text-white">
+                Anterior
             </button>
-            <span class="mx-4 text-xd font-semibold text-blue-700">total de registros:</span> {{ total }}
+            <template v-for="(page, index) in pages" :key="page">
+
+                <template v-if="page === '.....'">
+                    {{ page }}
+                </template>
+
+                <template v-else>
+                    <button class="px-3 mx-1 py-2 text-sm bg-blue-700 hover:bg-blue-900 focus:bg-violet-700 text-white"
+                        :class="page === atual ? 'bg-violet-700' : 'bg-blue-700'" @click="changePage(page)">
+                        {{ page }}
+                    </button>
+                </template>
+
+
+            </template>
+
+            <button :disabled="next1 == null" @click="nextPage('next')"
+                class="px-3 mx-1 py-2 text-sm bg-blue-700 hover:bg-blue-900 disabled:bg-gray-300 focus:bg-violet-700 text-white">
+                Próximo
+            </button>
+
+            <span class="mx-4 text-xd font-semibold text-blue-700">total: </span> {{
+            total }}
         </div>
     </div>
 </template>
@@ -118,6 +139,9 @@ export default {
     },
     data() {
         return {
+            atual: 1,
+            next1: null,
+            prev1: null,
             titleBtn: "mostrar filtro avançado",
             isVisible: false,
             usuarios: [],
@@ -141,6 +165,49 @@ export default {
         };
     },
     methods: {
+        nextPage(n) {
+            let i = 0;
+            
+            if (n === "next") {
+                let n = this.next1.substring(this.next1.indexOf("&"), 100).trim();
+                let a = n.slice(0, -13);
+                i = a.substring(a.indexOf("&") + 8, 100).trim();
+            
+            } else {
+                let n = this.prev1.substring(this.prev1.indexOf("&"), 100).trim();
+                let a = n.slice(0, -13);
+
+                if(a){
+                    i = a.substring(a.indexOf("&") + 8, 100).trim();
+                }
+                  
+            }
+            console.log(i)
+            if (i === 0) {
+                this.offset = 0;
+                this.getAll();
+                this.atual = 1;
+            } else {
+                this.getAll(i / this.limit);
+                this.atual = i / this.limit + 1;
+            }
+
+        },
+        abreviarPages() {
+            const qty = this.pages.length; // quantidade total de páginas
+            const firstPages = 15; // número de páginas para manter no início
+            const lastPages = 3; // número de páginas para manter no final
+
+            let pages = [];
+            for (let i = 1; i <= qty; i++) {
+                if (i <= firstPages || i > qty - lastPages) {
+                    pages.push(i);
+                } else if (i === firstPages + 1) {
+                    pages.push(".....");
+                }
+            }
+            this.pages = pages
+        },
         getAll(i = null) {
             if (i) {
                 this.offset = i
@@ -178,6 +245,9 @@ export default {
                     const qty = Math.ceil(this.total / this.limit);
                     if (qty <= 1) return [1];
                     this.pages = Array.from(Array(qty).keys(), (i) => i + 1);
+                    this.next1 = res.data.next;
+                    this.prev1 = res.data.previous;
+                    this.abreviarPages();
                 })
                 .catch(e => {
                     this.$swal("Oops...", e.response.data.detail, "error");
@@ -187,8 +257,16 @@ export default {
                 });
         },
         changePage(i) {
-            this.getAll(i);
-            this.offset = 0
+            if (i == 1) {
+                this.getAll(0);
+                this.atual = 1;
+            } else {
+                this.getAll(i - 1);
+                this.atual = i;
+            }
+
+            this.offset = 0;
+
         },
         mostrarSearch() {
             this.isVisible = !this.isVisible

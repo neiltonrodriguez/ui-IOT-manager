@@ -95,7 +95,7 @@
                                                 <template v-for="e in empresas" :key="e.id">
                                                     <option selected v-if="e.id == sensor.empresa" :value="e.id">{{
                                                         e.nome
-                                                        }}</option>
+                                                    }}</option>
                                                 </template>
                                             </select>
                                         </div>
@@ -108,7 +108,7 @@
                                                 <option value="" disabled selected>Escolha a conta</option>
                                                 <option v-for="dp in departamentos" :key="dp.id" :value="dp.id">{{
                                                     dp.titulo
-                                                    }}
+                                                }}
                                                 </option>
                                             </select>
                                         </div>
@@ -174,14 +174,15 @@
                                                 <option selected value="" disabled>Escolha um grupo</option>
                                                 <option v-for="sg in sensorgrupos" :value="sg.id" :key="sg.id">{{
                                                     sg.nome
-                                                    }}</option>
+                                                }}</option>
                                             </select>
                                         </div>
 
                                         <div>
                                             <label
                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tipo</label>
-                                            <select v-model="sensor.tipo" @change="habilitarSalvar()" class="edit-form">
+                                            <select disabled v-model="sensor.tipo" @change="habilitarSalvar()"
+                                                class="edit-form">
                                                 <option value="" disabled selected>Escolha a conta</option>
                                                 <option v-for="t in tipos" :key="t.id" :value="t.id">{{ t.nome }}
                                                 </option>
@@ -268,7 +269,7 @@
                                             <input type="text" v-model="sensor.valor_ref10" class="edit-form"
                                                 placeholder="" required>
                                         </div>
-                                        <div>
+                                        <div v-if="sensor.tipo == 3">
                                             <a class="cursor-pointer" @click="mostrarModalMapa()"><img
                                                     src="../../assets/img/map.png"
                                                     class="duration-200 w-20 hover:scale-110"></a>
@@ -483,7 +484,7 @@
                                     </button>
                                     <div class="bg-slate-200 p-2 duration-200
                                         rounded-md">
-                                        
+
                                         <template v-for="(d, index) in dados" :key="d">
 
 
@@ -491,10 +492,10 @@
 
                                                 <tr v-if="index === 0">
                                                     <td
-                                                        class="border-b dark:border-slate-600 font-medium pt-0 text-slate-400 dark:text-slate-200 text-left">
+                                                        class="border-b dark:border-slate-600 font-medium text-slate-400 dark:text-slate-200 text-left">
                                                         Hora do registro</td>
                                                     <td v-for="x in d.leituras" :key="x"
-                                                        class="border-b dark:border-slate-600 font-medium pt-0 text-slate-400 dark:text-slate-200 text-left">
+                                                        class="border-b dark:border-slate-600 font-medium text-slate-400 dark:text-slate-200 text-left">
                                                         {{ x.label }}</td>
 
                                                 </tr>
@@ -529,13 +530,12 @@
                                     </div>
                                 </div>
                                 <div class="py-4">
-                            
+                                    <button :disabled="prev1 == null" @click="nextPage('previous')"
+                                        class="px-3 mx-1 py-2 text-sm bg-blue-700 hover:bg-blue-900 disabled:bg-gray-300 focus:bg-violet-700 text-white">
+                                        Anterior
+                                    </button>
                                     <template v-for="(page, index) in pages1" :key="page">
-                                        <!-- <button v-if="page == 1" :disabled="atual == 1"
-                                            @click="changePage1Decrement(atual--)"
-                                            class="px-3 mx-1 py-2 text-sm disabled:bg-gray-300 bg-blue-700 hover:bg-blue-900 focus:bg-violet-700 text-white">
-                                            Anterior
-                                        </button> -->
+
                                         <template v-if="page === '.....'">
                                             {{ page }}
                                         </template>
@@ -543,20 +543,20 @@
                                         <template v-else>
                                             <button
                                                 class="px-3 mx-1 py-2 text-sm bg-blue-700 hover:bg-blue-900 focus:bg-violet-700 text-white"
-                                                :class="{ current: page === current1 }" @click="changePage1(page)">
+                                                :class="page === atual ? 'bg-violet-700': 'bg-blue-700'" @click="changePage1(page)">
                                                 {{ page }}
                                             </button>
                                         </template>
 
-                                        <!-- <button v-if="page == pages1.length" :disabled="atual == pages1.length"
-                                            @click="changePage1(atual++)"
-                                            class="px-3 mx-1 py-2 text-sm bg-blue-700 hover:bg-blue-900 focus:bg-violet-700 text-white">
-                                            Próximo
-                                        </button> -->
+
                                     </template>
 
+                                    <button :disabled="next1 == null" @click="nextPage('next')"
+                                        class="px-3 mx-1 py-2 text-sm bg-blue-700 hover:bg-blue-900 disabled:bg-gray-300 focus:bg-violet-700 text-white">
+                                        Próximo
+                                    </button>
 
-                                    <span class="mx-4 text-xd font-semibold text-blue-700">total de registros:</span> {{
+                                    <span class="mx-4 text-xd font-semibold text-blue-700">total: </span> {{
                                         total1 }}
                                 </div>
                                 <hr>
@@ -673,6 +673,8 @@ export default {
             limit: 5,
             pages: [],
             total: 0,
+            next1: null,
+            prev1: null,
             offset1: 0,
             limit1: 20,
             pages1: [],
@@ -781,7 +783,6 @@ export default {
                     this.toggleTabs(2);
                 })
                 .catch(e => {
-                    console.log(e.response);
                     this.$swal("Oops...", e.response.data.detail, "error");
                     if (e.response.data.detail == "Você não tem permissão para executar essa ação.") {
                         this.$router.push('/')
@@ -814,25 +815,33 @@ export default {
                 });
 
         },
-        updatePages() {
-            let currentPage = 1; // Página atual
-            const qty = 100; // quantidade total de páginas
-            const firstPages = 10; // número de páginas para manter no início
-            const lastPages = 10;
-            let pages = [];
-            for (let i = 1; i <= qty; i++) {
-                if (i <= firstPages || i > qty - lastPages || Math.abs(i - currentPage) <= 2) {
-                    pages.push(i);
-                } else if (i === firstPages + 1 || i === qty - lastPages + 1) {
-                    pages.push("...");
+        nextPage(n) {
+            let i = 0;
+            if (n === "next") {
+                let x = this.next1.indexOf("&");
+                i = this.next1.substring(x + 8, 100).trim();
+            } else {
+                let x = this.prev1.indexOf("&");
+                if (x != -1) {
+                    i = this.prev1.substring(x + 8, 100).trim();
                 }
+
             }
-            this.pages1 = pages;
+            if (i === 0) {
+                this.offset1 = 0;
+                this.getDadosLidos();
+                this.atual = 1;
+            } else {
+                this.getDadosLidos(i / this.limit1);
+                this.atual = i / this.limit1 + 1;
+            }
+           
         },
+        
         abreviarPages() {
             const qty = this.pages1.length; // quantidade total de páginas
-            const firstPages = 7; // número de páginas para manter no início
-            const lastPages = 7; // número de páginas para manter no final
+            const firstPages = 15; // número de páginas para manter no início
+            const lastPages = 3; // número de páginas para manter no final
 
             let pages = [];
             for (let i = 1; i <= qty; i++) {
@@ -849,7 +858,6 @@ export default {
             if (i) {
                 this.offset1 = i
             }
-            console.log(i)
             const url = `/sensores/${this.sensor.id}/dadoslidos?limit=${this.limit1}&offset=${this.limit1 * this.offset1}&ordering=-id`
             http.get(url)
                 .then(res => {
@@ -858,6 +866,8 @@ export default {
                     const qty = Math.ceil(this.total1 / this.limit1);
                     if (qty <= 1) return [1];
                     this.pages1 = Array.from(Array(qty).keys(), (i) => i + 1);
+                    this.next1 = res.data.next;
+                    this.prev1 = res.data.previous;
                     this.abreviarPages();
                     this.montarDadosLidos();
 
@@ -878,17 +888,18 @@ export default {
 
         },
         changePage1(i) {
-            this.getDadosLidos(i);
-            this.offset1 = 0
-            // this.updatePages();
-            this.atual = i;
+            if(i == 1){
+                this.getDadosLidos(0);
+                this.atual = 1;
+            } else {
+                this.getDadosLidos(i-1);
+                this.atual = i;
+            }
+            
+            this.offset1 = 0;
+
         },
-        // changePage1Decrement(i) {
-        //     this.offset1 = i--;
-        //     this.getDadosLidos(i);
-        //     // this.offset1 = i;
-        //     this.atual = i--;
-        // },
+
         toggleTabs: function (tabNumber) {
             if (tabNumber == 1) {
                 this.openTab = tabNumber
