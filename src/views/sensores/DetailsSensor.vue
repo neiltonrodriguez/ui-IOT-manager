@@ -328,8 +328,7 @@
                                                 <label
                                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descrição</label>
                                                 <textarea rows="4" v-on:keyup="habilitarSalvar()" type="text"
-                                                    v-model="sc.descricao" class="edit-form" placeholders=""
-                                                    required></textarea>
+                                                    v-model="sc.descricao" class="edit-form" placeholders=""></textarea>
 
                                             </div>
 
@@ -920,7 +919,7 @@ export default {
             for (let i = 0; i < this.dadoslidos.length; i++) {
                 let x = this.dadoslidos[i]
                 let a = {
-                    horaregistro: moment(x.horaregistro).format('DD/MM/YYYY hh:mm:ss'),
+                    horaregistro: moment(x.horaregistro).format('DD/MM/YYYY HH:mm:ss'),
                     alerta: x.sensoremalerta,
                     leituras: []
                 }

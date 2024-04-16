@@ -458,7 +458,7 @@ export default {
                     if (res.data.detail == "Conexão bem sucedida!") {
                         this.$swal.fire({
                             icon: 'success',
-                            title: e.response.data.detail,
+                            title: res.data.detail,
                             showConfirmButton: false,
                             timer: 1500
                         })

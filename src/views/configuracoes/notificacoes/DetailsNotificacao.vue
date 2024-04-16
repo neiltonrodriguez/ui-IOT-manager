@@ -36,22 +36,43 @@
                         placeholder="" required>
                 </div>
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">CC</label>
-                    <input type="text" v-model="notificacao.destinatariocc" disabled v-on:keyup="habilitarSalvar()"
+
+<label class="relative inline-flex items-center cursor-pointer">
+    <input @click="habilitarSalvar()" v-model="notificacao.notificacc" type="checkbox" :value="false"
+        class="sr-only peer">
+    <div
+        class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
+    </div>
+    <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">Notificar CC</span>
+</label>
+</div>
+<div>
+<label class="relative inline-flex items-center cursor-pointer">
+    <input @click="habilitarSalvar()" disabled v-model="notificacao.nottificacco" type="checkbox"
+        :value="false" class="sr-only peer">
+    <div
+        class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
+    </div>
+    <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">Notificar CCO</span>
+</label>
+</div>
+                <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Com Cópia</label>
+                    <input type="text" v-model="notificacao.destinatariocc" v-on:keyup="habilitarSalvar()"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  disabled:bg-red-50 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="" required>
                 </div>
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">CCO</label>
-                    <input type="text" v-model="notificacao.destinatariocco" disabled v-on:keyup="habilitarSalvar()"
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Com Cópia Oculta</label>
+                    <input type="text" v-model="notificacao.destinatariocco" v-on:keyup="habilitarSalvar()"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  disabled:bg-red-50 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="" required>
                 </div>
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Mensagem</label>
-                    <input type="text" v-model="notificacao.mensagem" v-on:keyup="habilitarSalvar()"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  disabled:bg-red-50 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="" required>
+                    <textarea rows="4" v-model="notificacao.mensagem"
+                        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="digite aqui sua mensagem"></textarea>
                 </div>
                 <div>
                     <label class="label-form">Habilitado</label>
@@ -67,7 +88,7 @@
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descrição</label>
                     <textarea rows="4" v-model="notificacao.descricao" v-on:keyup="habilitarSalvar()"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  disabled:bg-red-50 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="" required></textarea>
+                        placeholder=""></textarea>
                 </div>
 
                 <div>
@@ -95,27 +116,7 @@
                     </select>
                 </div>
 
-                <div>
-
-                    <label class="relative inline-flex items-center cursor-pointer">
-                        <input @click="habilitarSalvar()" v-model="notificacao.notificacc" type="checkbox" :value="false"
-                            class="sr-only peer">
-                        <div
-                            class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
-                        </div>
-                        <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">Notificar CC</span>
-                    </label>
-                </div>
-                <div>
-                    <label class="relative inline-flex items-center cursor-pointer">
-                        <input @click="habilitarSalvar()" disabled v-model="notificacao.nottificacco" type="checkbox"
-                            :value="false" class="sr-only peer">
-                        <div
-                            class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
-                        </div>
-                        <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">Notificar CCO</span>
-                    </label>
-                </div>
+                
 
             </div>
             <button type="submit" v-bind:disabled="isDisabled"

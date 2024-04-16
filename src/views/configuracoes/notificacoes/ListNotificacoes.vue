@@ -1,7 +1,7 @@
 <template>
     <div>
         <Filtro @meu-evento="filtrar" :filterConta="false" :filterUf="false" :filterEmpresa="false"
-            :filterGrupoSensor="false" :filterDepartamento="false" :filterStatus="false" :filterTipo="false" />
+            :filterGrupoSensor="false" :filterDepartamento="false" :filterStatus="true" :filterTipo="false" />
     </div>
     <div class="shadow-sm overflow-hidden my-8">
         <div class="py-4">
@@ -127,7 +127,7 @@ export default {
                 sensorgrupo: 0,
                 empresa: 0,
                 tipo: 0,
-                is_active: false,
+                is_active: "",
                 conta: '',
                 uf: ''
             }
@@ -142,7 +142,16 @@ export default {
             if (this.filter.search != "") {
                 search = `&search=${this.filter.search}`
             }
-            const url = `/notificacao/?limit=${this.limit}&offset=${this.limit * this.offset}${search}&ordering=-id`;
+            let is_active = ""
+            if (this.filter.is_active === "true") {
+                is_active = `&is_active=1`
+                this.pages = []
+            }
+            if (this.filter.is_active === "false") {
+                is_active = `&is_active=0`
+                this.pages = []
+            }
+            const url = `/notificacao/?limit=${this.limit}&offset=${this.limit * this.offset}${search}${is_active}&ordering=-id`;
             http.get(url)
                 .then(res => {
                     this.notificacoes = res.data.results

@@ -4,7 +4,7 @@
             class="px-4 w-full py-2 my-3 font-semibold text-sm bg-blue-700  hover:bg-blue-900 text-white rounded-md shadow-sm">{{
             titleBtn }}</button>
         <Filtro @meu-evento="filtrar" :filterConta="false" :filterUf="false" :filterEmpresa="false"
-            :filterGrupoSensor="false" :filterDepartamento="false" :filterStatus="false" :filterTipo="false" />
+            :filterGrupoSensor="false" :filterDepartamento="false" :filterStatus="true" :filterTipo="false" />
     </div>
     <div class="shadow-sm overflow-hidden my-8">
         <div class="py-4">
@@ -132,7 +132,7 @@ export default {
                 sensorgrupo: 0,
                 empresa: 0,
                 tipo: 0,
-                is_active: false,
+                is_active: "",
                 conta: '',
                 uf: ''
             }
@@ -148,7 +148,16 @@ export default {
                 search = `&search=${this.filter.search}`
                 this.pages = []
             }
-            const url = `/mensagemintegracao/?limit=${this.limit}&offset=${this.limit * this.offset}${search}&ordering=-id`;
+            let is_active = ""
+            if (this.filter.is_active === "true") {
+                is_active = `&is_active=1`
+                this.pages = []
+            }
+            if (this.filter.is_active === "false") {
+                is_active = `&is_active=0`
+                this.pages = []
+            }
+            const url = `/mensagemintegracao/?limit=${this.limit}&offset=${this.limit * this.offset}${is_active}${search}&ordering=-id`;
             http.get(url)
                 .then(res => {
                     this.mensagemintegracao = res.data.results

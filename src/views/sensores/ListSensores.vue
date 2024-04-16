@@ -157,7 +157,7 @@ export default {
                 sensorgrupo: 0,
                 empresa: 0,
                 tipo: 0,
-                is_active: false,
+                is_active: "",
                 conta: '',
                 uf: ''
             }
@@ -179,8 +179,12 @@ export default {
                 this.pages = []
             }
             let is_active = ""
-            if (this.filter.is_active) {
+            if (this.filter.is_active === "true") {
                 is_active = `&is_active=1`
+                this.pages = []
+            }
+            if (this.filter.is_active === "false") {
+                is_active = `&is_active=0`
                 this.pages = []
             }
             let sensorgrupo = ""

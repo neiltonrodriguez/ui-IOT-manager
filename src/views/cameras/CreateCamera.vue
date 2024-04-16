@@ -188,7 +188,7 @@
                                             <label
                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descrição</label>
                                             <textarea rows="4" v-model="formDataAgend.descricao" class="edit-form"
-                                                placeholder="" required></textarea>
+                                                placeholder=""></textarea>
                                         </div>
                                         <div>
                                             <label
@@ -466,9 +466,9 @@ export default {
                 });
         },
         getDepartamentos() {
-            let query = '?modulo=sensor'
+            let query = '?modulo=camera'
             if (this.user.tipo == 4) {
-                query = `?conta=${this.formData.conta}&modulo=sensor`
+                query = `?conta=${this.formData.conta}&modulo=camera`
             }
             const url = `/listaitens/departamento/lista${query}&so_ativos=true`
             http.get(url)
@@ -484,9 +484,9 @@ export default {
 
         },
         getFabricantes() {
-            let query = '?modulo=sensor'
+            let query = '?modulo=camera'
             if (this.user.tipo == 4) {
-                query = `?conta=${this.formData.conta}&modulo=sensor`
+                query = `?conta=${this.formData.conta}&modulo=camera`
             }
 
             http.get('/listaitens/fabricante/lista' + query + '&so_ativos=true')
@@ -502,9 +502,9 @@ export default {
 
         },
         getModelos() {
-            let query = '?modulo=sensor'
+            let query = '?modulo=camera'
             if (this.user.tipo == 4) {
-                query = `?conta=${this.formData.conta}&modulo=sensor`
+                query = `?conta=${this.formData.conta}&modulo=camera`
             }
             const url = `/listaitens/modelo/lista${query}&so_ativos=true`
             http.get(url)

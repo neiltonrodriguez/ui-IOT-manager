@@ -56,7 +56,7 @@
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descrição</label>
                                         <textarea rows="4" v-model="camera.descricao" v-on:keyup="habilitarSalvar()"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  disabled:bg-red-50 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                            placeholder="" required></textarea>
+                                            placeholder=""></textarea>
                                     </div>
 
                                     <div>
@@ -129,6 +129,16 @@
                                         </select>
                                     </div>
                                     <div>
+                                            <label
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Modelo</label>
+                                            <select v-model="camera.modelo" class="edit-form">
+                                                <option value="" disabled selected>Escolha um</option>
+                                                <option v-for="m in modelos" :key="m.id" :value="m.id">{{ m.titulo
+                                                    }}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    <div>
                                         <label
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Departamento</label>
                                         <select v-model="camera.departamento" @change="habilitarSalvar()"
@@ -163,8 +173,7 @@
                                         </select>
                                     </div>
 
-                                </div>
-                                <div class="grid gap-6 mb-6 md:grid-cols-2">
+                                
 
                                     <div>
                                         <label class="label-form">Habilitado</label>
@@ -211,19 +220,19 @@
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white dark:bg-slate-800">
-                                    <tr v-for="li in agendamentos" :key="li.id">
-                                        <td
+                                    <tr class="hover:bg-gray-100 cursor-pointer duration-200" v-for="li in agendamentos" :key="li.id">
+                                        <td @click="detailsAgendamento(li.id)"
                                             class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
                                             {{ li.titulo }}</td>
-                                        <td
+                                        <td @click="detailsAgendamento(li.id)"
                                             class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
                                             {{ li.diascaptura }}</td>
 
 
-                                        <td v-if="user.tipo == 4"
+                                        <td @click="detailsAgendamento(li.id)" v-if="user.tipo == 4"
                                             class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
                                             {{ li.criadopor }}</td>
-                                        <td
+                                        <td @click="detailsAgendamento(li.id)" 
                                             class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
                                             <template v-if="li.is_active">
                                                 <div class="flex items-center">
@@ -302,7 +311,7 @@
                                             <label
                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descrição</label>
                                             <textarea rows="4" v-model="agenda.descricao" class="edit-form"
-                                                placeholder="" required></textarea>
+                                                placeholder=""></textarea>
                                         </div>
                                         <div>
                                             <label
@@ -750,7 +759,7 @@ export default {
             console.log(this.dadosCamera)
             for (let i = 0; i < this.dadosCamera.length; i++) {
 
-                let x = moment(this.dadosCamera[i].horaregistro).format('DD/MM/YYYY hh:mm:ss');
+                let x = moment(this.dadosCamera[i].horaregistro).format('DD/MM/YYYY HH:mm:ss');
                 let horainicio = this.dadosCamera[i].horainicio.slice(0, 8);
                 let horafim = this.dadosCamera[i].horafim.slice(0, 8);
                 this.dadosCamera[i].horaregistro = x;

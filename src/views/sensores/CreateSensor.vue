@@ -244,7 +244,7 @@
                                             <label
                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descrição</label>
                                             <textarea rows="4" v-model=" formDataSC.descricao" class="edit-form"
-                                                placeholder="" required></textarea>
+                                                placeholder=""></textarea>
                                         </div>
                                         <div>
                                             <label

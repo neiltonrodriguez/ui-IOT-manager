@@ -49,7 +49,7 @@
                     </td>
                     <td @click="detailsAtivo(a.id)"
                         class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
-                        dat {{ a.nome }}</td>
+                        {{ a.nome }}</td>
                     <td @click="detailsAtivo(a.id)"
                         class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
                         {{ a.serial }}</td>
@@ -139,7 +139,7 @@ export default {
                 sensorgrupo: 0,
                 empresa: 0,
                 tipo: 0,
-                is_active: false,
+                is_active: "",
                 conta: '',
                 uf: ''
             }
@@ -166,7 +166,17 @@ export default {
                 this.pages = []
             }
 
-            const url = `/ativos/?limit=${this.limit}&offset=${this.limit * this.offset}${departamento}${empresa}${search}&ordering=-id`;
+            let is_active = ""
+            if (this.filter.is_active === "true") {
+                is_active = `&is_active=1`
+                this.pages = []
+            }
+            if (this.filter.is_active === "false") {
+                is_active = `&is_active=0`
+                this.pages = []
+            }
+
+            const url = `/ativos/?limit=${this.limit}&offset=${this.limit * this.offset}${departamento}${empresa}${search}${is_active}&ordering=-id`;
             http.get(url)
                 .then(res => {
                     this.ativos = res.data.results

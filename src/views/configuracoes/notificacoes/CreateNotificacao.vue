@@ -48,18 +48,6 @@
                         placeholder="" required>
                 </div>
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">CC</label>
-                    <input type="text" v-model="formData.destinatariocc"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="">
-                </div>
-                <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">CCO</label>
-                    <input type="text" v-model="formData.destinatariocco"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="">
-                </div>
-                <div>
 
                     <label class="relative inline-flex items-center cursor-pointer">
                         <input v-model="formData.notificacc" type="checkbox" value="false" class="sr-only peer">
@@ -79,6 +67,19 @@
                         <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">Notificar CCO</span>
                     </label>
                 </div>
+                <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Com Cópia</label>
+                    <input type="text" v-model="formData.destinatariocc"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="">
+                </div>
+                <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Com Cópia Oculta</label>
+                    <input type="text" v-model="formData.destinatariocco"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="">
+                </div>
+
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tipo de envio</label>
                     <select v-model="formData.tipoenvio"

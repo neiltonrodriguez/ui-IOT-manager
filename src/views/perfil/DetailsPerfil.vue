@@ -161,6 +161,7 @@
                     </select>
                 </div>
             </div>
+         
             <button type="submit" v-bind:disabled="isDisabled"
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800  disabled:bg-gray-300">Salvar</button>
             <button type="button" @click="cancelar()"
@@ -225,7 +226,7 @@ export default {
             formData.append('first_name', formD.first_name)
             formData.append('last_name', formD.last_name)
             formData.append('email', formD.email)
-            formData.append('password', formD.password)
+            // formData.append('password', formD.password)
             formData.append('cpf', formD.cpf)
             formData.append('telefone1', formD.telefone1)
             formData.append('telefone2', formD.telefone2)

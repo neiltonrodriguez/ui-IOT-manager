@@ -1,7 +1,7 @@
 <template>
     <button title="pesquisar dados nessa tela" type="button" @click="mostrarFiltro()"
         class="px-10 py-2 mb-3 font-semibold text-sm bg-blue-700  hover:bg-blue-900 text-white rounded-md shadow-sm">{{
-        textButtonFiltro }}</button>
+            textButtonFiltro }}</button>
     <div class="border-gray-300 border rounded-lg ">
 
         <form class="m-0" v-if="showFilter" v-on:submit.prevent="enviarParaPai()">
@@ -150,12 +150,15 @@
                     </div>
                 </div>
                 <div v-if="filterStatus">
-                    <div class="flex items-center mx-auto px-10 py-5">
-                        <input id="default-checkbox" type="checkbox" value="1" v-model="filter.is_active"
-                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="default-checkbox"
-                            class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Filtrar
-                            só ativos</label>
+                    <div class="flex items-center  mx-2 my-2">
+                        
+                        <select v-model="filter.is_active" class="edit-form">
+                            <option value="" disabled selected>Filtrar por Status</option>
+                            <option value="true">Sim</option>
+                            <option value="false">Não</option>
+
+
+                        </select>
                     </div>
 
                 </div>
@@ -218,7 +221,7 @@ export default {
                 departamentoUsuario: 0,
                 sensorgrupo: 0,
                 empresa: 0,
-                is_active: false,
+                is_active: "",
                 conta: '',
                 tipo: 0,
                 tipoUsuario: 0,
@@ -230,9 +233,9 @@ export default {
         enviarParaPai() {
             this.$emit('meu-evento', this.filter)
         },
-        mostrarFiltro(){
+        mostrarFiltro() {
             this.showFilter = !this.showFilter
-            if(this.showFilter){
+            if (this.showFilter) {
                 this.textButtonFiltro = "Ocultar filtro"
             } else {
                 this.textButtonFiltro = "Mostrar filtro"
@@ -244,7 +247,7 @@ export default {
             this.filter.departamento = 0;
             this.filter.sensorgrupo = 0;
             this.filter.empresa = 0;
-            this.filter.is_active = false;
+            this.filter.is_active = "";
             this.filter.conta = '';
             this.filter.tipo = 0;
             this.filter.tipoUsuario = 0;

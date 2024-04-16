@@ -925,6 +925,7 @@ export default {
                 empresa: ldap.empresa,
                 host: ldap.host,
                 ldap_tipo: ldap.ldap_tipo,
+                base_dn: ldap.base_dn,
                 porta: ldap.porta,
                 provedor: ldap.provedor,
                 senha: ldap.senha,

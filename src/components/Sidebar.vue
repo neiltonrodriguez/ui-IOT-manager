@@ -38,7 +38,7 @@
 
                     </div>
 
-                    <div v-if="conta == 'True'">
+                    <div @click="fecharMenus()" v-if="conta == 'True'">
                         <router-link to="/contas"
                             class="inline-flex relative items-center py-[10px] px-[10px] w-full text-sm font-medium rounded-md border-gray-200 hover:bg-gray-300  hover:text-gray-800 transition duration-400 ease-in-out">
                             <svg aria-hidden="true" class="mr-2 w-[25px] h-[25px] fill-current" fill="currentColor"
@@ -50,7 +50,7 @@
                             Contas
                         </router-link>
                     </div>
-                    <div v-if="empresa == 'True'">
+                    <div @click="fecharMenus()" v-if="empresa == 'True'">
                         <router-link to="/empresas"
                             class="inline-flex relative items-center py-[10px] px-[10px] w-full text-sm font-medium rounded-md border-gray-200 hover:bg-gray-300  hover:text-gray-800 transition duration-400 ease-in-out">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -98,7 +98,7 @@
                         </ul>
                     </div>
 
-                    <div>
+                    <div v-if="camera == 'True'">
                         <router-link @click="mostrarSubMenuCamera()" to=""
                             class="inline-flex relative items-center py-[10px] px-[10px] w-full text-sm font-medium rounded-md rounded-b-lg hover:bg-gray-300  hover:text-gray-800 transition duration-400 ease-in-out">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -263,6 +263,7 @@ export default {
         empresa: String,
         configuracao: String,
         sensor: String,
+        camera: String,
         usuario: String,
         ativo: String,
         usuariogrupo: String

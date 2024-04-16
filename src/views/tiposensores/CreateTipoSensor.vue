@@ -33,8 +33,14 @@
                                 <div class="grid gap-6 mb-6 md:grid-cols-2">
                                     <div class="flex flex-col items-start">
                                         <div class="flex flex-col items-center justify-center">
-                                            <img class="border-2 max-h-36 border-gray-500  shadow-md duration-200"
-                                                src="../../assets/img/sem-foto.png">
+                                            <template v-if="img">
+                            <img id="img-empresa" class="border-2 max-h-36 border-gray-500  shadow-md duration-200"
+                                :src="imagem">
+                        </template>
+                        <template v-else="">
+                            <img class="border-2 max-h-36 border-gray-500  shadow-md duration-200"
+                                src="../../assets/img/sem-foto.png">
+                        </template>
                                             <div>
                                                 <label title="Click to upload" for="file"
                                                     class="bg-gray-200 py-1 text-sm font-semibold rounded-md px-5 cursor-pointer hover:bg-gray-300 duration-200">
@@ -201,6 +207,7 @@ export default {
             openTab: 1,
             idSensor: 0,
             img: '',
+            imagem: '',
             nome: "",
             teste: true,
             icone: ""
@@ -337,6 +344,11 @@ export default {
         },
         uploadFile() {
             this.img = this.$refs.file.files[0];
+            var reader = new FileReader();
+            reader.onload = (e) => {
+                this.imagem = e.target.result;
+            }
+            reader.readAsDataURL(this.$refs.file.files[0]);
         },
         cancelar() {
             this.$router.push('/tiposensores');

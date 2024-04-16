@@ -3,7 +3,7 @@
         <!-- Side bar -->
         <Sidebar :showSide="showSide" :conta="modulos.conta" :ativo="modulos.ativo" :configuracao="modulos.configuracao"
             :empresa="modulos.empresa" :sensor="modulos.sensor" :cldap="modulos.cldap" :usuario="modulos.usuario"
-            :usuariogrupo="modulos.usuariogrupo" />
+            :usuariogrupo="modulos.usuariogrupo" :camera="modulos.camera"/>
         <div class="w-full bg-gray-400">
             <div class="h-[50px] bg-gray-100 flex items-center shadow-sm px-[20px] w-full py-[10px] z-10 border-b ">
                 <!-- Hambuger menu -->

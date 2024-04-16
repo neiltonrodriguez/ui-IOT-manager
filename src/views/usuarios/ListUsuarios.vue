@@ -157,7 +157,7 @@ export default {
                 sensorgrupo: 0,
                 empresa: 0,
                 tipo: 0,
-                is_active: false,
+                is_active: "",
                 tipoUsuario: 0,
                 conta: '',
                 uf: ''
@@ -223,10 +223,15 @@ export default {
                 this.pages = []
             }
             let is_active = ""
-            if (this.filter.is_active) {
+            if (this.filter.is_active === "true") {
                 is_active = `&is_active=1`
                 this.pages = []
             }
+            if (this.filter.is_active === "false") {
+                is_active = `&is_active=0`
+                this.pages = []
+            }
+            console.log(this.filter)
             let tipo = ""
             if (this.filter.tipoUsuario) {
                 tipo = `&tipo=${this.filter.tipoUsuario}`
@@ -277,6 +282,7 @@ export default {
             }
         },
         filtrar(payload) {
+            console.log(payload)
             this.filter = payload;
             this.getAll();
         },

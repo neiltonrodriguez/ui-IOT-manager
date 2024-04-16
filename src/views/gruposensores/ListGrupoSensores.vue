@@ -125,7 +125,7 @@ export default {
                 sensorgrupo: 0,
                 empresa: 0,
                 tipo: 0,
-                is_active: false,
+                is_active: "",
                 conta: '',
                 uf: ''
             }

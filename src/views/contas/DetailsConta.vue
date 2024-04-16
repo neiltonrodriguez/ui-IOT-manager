@@ -16,7 +16,7 @@
                                 src="../../assets/img/sem-foto.png">
                         </template>
                         <template v-else>
-                            <img class="border-2 max-h-36 border-gray-500  shadow-md duration-200" :src="usuario.foto"
+                            <img class="border-2 max-h-36 border-gray-500  shadow-md duration-200" :src="conta.logo"
                                 width="150">
 
                         </template>
