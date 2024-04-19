@@ -1,9 +1,9 @@
 <template>
-    <div class="w-full h-full bg-gray-800 flex">
+    <div class="w-full bg-gray-800 flex">
         <!-- Side bar -->
         <Sidebar :showSide="showSide" :conta="modulos.conta" :ativo="modulos.ativo" :configuracao="modulos.configuracao"
             :empresa="modulos.empresa" :sensor="modulos.sensor" :cldap="modulos.cldap" :usuario="modulos.usuario"
-            :usuariogrupo="modulos.usuariogrupo" :camera="modulos.camera"/>
+            :usuariogrupo="modulos.usuariogrupo" :camera="modulos.camera" />
         <div class="w-full bg-gray-400">
             <div class="h-[50px] bg-gray-100 flex items-center shadow-sm px-[20px] w-full py-[10px] z-10 border-b ">
                 <!-- Hambuger menu -->
@@ -43,9 +43,11 @@
                             <div class="py-1 text-left" role="none">
                                 <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
 
-                                <a href="#" @click="destroy()" class="text-gray-700 hover:bg-slate-200 block px-4 py-2 text-sm" role="menuitem"
+                                <a href="#" @click="destroy()"
+                                    class="text-gray-700 hover:bg-slate-200 block px-4 py-2 text-sm" role="menuitem"
                                     tabindex="-1" id="menu-item-2">Sair do sistema</a>
-                               <router-link to="/perfil" class="text-gray-700  hover:bg-slate-200 block px-4 py-2 text-sm" >
+                                <router-link to="/perfil"
+                                    class="text-gray-700  hover:bg-slate-200 block px-4 py-2 text-sm">
                                     Perfil</router-link>
 
                             </div>
@@ -53,14 +55,15 @@
                     </div>
                 </div>
             </div>
-            <div class="bg-gray-50 p-[20px]">
-                <div class="border border-gray-300 rounded-md p-[20px] h-full">
-                    <router-view></router-view>
+            <div class="bg-gray-50 p-[20px] h-screen">
+                <div class="border border-gray-300 rounded-md p-[20px] h-[700px] overflow-y-scroll">
+                    <router-view ></router-view>
                 </div>
             </div>
         </div>
         <!-- Main  -->
     </div>
+   
 </template>
 <script>
 import { useAuth } from './../stores/auth.js'

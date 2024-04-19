@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <div class="relative bg-slate-100 rounded-xl overflow-auto p-8">
+    <div class="h-screen">
+        <div class="relative bg-slate-100 rounded-xl p-8">
             <div class="text-gray-700 text-2xl mb-3">
                 <h3>Sensores:</h3>
 
@@ -31,7 +31,7 @@
                 
             </div>
         </div>
-        <div class="relative bg-slate-100 rounded-xl overflow-auto p-8">
+        <div class="relative bg-slate-100 rounded-xl p-8">
             <div class="text-gray-700 text-2xl mb-3">
                 <h3>Quantidade de tipos de Ativos: <span class="bg-gray-500 text-white rounded-md px-2">{{ ativosportipo.length }}</span></h3>
 

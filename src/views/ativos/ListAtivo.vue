@@ -9,6 +9,7 @@
                 class="px-4 py-2 font-semibold text-sm bg-blue-800 text-white rounded-md shadow-sm">Novo
                 Ativo</button>
         </div>
+        <div class="h-[500px] overflow-y-auto">
         <table class="border-collapse table-fixed w-full text-sm">
             <thead>
                 <tr>
@@ -96,6 +97,7 @@
                 </tr>
             </tbody>
         </table>
+    </div>
         <div class="py-4">
             <button v-for="(page, index) in pages" :key="page"
                 class="px-3 mx-1 py-2 text-sm bg-blue-700 hover:bg-blue-900 focus:bg-violet-700 text-white"

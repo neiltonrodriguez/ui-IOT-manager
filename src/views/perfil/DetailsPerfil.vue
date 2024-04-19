@@ -11,8 +11,15 @@
             <div class="grid gap-6 mb-6 md:grid-cols-2">
                 <div class="flex flex-col items-start">
                     <div class="flex flex-col items-center justify-center">
-                        <img class="border-2 max-h-36 border-gray-500  shadow-md duration-200"
-                            src="../../assets/img/sem-foto.png">
+                        <template v-if="perfil.foto == null">
+                            <img class="border-2 max-h-36 border-gray-500  shadow-md duration-200"
+                                src="../../assets/img/sem-foto.png">
+                        </template>
+                        <template v-else>
+                            <img class="border-2 max-h-36 border-gray-500  shadow-md duration-200" :src="perfil.foto"
+                                width="150">
+
+                        </template>
                         <div>
                             <label title="Click to upload" for="file"
                                 class="bg-gray-200 py-1 text-sm font-semibold rounded-md px-5 cursor-pointer hover:bg-gray-300 duration-200">
@@ -40,6 +47,12 @@
                 <div>
                     <label class="label-form">Login</label>
                     <input type="text" v-model="perfil.usuario" disabled
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  disabled:bg-red-50 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="">
+                </div>
+                <div v-if="perfil.origemusuario != 'ldap'">
+                    <label class="label-form">Login</label>
+                    <input type="password" v-model="perfil.password" disabled
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  disabled:bg-red-50 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="">
                 </div>
@@ -161,7 +174,7 @@
                     </select>
                 </div>
             </div>
-         
+
             <button type="submit" v-bind:disabled="isDisabled"
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800  disabled:bg-gray-300">Salvar</button>
             <button type="button" @click="cancelar()"
@@ -226,7 +239,9 @@ export default {
             formData.append('first_name', formD.first_name)
             formData.append('last_name', formD.last_name)
             formData.append('email', formD.email)
-            // formData.append('password', formD.password)
+            if (this.perfil.origemusuario != "ldap") {
+                formData.append('password', formD.password)
+            }
             formData.append('cpf', formD.cpf)
             formData.append('telefone1', formD.telefone1)
             formData.append('telefone2', formD.telefone2)

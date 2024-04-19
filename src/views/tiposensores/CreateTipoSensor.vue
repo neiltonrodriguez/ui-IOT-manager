@@ -34,13 +34,14 @@
                                     <div class="flex flex-col items-start">
                                         <div class="flex flex-col items-center justify-center">
                                             <template v-if="img">
-                            <img id="img-empresa" class="border-2 max-h-36 border-gray-500  shadow-md duration-200"
-                                :src="imagem">
-                        </template>
-                        <template v-else="">
-                            <img class="border-2 max-h-36 border-gray-500  shadow-md duration-200"
-                                src="../../assets/img/sem-foto.png">
-                        </template>
+                                                <img id="img-empresa"
+                                                    class="border-2 max-h-36 border-gray-500  shadow-md duration-200"
+                                                    :src="imagem">
+                                            </template>
+                                            <template v-else="">
+                                                <img class="border-2 max-h-36 border-gray-500  shadow-md duration-200"
+                                                    src="../../assets/img/sem-foto.png">
+                                            </template>
                                             <div>
                                                 <label title="Click to upload" for="file"
                                                     class="bg-gray-200 py-1 text-sm font-semibold rounded-md px-5 cursor-pointer hover:bg-gray-300 duration-200">
@@ -74,8 +75,7 @@
                                     <div>
                                         <label
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Geolocalização</label>
-                                        <select class="edit-form" v-model="formData.geolocalizacao"
-                                            @change="habilitarSalvar()">
+                                        <select class="edit-form" v-model="formData.geolocalizacao">
                                             <option :value="true">Sim</option>
                                             <option :value="false">Não</option>
                                         </select>
@@ -101,7 +101,8 @@
                                     class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 mb-10 font-medium rounded-lg text-sm w-full sm:w-auto px-5 mx-3 py-2.5 text-center">Adicionar
                                     mais campos</button>
                                 <div class="">
-                                    <template v-for="i in quantity" :key="i">
+
+                                    <template v-for="(i, index) in quantity" :key="index">
                                         <div class="flex gap-3 items-center justify-center">
                                             <div class="flex-1">
                                                 <label
@@ -111,7 +112,7 @@
                                             </div>
                                             <div class="flex-1">
                                                 <label
-                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Parâmetro</label>
+                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Parametro</label>
                                                 <input type="text" :id='"valor_ref_param" + i' class="edit-form"
                                                     placeholder="">
                                             </div>
@@ -125,8 +126,10 @@
                                                     </svg>
                                                 </button>
                                             </div>
+
                                         </div>
                                     </template>
+
 
                                 </div>
                                 <button type="submit"
@@ -209,11 +212,42 @@ export default {
             img: '',
             imagem: '',
             nome: "",
-            teste: true,
+            teste: false,
             icone: ""
         };
     },
     methods: {
+        preencherCamposAtributos() {
+            for (let i = 1; i <= this.quantity; i++) {
+                let label = document.getElementById('valor_ref_label' + i)
+                let param = document.getElementById('valor_ref_param' + i)
+
+
+                switch (i) {
+                    case 1:
+                        label.value = this.atributos.valor_ref1.label
+                        param.value = this.atributos.valor_ref1.parametro
+                        label.disabled = true;
+                        param.disabled = true;
+                        break;
+                    case 2:
+                        label.value = this.atributos.valor_ref2.label
+                        param.value = this.atributos.valor_ref2.parametro
+                        label.disabled = true;
+                        param.disabled = true;
+                        break;
+                    case 3:
+                        label.value = this.atributos.valor_ref3.label
+                        param.value = this.atributos.valor_ref3.parametro
+                        label.disabled = true;
+                        param.disabled = true;
+                        break;
+                }
+
+
+            }
+            console.log('llfldfldfldfldfdlfl')
+        },
         createTipoSensor(formD) {
             let formData = new FormData()
             formData.append('icone', this.img)
@@ -227,7 +261,15 @@ export default {
             http.post('/sensortipos/', formData, { headers })
                 .then(res => {
                     this.getAtributos(res.data.id)
+                    if (res.data.geolocalizacao) {
+
+                        this.quantity = 3;
+                       
+                    }
+                    this.teste = true
                     this.toggleTabs(2);
+
+
                 })
                 .catch(e => {
                     this.$swal("Oops...", e.response.data.detail, "error");
@@ -291,7 +333,7 @@ export default {
             formData.append('is_active', this.is_active)
             formData.append('geolocalizacao', this.formData.geolocalizacao)
             const headers = { 'Content-Type': 'multipart/form-data' };
-            http.put('/sensortipos/' + this.idSensor + '/', formData, {headers})
+            http.put('/sensortipos/' + this.idSensor + '/', formData, { headers })
                 .then(res => {
                     this.$swal.fire({
                         icon: 'success',
@@ -311,16 +353,19 @@ export default {
         incrementQuantity(action) {
             if (action === "increment" && this.quantity < 10) {
                 this.quantity++
-            } else if (action === "decrement"){
+            } else if (action === "decrement") {
                 this.quantity--
             }
         },
         toggleTabs: function (tabNumber) {
-            console.log(tabNumber)
             if (tabNumber == 1) {
                 this.openTab = tabNumber
             } else if (tabNumber == 2 && this.teste) {
+                if(this.quantity == 3){
+                    this.preencherCamposAtributos();
+                }
                 this.openTab = tabNumber
+
             }
 
 
@@ -334,6 +379,8 @@ export default {
                     this.idSensor = res.data.id
                     this.nome = res.data.nome
                     this.icone = res.data.icone
+
+
                 })
                 .catch(e => {
                     this.$swal("Oops...", e.response.data.detail, "error");
