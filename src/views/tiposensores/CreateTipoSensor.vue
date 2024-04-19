@@ -93,42 +93,255 @@
                                 <button type="button" @click="cancelar()"
                                     class="text-white bg-red-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mx-3">Cancelar</button>
                             </form>
+                            
                         </div>
                         <div v-bind:class="{ 'hidden': openTab !== 2, 'block': openTab === 2 }">
 
                             <form class="" v-on:submit.prevent="updateTipoSensor()">
-                                <button type="button" @click="incrementQuantity('increment')"
-                                    class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 mb-10 font-medium rounded-lg text-sm w-full sm:w-auto px-5 mx-3 py-2.5 text-center">Adicionar
-                                    mais campos</button>
+                               
                                 <div class="">
 
-                                    <template v-for="(i, index) in quantity" :key="index">
-                                        <div class="flex gap-3 items-center justify-center">
-                                            <div class="flex-1">
-                                                <label
-                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Label</label>
-                                                <input type="text" :id='"valor_ref_label" + i' class="edit-form"
-                                                    placeholder="">
-                                            </div>
-                                            <div class="flex-1">
-                                                <label
-                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Parametro</label>
-                                                <input type="text" :id='"valor_ref_param" + i' class="edit-form"
-                                                    placeholder="">
-                                            </div>
-                                            <div class="flex items-center justify-center">
-                                                <button class="" type="button" @click="incrementQuantity('decrement')">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="red"
-                                                        class="w-6 h-6 mt-5">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            d="M6 18L18 6M6 6l12 12" />
-                                                    </svg>
-                                                </button>
-                                            </div>
 
+                                    <div class="flex gap-3 items-center justify-center">
+                                        <div class="flex-1">
+                                            <label
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Label</label>
+                                            <input type="text" v-model="atributos.valor_ref1.label" class="edit-form"
+                                                placeholder="">
                                         </div>
-                                    </template>
+                                        <div class="flex-1">
+                                            <label
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Parametro</label>
+                                            <input type="text" v-model="atributos.valor_ref1.parametro"
+                                                class="edit-form" placeholder="">
+                                        </div>
+                                        <div class="flex items-center justify-center">
+                                            <button class="" type="button" @click="incrementQuantity(1)">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                    stroke-width="1.5" stroke="red" class="w-6 h-6 mt-5">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M6 18L18 6M6 6l12 12" />
+                                                </svg>
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                    <div class="flex gap-3 items-center justify-center">
+                                        <div class="flex-1">
+                                            <label
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Label</label>
+                                            <input type="text" v-model="atributos.valor_ref2.label" class="edit-form"
+                                                placeholder="">
+                                        </div>
+                                        <div class="flex-1">
+                                            <label
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Parametro</label>
+                                            <input type="text" v-model="atributos.valor_ref2.parametro"
+                                                class="edit-form" placeholder="">
+                                        </div>
+                                        <div class="flex items-center justify-center">
+                                            <button class="" type="button" @click="incrementQuantity(2)">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                    stroke-width="1.5" stroke="red" class="w-6 h-6 mt-5">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M6 18L18 6M6 6l12 12" />
+                                                </svg>
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                    <div class="flex gap-3 items-center justify-center">
+                                        <div class="flex-1">
+                                            <label
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Label</label>
+                                            <input type="text" v-model="atributos.valor_ref3.label" class="edit-form"
+                                                placeholder="">
+                                        </div>
+                                        <div class="flex-1">
+                                            <label
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Parametro</label>
+                                            <input type="text" v-model="atributos.valor_ref3.parametro"
+                                                class="edit-form" placeholder="">
+                                        </div>
+                                        <div class="flex items-center justify-center">
+                                            <button class="" type="button" @click="incrementQuantity(3)">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                    stroke-width="1.5" stroke="red" class="w-6 h-6 mt-5">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M6 18L18 6M6 6l12 12" />
+                                                </svg>
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                    <div class="flex gap-3 items-center justify-center">
+                                        <div class="flex-1">
+                                            <label
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Label</label>
+                                            <input type="text" v-model="atributos.valor_ref4.label" class="edit-form"
+                                                placeholder="">
+                                        </div>
+                                        <div class="flex-1">
+                                            <label
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Parametro</label>
+                                            <input type="text" v-model="atributos.valor_ref4.parametro"
+                                                class="edit-form" placeholder="">
+                                        </div>
+                                        <div class="flex items-center justify-center">
+                                            <button class="" type="button" @click="incrementQuantity(4)">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                    stroke-width="1.5" stroke="red" class="w-6 h-6 mt-5">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M6 18L18 6M6 6l12 12" />
+                                                </svg>
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                    <div class="flex gap-3 items-center justify-center">
+                                        <div class="flex-1">
+                                            <label
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Label</label>
+                                            <input type="text" v-model="atributos.valor_ref5.label" class="edit-form"
+                                                placeholder="">
+                                        </div>
+                                        <div class="flex-1">
+                                            <label
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Parametro</label>
+                                            <input type="text" v-model="atributos.valor_ref5.parametro"
+                                                class="edit-form" placeholder="">
+                                        </div>
+                                        <div class="flex items-center justify-center">
+                                            <button class="" type="button" @click="incrementQuantity(5)">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                    stroke-width="1.5" stroke="red" class="w-6 h-6 mt-5">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M6 18L18 6M6 6l12 12" />
+                                                </svg>
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                    <div class="flex gap-3 items-center justify-center">
+                                        <div class="flex-1">
+                                            <label
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Label</label>
+                                            <input type="text" v-model="atributos.valor_ref6.label" class="edit-form"
+                                                placeholder="">
+                                        </div>
+                                        <div class="flex-1">
+                                            <label
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Parametro</label>
+                                            <input type="text" v-model="atributos.valor_ref6.parametro"
+                                                class="edit-form" placeholder="">
+                                        </div>
+                                        <div class="flex items-center justify-center">
+                                            <button class="" type="button" @click="incrementQuantity(6)">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                    stroke-width="1.5" stroke="red" class="w-6 h-6 mt-5">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M6 18L18 6M6 6l12 12" />
+                                                </svg>
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                    <div class="flex gap-3 items-center justify-center">
+                                        <div class="flex-1">
+                                            <label
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Label</label>
+                                            <input type="text" v-model="atributos.valor_ref7.label" class="edit-form"
+                                                placeholder="">
+                                        </div>
+                                        <div class="flex-1">
+                                            <label
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Parametro</label>
+                                            <input type="text" v-model="atributos.valor_ref7.parametro"
+                                                class="edit-form" placeholder="">
+                                        </div>
+                                        <div class="flex items-center justify-center">
+                                            <button class="" type="button" @click="incrementQuantity(7)">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                    stroke-width="1.5" stroke="red" class="w-6 h-6 mt-5">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M6 18L18 6M6 6l12 12" />
+                                                </svg>
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                    <div class="flex gap-3 items-center justify-center">
+                                        <div class="flex-1">
+                                            <label
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Label</label>
+                                            <input type="text" v-model="atributos.valor_ref8.label" class="edit-form"
+                                                placeholder="">
+                                        </div>
+                                        <div class="flex-1">
+                                            <label
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Parametro</label>
+                                            <input type="text" v-model="atributos.valor_ref8.parametro"
+                                                class="edit-form" placeholder="">
+                                        </div>
+                                        <div class="flex items-center justify-center">
+                                            <button class="" type="button" @click="incrementQuantity(8)">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                    stroke-width="1.5" stroke="red" class="w-6 h-6 mt-5">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M6 18L18 6M6 6l12 12" />
+                                                </svg>
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                    <div class="flex gap-3 items-center justify-center">
+                                        <div class="flex-1">
+                                            <label
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Label</label>
+                                            <input type="text" v-model="atributos.valor_ref9.label" class="edit-form"
+                                                placeholder="">
+                                        </div>
+                                        <div class="flex-1">
+                                            <label
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Parametro</label>
+                                            <input type="text" v-model="atributos.valor_ref9.parametro"
+                                                class="edit-form" placeholder="">
+                                        </div>
+                                        <div class="flex items-center justify-center">
+                                            <button class="" type="button" @click="incrementQuantity(9)">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                    stroke-width="1.5" stroke="red" class="w-6 h-6 mt-5">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M6 18L18 6M6 6l12 12" />
+                                                </svg>
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                    <div class="flex gap-3 items-center justify-center">
+                                        <div class="flex-1">
+                                            <label
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Label</label>
+                                            <input type="text" v-model="atributos.valor_ref10.label" class="edit-form"
+                                                placeholder="">
+                                        </div>
+                                        <div class="flex-1">
+                                            <label
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Parametro</label>
+                                            <input type="text" v-model="atributos.valor_ref10.parametro"
+                                                class="edit-form" placeholder="">
+                                        </div>
+                                        <div class="flex items-center justify-center">
+                                            <button class="" type="button" @click="incrementQuantity(10)">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                    stroke-width="1.5" stroke="red" class="w-6 h-6 mt-5">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M6 18L18 6M6 6l12 12" />
+                                                </svg>
+                                            </button>
+                                        </div>
+
+                                    </div>
 
 
                                 </div>
@@ -203,7 +416,48 @@ export default {
                     parametro: ""
                 }
             },
-            atributos: {},
+            atributos: {
+                valor_ref1: {
+                    label: "",
+                    parametro: ""
+                },
+                valor_ref2: {
+                    label: "",
+                    parametro: ""
+                },
+                valor_ref3: {
+                    label: "",
+                    parametro: ""
+                },
+                valor_ref4: {
+                    label: "",
+                    parametro: ""
+                },
+                valor_ref5: {
+                    label: "",
+                    parametro: ""
+                },
+                valor_ref6: {
+                    label: "",
+                    parametro: ""
+                },
+                valor_ref7: {
+                    label: "",
+                    parametro: ""
+                },
+                valor_ref8: {
+                    label: "",
+                    parametro: ""
+                },
+                valor_ref9: {
+                    label: "",
+                    parametro: ""
+                },
+                valor_ref10: {
+                    label: "",
+                    parametro: ""
+                }
+            },
             user: {},
             formDataSC: {},
             contas: [],
@@ -217,37 +471,37 @@ export default {
         };
     },
     methods: {
-        preencherCamposAtributos() {
-            for (let i = 1; i <= this.quantity; i++) {
-                let label = document.getElementById('valor_ref_label' + i)
-                let param = document.getElementById('valor_ref_param' + i)
+        // preencherCamposAtributos() {
+        //     for (let i = 1; i <= 3; i++) {
+        //         let label = document.getElementById('valor_ref_label' + i)
+        //         let param = document.getElementById('valor_ref_param' + i)
 
 
-                switch (i) {
-                    case 1:
-                        label.value = this.atributos.valor_ref1.label
-                        param.value = this.atributos.valor_ref1.parametro
-                        label.disabled = true;
-                        param.disabled = true;
-                        break;
-                    case 2:
-                        label.value = this.atributos.valor_ref2.label
-                        param.value = this.atributos.valor_ref2.parametro
-                        label.disabled = true;
-                        param.disabled = true;
-                        break;
-                    case 3:
-                        label.value = this.atributos.valor_ref3.label
-                        param.value = this.atributos.valor_ref3.parametro
-                        label.disabled = true;
-                        param.disabled = true;
-                        break;
-                }
+        //         switch (i) {
+        //             case 1:
+        //                 label.value = this.atributos.valor_ref1.label ? this.atributos.valor_ref1.label : '';
+        //                 param.value = this.atributos.valor_ref1.parametro ? this.atributos.valor_ref1.parametro : '';
+        //                 label.disabled = true;
+        //                 param.disabled = true;
+        //                 break;
+        //             case 2:
+        //                 label.value = this.atributos.valor_ref2.label ? this.atributos.valor_ref2.label : '';
+        //                 param.value = this.atributos.valor_ref2.parametro ? this.atributos.valor_ref2.parametro : '';
+        //                 label.disabled = true;
+        //                 param.disabled = true;
+        //                 break;
+        //             case 3:
+        //                 label.value = this.atributos.valor_ref3.label ? this.atributos.valor_ref3.label : '';
+        //                 param.value = this.atributos.valor_ref3.parametro ? this.atributos.valor_ref3.parametro : '';
+        //                 label.disabled = true;
+        //                 param.disabled = true;
+        //                 break;
+        //         }
 
 
-            }
-            console.log('llfldfldfldfldfdlfl')
-        },
+        //     }
+        //     console.log('llfldfldfldfldfdlfl')
+        // },
         createTipoSensor(formD) {
             let formData = new FormData()
             formData.append('icone', this.img)
@@ -260,11 +514,11 @@ export default {
             const headers = { 'Content-Type': 'multipart/form-data' };
             http.post('/sensortipos/', formData, { headers })
                 .then(res => {
+                    console.log(res)
                     this.getAtributos(res.data.id)
                     if (res.data.geolocalizacao) {
-
                         this.quantity = 3;
-                       
+                        // this.preencherCamposAtributos();
                     }
                     this.teste = true
                     this.toggleTabs(2);
@@ -272,6 +526,7 @@ export default {
 
                 })
                 .catch(e => {
+                    console.log(e)
                     this.$swal("Oops...", e.response.data.detail, "error");
                     if (e.response.data.detail == "Você não tem permissão para executar essa ação.") {
                         this.$router.push('/')
@@ -279,59 +534,60 @@ export default {
                 });
         },
         updateTipoSensor() {
-            for (let i = 1; i <= this.quantity; i++) {
-                const label = document.getElementById('valor_ref_label' + i);
-                const parametro = document.getElementById('valor_ref_param' + i);
-                switch (i) {
-                    case 1:
-                        this.formAtributo.valor_ref1.label = label.value
-                        this.formAtributo.valor_ref1.parametro = parametro.value
-                        break;
-                    case 2:
-                        this.formAtributo.valor_ref2.label = label.value
-                        this.formAtributo.valor_ref2.parametro = parametro.value
-                        break;
-                    case 3:
-                        this.formAtributo.valor_ref3.label = label.value
-                        this.formAtributo.valor_ref3.parametro = parametro.value
-                        break;
-                    case 4:
-                        this.formAtributo.valor_ref4.label = label.value
-                        this.formAtributo.valor_ref4.parametro = parametro.value
-                        break;
-                    case 5:
-                        this.formAtributo.valor_ref5.label = label.value
-                        this.formAtributo.valor_ref5.parametro = parametro.value
-                        break;
-                    case 6:
-                        this.formAtributo.valor_ref6.label = label.value
-                        this.formAtributo.valor_ref6.parametro = parametro.value
-                        break;
-                    case 7:
-                        this.formAtributo.valor_ref7.label = label.value
-                        this.formAtributo.valor_ref7.parametro = parametro.value
-                        break;
-                    case 8:
-                        this.formAtributo.valor_ref8.label = label.value
-                        this.formAtributo.valor_ref8.parametro = parametro.value
-                        break;
-                    case 9:
-                        this.formAtributo.valor_ref9.label = label.value
-                        this.formAtributo.valor_ref9.parametro = parametro.value
-                        break;
-                    case 10:
-                        this.formAtributo.valor_ref10.label = label.value
-                        this.formAtributo.valor_ref10.parametro = parametro.value
-                        break;
-                    default:
-                        console.log("erro")
-                }
-            }
+            // for (let i = 1; i <= this.quantity; i++) {
+            //     const label = document.getElementById('valor_ref_label' + i);
+            //     const parametro = document.getElementById('valor_ref_param' + i);
+            //     switch (i) {
+            //         case 1:
+            //             this.formAtributo.valor_ref1.label = label.value
+            //             this.formAtributo.valor_ref1.parametro = parametro.value
+            //             break;
+            //         case 2:
+            //             this.formAtributo.valor_ref2.label = label.value
+            //             this.formAtributo.valor_ref2.parametro = parametro.value
+            //             break;
+            //         case 3:
+            //             this.formAtributo.valor_ref3.label = label.value
+            //             this.formAtributo.valor_ref3.parametro = parametro.value
+            //             break;
+            //         case 4:
+            //             this.formAtributo.valor_ref4.label = label.value
+            //             this.formAtributo.valor_ref4.parametro = parametro.value
+            //             break;
+            //         case 5:
+            //             this.formAtributo.valor_ref5.label = label.value
+            //             this.formAtributo.valor_ref5.parametro = parametro.value
+            //             break;
+            //         case 6:
+            //             this.formAtributo.valor_ref6.label = label.value
+            //             this.formAtributo.valor_ref6.parametro = parametro.value
+            //             break;
+            //         case 7:
+            //             this.formAtributo.valor_ref7.label = label.value
+            //             this.formAtributo.valor_ref7.parametro = parametro.value
+            //             break;
+            //         case 8:
+            //             this.formAtributo.valor_ref8.label = label.value
+            //             this.formAtributo.valor_ref8.parametro = parametro.value
+            //             break;
+            //         case 9:
+            //             this.formAtributo.valor_ref9.label = label.value
+            //             this.formAtributo.valor_ref9.parametro = parametro.value
+            //             break;
+            //         case 10:
+            //             this.formAtributo.valor_ref10.label = label.value
+            //             this.formAtributo.valor_ref10.parametro = parametro.value
+            //             break;
+            //         default:
+            //             console.log("erro")
+            //     }
+            // }
             let formData = new FormData()
             formData.append('nome', this.nome)
-            formData.append('atributos', JSON.stringify(this.formAtributo))
+            formData.append('atributos', JSON.stringify(this.atributos))
             formData.append('is_active', this.is_active)
             formData.append('geolocalizacao', this.formData.geolocalizacao)
+
             const headers = { 'Content-Type': 'multipart/form-data' };
             http.put('/sensortipos/' + this.idSensor + '/', formData, { headers })
                 .then(res => {
@@ -350,20 +606,60 @@ export default {
                     }
                 });
         },
-        incrementQuantity(action) {
-            if (action === "increment" && this.quantity < 10) {
-                this.quantity++
-            } else if (action === "decrement") {
-                this.quantity--
+        incrementQuantity(number) {
+            switch (number) {
+                case 1:
+                    this.atributos.valor_ref1.label = "";
+                    this.atributos.valor_ref1.parametro = "";
+                    break;
+                case 2:
+                    this.atributos.valor_ref2.label = "";
+                    this.atributos.valor_ref2.parametro = "";
+                    break;
+                case 3:
+                    this.atributos.valor_ref3.label = "";
+                    this.atributos.valor_ref3.parametro = "";
+                    break;
+                case 4:
+                    this.atributos.valor_ref4.label = "";
+                    this.atributos.valor_ref4.parametro = "";
+                    break;
+                case 5:
+                    this.atributos.valor_ref5.label = "";
+                    this.atributos.valor_ref5.parametro = "";
+                    break;
+                case 6:
+                    this.atributos.valor_ref6.label = "";
+                    this.atributos.valor_ref6.parametro = "";
+                    break;
+                case 7:
+                    this.atributos.valor_ref7.label = "";
+                    this.atributos.valor_ref7.parametro = "";
+                    break;
+                case 8:
+                    this.atributos.valor_ref8.label = "";
+                    this.atributos.valor_ref8.parametro = "";
+                    break;
+                case 9:
+                    this.atributos.valor_ref9.label = "";
+                    this.atributos.valor_ref9.parametro = "";
+                    break;
+                case 10:
+                    this.atributos.valor_ref10.label = "";
+                    this.atributos.valor_ref10.parametro = "";
+                    break;
+                default:
+                    console.log('numero inválido')
+                    break;
             }
         },
         toggleTabs: function (tabNumber) {
             if (tabNumber == 1) {
                 this.openTab = tabNumber
             } else if (tabNumber == 2 && this.teste) {
-                if(this.quantity == 3){
-                    this.preencherCamposAtributos();
-                }
+                // if(this.quantity == 3){
+                // this.preencherCamposAtributos();
+                // }
                 this.openTab = tabNumber
 
             }
@@ -379,8 +675,6 @@ export default {
                     this.idSensor = res.data.id
                     this.nome = res.data.nome
                     this.icone = res.data.icone
-
-
                 })
                 .catch(e => {
                     this.$swal("Oops...", e.response.data.detail, "error");
@@ -425,7 +719,17 @@ export default {
     mounted() {
         this.setUser();
         this.chamadasGet();
-    }
+    },
+    // watch: {
+    //     quantity() {
+    //         if (this.quantity == 3) {
+    //             console.log("aquiosoo")
+    //             this.preencherCamposAtributos();
+    //         }
+
+    //     }
+
+    // }
 };
 </script>
 
