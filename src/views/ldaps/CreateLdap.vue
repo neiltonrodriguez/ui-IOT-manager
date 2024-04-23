@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h3 class="detalhes">CADASTRO DE LDAP</h3>
+        <h3 class="detalhes">CADASTRO DE LDAP {{  tipo == 1 ? 'USUÁRIOS' : 'SENSORES' }}</h3>
     </div>
     <div class="divide-x my-5">
         <hr>

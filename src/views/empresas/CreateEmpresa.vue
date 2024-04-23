@@ -27,7 +27,7 @@
                             </label>
                             <input @change="uploadFile()" hidden="" name="inputFoto" type="file" ref="file" id="file">
                         </div>
-                        {{ img.name ? img.name : '' }}
+                        {{ img.name ? img.name.slice(0, 15) + '...' : '' }}
                     </div>
                 </div>
             </div>
@@ -162,7 +162,7 @@
             </div>
             <div class="grid gap-6 mb-6 md:grid-cols-2">
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Comlemento</label>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Complemento</label>
                     <select v-model="formD.complemento"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option value="" disabled selected>Escolha o complemento</option>
@@ -241,7 +241,7 @@ export default {
                         showConfirmButton: false,
                         timer: 1500
                     })
-                    this.$router.push('/empresas/');
+                    this.$router.push('/empresas');
                 })
                 .catch(e => {
                     this.$swal("Oops...", e.response.data.detail, "error");

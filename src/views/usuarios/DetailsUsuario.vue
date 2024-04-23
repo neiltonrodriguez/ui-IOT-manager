@@ -9,9 +9,14 @@
             <div class="grid gap-6 mb-6 md:grid-cols-2">
                 <div class="flex flex-col items-start">
                     <div class="flex flex-col items-center justify-center">
-                        <template v-if="usuario.foto == null">
+                        <template v-if="usuario.foto == null && img == ''">
                             <img class="border-2 max-h-36 border-gray-500  shadow-md duration-200"
                                 src="../../assets/img/sem-foto.png">
+                        </template>
+                        <template v-else-if="img">
+                            <img id="img-empresa" class="border-2 max-h-36 border-gray-500  shadow-md duration-200"
+                                :src="imagem">
+
                         </template>
                         <template v-else>
                             <img class="border-2 max-h-36 border-gray-500  shadow-md duration-200" :src="usuario.foto"
@@ -27,7 +32,7 @@
 
                             <input @change="uploadFile()" hidden="" name="inputFoto" type="file" ref="file" id="file">
                         </div>
-                        {{ img.name ? img.name : '' }}
+                        {{ img.name ? img.name.slice(0, 15) + '...' : '' }}
                     </div>
                 </div>
             </div>
@@ -68,8 +73,7 @@
                 </div>
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">CPF</label>
-                    <input type="text" v-model="usuario.cpf" v-mask="'###.###.###-##'"
-                        v-on:keyup="habilitarSalvar()"
+                    <input type="text" v-model="usuario.cpf" v-mask="'###.###.###-##'" v-on:keyup="habilitarSalvar()"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500  disabled:bg-red-50"
                         placeholder="">
                 </div>
@@ -249,7 +253,8 @@ export default {
             empresas: [],
             user: {},
             img: '',
-            isDisabled: true
+            isDisabled: true,
+            imagem: ''
         };
     },
     methods: {
@@ -274,6 +279,12 @@ export default {
             this.isDisabled = false
         },
         uploadFile() {
+            this.img = this.$refs.file.files[0];
+            var reader = new FileReader();
+            reader.onload = (e) => {
+                this.imagem = e.target.result;
+            }
+            reader.readAsDataURL(this.$refs.file.files[0]);
             this.img = this.$refs.file.files[0];
         },
         store(formD) {

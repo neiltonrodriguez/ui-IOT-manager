@@ -56,7 +56,7 @@
                 </div>
             </div>
             <div class="bg-gray-50 p-[20px] h-screen">
-                <div class="border border-gray-300 rounded-md p-[20px] h-[700px] overflow-y-scroll">
+                <div class="border border-gray-300 rounded-md p-[20px] h-[700px] overflow-y-auto">
                     <router-view ></router-view>
                 </div>
             </div>

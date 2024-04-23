@@ -27,7 +27,7 @@
                             </label>
                             <input @change="uploadFile()" hidden="" name="inputFoto" type="file" ref="file" id="file">
                         </div>
-                        {{ img.name ? img.name : '' }}
+                        {{ img.name ? img.name.slice(0, 15) + '...' : '' }}
                     </div>
                 </div>
             </div>

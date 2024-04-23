@@ -11,9 +11,14 @@
             <div class="grid gap-6 mb-6 md:grid-cols-2">
                 <div class="flex flex-col items-start">
                     <div class="flex flex-col items-center justify-center">
-                        <template v-if="perfil.foto == null">
+                        <template v-if="perfil.foto == null && img == ''">
                             <img class="border-2 max-h-36 border-gray-500  shadow-md duration-200"
                                 src="../../assets/img/sem-foto.png">
+                        </template>
+                        <template v-else-if="img">
+                            <img id="img-empresa" class="border-2 max-h-36 border-gray-500  shadow-md duration-200"
+                                :src="imagem">
+
                         </template>
                         <template v-else>
                             <img class="border-2 max-h-36 border-gray-500  shadow-md duration-200" :src="perfil.foto"
@@ -27,7 +32,7 @@
                             </label>
                             <input @change="uploadFile()" hidden="" name="inputFoto" type="file" ref="file" id="file">
                         </div>
-                        {{ img.name ? img.name : '' }}
+                        {{ img.name ? img.name.slice(0, 15) + '...' : '' }}
                     </div>
                 </div>
             </div>
@@ -199,7 +204,8 @@ export default {
             departamentos: [],
             complementos: [],
             empresas: [],
-            img: ''
+            img: '',
+            imagem: ''
         };
     },
     methods: {
@@ -208,6 +214,11 @@ export default {
         },
         uploadFile() {
             this.img = this.$refs.file.files[0];
+            var reader = new FileReader();
+            reader.onload = (e) => {
+                this.imagem = e.target.result;
+            }
+            reader.readAsDataURL(this.$refs.file.files[0]);
             this.isDisabled = false
         },
         habilitarSalvar() {

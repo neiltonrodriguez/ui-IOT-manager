@@ -1,6 +1,7 @@
 <template>
     <div class="w-[400px] h-full  bg-gray-200 text-white " v-show="showSide">
-        <div @click="home()" title="Voltar para HOME" class="cursor-pointer duration-200 hover:bg-slate-500 h-auto w-auto bg-gray-900 flex justify-center  items-center py-5">
+        <div @click="home()" title="Voltar para HOME"
+            class="cursor-pointer duration-200 hover:bg-slate-500 h-auto w-auto bg-gray-900 flex justify-center  items-center py-5">
             <div class="px-[20px]">
                 <!-- <img class="flex items-center justify-center" src="./../assets/img/logomarca.jpg" alt=""> -->
                 <h3 class="font-bold text-xl">Admin Dashboard</h3>
@@ -12,7 +13,7 @@
 
                     <div v-if="usuario == 'True'">
                         <router-link @click="mostrarSubMenuUsuario()" to=""
-                            class="inline-flex relative items-center py-[10px] px-[10px] w-full text-sm font-medium rounded-md border-gray-200 hover:bg-gray-200 hover:text-gray-800  transition duration-400 ease-in-out">
+                            class="inline-flex  relative items-center py-[10px] px-[10px] w-full text-sm font-medium rounded-md border-gray-200 hover:bg-gray-200 hover:text-gray-800  transition duration-400 ease-in-out">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="mr-2 w-6 h-6">
                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -24,12 +25,14 @@
                         <ul v-if="subMenuUsuario">
                             <li>
                                 <router-link to="/usuarios"
-                                    class="mx-5 inline-flex relative items-center py-[10px] px-[10px] w-full text-sm font-medium rounded-md border-gray-200 hover:bg-gray-200 hover:text-gray-800  transition duration-400 ease-in-out">
+                                :class="rotaAtual === '/usuarios' ? 'bg-slate-500' : ''"
+                                    class="mx-5 active:bg-slate-500  focus:bg-slate-500 inline-flex relative items-center py-[10px] px-[10px] w-full text-sm font-medium rounded-md border-gray-200 hover:bg-gray-200 hover:text-gray-800  transition duration-400 ease-in-out">
                                     - Usuários
                                 </router-link>
                             </li>
                             <li v-if="usuariogrupo == 'True'">
                                 <router-link to="/grupousuarios"
+                                :class="rotaAtual === '/grupousuarios' ? 'bg-slate-500' : ''"
                                     class="mx-5 inline-flex relative items-center py-[10px] px-[10px] w-full text-sm font-medium rounded-md border-gray-200 hover:bg-gray-200 hover:text-gray-800  transition duration-400 ease-in-out">
                                     - Grupos de usuários
                                 </router-link>
@@ -40,6 +43,7 @@
 
                     <div @click="fecharMenus()" v-if="conta == 'True'">
                         <router-link to="/contas"
+                        :class="rotaAtual === '/contas' ? 'bg-slate-500' : ''"
                             class="inline-flex relative items-center py-[10px] px-[10px] w-full text-sm font-medium rounded-md border-gray-200 hover:bg-gray-300  hover:text-gray-800 transition duration-400 ease-in-out">
                             <svg aria-hidden="true" class="mr-2 w-[25px] h-[25px] fill-current" fill="currentColor"
                                 viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -52,6 +56,7 @@
                     </div>
                     <div @click="fecharMenus()" v-if="empresa == 'True'">
                         <router-link to="/empresas"
+                        :class="rotaAtual === '/empresas' ? 'bg-slate-500' : ''"
                             class="inline-flex relative items-center py-[10px] px-[10px] w-full text-sm font-medium rounded-md border-gray-200 hover:bg-gray-300  hover:text-gray-800 transition duration-400 ease-in-out">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="mr-2 w-[25px] h-[25px] fill-current">
@@ -78,18 +83,21 @@
 
                             <li>
                                 <router-link to="/sensores"
+                                :class="rotaAtual === '/sensores' ? 'bg-slate-500' : ''"
                                     class="mx-5 inline-flex relative items-center py-[10px] px-[10px] w-full text-sm font-medium rounded-md border-gray-200 hover:bg-gray-200 hover:text-gray-800  transition duration-400 ease-in-out">
                                     - Sensor
                                 </router-link>
                             </li>
                             <li>
                                 <router-link to="/tiposensores"
+                                :class="rotaAtual === '/tiposensores' ? 'bg-slate-500' : ''"
                                     class="mx-5 inline-flex relative items-center py-[10px] px-[10px] w-full text-sm font-medium rounded-md border-gray-200 hover:bg-gray-200 hover:text-gray-800  transition duration-400 ease-in-out">
                                     - Tipo/sensor
                                 </router-link>
                             </li>
                             <li>
                                 <router-link to="/gruposensores"
+                                :class="rotaAtual === '/gruposensores' ? 'bg-slate-500' : ''"
                                     class="mx-5 inline-flex relative items-center py-[10px] px-[10px] w-full text-sm font-medium rounded-md border-gray-200 hover:bg-gray-200 hover:text-gray-800  transition duration-400 ease-in-out">
                                     - Grupo de sensores
                                 </router-link>
@@ -115,12 +123,14 @@
                         <ul v-if="subMenuCamera">
                             <li>
                                 <router-link to="/cameras"
+                                :class="rotaAtual === '/cameras' ? 'bg-slate-500' : ''"
                                     class="mx-5 inline-flex relative items-center py-[10px] px-[10px] w-full text-sm font-medium rounded-md border-gray-200 hover:bg-gray-200 hover:text-gray-800  transition duration-400 ease-in-out">
                                     - Camera
                                 </router-link>
                             </li>
                             <li>
                                 <router-link to="/grupocameras"
+                                :class="rotaAtual === '/grupocameras' ? 'bg-slate-500' : ''"
                                     class="mx-5 inline-flex relative items-center py-[10px] px-[10px] w-full text-sm font-medium rounded-md border-gray-200 hover:bg-gray-200 hover:text-gray-800  transition duration-400 ease-in-out">
                                     - Grupos de Cameras
                                 </router-link>
@@ -145,12 +155,14 @@
                         <ul v-if="subMenuLdap">
                             <li>
                                 <router-link to="/ldaps/1/"
+                                :class="rotaAtual === '/ldaps/1/' ? 'bg-slate-500' : ''"
                                     class="mx-5 inline-flex relative items-center py-[10px] px-[10px] w-full text-sm font-medium rounded-md border-gray-200 hover:bg-gray-200 hover:text-gray-800  transition duration-400 ease-in-out">
                                     - Usuário/Grupos
                                 </router-link>
                             </li>
                             <li>
                                 <router-link to="/ldaps/2/"
+                                :class="rotaAtual === '/ldaps/2/' ? 'bg-slate-500' : ''"
                                     class="mx-5 inline-flex relative items-center py-[10px] px-[10px] w-full text-sm font-medium rounded-md border-gray-200 hover:bg-gray-200 hover:text-gray-800  transition duration-400 ease-in-out">
                                     - Sensores
                                 </router-link>
@@ -172,18 +184,21 @@
                         <ul v-if="subMenuAtivo">
                             <li>
                                 <router-link to="/ativos"
+                                :class="rotaAtual === '/ativos' ? 'bg-slate-500' : ''"
                                     class="mx-5 inline-flex relative items-center py-[10px] px-[10px] w-full text-sm font-medium rounded-md border-gray-200 hover:bg-gray-200 hover:text-gray-800  transition duration-400 ease-in-out">
                                     - ativos
                                 </router-link>
                             </li>
                             <li>
                                 <router-link to="/tipoativos"
+                                :class="rotaAtual === '/tipoativos' ? 'bg-slate-500' : ''"
                                     class="mx-5 inline-flex relative items-center py-[10px] px-[10px] w-full text-sm font-medium rounded-md border-gray-200 hover:bg-gray-200 hover:text-gray-800  transition duration-400 ease-in-out">
                                     - Tipo de ativos
                                 </router-link>
                             </li>
                             <li>
                                 <router-link to="/grupoativos"
+                                :class="rotaAtual === '/grupoativos' ? 'bg-slate-500' : ''"
                                     class="mx-5 inline-flex relative items-center py-[10px] px-[10px] w-full text-sm font-medium rounded-md border-gray-200 hover:bg-gray-200 hover:text-gray-800  transition duration-400 ease-in-out">
                                     - Grupo de ativos
                                 </router-link>
@@ -205,36 +220,42 @@
                         <ul v-if="subMenuConfiguracao">
                             <li>
                                 <router-link to="/lista-customizada"
+                                :class="rotaAtual === '/lista-customizada' ? 'bg-slate-500' : ''"
                                     class="mx-5 inline-flex relative items-center py-[10px] px-[10px] w-full text-sm font-medium rounded-md border-gray-200 hover:bg-gray-200 hover:text-gray-800  transition duration-400 ease-in-out">
                                     - Lista Customizada
                                 </router-link>
                             </li>
                             <li>
                                 <router-link to="/emailintegracao"
+                                :class="rotaAtual === '/emailintegracao' ? 'bg-slate-500' : ''"
                                     class="mx-5 inline-flex relative items-center py-[10px] px-[10px] w-full text-sm font-medium rounded-md border-gray-200 hover:bg-gray-200 hover:text-gray-800  transition duration-400 ease-in-out">
                                     - Integração email
                                 </router-link>
                             </li>
                             <li>
                                 <router-link to="/mensagemintegracao"
+                                :class="rotaAtual === '/mensagemintegracao' ? 'bg-slate-500' : ''"
                                     class="mx-5 inline-flex relative items-center py-[10px] px-[10px] w-full text-sm font-medium rounded-md border-gray-200 hover:bg-gray-200 hover:text-gray-800  transition duration-400 ease-in-out">
                                     - Integração mensagem
                                 </router-link>
                             </li>
                             <li>
                                 <router-link to="/notificacoes"
+                                :class="rotaAtual === '/notificacoes' ? 'bg-slate-500' : ''"
                                     class="mx-5 inline-flex relative items-center py-[10px] px-[10px] w-full text-sm font-medium rounded-md border-gray-200 hover:bg-gray-200 hover:text-gray-800  transition duration-400 ease-in-out">
                                     - Notificação
                                 </router-link>
                             </li>
                             <li>
                                 <router-link to="/monitoriot"
+                                :class="rotaAtual === '/monitoriot' ? 'bg-slate-500' : ''"
                                     class="mx-5 inline-flex relative items-center py-[10px] px-[10px] w-full text-sm font-medium rounded-md border-gray-200 hover:bg-gray-200 hover:text-gray-800  transition duration-400 ease-in-out">
                                     - Monitor IOT
                                 </router-link>
                             </li>
                             <li>
                                 <router-link to="/gatewayiot"
+                                :class="rotaAtual === '/gatewayiot' ? 'bg-slate-500' : ''"
                                     class="mx-5 inline-flex relative items-center py-[10px] px-[10px] w-full text-sm font-medium rounded-md border-gray-200 hover:bg-gray-200 hover:text-gray-800  transition duration-400 ease-in-out">
                                     - Gateway IOT
                                 </router-link>
@@ -243,6 +264,7 @@
                         </ul>
 
                     </div>
+                   
                 </div>
             </div>
         </div>
@@ -266,10 +288,12 @@ export default {
         camera: String,
         usuario: String,
         ativo: String,
-        usuariogrupo: String
+        usuariogrupo: String,
+        atual: String
     },
     data() {
         return {
+            rotaAtual: '',
             subMenuLdap: false,
             subMenuSensor: false,
             subMenuCamera: false,
@@ -279,10 +303,13 @@ export default {
         }
     },
     methods: {
-        home(){
+        setarRota() {
+            this.rotaAtual = this.$route.fullPath
+        },
+        home() {
             this.$router.push('/')
         },
-        fecharMenus(){
+        fecharMenus() {
             this.subMenuUsuario = false
             this.subMenuLdap = false
             this.subMenuCamera = false
@@ -315,7 +342,16 @@ export default {
             this.subMenuConfiguracao = !this.subMenuConfiguracao
         }
 
-    }
+    },
+    created() {
+        this.$watch(
+            () => this.$route.fullPath,
+            (toParams, previousParams) => {
+                this.setarRota();
+            }
+        )
+    },
+    
 
 }
 

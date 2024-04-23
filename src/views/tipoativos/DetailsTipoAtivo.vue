@@ -11,13 +11,18 @@
             <div class="grid gap-6 mb-6 md:grid-cols-2">
                 <div class="flex flex-col items-start">
                     <div class="flex flex-col items-center justify-center">
-                        <template v-if="tipoativo.icone == null">
+                        <template v-if="tipoativo.icone == null && img == ''">
                             <img class="border-2 max-h-36 border-gray-500  shadow-md duration-200"
                                 src="../../assets/img/sem-foto.png">
                         </template>
+                        <template v-else-if="img">
+                            <img id="img-empresa" class="border-2 max-h-36 border-gray-500  shadow-md duration-200"
+                                :src="imagem">
+
+                        </template>
                         <template v-else>
-                            <img class="border-2 max-h-36 border-gray-500  shadow-md duration-200"
-                                :src="tipoativo.icone" width="150">
+                            <img class="border-2 max-h-36 border-gray-500  shadow-md duration-200" :src="tipoativo.icone"
+                                width="150">
 
                         </template>
                         <div>
@@ -29,7 +34,7 @@
 
                             <input @change="uploadFile()" hidden="" name="inputFoto" type="file" ref="file" id="file">
                         </div>
-                        {{ img.name ? img.name : '' }}
+                        {{ img.name ? img.name.slice(0, 15) + '...' : '' }}
                     </div>
                 </div>
             </div>
@@ -88,12 +93,18 @@ export default {
             user: {},
             isDisabled: true,
             contas: {},
-            img: ''
+            img: '',
+            imagem: ''
         };
     },
     methods: {
         uploadFile() {
             this.img = this.$refs.file.files[0];
+            var reader = new FileReader();
+            reader.onload = (e) => {
+                this.imagem = e.target.result;
+            }
+            reader.readAsDataURL(this.$refs.file.files[0]);
             this.isDisabled = false
         },
         store(formD) {

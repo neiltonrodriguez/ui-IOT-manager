@@ -1,6 +1,6 @@
 <template>
     <div class="flex items-center my-auto">
-        <h3 class="detalhes">DETALHES DE LDAP</h3>
+        <h3 class="detalhes">DETALHES DE LDAP {{  tipo == 1 ? 'USUÁRIOS' : 'SENSORES' }}</h3>
 
     </div>
 
