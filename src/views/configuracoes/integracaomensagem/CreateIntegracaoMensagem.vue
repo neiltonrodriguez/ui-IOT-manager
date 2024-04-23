@@ -10,48 +10,48 @@
             <div class="grid gap-6 mb-6 md:grid-cols-2">
 
                 <div v-if="user.tipo == 4">
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Conta</label>
+                    <label class="label-form">Conta</label>
                     <select v-model="formData.conta"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        class="input-form">
                         <option value="" disabled selected>Escolha a conta</option>
                         <option v-for="c in contas" :key="c.id" :value="c.conta">{{ c.conta }}</option>
                     </select>
                 </div>
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Título</label>
+                    <label class="label-form">Título</label>
                     <input type="text" v-model="formData.titulo"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="input-form"
                         placeholder="" required>
                 </div>
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descrição</label>
+                    <label class="label-form">Descrição</label>
                     <textarea rows="4" v-model="formData.descricao"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="input-form"
                         placeholder=""></textarea>
                 </div>
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Telefone</label>
+                    <label class="label-form">Telefone</label>
                     <input type="text" v-model="formData.numerotelefone" v-mask="['(##) ####-####', '(##) #####-####']"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="input-form"
                         placeholder="" required>
                 </div>
 
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">SID twilio</label>
+                    <label class="label-form">SID twilio</label>
                     <input type="text" v-model="formData.sidtwilio"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="input-form"
                         placeholder="" required>
                 </div>
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Token Twilio</label>
+                    <label class="label-form">Token Twilio</label>
                     <input type="password" v-model="formData.authtokentwilio"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="input-form"
                         placeholder="" required>
                 </div>
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">CharSet</label>
+                    <label class="label-form">CharSet</label>
                     <input type="text" v-model="formData.charset"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="input-form"
                         placeholder="" required>
                 </div>
 

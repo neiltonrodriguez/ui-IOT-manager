@@ -11,75 +11,75 @@ detalhes">CADASTRO DE ATIVOS</h3>
         <form class="row g-3" v-on:submit.prevent="createAtivo(formData)">
             <div class="grid gap-6 mb-6 md:grid-cols-2">
                 <div v-if="user.tipo == 4">
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Conta</label>
-                    <select v-model="formData.conta" class="edit-form" @change="actionByAcount()">
+                    <label class="label-form">Conta</label>
+                    <select v-model="formData.conta" class="input-form" @change="actionByAcount()">
                         <option value="" disabled selected>Escolha a conta</option>
                         <option v-for="c in contas" :key="c.id" :value="c.conta">{{ c.conta }}
                         </option>
                     </select>
                 </div>
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nome</label>
-                    <input type="text" v-model="formData.nome" class="edit-form" placeholder="" required>
+                    <label class="label-form">Nome</label>
+                    <input type="text" v-model="formData.nome" class="input-form" placeholder="" required>
                 </div>
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descrição</label>
-                    <textarea rows="4" v-model="formData.descricao" class="edit-form" placeholder=""></textarea>
+                    <label class="label-form">Descrição</label>
+                    <textarea rows="4" v-model="formData.descricao" class="input-form" placeholder=""></textarea>
                 </div>
              
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Empresa</label>
+                    <label class="label-form">Empresa</label>
                     <select v-model="formData.empresa"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    class="input-form">
                         <option value="" disabled selected>Escolha a empresa</option>
                         <option v-for="e in empresas" :key="e.id" :value="e.id">{{ e.nome }}
                         </option>
                     </select>
                 </div>
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Serial</label>
-                    <input type="text" v-model="formData.serial" class="edit-form" placeholder="" required>
+                    <label class="label-form">Serial</label>
+                    <input type="text" v-model="formData.serial" class="input-form" placeholder="" required>
                 </div>
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fabricante</label>
+                    <label class="label-form">Fabricante</label>
                     <select v-model="formData.fabricante"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        class="input-form">
                         <option value="" disabled selected>Escolha o fabricante</option>
                         <option v-for="fb in fabricantes" :key="fb.id" :value="fb.id">{{ fb.titulo }}
                         </option>
                     </select>
                 </div>
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Modelo</label>
+                    <label class="label-form">Modelo</label>
                     <select v-model="formData.modelo"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        class="input-form">
                         <option value="" disabled selected>Escolha o modelo</option>
                         <option v-for="md in modelos" :key="md.id" :value="md.id">{{ md.titulo }}
                         </option>
                     </select>
                 </div>
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Departamento</label>
+                    <label class="label-form">Departamento</label>
                     <select v-model="formData.departamento"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        class="input-form">
                         <option value="" disabled selected>Escolha o departamento</option>
                         <option v-for="dp in departamentos" :key="dp.id" :value="dp.id">{{ dp.titulo }}
                         </option>
                     </select>
                 </div>
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Grupo</label>
+                    <label class="label-form">Grupo</label>
                     <select v-model="formData.grupo"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        class="input-form">
                         <option value="" disabled selected>Escolha o grupo</option>
                         <option v-for="g in grupoativo" :key="g.id" :value="g.id">{{ g.nome }}
                         </option>
                     </select>
                 </div>
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tipo</label>
+                    <label class="label-form">Tipo</label>
                     <select v-model="formData.tipo"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        class="input-form">
                         <option value="" disabled selected>Escolha o tipo</option>
                         <option v-for="t in tipoativo" :key="t.id" :value="t.id">{{ t.nome }}
                         </option>

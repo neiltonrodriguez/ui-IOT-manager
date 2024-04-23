@@ -12,41 +12,41 @@
             <div class="grid gap-6 mb-6 md:grid-cols-2">
 
                 <div v-if="user.tipo == 4">
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Conta</label>
+                    <label class="label-form">Conta</label>
                     <input type="text" v-model="integracao.conta" disabled
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 disabled:bg-red-50"
+                        class="input-form"
                         placeholder="" required>
                 </div>
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Protocolo</label>
+                    <label class="label-form">Protocolo</label>
                     <select v-model="integracao.protocolo" @change="habilitarSalvar()"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        class="input-form">
                         <option value="" disabled selected>Escolha o protocolo</option>
                         <option value="1">SMTP</option>
                         <option value="2">OAuth2</option>
                     </select>
                 </div>
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Título</label>
+                    <label class="label-form">Título</label>
                     <input type="text" v-model="integracao.titulo" v-on:keyup="habilitarSalvar()"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  disabled:bg-red-50 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="input-form"
                         placeholder="" required>
                 </div>
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+                    <label class="label-form">Email</label>
                     <input type="email" v-model="integracao.email" v-on:keyup="habilitarSalvar()"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  disabled:bg-red-50 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="input-form"
                         placeholder="" required>
                 </div>
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descrição</label>
+                    <label class="label-form">Descrição</label>
                     <textarea rows="4" v-model="integracao.descricao" v-on:keyup="habilitarSalvar()"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  disabled:bg-red-50 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="input-form"
                         placeholder=""></textarea>
                 </div>
                 <div>
                     <label class="label-form">Habilitado</label>
-                    <select v-model="integracao.is_active" class="edit-form" @change="habilitarSalvar()">
+                    <select v-model="integracao.is_active" class="input-form" @change="habilitarSalvar()">
                         <option value="" disabled selected>escolha um status</option>
                         <option :value="true">Sim</option>
                         <option :value="false">Não</option>
@@ -55,23 +55,23 @@
             </div>
             <div v-if="integracao.protocolo == '1'" class="grid gap-6 mb-6 md:grid-cols-2">
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">SMTP Host</label>
+                    <label class="label-form">SMTP Host</label>
                     <input type="text" v-model="integracao.smpthost" v-on:keyup="habilitarSalvar()"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="input-form"
                         placeholder="" required>
                 </div>
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">SMTP Port</label>
+                    <label class="label-form">SMTP Port</label>
                     <input type="text" v-model="integracao.smtpport" v-on:keyup="habilitarSalvar()"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="input-form"
                         placeholder="" required>
                 </div>
             </div>
             <div v-if="integracao.protocolo == '1'" class="grid gap-6 mb-6 md:grid-cols-3">
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Criptografia</label>
+                    <label class="label-form">Criptografia</label>
                     <select v-model="integracao.criptografia" @change="habilitarSalvar()"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        class="input-form">
                         <option value="" disabled selected>Escolha o tipo de conteudo</option>
                         <option value="0">Nenhuma</option>
                         <option value="1">SSL</option>
@@ -80,35 +80,35 @@
                     </select>
                 </div>
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">SMTP Usuário</label>
+                    <label class="label-form">SMTP Usuário</label>
                     <input type="text" v-model="integracao.smtpusuario" v-on:keyup="habilitarSalvar()"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="input-form"
                         placeholder="" required>
                 </div>
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">SMTP senha</label>
+                    <label class="label-form">SMTP senha</label>
                     <input type="password" v-model="integracao.smtpsenha" v-on:keyup="habilitarSalvar()"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="input-form"
                         placeholder="" required>
                 </div>
             </div>
             <div v-if="integracao.protocolo == '2'" class="grid gap-6 mb-6 md:grid-cols-3">
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tenant ID</label>
+                    <label class="label-form">Tenant ID</label>
                     <input type="text" v-model="integracao.tenantid" v-on:keyup="habilitarSalvar()"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="input-form"
                         placeholder="" required>
                 </div>
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Cliente ID</label>
+                    <label class="label-form">Cliente ID</label>
                     <input type="text" v-model="integracao.clienteid" v-on:keyup="habilitarSalvar()"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="input-form"
                         placeholder="" required>
                 </div>
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Cliente Chave</label>
+                    <label class="label-form">Cliente Chave</label>
                     <input type="password" v-model="integracao.clientkey" v-on:keyup="habilitarSalvar()"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="input-form"
                         placeholder="" required>
                 </div>
 
@@ -116,23 +116,23 @@
             </div>
             <div class="grid gap-6 mb-6 md:grid-cols-3">
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Encoding</label>
+                    <label class="label-form">Encoding</label>
                     <input type="text" v-model="integracao.encoding" v-on:keyup="habilitarSalvar()"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="input-form"
                         placeholder="" required>
                 </div>
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tipo Conteúdo</label>
+                    <label class="label-form">Tipo Conteúdo</label>
                     <select v-model="integracao.tipoconteudo" @change="habilitarSalvar()"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        class="input-form">
                         <option value="1">Texto</option>
                         <option value="0">HTML</option>
                     </select>
                 </div>
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Charset</label>
+                    <label class="label-form">Charset</label>
                     <input type="text" v-model="integracao.charset" v-on:keyup="habilitarSalvar()"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="input-form"
                         placeholder="" required>
                 </div>
             </div>

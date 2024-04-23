@@ -39,7 +39,7 @@
                         </a>
                     </li>
                 </ul>
-                <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
+                <div class="relative flex flex-col min-w-0 break-words  w-full mb-6 shadow-lg rounded">
                     <div class="px-4 py-5 flex-auto">
                         <div class="tab-content tab-space">
                             <div v-bind:class="{ 'hidden': openTab !== 1, 'block': openTab === 1 }">
@@ -49,12 +49,12 @@
                                         <div>
                                             <label class="label-form">Nome</label>
                                             <input type="text" v-model="grupousuario.nome"
-                                                v-on:keyup="habilitarSalvar()" class="edit-form" placeholder=""
+                                                v-on:keyup="habilitarSalvar()" class="input-form" placeholder=""
                                                 disabled>
                                         </div>
                                         <div v-if="user.tipo == 4">
                                             <label class="label-form">Conta</label>
-                                            <select v-model="grupousuario.conta" disabled class="edit-form">
+                                            <select v-model="grupousuario.conta" disabled class="input-form">
                                                 <option value="" disabled selected>Escolha a conta</option>
                                                 <option v-for="c in contas" :key="c.id" :value="c.conta">{{ c.conta }}
                                                 </option>
@@ -62,7 +62,7 @@
                                         </div>
                                         <div>
                                             <label class="label-form">Tipo de usuário</label>
-                                            <select v-model="grupousuario.tipo" disabled class="edit-form"
+                                            <select v-model="grupousuario.tipo" disabled class="input-form"
                                                 @change="habilitarSalvar()">
                                                 <option value="0" selected>Tipo de usuário</option>
                                                 <option value="1">Comun</option>
@@ -75,11 +75,11 @@
                                         <div>
                                             <label class="label-form">Descrição</label>
                                             <textarea rows="4" v-model="grupousuario.descricao"
-                                                class="edit-form" v-on:keyup="habilitarSalvar()" placeholder=""></textarea>
+                                                class="input-form" v-on:keyup="habilitarSalvar()" placeholder=""></textarea>
                                         </div>
                                         <div>
                                             <label class="label-form">Habilitado</label>
-                                            <select v-model="grupousuario.is_active" required class="edit-form"
+                                            <select v-model="grupousuario.is_active" required class="input-form"
                                                 @change="habilitarSalvar()">
                                                 <option :value="true">Sim</option>                                      
                                                 <option :value="false">Não</option>                                    

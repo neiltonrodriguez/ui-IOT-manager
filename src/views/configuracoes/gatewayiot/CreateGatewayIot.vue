@@ -10,36 +10,36 @@
         <form class="row g-3" v-on:submit.prevent="createGatewayIot(formData)">
             <div class="grid gap-6 mb-6 md:grid-cols-2">
                 <div v-if="user.tipo == 4">
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Conta</label>
-                    <select v-model="formData.conta" @change="escolherConta()" class="edit-form">
+                    <label class="label-form">Conta</label>
+                    <select v-model="formData.conta" @change="escolherConta()" class="input-form">
                         <option value="" disabled selected>Escolha a conta</option>
                         <option v-for=" c in contas" :key="c.id" :value="c.conta">{{ c.conta }}
                         </option>
                     </select>
                 </div>
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Título</label>
-                    <input type="text" v-model="formData.titulo" class="edit-form" placeholder="" required>
+                    <label class="label-form">Título</label>
+                    <input type="text" v-model="formData.titulo" class="input-form" placeholder="" required>
                 </div>
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descrição</label>
-                    <textarea rows="4" v-model="formData.descricao" class="edit-form" placeholder=""></textarea>
+                    <label class="label-form">Descrição</label>
+                    <textarea rows="4" v-model="formData.descricao" class="input-form" placeholder=""></textarea>
                 </div>
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Host</label>
-                    <input type="text" v-model="formData.host" class="edit-form" placeholder="">
+                    <label class="label-form">Host</label>
+                    <input type="text" v-model="formData.host" class="input-form" placeholder="">
                 </div>
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Porta</label>
-                    <input type="text" v-model="formData.porta" class="edit-form" placeholder="">
+                    <label class="label-form">Porta</label>
+                    <input type="text" v-model="formData.porta" class="input-form" placeholder="">
                 </div>
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Exchange</label>
-                    <input type="text" v-model="formData.exchange" class="edit-form" placeholder="">
+                    <label class="label-form">Exchange</label>
+                    <input type="text" v-model="formData.exchange" class="input-form" placeholder="">
                 </div>
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Monitor IOT</label>
-                    <select v-model="formData.monitoriot" class="edit-form">
+                    <label class="label-form">Monitor IOT</label>
+                    <select v-model="formData.monitoriot" class="input-form">
                         <option value="" disabled selected>Escolha um</option>
                         <option v-for="e in monitoriot" :key="e.id" :value="e.id">{{ e.titulo }}
                         </option>

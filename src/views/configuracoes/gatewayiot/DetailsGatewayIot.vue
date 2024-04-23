@@ -12,45 +12,45 @@
             <div class="grid gap-6 mb-6 md:grid-cols-2">
 
                 <div v-if="user.tipo == 4">
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Conta</label>
+                    <label class="label-form">Conta</label>
                     <input type="text" v-model="gatewayiot.conta" disabled
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 disabled:bg-red-50"
+                        class="input-form"
                         placeholder="" required>
                 </div>
 
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Título</label>
+                    <label class="label-form">Título</label>
                     <input type="text" v-model="gatewayiot.titulo" v-on:keyup="habilitarSalvar()"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  disabled:bg-red-50 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="input-form"
                         placeholder="" required>
                 </div>
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descrição</label>
+                    <label class="label-form">Descrição</label>
                     <textarea rows="4" v-model="gatewayiot.descricao" v-on:keyup="habilitarSalvar()"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  disabled:bg-red-50 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="input-form"
                         placeholder=""></textarea>
                 </div>
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Host</label>
+                    <label class="label-form">Host</label>
                     <input type="text" v-model="gatewayiot.host" v-on:keyup="habilitarSalvar()"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  disabled:bg-red-50 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="input-form"
                         placeholder="" required>
                 </div>
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Porta</label>
+                    <label class="label-form">Porta</label>
                     <input type="text" v-model="gatewayiot.porta" v-on:keyup="habilitarSalvar()"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  disabled:bg-red-50 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="input-form"
                         placeholder="" required>
                 </div>
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Exchange</label>
+                    <label class="label-form">Exchange</label>
                     <input type="text" v-model="gatewayiot.exchange" v-on:keyup="habilitarSalvar()"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  disabled:bg-red-50 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="input-form"
                         placeholder="" required>
                 </div>
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Monitor IOT</label>
-                    <select v-model="gatewayiot.monitoriot" class="edit-form">
+                    <label class="label-form">Monitor IOT</label>
+                    <select v-model="gatewayiot.monitoriot" class="input-form">
                         <option value="" disabled selected>Escolha um</option>
                         <option v-for="e in monitoresiot" :key="e.id" :value="e.id">{{ e.titulo }}
                         </option>
@@ -58,7 +58,7 @@
                 </div>
                 <div>
                     <label class="label-form">Habilitado</label>
-                    <select v-model="gatewayiot.is_active" class="edit-form" @change="habilitarSalvar()">
+                    <select v-model="gatewayiot.is_active" class="input-form" @change="habilitarSalvar()">
                         <option :value="true">Sim</option>
                         <option :value="false">Não</option>
 

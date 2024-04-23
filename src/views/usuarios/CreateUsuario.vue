@@ -31,64 +31,64 @@
             </div>
             <div class="grid gap-6 mb-6 md:grid-cols-2">
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Primeiro Nome</label>
+                    <label class="label-form">Primeiro Nome</label>
                     <input type="text" v-model="formD.first_name"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="input-form"
                         placeholder="" required>
                 </div>
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Sobrenome</label>
+                    <label class="label-form">Sobrenome</label>
                     <input type="text" v-model="formD.last_name"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="input-form"
                         placeholder="">
                 </div>
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+                    <label class="label-form">Email</label>
                     <input type="email" v-model="formD.email"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="input-form"
                         placeholder="">
                 </div>
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Login</label>
+                    <label class="label-form">Login</label>
                     <input type="text" v-model="formD.usuario"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="input-form"
                         placeholder="" required>
                 </div>
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Senha</label>
+                    <label class="label-form">Senha</label>
                     <input type="password" v-model="formD.password"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="input-form"
                         placeholder="********" required>
                 </div>
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">CPF</label>
+                    <label class="label-form">CPF</label>
                     <input type="contato" v-model="formD.cpf" v-mask="'###.###.###-##'"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="input-form"
                         placeholder="pessoa para contato">
                 </div>
 
                 <div v-if="user.tipo == 4">
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Conta</label>
+                    <label class="label-form">Conta</label>
                     <select v-model="formD.conta" @change="ActionByAccount()" required
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        class="input-form">
                         <option value="" disabled selected>Escolha a conta</option>
                         <option v-for="c in contas" :key="c.id" :value="c.conta">{{ c.conta }}</option>
                     </select>
                 </div>
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Empresa</label>
+                    <label class="label-form">Empresa</label>
                     <select v-model="formD.empresa"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        class="input-form">
                         <option value="" disabled selected>Escolha o empresa</option>
                         <option v-for="ep in empresas" :key="ep.id" :value="ep.id">{{ ep.nome }}
                         </option>
                     </select>
                 </div>
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tipo
+                    <label class="label-form">Tipo
                         de usuário</label>
                     <select v-model="formD.tipo" required
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        class="input-form">
                         <option value="0" disabled selected>Tipo de usuário</option>
                         <option value="1">Comun</option>
                         <option value="2">Monitor</option>
@@ -99,7 +99,7 @@
                 </div>
                 <div>
                     <label class="label-form">Habilitado</label>
-                    <select v-model="formD.is_active" disabled class="edit-form" @change="habilitarSalvar()">
+                    <select v-model="formD.is_active" disabled class="input-form" @change="habilitarSalvar()">
                         <option :value="true" selected>Sim</option>
                         <option :value="false">Não</option>
                     </select>
@@ -107,29 +107,29 @@
             </div>
             <div class="grid gap-6 mb-6 md:grid-cols-2">
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Telefone
+                    <label class="label-form">Telefone
                         1</label>
                     <input type="text" v-model="formD.telefone1" v-mask="['(##) ####-####', '(##) #####-####']"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="input-form"
                         placeholder="">
                 </div>
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Telefone
+                    <label class="label-form">Telefone
                         2</label>
                     <input type="text" v-model="formD.telefone2" v-mask="['(##) ####-####', '(##) #####-####']"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="input-form"
                         placeholder="">
                 </div>
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Cep</label>
+                    <label class="label-form">Cep</label>
                     <input @blur="buscarCep()" type="text" v-model="formD.cep" v-mask="'##.###-###'"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="input-form"
                         placeholder="">
                 </div>
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Endereço</label>
+                    <label class="label-form">Endereço</label>
                     <input type="text" v-model="formD.logradouro"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="input-form"
                         placeholder="">
                 </div>
             </div>
@@ -138,22 +138,22 @@
             </div>
             <div class="grid gap-6 mb-6 md:grid-cols-3">
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Bairro</label>
+                    <label class="label-form">Bairro</label>
                     <input type="text" v-model="formD.bairro"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="input-form"
                         placeholder="">
                 </div>
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Cidade</label>
+                    <label class="label-form">Cidade</label>
                     <input type="text" v-model="formD.cidade"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="input-form"
                         placeholder="">
                 </div>
                 <div>
                     <label for="confirm_password"
-                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Estado</label>
+                        class="label-form">Estado</label>
                     <select v-model="formD.uf"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        class="input-form">
                         <option value="" disabled selected>Filtrar por UF</option>
                         <option value="AC">Acre</option>
                         <option value="AL">Alagoas</option>
@@ -185,9 +185,9 @@
                     </select>
                 </div>
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Complemento</label>
+                    <label class="label-form">Complemento</label>
                     <select v-model="formD.complemento"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        class="input-form">
                         <option value="" disabled selected>Escolha o complemento</option>
                         <option v-for="cp in complementos" :key="cp.id" :value="cp.id">{{ cp.titulo }}
                         </option>
@@ -195,15 +195,15 @@
                 </div>
                 <div>
                     <label for="confirm_password"
-                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Número</label>
+                        class="label-form">Número</label>
                     <input type="text" v-model="formD.numero"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="input-form"
                         placeholder="">
                 </div>
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Departamento</label>
+                    <label class="label-form">Departamento</label>
                     <select v-model="formD.departamento"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        class="input-form">
                         <option value="" disabled selected>Escolha o departamento</option>
                         <option v-for="dp in departamentos" :key="dp.id" :value="dp.id">{{ dp.titulo }}
                         </option>

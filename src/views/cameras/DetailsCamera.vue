@@ -31,7 +31,7 @@
                 </li>
 
             </ul>
-            <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
+            <div class="relative flex flex-col min-w-0 break-words  w-full mb-6 shadow-lg rounded">
                 <div class="px-4 py-5 flex-auto">
                     <div class="tab-content tab-space">
                         <div v-bind:class="{ 'hidden': openTab !== 1, 'block': openTab === 1 }">
@@ -39,66 +39,66 @@
                                 <div class="grid gap-6 mb-6 md:grid-cols-2">
                                     <div v-if="user.tipo == 4">
                                         <label
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Conta</label>
+                                            class="label-form">Conta</label>
                                         <input type="text" v-model="camera.conta" disabled
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 disabled:bg-red-50"
+                                            class="input-form"
                                             placeholder="" required>
                                     </div>
                                     <div>
                                         <label
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Título</label>
+                                            class="label-form">Título</label>
                                         <input type="text" v-model="camera.titulo" v-on:keyup="habilitarSalvar()"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  disabled:bg-red-50 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            class="input-form"
                                             placeholder="" required>
                                     </div>
                                     <div>
                                         <label
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descrição</label>
+                                            class="label-form">Descrição</label>
                                         <textarea rows="4" v-model="camera.descricao" v-on:keyup="habilitarSalvar()"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  disabled:bg-red-50 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            class="input-form"
                                             placeholder=""></textarea>
                                     </div>
 
                                     <div>
                                         <label
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Serial</label>
+                                            class="label-form">Serial</label>
                                         <input type="text" v-model="camera.serial" v-on:keyup="habilitarSalvar()"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  disabled:bg-red-50 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            class="input-form"
                                             placeholder="" required>
                                     </div>
                                     <div>
                                         <label
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Protocolo</label>
+                                            class="label-form">Protocolo</label>
                                         <input type="text" v-model="camera.protocolo" v-on:keyup="habilitarSalvar()"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  disabled:bg-red-50 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            class="input-form"
                                             placeholder="" required>
                                     </div>
 
                                     <div>
                                         <label
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Usuário</label>
+                                            class="label-form">Usuário</label>
                                         <input type="text" v-model="camera.usuario" v-on:keyup="habilitarSalvar()"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  disabled:bg-red-50 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            class="input-form"
                                             placeholder="" required>
                                     </div>
                                     <div>
                                         <label
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Senha</label>
+                                            class="label-form">Senha</label>
                                         <input type="password" v-model="camera.senha" v-on:keyup="habilitarSalvar()"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  disabled:bg-red-50 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            class="input-form"
                                             placeholder="" required>
                                     </div>
                                     <div>
                                         <label
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Url</label>
+                                            class="label-form">Url</label>
                                         <input type="text" v-model="camera.url" v-on:keyup="habilitarSalvar()"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  disabled:bg-red-50 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            class="input-form"
                                             placeholder="" required>
                                     </div>
                                     <div>
                                         <label
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Empresa</label>
-                                        <select class="edit-form" v-model="camera.empresa" @change="habilitarSalvar()">
+                                            class="label-form">Empresa</label>
+                                        <select class="input-form" v-model="camera.empresa" @change="habilitarSalvar()">
                                             <option value="" disabled>Escolha uma empresa</option>
                                             <template v-for="e in empresas" :key="e.id">
                                                 <option selected v-if="e.id == camera.empresa" :value="e.id">{{
@@ -109,8 +109,8 @@
                                     </div>
                                     <div>
                                         <label
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ativos</label>
-                                        <select v-model="camera.ativo" class="edit-form" @change="habilitarSalvar()">
+                                            class="label-form">Ativos</label>
+                                        <select v-model="camera.ativo" class="input-form" @change="habilitarSalvar()">
                                             <option value="" disabled selected>Escolha um</option>
                                             <option v-for="v in ativos" :key="v.id" :value="v.id">{{ v.nome
                                                 }}
@@ -119,9 +119,9 @@
                                     </div>
                                     <div>
                                         <label
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fabricante</label>
+                                            class="label-form">Fabricante</label>
                                         <select v-model="camera.fabricante" @change="habilitarSalvar()"
-                                            class="edit-form">
+                                            class="input-form">
                                             <option value="" disabled selected>Escolha a conta</option>
                                             <option v-for="f in fabricantes" :key="f.id" :value="f.id">{{ f.titulo
                                                 }}
@@ -130,8 +130,8 @@
                                     </div>
                                     <div>
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Modelo</label>
-                                            <select v-model="camera.modelo" class="edit-form">
+                                                class="label-form">Modelo</label>
+                                            <select v-model="camera.modelo" class="input-form">
                                                 <option value="" disabled selected>Escolha um</option>
                                                 <option v-for="m in modelos" :key="m.id" :value="m.id">{{ m.titulo
                                                     }}
@@ -140,9 +140,9 @@
                                         </div>
                                     <div>
                                         <label
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Departamento</label>
+                                            class="label-form">Departamento</label>
                                         <select v-model="camera.departamento" @change="habilitarSalvar()"
-                                            class="edit-form">
+                                            class="input-form">
                                             <option value="" disabled selected>Escolha a conta</option>
                                             <option v-for="dp in departamentos" :key="dp.id" :value="dp.id">{{
                                                 dp.titulo
@@ -152,8 +152,8 @@
                                     </div>
                                     <div>
                                         <label
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Grupo</label>
-                                        <select v-model="camera.grupo" @change="habilitarSalvar()" class="edit-form">
+                                            class="label-form">Grupo</label>
+                                        <select v-model="camera.grupo" @change="habilitarSalvar()" class="input-form">
                                             <option value="" disabled selected>Escolha a conta</option>
                                             <option v-for="gp in grupos" :key="gp.id" :value="gp.id">{{
                                                 gp.nome
@@ -163,9 +163,9 @@
                                     </div>
                                     <div>
                                         <label
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gateway
+                                            class="label-form">Gateway
                                             IOT</label>
-                                        <select v-model="camera.gatewayiot" class="edit-form" required>
+                                        <select v-model="camera.gatewayiot" class="input-form" required>
                                             <option value="" disabled selected>Escolha um</option>
                                             <option v-for="v in gatewayiot" :key="v.id" :value="v.id">{{ v.titulo
                                                 }}
@@ -177,7 +177,7 @@
 
                                     <div>
                                         <label class="label-form">Habilitado</label>
-                                        <select v-model="camera.is_active" class="edit-form"
+                                        <select v-model="camera.is_active" class="input-form"
                                             @change="habilitarSalvar()">
                                             <option :value="true">Sim</option>
                                             <option :value="false">Não</option>
@@ -285,8 +285,8 @@
                                     <div class="grid gap-6 mb-6 md:grid-cols-2">
                                         <div v-if="user.tipo == 4">
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Conta</label>
-                                            <select v-model="agenda.conta" class="edit-form" @change="escolherConta()"
+                                                class="label-form">Conta</label>
+                                            <select v-model="agenda.conta" class="input-form" @change="escolherConta()"
                                                 disabled>
                                                 <option value="" disabled selected>Escolha a conta</option>
                                                 <option v-for="c in contas" :key="c.id" :value="c.conta">{{ c.conta }}
@@ -295,27 +295,27 @@
                                         </div>
                                         <div>
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ID
+                                                class="label-form">ID
                                                 Camera</label>
-                                            <input disabled type="text" v-model="agenda.camera" class="edit-form"
+                                            <input disabled type="text" v-model="agenda.camera" class="input-form"
                                                 placeholder="" required>
                                         </div>
 
                                         <div>
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Título</label>
-                                            <input type="text" v-model="agenda.titulo" class="edit-form" placeholder=""
+                                                class="label-form">Título</label>
+                                            <input type="text" v-model="agenda.titulo" class="input-form" placeholder=""
                                                 required>
                                         </div>
                                         <div>
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descrição</label>
-                                            <textarea rows="4" v-model="agenda.descricao" class="edit-form"
+                                                class="label-form">Descrição</label>
+                                            <textarea rows="4" v-model="agenda.descricao" class="input-form"
                                                 placeholder=""></textarea>
                                         </div>
                                         <div>
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Dias
+                                                class="label-form">Dias
                                                 de Captura</label>
                                             <span v-for="d in diasSemana" :key="d.index"><input v-model="d.ativo"
                                                     @change="escolherDia()" type="checkbox"
@@ -324,42 +324,42 @@
                                         </div>
                                         <div>
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Hora
+                                                class="label-form">Hora
                                                 Início</label>
-                                            <input type="text" v-model="agenda.periodoinicio" class="edit-form"
+                                            <input type="text" v-model="agenda.periodoinicio" class="input-form"
                                                 placeholder="08:00:00" required v-mask="'##:##:##'">
                                         </div>
                                         <div>
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Hora
+                                                class="label-form">Hora
                                                 Fim</label>
-                                            <input type="text" v-model="agenda.periodofim" class="edit-form"
+                                            <input type="text" v-model="agenda.periodofim" class="input-form"
                                                 placeholder="12:00:00" required v-mask="'##:##:##'">
                                         </div>
                                         <div>
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Intervalo
+                                                class="label-form">Intervalo
                                                 entre Capturas (minutos)</label>
                                             <input type="number" v-model="agenda.intervaloentrecapturas"
-                                                class="edit-form" placeholder="" required>
+                                                class="input-form" placeholder="" required>
                                         </div>
                                         <div>
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Quantidade
+                                                class="label-form">Quantidade
                                                 de Imagens</label>
-                                            <input type="number" v-model="agenda.quantidadeimagem" class="edit-form"
+                                            <input type="number" v-model="agenda.quantidadeimagem" class="input-form"
                                                 placeholder="" required>
                                         </div>
                                         <div>
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Intervalo
+                                                class="label-form">Intervalo
                                                 entre Imagens (segundos)</label>
                                             <input type="number" v-model="agenda.intervaloentreimagens"
-                                                class="edit-form" placeholder="" required>
+                                                class="input-form" placeholder="" required>
                                         </div>
                                         <div v-if="agenda.id">
                                             <label class="label-form">Habilitado</label>
-                                            <select v-model="agenda.is_active" class="edit-form"
+                                            <select v-model="agenda.is_active" class="input-form"
                                                 @change="habilitarSalvar()">
                                                 <option :value="true">Sim</option>
                                                 <option :value="false">Não</option>

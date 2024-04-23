@@ -9,8 +9,8 @@
     <div class="shadow-sm overflow-hidden">
         <div class="py-4">
             <div>
-                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">LISTA CUSTOMIZADA</label>
-                <select v-model="lista" class="edit-form" @change="mostrarLista(lista)">
+                <label class="label-form">LISTA CUSTOMIZADA</label>
+                <select v-model="lista" class="input-form" @change="mostrarLista(lista)">
                     <option value="" disabled selected>Escolha o tipo de lista</option>
                     <option v-for="list in listacustomizada" :value="list.id" :key="list.id">{{ list.label }}</option>
 
@@ -21,20 +21,20 @@
             <form class="row g-3" v-on:submit.prevent="createLista(formData)">
                 <div class="grid gap-6 mb-6 md:grid-cols-2">
                     <div v-if="user.tipo == 4">
-                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Conta</label>
-                        <select v-model="formData.conta" class="edit-form">
+                        <label class="label-form">Conta</label>
+                        <select v-model="formData.conta" class="input-form">
                             <option value="" disabled selected>Escolha a conta</option>
                             <option v-for="c in contas" :key="c.id" :value="c.conta">{{ c.conta }}
                             </option>
                         </select>
                     </div>
                     <div>
-                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Título</label>
-                        <input type="text" v-model="formData.titulo" class="edit-form" placeholder="" required>
+                        <label class="label-form">Título</label>
+                        <input type="text" v-model="formData.titulo" class="input-form" placeholder="" required>
                     </div>
                     <div>
-                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descrição</label>
-                        <textarea rows="4" v-model="formData.descricao" class="edit-form" placeholder=""></textarea>
+                        <label class="label-form">Descrição</label>
+                        <textarea rows="4" v-model="formData.descricao" class="input-form" placeholder=""></textarea>
                     </div>
                     <div class="flex my-5">
 

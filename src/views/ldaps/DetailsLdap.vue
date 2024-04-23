@@ -70,7 +70,7 @@
                     </li>
 
                 </ul>
-                <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
+                <div class="relative flex flex-col min-w-0 break-words  w-full mb-6 shadow-lg rounded">
                     <div class="px-4 py-5 flex-auto">
                         <div class="tab-content tab-space">
                             <div v-bind:class="{ 'hidden': openTab !== 1, 'block': openTab === 1 }">
@@ -79,12 +79,12 @@
                                     <div class="grid gap-6 mb-6 md:grid-cols-2">
                                         <div>
                                             <label class="label-form">Título</label>
-                                            <input type="text" v-model="ldap.titulo" class="edit-form"
+                                            <input type="text" v-model="ldap.titulo" class="input-form"
                                                 v-on:keyup="habilitarSalvar()" placeholder="">
                                         </div>
                                         <div v-if="user.tipo == 4">
                                             <label class="label-form">Conta</label>
-                                            <select v-model="ldap.conta" disabled class="edit-form">
+                                            <select v-model="ldap.conta" disabled class="input-form">
                                                 <option value="" disabled>Escolha a conta</option>
                                                 <option v-for="c in contas" :key="c.id" :value="c.conta">{{ c.conta }}
                                                 </option>
@@ -92,7 +92,7 @@
                                         </div>
                                         <div>
                                             <label class="label-form">Ldap Tipo</label>
-                                            <select v-model="ldap.ldap_tipo" @change="habilitarSalvar()" class="edit-form">
+                                            <select v-model="ldap.ldap_tipo" @change="habilitarSalvar()" class="input-form">
                                                 <option value="">Escolha uma tipo</option>
                                                 <option value="1">Usuarios/Grupos</option>
                                                 <option value="2">Sensores</option>
@@ -100,7 +100,7 @@
                                         </div>
                                         <div>
                                             <label class="label-form">Empresa</label>
-                                            <select v-model="ldap.empresa" @change="habilitarSalvar()" class="edit-form">
+                                            <select v-model="ldap.empresa" @change="habilitarSalvar()" class="input-form">
                                                 <option value="" disabled>Escolha a conta</option>
                                                 <option v-for="e in empresas" :key="e.id" :value="e.id">{{ e.nome }}
                                                 </option>
@@ -109,17 +109,17 @@
                                         <div>
                                             <label class="label-form">Host</label>
                                             <input type="text" v-model="ldap.host" v-on:keyup="habilitarSalvar()"
-                                                class="edit-form" placeholder="">
+                                                class="input-form" placeholder="">
                                         </div>
                                         <div>
                                             <label class="label-form">Porta</label>
                                             <input type="number" v-model="ldap.porta" v-on:keyup="habilitarSalvar()"
-                                                class="edit-form" placeholder="">
+                                                class="input-form" placeholder="">
                                         </div>
                                         <div>
                                             <label class="label-form">Tipo de Autenticação</label>
                                             <select v-model="ldap.tipo_autenticacao" @change="habilitarSalvar()"
-                                                class="edit-form">
+                                                class="input-form">
                                                 <option value="" disabled selected>Escolha um tipo de autenticação</option>
                                                 <option value="1">Simples</option>
                                                 <option value="2">Digest-MD5</option>
@@ -128,21 +128,21 @@
                                         <div>
                                             <label class="label-form">Usuário</label>
                                             <input v-on:keyup="habilitarSalvar()" type="text" v-model="ldap.usuario"
-                                                class="edit-form" placeholder="">
+                                                class="input-form" placeholder="">
                                         </div>
                                         <div v-if="ldap.origemusuario != 'ldap'">
                                             <label class="label-form">Senha</label>
                                             <input v-on:keyup="habilitarSalvar()" type="password" v-model="ldap.senha"
-                                                class="edit-form" placeholder="">
+                                                class="input-form" placeholder="">
                                         </div>
                                         <div>
                                             <label class="label-form">Domínio</label>
                                             <input v-on:keyup="habilitarSalvar()" type="text" v-model="ldap.dominio"
-                                                class="edit-form" placeholder="">
+                                                class="input-form" placeholder="">
                                         </div>
                                         <div>
                                             <label class="label-form">Provedor</label>
-                                            <select v-model="ldap.provedor" @change="habilitarSalvar()" class="edit-form">
+                                            <select v-model="ldap.provedor" @change="habilitarSalvar()" class="input-form">
                                                 <option value="" disabled>Escolha um provedor</option>
                                                 <option value="1">Microsoft LDAP</option>
                                                 <option value="2">Open LDAP</option>
@@ -150,7 +150,7 @@
                                         </div>
                                         <div>
                                             <label class="label-form">Habilitado</label>
-                                            <select v-model="ldap.is_active" class="edit-form" @change="habilitarSalvar()">
+                                            <select v-model="ldap.is_active" class="input-form" @change="habilitarSalvar()">
                                                 <option :value="true">Sim</option>
                                                 <option :value="false">Não</option>
                                             </select>
@@ -158,7 +158,7 @@
                                         <div>
                                                 <label class="label-form">Base DN</label>
                                                 <input type="text" v-model="ldap.base_dn" v-on:keyup="habilitarSalvar()"
-                                                    class="edit-form" placeholder="">
+                                                    class="input-form" placeholder="">
                                             </div>
 
                                     </div>
@@ -176,7 +176,7 @@
                                     <div class="grid gap-6 mb-6 md:grid-cols-2">
                                         <div @click="ocultarCalendario()">
                                             <label class="label-form">Agendar Scan</label>
-                                            <select v-model="ldap.agendar_scan" class="edit-form"
+                                            <select v-model="ldap.agendar_scan" class="input-form"
                                                 @change="habilitarSalvar()">
                                                 <option :value="true">Sim</option>
                                                 <option :value="false">Não</option>
@@ -185,7 +185,7 @@
                                         <div v-if="ldap.agendar_scan === true">
                                             <label class="label-form">Data de início</label>
                                             <input type="text" v-model="ldap.hora_inicio_agenda"
-                                                @click="mostrarCalendario()" @blur="habilitarSalvar()" class="edit-form"
+                                                @click="mostrarCalendario()" @blur="habilitarSalvar()" class="input-form"
                                                 placeholder="">
                                             <div class="flex" v-if="mostrarCalendar">
                                                 <DatePicker v-model="ldap.hora_inicio_agenda" mode="dateTime"
@@ -194,7 +194,7 @@
                                         </div>
                                         <div v-if="ldap.agendar_scan === true" @click="ocultarCalendario()">
                                             <label class="label-form">Tipo de repetição</label>
-                                            <select v-model="ldap.tipo_repeticao_agenda" class="edit-form"
+                                            <select v-model="ldap.tipo_repeticao_agenda" class="input-form"
                                                 @change="habilitarSalvar()">
                                                 <option value="1">Diário</option>
                                                 <option value="2">Semanal</option>
@@ -212,7 +212,7 @@
                                         </div>
                                         <div @click="ocultarCalendario()">
                                             <label class="label-form">Importar Grupos</label>
-                                            <select v-model="ldap.importar_grupos" class="edit-form"
+                                            <select v-model="ldap.importar_grupos" class="input-form"
                                                 @change="habilitarSalvar()">
                                                 <option :value="true" selected>Sim</option>
                                                 <option :value="false">Não</option>
@@ -221,7 +221,7 @@
                                         </div>
                                         <div @click="ocultarCalendario()">
                                             <label class="label-form">Incluir Subs OUs</label>
-                                            <select v-model="ldap.incluir_sub_ous" class="edit-form"
+                                            <select v-model="ldap.incluir_sub_ous" class="input-form"
                                                 @change="habilitarSalvar()">
                                                 <option :value="true" selected>Sim</option>
                                                 <option :value="false">Não</option>
@@ -230,7 +230,7 @@
                                         </div>
                                         <div @click="ocultarCalendario()">
                                             <label class="label-form">Salvar senha em cache</label>
-                                            <select v-model="ldap.salvar_senha_cache" class="edit-form"
+                                            <select v-model="ldap.salvar_senha_cache" class="input-form"
                                                 @change="habilitarSalvar()">
                                                 <option :value="true" selected>Sim</option>
                                                 <option :value="false">Não</option>
@@ -242,43 +242,43 @@
                                         <div @click="ocultarCalendario()">
                                             <label class="label-form">Filtro Classe</label>
                                             <input type="text" v-model="ldap.filtro_classe" v-on:keyup="habilitarSalvar()"
-                                                class="edit-form" placeholder="">
+                                                class="input-form" placeholder="">
                                         </div>
 
                                         <div @click="ocultarCalendario()">
                                             <label class="label-form">Filtro Usuário</label>
                                             <input type="text" v-model="ldap.filtro_usuario" v-on:keyup="habilitarSalvar()"
-                                                class="edit-form" placeholder="">
+                                                class="input-form" placeholder="">
                                         </div>
                                         <div @click="ocultarCalendario()">
                                             <label class="label-form">Atributo CN</label>
                                             <input type="text" v-model="ldap.atributo_cn" v-on:keyup="habilitarSalvar()"
-                                                class="edit-form" placeholder="">
+                                                class="input-form" placeholder="">
                                         </div>
                                         <div @click="ocultarCalendario()">
                                             <label class="label-form">Atributo DN</label>
                                             <input type="text" v-model="ldap.atributo_dn" v-on:keyup="habilitarSalvar()"
-                                                class="edit-form" placeholder="">
+                                                class="input-form" placeholder="">
                                         </div>
                                         <div @click="ocultarCalendario()">
                                             <label class="label-form">Atributo Nome</label>
                                             <input type="text" v-model="ldap.atributo_nome" v-on:keyup="habilitarSalvar()"
-                                                class="edit-form" placeholder="">
+                                                class="input-form" placeholder="">
                                         </div>
                                         <div @click="ocultarCalendario()">
                                             <label class="label-form">DN Login</label>
                                             <input type="text" v-model="ldap.dn_login" v-on:keyup="habilitarSalvar()"
-                                                class="edit-form" placeholder="">
+                                                class="input-form" placeholder="">
                                         </div>
                                         <div @click="ocultarCalendario()">
                                             <label class="label-form">Open Ldap Atributo Estado</label>
                                             <input type="text" v-model="ldap.open_ldap_atributo_state"
-                                                v-on:keyup="habilitarSalvar()" class="edit-form" placeholder="">
+                                                v-on:keyup="habilitarSalvar()" class="input-form" placeholder="">
                                         </div>
                                         <div @click="ocultarCalendario()">
                                             <label class="label-form">Open Ldap AtributoF Estado DU</label>
                                             <input type="text" v-model="ldap.open_ldap_atributo_state_du"
-                                                v-on:keyup="habilitarSalvar()" class="edit-form" placeholder="">
+                                                v-on:keyup="habilitarSalvar()" class="input-form" placeholder="">
                                         </div>
 
                                     </div>
@@ -303,19 +303,19 @@
                                             <div class="grid gap-6 mb-6 md:grid-cols-2">
                                                 <div>
                                                     <label
-                                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Campo
+                                                        class="label-form">Campo
                                                         LDAP</label>
                                                     <input v-on:key="habilitarSalvar()" type="text"
                                                         v-model="formAtributo.campo_ldap"
-                                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                        class="input-form"
                                                         placeholder="" required>
                                                 </div>
                                                 <div>
                                                     <label
-                                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Caminho</label>
+                                                        class="label-form">Caminho</label>
                                                     <div class="flex"><select v-model="formAtributo.campo_sistema"
                                                             @change="habilitarSalvar()"
-                                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                            class="input-form">
                                                             <option value="" disabled selected>Escolha uma opção
                                                             </option>
                                                             <option v-for="cs in camposistema" :key="cs.id"
@@ -366,12 +366,12 @@
                                                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                                                         <input @blur="updateAtributo(u.id)" type="text"
                                                             :id='"campoLdap" + u.id' :class='"item" + u.id'
-                                                            :value="u.campo_ldap" class="edit-form" placeholder="">
+                                                            :value="u.campo_ldap" class="input-form" placeholder="">
                                                     </td>
                                                     <td
                                                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                                                         <select @blur="updateAtributo(u.id)" :id='"campoSistema" + u.id'
-                                                            v-model="u.campo_sistema" class="edit-form">
+                                                            v-model="u.campo_sistema" class="input-form">
                                                             <option value="" disabled selected>Escolha uma opção
                                                             </option>
                                                             <option v-for="cs in camposistema" :key="cs.id"
@@ -421,7 +421,7 @@
                                             <div class="grid gap-6 mb-6 md:grid-cols-2">
                                                 <div>
                                                     <label
-                                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Caminho
+                                                        class="label-form">Caminho
                                                         OU usuários<button type="button" @click="inputOUusuario++"
                                                             class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 mx-3 py-2.5 text-center">Adicionar
                                                             mais campos</button></label>
@@ -474,7 +474,7 @@
                                                     <td
                                                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                                                         <input @blur="updateOUusuario(u.id)" type="text" :id='"item" + u.id'
-                                                            :class='"item" + u.id' :value="u.caminho" class="edit-form"
+                                                            :class='"item" + u.id' :value="u.caminho" class="input-form"
                                                             placeholder="">
                                                     </td>
                                                     <td
@@ -520,7 +520,7 @@
                                             <div class="grid gap-6 mb-6 md:grid-cols-2">
                                                 <div>
                                                     <label
-                                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Caminho
+                                                        class="label-form">Caminho
                                                         OU usuários<button type="button" @click="inputOUgrupo++"
                                                             class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 mx-3 py-2.5 text-center">Adicionar
                                                             mais campos</button></label>
@@ -573,7 +573,7 @@
                                                     <td
                                                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                                                         <input @blur="updateOUgrupo(u.id)" type="text" :id='"item" + u.id'
-                                                            :class='"item" + u.id' :value="u.caminho" class="edit-form"
+                                                            :class='"item" + u.id' :value="u.caminho" class="input-form"
                                                             placeholder="">
                                                     </td>
                                                     <td
@@ -617,21 +617,21 @@
                                             <div class="grid gap-6 mb-6 md:grid-cols-2">
                                                 <div>
                                                     <label
-                                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Campo
+                                                        class="label-form">Campo
                                                         LDAP</label>
                                                     <input v-on:keyup="habilitarSalvar()" type="text"
                                                         v-model="formAtributo.campo_ldap"
-                                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                        class="input-form"
                                                         placeholder="" required>
                                                 </div>
 
                                                 <div>
                                                     <label
-                                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Campo
+                                                        class="label-form">Campo
                                                         Sensor</label>
                                                     <div class="flex"><select v-model="formAtributo.campo_sistema"
                                                             @change="habilitarSalvar()"
-                                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                            class="input-form">
                                                             <option value="" disabled selected>Escolha uma opção
                                                             </option>
                                                             <option v-for="cs in camposensor" :key="cs.id"
@@ -676,13 +676,13 @@
                                                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                                                         <input @blur="updateAtributoSensor(u.id)" type="text"
                                                             :id='"campoLdapS" + u.id' :class='"item" + u.id'
-                                                            :value="u.campo_ldap" class="edit-form" placeholder="">
+                                                            :value="u.campo_ldap" class="input-form" placeholder="">
                                                     </td>
                                                     <td
                                                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                                                         <select @change="updateAtributoSensor(u.id)"
                                                             :id='"campoSensorI" + u.id' v-model="u.campo_sistema"
-                                                            class="edit-form">
+                                                            class="input-form">
                                                             <option value="" disabled selected>Escolha uma opção
                                                             </option>
                                                             <option v-for="cs in camposensor" :key="cs.id"
@@ -727,7 +727,7 @@
                                                 <div class="grid gap-6 mb-6 md:grid-cols-2">
                                                     <div>
                                                         <label
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Caminho
+                                                            class="label-form">Caminho
                                                             OU usuários<button type="button" @click="inputOUgrupo++"
                                                                 class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 mx-3 py-2.5 text-center">Adicionar
                                                                 mais campos</button></label>
@@ -781,7 +781,7 @@
                                                     <td
                                                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                                                         <input @blur="updateOUsensor(s.id)" type="text" :id='"itemS" + s.id'
-                                                            :class='"itemS" + s.id' :value="s.caminho" class="edit-form"
+                                                            :class='"itemS" + s.id' :value="s.caminho" class="input-form"
                                                             placeholder="">
                                                     </td>
                                                     <td

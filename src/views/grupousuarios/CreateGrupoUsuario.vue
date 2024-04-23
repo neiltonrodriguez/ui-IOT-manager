@@ -39,7 +39,7 @@
                     </li>
 
                 </ul>
-                <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
+                <div class="relative flex flex-col min-w-0 break-words  w-full mb-6 shadow-lg rounded">
                     <div class="px-4 py-5 flex-auto">
                         <div class="tab-content tab-space">
                             <div v-bind:class="{ 'hidden': openTab !== 1, 'block': openTab === 1 }">
@@ -47,16 +47,16 @@
                                     <div class="grid gap-6 mb-6 md:grid-cols-2">
                                         <div>
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nome</label>
+                                                class="label-form">Nome</label>
                                             <input type="text" v-model="formData.nome" v-bind:disabled="isDisabled"
-                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                class="input-form"
                                                 placeholder="" required>
                                         </div>
                                         <div v-if="user.tipo == 4">
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Conta</label>
+                                                class="label-form">Conta</label>
                                             <select v-model="formData.conta" required v-bind:disabled="isDisabled"
-                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                class="input-form">
                                                 <option value="" disabled selected>Escolha a conta</option>
                                                 <option v-for="c in contas" :key="c.id" :value="c.conta">{{ c.conta }}
                                                 </option>
@@ -64,10 +64,10 @@
                                         </div>
                                         <div>
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tipo
+                                                class="label-form">Tipo
                                                 de usuário</label>
                                             <select v-model="formData.tipo" v-bind:disabled="isDisabled" required
-                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                class="input-form">
                                                 <option value="0" disabled selected>Tipo de usuário</option>
                                                 <option value="1">Comun</option>
                                                 <option value="2">Monitor</option>
@@ -78,10 +78,10 @@
                                         </div>
                                         <div>
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descrição</label>
+                                                class="label-form">Descrição</label>
                                             <textarea rows="4" v-model="formData.descricao"
                                                 v-bind:disabled="isDisabled"
-                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                class="input-form"
                                                 placeholder=""></textarea>
                                         </div>
                                     </div>

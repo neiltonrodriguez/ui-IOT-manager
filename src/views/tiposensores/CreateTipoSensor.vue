@@ -25,7 +25,7 @@
                 </li>
 
             </ul>
-            <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
+            <div class="relative flex flex-col min-w-0 break-words  w-full mb-6 shadow-lg rounded">
                 <div class="px-4 py-5 flex-auto">
                     <div class="tab-content tab-space">
                         <div v-bind:class="{ 'hidden': openTab !== 1, 'block': openTab === 1 }">
@@ -57,8 +57,8 @@
                                 <div class="grid gap-6 mb-6 md:grid-cols-2">
                                     <div v-if="user.tipo == 4">
                                         <label
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Conta</label>
-                                        <select v-model="formData.conta" class="edit-form">
+                                            class="label-form">Conta</label>
+                                        <select v-model="formData.conta" class="input-form">
                                             <option value="" disabled selected>Escolha a conta</option>
                                             <option v-for="c in contas" :key="c.id" :value="c.conta">{{ c.conta }}
                                             </option>
@@ -66,24 +66,24 @@
                                     </div>
                                     <div>
                                         <label
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nome</label>
-                                        <input type="text" v-model="formData.nome" class="edit-form" placeholder=""
+                                            class="label-form">Nome</label>
+                                        <input type="text" v-model="formData.nome" class="input-form" placeholder=""
                                             required>
                                     </div>
 
 
                                     <div>
                                         <label
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Geolocalização</label>
-                                        <select class="edit-form" v-model="formData.geolocalizacao">
+                                            class="label-form">Geolocalização</label>
+                                        <select class="input-form" v-model="formData.geolocalizacao">
                                             <option :value="true">Sim</option>
                                             <option :value="false">Não</option>
                                         </select>
                                     </div>
                                     <div>
                                         <label
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descrição</label>
-                                        <textarea rows="4" v-model="formData.descricao" class="edit-form"
+                                            class="label-form">Descrição</label>
+                                        <textarea rows="4" v-model="formData.descricao" class="input-form"
                                             placeholder=""></textarea>
                                     </div>
 
@@ -105,15 +105,15 @@
                                     <div class="flex gap-3 items-center justify-center">
                                         <div class="flex-1">
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Label</label>
-                                            <input type="text" v-model="atributos.valor_ref1.label" class="edit-form"
+                                                class="label-form">Label</label>
+                                            <input type="text" v-model="atributos.valor_ref1.label" class="input-form"
                                                 placeholder="">
                                         </div>
                                         <div class="flex-1">
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Parametro</label>
+                                                class="label-form">Parametro</label>
                                             <input type="text" v-model="atributos.valor_ref1.parametro"
-                                                class="edit-form" placeholder="">
+                                                class="input-form" placeholder="">
                                         </div>
                                         <div class="flex items-center justify-center">
                                             <button class="" type="button" @click="incrementQuantity(1)">
@@ -129,15 +129,15 @@
                                     <div class="flex gap-3 items-center justify-center">
                                         <div class="flex-1">
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Label</label>
-                                            <input type="text" v-model="atributos.valor_ref2.label" class="edit-form"
+                                                class="label-form">Label</label>
+                                            <input type="text" v-model="atributos.valor_ref2.label" class="input-form"
                                                 placeholder="">
                                         </div>
                                         <div class="flex-1">
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Parametro</label>
+                                                class="label-form">Parametro</label>
                                             <input type="text" v-model="atributos.valor_ref2.parametro"
-                                                class="edit-form" placeholder="">
+                                                class="input-form" placeholder="">
                                         </div>
                                         <div class="flex items-center justify-center">
                                             <button class="" type="button" @click="incrementQuantity(2)">
@@ -153,15 +153,15 @@
                                     <div class="flex gap-3 items-center justify-center">
                                         <div class="flex-1">
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Label</label>
-                                            <input type="text" v-model="atributos.valor_ref3.label" class="edit-form"
+                                                class="label-form">Label</label>
+                                            <input type="text" v-model="atributos.valor_ref3.label" class="input-form"
                                                 placeholder="">
                                         </div>
                                         <div class="flex-1">
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Parametro</label>
+                                                class="label-form">Parametro</label>
                                             <input type="text" v-model="atributos.valor_ref3.parametro"
-                                                class="edit-form" placeholder="">
+                                                class="input-form" placeholder="">
                                         </div>
                                         <div class="flex items-center justify-center">
                                             <button class="" type="button" @click="incrementQuantity(3)">
@@ -177,15 +177,15 @@
                                     <div class="flex gap-3 items-center justify-center">
                                         <div class="flex-1">
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Label</label>
-                                            <input type="text" v-model="atributos.valor_ref4.label" class="edit-form"
+                                                class="label-form">Label</label>
+                                            <input type="text" v-model="atributos.valor_ref4.label" class="input-form"
                                                 placeholder="">
                                         </div>
                                         <div class="flex-1">
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Parametro</label>
+                                                class="label-form">Parametro</label>
                                             <input type="text" v-model="atributos.valor_ref4.parametro"
-                                                class="edit-form" placeholder="">
+                                                class="input-form" placeholder="">
                                         </div>
                                         <div class="flex items-center justify-center">
                                             <button class="" type="button" @click="incrementQuantity(4)">
@@ -201,15 +201,15 @@
                                     <div class="flex gap-3 items-center justify-center">
                                         <div class="flex-1">
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Label</label>
-                                            <input type="text" v-model="atributos.valor_ref5.label" class="edit-form"
+                                                class="label-form">Label</label>
+                                            <input type="text" v-model="atributos.valor_ref5.label" class="input-form"
                                                 placeholder="">
                                         </div>
                                         <div class="flex-1">
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Parametro</label>
+                                                class="label-form">Parametro</label>
                                             <input type="text" v-model="atributos.valor_ref5.parametro"
-                                                class="edit-form" placeholder="">
+                                                class="input-form" placeholder="">
                                         </div>
                                         <div class="flex items-center justify-center">
                                             <button class="" type="button" @click="incrementQuantity(5)">
@@ -225,15 +225,15 @@
                                     <div class="flex gap-3 items-center justify-center">
                                         <div class="flex-1">
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Label</label>
-                                            <input type="text" v-model="atributos.valor_ref6.label" class="edit-form"
+                                                class="label-form">Label</label>
+                                            <input type="text" v-model="atributos.valor_ref6.label" class="input-form"
                                                 placeholder="">
                                         </div>
                                         <div class="flex-1">
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Parametro</label>
+                                                class="label-form">Parametro</label>
                                             <input type="text" v-model="atributos.valor_ref6.parametro"
-                                                class="edit-form" placeholder="">
+                                                class="input-form" placeholder="">
                                         </div>
                                         <div class="flex items-center justify-center">
                                             <button class="" type="button" @click="incrementQuantity(6)">
@@ -249,15 +249,15 @@
                                     <div class="flex gap-3 items-center justify-center">
                                         <div class="flex-1">
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Label</label>
-                                            <input type="text" v-model="atributos.valor_ref7.label" class="edit-form"
+                                                class="label-form">Label</label>
+                                            <input type="text" v-model="atributos.valor_ref7.label" class="input-form"
                                                 placeholder="">
                                         </div>
                                         <div class="flex-1">
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Parametro</label>
+                                                class="label-form">Parametro</label>
                                             <input type="text" v-model="atributos.valor_ref7.parametro"
-                                                class="edit-form" placeholder="">
+                                                class="input-form" placeholder="">
                                         </div>
                                         <div class="flex items-center justify-center">
                                             <button class="" type="button" @click="incrementQuantity(7)">
@@ -273,15 +273,15 @@
                                     <div class="flex gap-3 items-center justify-center">
                                         <div class="flex-1">
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Label</label>
-                                            <input type="text" v-model="atributos.valor_ref8.label" class="edit-form"
+                                                class="label-form">Label</label>
+                                            <input type="text" v-model="atributos.valor_ref8.label" class="input-form"
                                                 placeholder="">
                                         </div>
                                         <div class="flex-1">
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Parametro</label>
+                                                class="label-form">Parametro</label>
                                             <input type="text" v-model="atributos.valor_ref8.parametro"
-                                                class="edit-form" placeholder="">
+                                                class="input-form" placeholder="">
                                         </div>
                                         <div class="flex items-center justify-center">
                                             <button class="" type="button" @click="incrementQuantity(8)">
@@ -297,15 +297,15 @@
                                     <div class="flex gap-3 items-center justify-center">
                                         <div class="flex-1">
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Label</label>
-                                            <input type="text" v-model="atributos.valor_ref9.label" class="edit-form"
+                                                class="label-form">Label</label>
+                                            <input type="text" v-model="atributos.valor_ref9.label" class="input-form"
                                                 placeholder="">
                                         </div>
                                         <div class="flex-1">
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Parametro</label>
+                                                class="label-form">Parametro</label>
                                             <input type="text" v-model="atributos.valor_ref9.parametro"
-                                                class="edit-form" placeholder="">
+                                                class="input-form" placeholder="">
                                         </div>
                                         <div class="flex items-center justify-center">
                                             <button class="" type="button" @click="incrementQuantity(9)">
@@ -321,15 +321,15 @@
                                     <div class="flex gap-3 items-center justify-center">
                                         <div class="flex-1">
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Label</label>
-                                            <input type="text" v-model="atributos.valor_ref10.label" class="edit-form"
+                                                class="label-form">Label</label>
+                                            <input type="text" v-model="atributos.valor_ref10.label" class="input-form"
                                                 placeholder="">
                                         </div>
                                         <div class="flex-1">
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Parametro</label>
+                                                class="label-form">Parametro</label>
                                             <input type="text" v-model="atributos.valor_ref10.parametro"
-                                                class="edit-form" placeholder="">
+                                                class="input-form" placeholder="">
                                         </div>
                                         <div class="flex items-center justify-center">
                                             <button class="" type="button" @click="incrementQuantity(10)">

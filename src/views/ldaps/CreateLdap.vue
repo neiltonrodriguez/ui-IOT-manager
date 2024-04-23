@@ -52,7 +52,7 @@
                         </a>
                     </li>
                 </ul>
-                <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
+                <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded">
                     <div class="px-4 py-5 flex-auto">
                         <div class="tab-content tab-space">
                             <div v-bind:class="{ 'hidden': openTab !== 1, 'block': openTab === 1 }">
@@ -60,17 +60,17 @@
                                     <div class="grid gap-6 mb-6 md:grid-cols-2">
                                         <div>
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Título</label>
+                                                class="label-form">Título</label>
                                             <input type="text" v-model="formData.titulo" v-bind:disabled="isDisabled"
-                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                class="input-form"
                                                 placeholder="" required>
                                         </div>
                                         <div v-if="user.tipo == 4">
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Conta</label>
+                                                class="label-form">Conta</label>
                                             <select v-model="formData.conta" @change="getEmpresas()"
                                                 v-bind:disabled="isDisabled"
-                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                class="input-form">
                                                 <option value="" disabled selected>Escolha a conta</option>
                                                 <option v-for="c in contas" :key="c.id" :value="c.conta">{{ c.conta }}
                                                 </option>
@@ -78,9 +78,9 @@
                                         </div>
                                         <div>
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ldap
+                                                class="label-form">Ldap
                                                 Tipo</label>
-                                            <select v-model="formData.ldap_tipo" required class="edit-form">
+                                            <select v-model="formData.ldap_tipo" required class="input-form">
                                                 <option :value="tipo" selected>{{ tipo == 1 ? 'Usuários/grupos' :
                                                     'Sensores'
                                                     }}</option>
@@ -89,9 +89,9 @@
                                         </div>
                                         <div>
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Empresa</label>
+                                                class="label-form">Empresa</label>
                                             <select v-model="formData.empresa" v-bind:disabled="isDisabled"
-                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                class="input-form">
                                                 <option value="" disabled selected>Escolha a conta</option>
                                                 <option v-for="e in empresas" :key="e.id" :value="e.id">{{ e.nome }}
                                                 </option>
@@ -99,24 +99,24 @@
                                         </div>
                                         <div>
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Host</label>
+                                                class="label-form">Host</label>
                                             <input type="text" v-model="formData.host" v-bind:disabled="isDisabled"
-                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                class="input-form"
                                                 placeholder="" required>
                                         </div>
                                         <div>
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Porta</label>
+                                                class="label-form">Porta</label>
                                             <input type="number" v-model="formData.porta" v-bind:disabled="isDisabled"
-                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                class="input-form"
                                                 placeholder="" required>
                                         </div>
                                         <div>
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tipo
+                                                class="label-form">Tipo
                                                 de Autenticação</label>
                                             <select v-model="formData.tipo_autenticacao" v-bind:disabled="isDisabled"
-                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                class="input-form">
                                                 <option value="" disabled selected>Escolha um tipo de autenticação
                                                 </option>
                                                 <option value="1">Simples</option>
@@ -125,30 +125,30 @@
                                         </div>
                                         <div>
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Usuário</label>
+                                                class="label-form">Usuário</label>
                                             <input type="text" v-model="formData.usuario" v-bind:disabled="isDisabled"
-                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                class="input-form"
                                                 placeholder="" required>
                                         </div>
                                         <div>
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Senha</label>
+                                                class="label-form">Senha</label>
                                             <input type="password" v-model="formData.senha" v-bind:disabled="isDisabled"
-                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                class="input-form"
                                                 placeholder="" required>
                                         </div>
                                         <div>
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Domínio</label>
+                                                class="label-form">Domínio</label>
                                             <input type="text" v-model="formData.dominio" v-bind:disabled="isDisabled"
-                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                class="input-form"
                                                 placeholder="" required>
                                         </div>
                                         <div>
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Provedor</label>
+                                                class="label-form">Provedor</label>
                                             <select v-model="formData.provedor" v-bind:disabled="isDisabled"
-                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                class="input-form">
                                                 <option value="" disabled selected>Escolha um provedor</option>
                                                 <option value="1">Microsoft LDAP</option>
                                                 <option value="2">Open LDAP</option>
@@ -156,10 +156,10 @@
                                         </div>
                                         <div>
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Base
+                                                class="label-form">Base
                                                 DN</label>
                                             <input type="text" v-model="formData.base_dn" v-bind:disabled="isDisabled"
-                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                class="input-form"
                                                 placeholder="" required>
                                         </div>
                                     </div>
@@ -187,21 +187,21 @@
                                                 <template v-for="i in inputAtributo" :key="i">
                                                     <div>
                                                         <label
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Campo
+                                                            class="label-form">Campo
                                                             LDAP</label>
                                                         <input :id='"campoLdap" + i' type="text"
                                                             v-bind:disabled="isDisabledA"
-                                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                            class="input-form"
                                                             placeholder="" required>
                                                     </div>
 
                                                     <div>
                                                         <label
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Campo
+                                                            class="label-form">Campo
                                                             Sistemasss</label>
                                                         <div class="flex"><select :id='"campoSistema" + i'
                                                                 v-bind:disabled="isDisabledA"
-                                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                                class="input-form">
                                                                 <option value="" disabled selected>Escolha uma opção
                                                                 </option>
                                                                 <option v-for="cs in camposistema" :key="cs.id"
@@ -231,7 +231,7 @@
                                     <div class="grid gap-6 mb-6 md:grid-cols-2">
                                         <div>
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Caminho
+                                                class="label-form">Caminho
                                                 OU usuários<button type="button" @click="inputA++"
                                                     class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 mx-3 py-2.5 text-center">Adicionar
                                                     mais campos</button></label>
@@ -265,7 +265,7 @@
                                         <div>
 
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Caminho
+                                                class="label-form">Caminho
                                                 OU Grupos <button type="button" @click="input++"
                                                     class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 mx-3 py-2.5 text-center">Adicionar
                                                     mais campos</button></label>
@@ -311,19 +311,19 @@
                                                 <template v-for="i in inputAtributoS" :key="i">
                                                     <div>
                                                         <label
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Campo
+                                                            class="label-form">Campo
                                                             LDAP</label>
-                                                        <input :id='"campoLdapS" + i' type="text" class="edit-form"
+                                                        <input :id='"campoLdapS" + i' type="text" class="input-form"
                                                             placeholder="" required
                                                             v-bind:disabled="isDisabledAtributoSensor">
                                                     </div>
 
                                                     <div>
                                                         <label
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Campo
+                                                            class="label-form">Campo
                                                             Sensor</label>
                                                         <div class="flex"><select :id='"campoSensor" + i'
-                                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                                class="input-form">
                                                                 <option value="" disabled selected>Escolha uma opção
                                                                 </option>
                                                                 <option v-for="cs in camposensor" :key="cs.id"
@@ -353,7 +353,7 @@
                                     <div class="grid gap-6 mb-6 md:grid-cols-2">
                                         <div>
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Caminho
+                                                class="label-form">Caminho
                                                 OU sensores<button type="button" @click="inputS++"
                                                     class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 mx-3 py-2.5 text-center">Adicionar
                                                     mais campos</button></label>

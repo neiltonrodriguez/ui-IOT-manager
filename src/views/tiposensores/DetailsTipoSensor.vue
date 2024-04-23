@@ -25,7 +25,7 @@ detalhes">DETALHES DE TIPOS DE SENSORES</h3>
                 </li>
 
             </ul>
-            <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
+            <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded">
                 <div class="px-4 py-5 flex-auto">
                     <div class="tab-content tab-space">
                         <div v-bind:class="{ 'hidden': openTab !== 1, 'block': openTab === 1 }">
@@ -67,9 +67,9 @@ detalhes">DETALHES DE TIPOS DE SENSORES</h3>
 
                                     <div>
                                         <label
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nome</label>
+                                            class="label-form">Nome</label>
                                         <input type="text" v-model="sensortipo.nome" v-on:keyup="habilitarSalvar()"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  disabled:bg-red-50 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            class="input-form"
                                             placeholder="" required>
                                     </div>
 
@@ -78,16 +78,16 @@ detalhes">DETALHES DE TIPOS DE SENSORES</h3>
 
                                     <div v-if="user.tipo == 4">
                                         <label
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Conta</label>
+                                            class="label-form">Conta</label>
                                         <input type="text" v-model="sensortipo.conta" disabled
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 disabled:bg-red-50"
+                                            class="input-form"
                                             placeholder="" required>
                                     </div>
 
                                     <div>
                                         <label
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Habilitado</label>
-                                        <select class="edit-form" v-model="sensortipo.is_active"
+                                            class="label-form">Habilitado</label>
+                                        <select class="input-form" v-model="sensortipo.is_active"
                                             @change="habilitarSalvar()">
                                             <option :value="true">Sim</option>
                                             <option :value="false">Não</option>
@@ -95,17 +95,17 @@ detalhes">DETALHES DE TIPOS DE SENSORES</h3>
                                     </div>
                                     <div>
                                         <label
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Geolocalização</label>
-                                        <select class="edit-form" v-model="sensortipo.geolocalizacao" disabled>
+                                            class="label-form">Geolocalização</label>
+                                        <select class="input-form" v-model="sensortipo.geolocalizacao" disabled>
                                             <option :value="true">Sim</option>
                                             <option :value="false">Não</option>
                                         </select>
                                     </div>
                                     <div>
                                         <label
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descrição</label>
+                                            class="label-form">Descrição</label>
                                         <textarea rows="4" v-model="sensortipo.descricao" v-on:keyup="habilitarSalvar()"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  disabled:bg-red-50 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            class="input-form"
                                             placeholder=""></textarea>
                                     </div>
                                 </div>
@@ -121,18 +121,18 @@ detalhes">DETALHES DE TIPOS DE SENSORES</h3>
                                 <div class="grid gap-6 mb-6 md:grid-cols-2">
                                     <div>
                                         <label
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Label</label>
+                                            class="label-form">Label</label>
                                         <input type="text" v-on:keyup="habilitarSalvar()"
                                             v-model="sensortipo.atributos.valor_ref1.label"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 disabled:bg-red-50"
+                                            class="input-form"
                                             placeholder="">
                                     </div>
                                     <div>
                                         <label
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Parâmetro</label>
+                                            class="label-form">Parâmetro</label>
                                         <input type="text" v-on:keyup="habilitarSalvar()"
                                             v-model="sensortipo.atributos.valor_ref1.parametro"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            class="input-form"
                                             placeholder="">
                                     </div>
                                 </div>
@@ -140,18 +140,18 @@ detalhes">DETALHES DE TIPOS DE SENSORES</h3>
 
                                     <div>
                                         <label
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Label</label>
+                                            class="label-form">Label</label>
                                         <input type="text" v-on:keyup="habilitarSalvar()"
                                             v-model="sensortipo.atributos.valor_ref2.label"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 disabled:bg-red-50"
+                                            class="input-form"
                                             placeholder="">
                                     </div>
                                     <div>
                                         <label
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Parâmetro</label>
+                                            class="label-form">Parâmetro</label>
                                         <input type="text" v-on:keyup="habilitarSalvar()"
                                             v-model="sensortipo.atributos.valor_ref2.parametro"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            class="input-form"
                                             placeholder="">
                                     </div>
                                 </div>
@@ -159,144 +159,144 @@ detalhes">DETALHES DE TIPOS DE SENSORES</h3>
 
                                     <div>
                                         <label
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Label</label>
+                                            class="label-form">Label</label>
                                         <input type="text" v-on:keyup="habilitarSalvar()"
                                             v-model="sensortipo.atributos.valor_ref3.label"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 disabled:bg-red-50"
+                                            class="input-form"
                                             placeholder="">
                                     </div>
                                     <div>
                                         <label
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Parâmetro</label>
+                                            class="label-form">Parâmetro</label>
                                         <input type="text" v-on:keyup="habilitarSalvar()"
                                             v-model="sensortipo.atributos.valor_ref3.parametro"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            class="input-form"
                                             placeholder="">
                                     </div>
                                 </div>
                                 <div class="grid gap-6 mb-6 md:grid-cols-2">
                                     <div>
                                         <label
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Label</label>
+                                            class="label-form">Label</label>
                                         <input type="text" v-on:keyup="habilitarSalvar()"
                                             v-model="sensortipo.atributos.valor_ref4.label"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 disabled:bg-red-50"
+                                            class="input-form"
                                             placeholder="">
                                     </div>
                                     <div>
                                         <label
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Parâmetro</label>
+                                            class="label-form">Parâmetro</label>
                                         <input type="text" v-on:keyup="habilitarSalvar()"
                                             v-model="sensortipo.atributos.valor_ref4.parametro"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            class="input-form"
                                             placeholder="">
                                     </div>
                                 </div>
                                 <div class="grid gap-6 mb-6 md:grid-cols-2">
                                     <div>
                                         <label
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Label</label>
+                                            class="label-form">Label</label>
                                         <input type="text" v-on:keyup="habilitarSalvar()"
                                             v-model="sensortipo.atributos.valor_ref5.label"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 disabled:bg-red-50"
+                                            class="input-form"
                                             placeholder="">
                                     </div>
                                     <div>
                                         <label
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Parâmetro</label>
+                                            class="label-form">Parâmetro</label>
                                         <input type="text" v-on:keyup="habilitarSalvar()"
                                             v-model="sensortipo.atributos.valor_ref5.parametro"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            class="input-form"
                                             placeholder="">
                                     </div>
                                 </div>
                                 <div class="grid gap-6 mb-6 md:grid-cols-2">
                                     <div>
                                         <label
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Label</label>
+                                            class="label-form">Label</label>
                                         <input type="text" v-on:keyup="habilitarSalvar()"
                                             v-model="sensortipo.atributos.valor_ref6.label"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 disabled:bg-red-50"
+                                            class="input-form"
                                             placeholder="">
                                     </div>
                                     <div>
                                         <label
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Parâmetro</label>
+                                            class="label-form">Parâmetro</label>
                                         <input type="text" v-on:keyup="habilitarSalvar()"
                                             v-model="sensortipo.atributos.valor_ref6.parametro"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            class="input-form"
                                             placeholder="">
                                     </div>
                                 </div>
                                 <div class="grid gap-6 mb-6 md:grid-cols-2">
                                     <div>
                                         <label
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Label</label>
+                                            class="label-form">Label</label>
                                         <input type="text" v-on:keyup="habilitarSalvar()"
                                             v-model="sensortipo.atributos.valor_ref7.label"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 disabled:bg-red-50"
+                                            class="input-form"
                                             placeholder="">
                                     </div>
                                     <div>
                                         <label
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Parâmetro</label>
+                                            class="label-form">Parâmetro</label>
                                         <input type="text" v-on:keyup="habilitarSalvar()"
                                             v-model="sensortipo.atributos.valor_ref7.parametro"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            class="input-form"
                                             placeholder="">
                                     </div>
                                 </div>
                                 <div class="grid gap-6 mb-6 md:grid-cols-2">
                                     <div>
                                         <label
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Label</label>
+                                            class="label-form">Label</label>
                                         <input type="text" v-on:keyup="habilitarSalvar()"
                                             v-model="sensortipo.atributos.valor_ref8.label"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 disabled:bg-red-50"
+                                            class="input-form"
                                             placeholder="">
                                     </div>
                                     <div>
                                         <label
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Parâmetro</label>
+                                            class="label-form">Parâmetro</label>
                                         <input type="text" v-on:keyup="habilitarSalvar()"
                                             v-model="sensortipo.atributos.valor_ref8.parametro"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            class="input-form"
                                             placeholder="">
                                     </div>
                                 </div>
                                 <div class="grid gap-6 mb-6 md:grid-cols-2">
                                     <div>
                                         <label
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Label</label>
+                                            class="label-form">Label</label>
                                         <input type="text" v-on:keyup="habilitarSalvar()"
                                             v-model="sensortipo.atributos.valor_ref9.label"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 disabled:bg-red-50"
+                                            class="input-form"
                                             placeholder="">
                                     </div>
                                     <div>
                                         <label
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Parâmetro</label>
+                                            class="label-form">Parâmetro</label>
                                         <input type="text" v-on:keyup="habilitarSalvar()"
                                             v-model="sensortipo.atributos.valor_ref9.parametro"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            class="input-form"
                                             placeholder="">
                                     </div>
                                 </div>
                                 <div class="grid gap-6 mb-6 md:grid-cols-2">
                                     <div>
                                         <label
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Label</label>
+                                            class="label-form">Label</label>
                                         <input type="text" v-on:keyup="habilitarSalvar()"
                                             v-model="sensortipo.atributos.valor_ref10.label"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 disabled:bg-red-50"
+                                            class="input-form"
                                             placeholder="">
                                     </div>
                                     <div>
                                         <label
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Parâmetro</label>
+                                            class="label-form">Parâmetro</label>
                                         <input type="text" v-on:keyup="habilitarSalvar()"
                                             v-model="sensortipo.atributos.valor_ref10.parametro"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            class="input-form"
                                             placeholder="">
                                     </div>
                                 </div>

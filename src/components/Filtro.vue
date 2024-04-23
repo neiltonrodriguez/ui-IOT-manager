@@ -18,7 +18,7 @@
                 <div v-if="filterEmpresa">
                     <div class="flex items-center  mx-2 my-2">
                         <select v-model="filter.empresa"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            class="input-form">
                             <option value="0" disabled selected>Filtrar por empresa</option>
                             <option v-for="e in empresas" :key="e.id" :value="e.id">
                                 {{ e.nome }}
@@ -29,7 +29,7 @@
                 <div v-if="filterUf">
                     <div class="flex items-center mx-2 my-2">
                         <select v-model="filter.uf"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            class="input-form">
                             <option value="" disabled selected>Filtrar por UF</option>
                             <option value="AC">Acre</option>
                             <option value="AL">Alagoas</option>
@@ -64,7 +64,7 @@
                 <div v-if="filterConta && user.tipo == 4">
                     <div class="flex items-center  mx-2 my-2">
                         <select v-model="filter.conta"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            class="input-form">
                             <option value="" disabled selected>Filtrar por conta</option>
                             <option v-for="c in contas" :key="c.id" :value="c.conta">
                                 {{ c.conta }}
@@ -75,7 +75,7 @@
                 <div v-if="filterDepartamentoAtivo">
                     <div class="flex items-center  mx-2 my-2">
                         <select v-model="filter.departamentoAtivo"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            class="input-form">
                             <option value="0" disabled selected>Filtrar por departamento</option>
                             <option v-for="c in departamentoAtivos" :key="c.id" :value="c.id">
                                 {{ c.titulo }}
@@ -86,7 +86,7 @@
                 <div v-if="filterDepartamentoSensor">
                     <div class="flex items-center  mx-2 my-2">
                         <select v-model="filter.departamentoSensor"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            class="input-form">
                             <option value="0" disabled selected>Filtrar por departamento</option>
                             <option v-for="c in departamentoSensores" :key="c.id" :value="c.id">
                                 {{ c.titulo }}
@@ -97,7 +97,7 @@
                 <div v-if="filterDepartamentoUsuario">
                     <div class="flex items-center  mx-2 my-2">
                         <select v-model="filter.departamentoUsuario"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            class="input-form">
                             <option value="0" disabled selected>Filtrar por departamento</option>
                             <option v-for="c in departamentoUsuarios" :key="c.id" :value="c.id">
                                 {{ c.titulo }}
@@ -108,7 +108,7 @@
                 <div v-if="filterDepartamento">
                     <div class="flex items-center  mx-2 my-2">
                         <select v-model="filter.departamento"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            class="input-form">
                             <option value="0" disabled selected>Filtrar por departamento</option>
                             <option value="1"> departamento 1</option>
                             <option value="2"> departamento 2</option>
@@ -119,7 +119,7 @@
                 <div v-if="filterTipo">
                     <div class="flex items-center  mx-2 my-2">
                         <select v-model="filter.tipo"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            class="input-form">
                             <option value="0" disabled selected>Escolha uma tipo</option>
                             <option value="1">Usuarios/Grupos</option>
                             <option value="2">Sensores</option>
@@ -129,7 +129,7 @@
                 <div v-if="filterTipoUsuario">
                     <div class="flex items-center  mx-2 my-2">
                         <select v-model="filter.tipoUsuario"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            class="input-form">
                             <option value="0" disabled selected>Tipo de usuário</option>
                             <option value="1">Comun</option>
                             <option value="2">Monitor</option>
@@ -141,7 +141,7 @@
                 <div v-if="filterGrupoSensor">
                     <div class="flex items-center  mx-2 my-2">
                         <select v-model="filter.sensorgrupo"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            class="input-form">
                             <option value="0" disabled selected>Filtrar por grupo de sensor</option>
                             <option v-for="sg in sensorgrupos" :key="sg.id" :value="sg.id">
                                 {{ sg.nome }}
@@ -152,7 +152,7 @@
                 <div v-if="filterStatus">
                     <div class="flex items-center  mx-2 my-2">
                         
-                        <select v-model="filter.is_active" class="edit-form">
+                        <select v-model="filter.is_active" class="input-form">
                             <option value="" disabled selected>Filtrar por Status</option>
                             <option value="true">Sim</option>
                             <option value="false">Não</option>

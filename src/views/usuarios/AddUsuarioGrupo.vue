@@ -8,7 +8,7 @@
             <hr>
         </div>
         <div>
-            <select class="edit-form" v-model="grupo.id">
+            <select class="input-form" v-model="grupo.id">
                 <option value="" disabled selected>selecione o grupo para ser adicionado</option>
                 <option v-for="g in grupousuarios" :key="g.id" :value="g.id"  @change="listarMembros(0, g.id)">{{ g.nome }}</option>
 

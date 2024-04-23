@@ -44,7 +44,7 @@
 
                 <div>
                     <label class="label-form">Titulo</label>
-                    <input required type="text" v-model="conta.titulo" v-on:keyup="habilitarSalvar()" class="edit-form"
+                    <input required type="text" v-model="conta.titulo" v-on:keyup="habilitarSalvar()" class="input-form"
                         placeholder="">
                 </div>
 
@@ -53,19 +53,19 @@
                 <div>
                     <label class="label-form">Razão
                         social</label>
-                    <input required type="text" v-model="conta.razaosocial" v-on:keyup="habilitarSalvar()" class="edit-form"
+                    <input required type="text" v-model="conta.razaosocial" v-on:keyup="habilitarSalvar()" class="input-form"
                         placeholder="">
                 </div>
                 <div>
                     <label class="label-form">CNPJ</label>
                     <input required type="text" v-model="conta.cnpj" v-mask="'##.###.###/####-##'" v-on:keyup="habilitarSalvar()"
-                        class="edit-form" placeholder="">
+                        class="input-form" placeholder="">
                 </div>
 
 
                 <div>
                     <label class="label-form">Conta</label>
-                    <input type="text" v-model="conta.conta" disabled class="edit-form" placeholder="">
+                    <input type="text" v-model="conta.conta" disabled class="input-form" placeholder="">
                 </div>
 
 
@@ -73,22 +73,22 @@
                     <label class="label-form">Telefone
                         1</label>
                     <input required type="text" v-model="conta.telefone1" v-mask="['(##) ####-####', '(##) #####-####']"
-                        v-on:keyup="habilitarSalvar()" class="edit-form" placeholder="">
+                        v-on:keyup="habilitarSalvar()" class="input-form" placeholder="">
                 </div>
                 <div>
                     <label class="label-form">Telefone
                         2</label>
                     <input type="text" v-model="conta.telefone2" v-mask="['(##) ####-####', '(##) #####-####']"
-                        v-on:keyup="habilitarSalvar()" class="edit-form" placeholder="">
+                        v-on:keyup="habilitarSalvar()" class="input-form" placeholder="">
                 </div>
                 <div>
                     <label class="label-form">Descrição</label>
                     <textarea rows="4" v-model="conta.descricao" v-on:keyup="habilitarSalvar()"
-                        class="edit-form" placeholder=""></textarea>
+                        class="input-form" placeholder=""></textarea>
                 </div>
                 <div>
                     <label class="label-form">Contato</label>
-                    <input type="contato" v-model="conta.contato" class="edit-form" placeholder="pessoa para contato"
+                    <input type="contato" v-model="conta.contato" class="input-form" placeholder="pessoa para contato"
                         v-on:keyup="habilitarSalvar()">
                 </div>
 
@@ -96,14 +96,14 @@
             <div class="grid gap-6 mb-6 md:grid-cols-2">
                 <div>
                     <label class="label-form">Habilitado</label>
-                    <select required v-model="conta.is_active" class="edit-form" @change="habilitarSalvar()">
+                    <select required v-model="conta.is_active" class="input-form" @change="habilitarSalvar()">
                         <option :value="true">Sim</option>
                         <option :value="false">Não</option>
                     </select>
                 </div>
                 <div>
                     <label class="label-form">Email</label>
-                    <input type="email" id="email" v-model="conta.email" class="edit-form"
+                    <input type="email" id="email" v-model="conta.email" class="input-form"
                         placeholder="seuemail@email.com" v-on:keyup="habilitarSalvar()">
                 </div>
 
@@ -111,29 +111,29 @@
             <div class="grid gap-6 mb-6 md:grid-cols-2">
                 <div>
                     <label class="label-form">Cep</label>
-                    <input @blur="buscarCep()" type="text" v-model="conta.cep" v-mask="'##.###-###'" class="edit-form"
+                    <input @blur="buscarCep()" type="text" v-model="conta.cep" v-mask="'##.###-###'" class="input-form"
                         v-on:keyup="habilitarSalvar()" placeholder="">
                 </div>
                 <div>
                     <label class="label-form">Endereço</label>
-                    <input type="text" v-model="conta.logradouro" class="edit-form" placeholder=""
+                    <input type="text" v-model="conta.logradouro" class="input-form" placeholder=""
                         v-on:keyup="habilitarSalvar()">
                 </div>
             </div>
             <div class="grid gap-6 mb-6 md:grid-cols-3">
                 <div>
                     <label class="label-form">Bairro</label>
-                    <input type="text" v-model="conta.bairro" class="edit-form" v-on:keyup="habilitarSalvar()"
+                    <input type="text" v-model="conta.bairro" class="input-form" v-on:keyup="habilitarSalvar()"
                         placeholder="">
                 </div>
                 <div>
                     <label class="label-form">Cidade</label>
-                    <input type="text" v-model="conta.cidade" v-on:keyup="habilitarSalvar()" class="edit-form"
+                    <input type="text" v-model="conta.cidade" v-on:keyup="habilitarSalvar()" class="input-form"
                         placeholder="">
                 </div>
                 <div>
                     <label class="label-form">Estado</label>
-                    <select v-model="conta.uf" class="edit-form" @change="habilitarSalvar()">
+                    <select v-model="conta.uf" class="input-form" @change="habilitarSalvar()">
                         <option value="" disabled selected>Filtrar por UF</option>
                         <option value="AC">Acre</option>
                         <option value="AL">Alagoas</option>
@@ -167,9 +167,9 @@
             </div>
             <div class="grid gap-6 mb-6 md:grid-cols-2">
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Complemento</label>
+                    <label class="label-form">Complemento</label>
                     <select v-model="conta.complemento" @change="habilitarSalvar()"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        class="input-form">
                         <option value="" disabled selected>Escolha o complemento</option>
                         <option v-for="cp in complementos" :key="cp.id" :value="cp.id">{{ cp.titulo }}
                         </option>
@@ -177,7 +177,7 @@
                 </div>
                 <div>
                     <label for="confirm_password" class="label-form">Número</label>
-                    <input type="text" v-model="conta.numero" v-on:keyup="habilitarSalvar()" class="edit-form"
+                    <input type="text" v-model="conta.numero" v-on:keyup="habilitarSalvar()" class="input-form"
                         placeholder="">
                 </div>
 

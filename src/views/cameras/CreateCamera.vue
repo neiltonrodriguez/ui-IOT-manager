@@ -25,7 +25,7 @@
                     </li>
 
                 </ul>
-                <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
+                <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded">
                     <div class="px-4 py-5 flex-auto">
                         <div class="tab-content tab-space">
                             <div v-bind:class="{ 'hidden': openTab !== 1, 'block': openTab === 1 }">
@@ -33,14 +33,14 @@
                                     <div class="grid gap-6 mb-6 md:grid-cols-2">
                                         <div>
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Titulo</label>
-                                            <input type="text" v-model="formData.titulo" class="edit-form"
+                                                class="label-form">Titulo</label>
+                                            <input type="text" v-model="formData.titulo" class="input-form"
                                                 placeholder="" required>
                                         </div>
                                         <div v-if="user.tipo == 4">
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Conta</label>
-                                            <select v-model="formData.conta" class="edit-form"
+                                                class="label-form">Conta</label>
+                                            <select v-model="formData.conta" class="input-form"
                                                 @change="escolherConta()">
                                                 <option value="" disabled selected>Escolha a conta</option>
                                                 <option v-for="c in contas" :key="c.id" :value="c.conta">{{ c.conta }}
@@ -49,8 +49,8 @@
                                         </div>
                                         <div>
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Empresa</label>
-                                            <select v-model="formData.empresa" class="edit-form">
+                                                class="label-form">Empresa</label>
+                                            <select v-model="formData.empresa" class="input-form">
                                                 <option value="" disabled selected>Escolha a empresa</option>
                                                 <option v-for="e in empresas" :key="e.id" :value="e.id">{{ e.nome }}
                                                 </option>
@@ -58,38 +58,38 @@
                                         </div>
                                         <div>
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Serial</label>
-                                            <input type="text" v-model="formData.serial" class="edit-form"
+                                                class="label-form">Serial</label>
+                                            <input type="text" v-model="formData.serial" class="input-form"
                                                 placeholder="">
                                         </div>
                                         <div>
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Protocolo</label>
-                                            <input type="text" v-model="formData.protocolo" class="edit-form"
+                                                class="label-form">Protocolo</label>
+                                            <input type="text" v-model="formData.protocolo" class="input-form"
                                                 placeholder="">
                                         </div>
                                         <div>
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">URL</label>
-                                            <input type="text" v-model="formData.url" class="edit-form" placeholder="">
+                                                class="label-form">URL</label>
+                                            <input type="text" v-model="formData.url" class="input-form" placeholder="">
                                         </div>
                                         <div>
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Usuário</label>
-                                            <input type="text" v-model="formData.usuario" class="edit-form"
+                                                class="label-form">Usuário</label>
+                                            <input type="text" v-model="formData.usuario" class="input-form"
                                                 placeholder="">
                                         </div>
                                         <div>
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Senha</label>
-                                            <input type="password" v-model="formData.senha" class="edit-form"
+                                                class="label-form">Senha</label>
+                                            <input type="password" v-model="formData.senha" class="input-form"
                                                 placeholder="">
                                         </div>
 
                                         <div>
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Grupo</label>
-                                            <select v-model="formData.grupo" class="edit-form">
+                                                class="label-form">Grupo</label>
+                                            <select v-model="formData.grupo" class="input-form">
                                                 <option value="" disabled selected>Escolha um</option>
                                                 <option v-for="gc in grupocameras" :key="gc.id" :value="gc.id">{{
                                 gc.nome
@@ -99,8 +99,8 @@
                                         </div>
                                         <div>
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Departamento</label>
-                                            <select v-model="formData.departamento" class="edit-form">
+                                                class="label-form">Departamento</label>
+                                            <select v-model="formData.departamento" class="input-form">
                                                 <option value="" disabled selected>Escolha um</option>
                                                 <option v-for="dp in departamentos" :key="dp.id" :value="dp.id">{{
                                 dp.titulo
@@ -110,8 +110,8 @@
                                         </div>
                                         <div>
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fabricante</label>
-                                            <select v-model="formData.fabricante" class="edit-form">
+                                                class="label-form">Fabricante</label>
+                                            <select v-model="formData.fabricante" class="input-form">
                                                 <option value="" disabled selected>Escolha um</option>
                                                 <option v-for="f in fabricantes" :key="f.id" :value="f.id">{{ f.titulo
                                                     }}
@@ -120,8 +120,8 @@
                                         </div>
                                         <div>
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Modelo</label>
-                                            <select v-model="formData.modelo" class="edit-form">
+                                                class="label-form">Modelo</label>
+                                            <select v-model="formData.modelo" class="input-form">
                                                 <option value="" disabled selected>Escolha um</option>
                                                 <option v-for="m in modelos" :key="m.id" :value="m.id">{{ m.titulo
                                                     }}
@@ -130,8 +130,8 @@
                                         </div>
                                         <div>
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ativos</label>
-                                            <select v-model="formData.ativo" class="edit-form">
+                                                class="label-form">Ativos</label>
+                                            <select v-model="formData.ativo" class="input-form">
                                                 <option value="" disabled selected>Escolha um</option>
                                                 <option v-for="v in ativos" :key="v.id" :value="v.id">{{ v.nome
                                                     }}
@@ -140,9 +140,9 @@
                                         </div>
                                         <div>
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gateway
+                                                class="label-form">Gateway
                                                 IOT</label>
-                                            <select v-model="formData.gatewayiot" class="edit-form" required>
+                                            <select v-model="formData.gatewayiot" class="input-form" required>
                                                 <option value="" disabled selected>Escolha um</option>
                                                 <option v-for="v in gatewayiot" :key="v.id" :value="v.id">{{ v.titulo
                                                     }}
@@ -162,8 +162,8 @@
                                     <div class="grid gap-6 mb-6 md:grid-cols-2">
                                         <div v-if="user.tipo == 4">
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Conta</label>
-                                            <select v-model="formDataAgend.conta" class="edit-form"
+                                                class="label-form">Conta</label>
+                                            <select v-model="formDataAgend.conta" class="input-form"
                                                 @change="escolherConta()" disabled>
                                                 <option value="" disabled selected>Escolha a conta</option>
                                                 <option v-for="c in contas" :key="c.id" :value="c.conta">{{ c.conta }}
@@ -172,27 +172,27 @@
                                         </div>
                                         <div>
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ID
+                                                class="label-form">ID
                                                 Camera</label>
-                                            <input disabled type="text" v-model="formDataAgend.camera" class="edit-form"
+                                            <input disabled type="text" v-model="formDataAgend.camera" class="input-form"
                                                 placeholder="" required>
                                         </div>
 
                                         <div>
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Título</label>
-                                            <input type="text" v-model="formDataAgend.titulo" class="edit-form"
+                                                class="label-form">Título</label>
+                                            <input type="text" v-model="formDataAgend.titulo" class="input-form"
                                                 placeholder="" required>
                                         </div>
                                         <div>
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descrição</label>
-                                            <textarea rows="4" v-model="formDataAgend.descricao" class="edit-form"
+                                                class="label-form">Descrição</label>
+                                            <textarea rows="4" v-model="formDataAgend.descricao" class="input-form"
                                                 placeholder=""></textarea>
                                         </div>
                                         <div>
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Dias
+                                                class="label-form">Dias
                                                 de Captura</label>
                                             <span v-for="d in diasSemana" :key="d.index"><input v-model="d.ativo"
                                                     @change="escolherDia()" type="checkbox"
@@ -201,38 +201,38 @@
                                         </div>
                                         <div>
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Hora
+                                                class="label-form">Hora
                                                 Início</label>
-                                            <input type="text" v-model="formDataAgend.periodoinicio" class="edit-form"
+                                            <input type="text" v-model="formDataAgend.periodoinicio" class="input-form"
                                                 placeholder="08:00:00" required v-mask="'##:##:##'">
                                         </div>
                                         <div>
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Hora
+                                                class="label-form">Hora
                                                 Fim</label>
-                                            <input type="text" v-model="formDataAgend.periodofim" class="edit-form"
+                                            <input type="text" v-model="formDataAgend.periodofim" class="input-form"
                                                 placeholder="12:00:00" required v-mask="'##:##:##'">
                                         </div>
                                         <div>
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Intervalo
+                                                class="label-form">Intervalo
                                                 entre Capturas (minutos)</label>
                                             <input type="number" v-model="formDataAgend.intervaloentrecapturas"
-                                                class="edit-form" placeholder="" required>
+                                                class="input-form" placeholder="" required>
                                         </div>
                                         <div>
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Quantidade
+                                                class="label-form">Quantidade
                                                 de Imagens</label>
                                             <input type="number" v-model="formDataAgend.quantidadedeimagem"
-                                                class="edit-form" placeholder="" required>
+                                                class="input-form" placeholder="" required>
                                         </div>
                                         <div>
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Intervalo
+                                                class="label-form">Intervalo
                                                 entre Imagens (segundos)</label>
                                             <input type="number" v-model="formDataAgend.intervaloentreimagens"
-                                                class="edit-form" placeholder="" required>
+                                                class="input-form" placeholder="" required>
                                         </div>
 
                                     </div>

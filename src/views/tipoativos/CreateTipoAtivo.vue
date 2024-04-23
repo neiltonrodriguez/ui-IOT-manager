@@ -34,21 +34,21 @@
             <div class="grid gap-6 mb-6 md:grid-cols-2">
 
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nome</label>
-                    <input type="text" v-model="formData.nome" class="edit-form" placeholder="" required>
+                    <label class="label-form">Nome</label>
+                    <input type="text" v-model="formData.nome" class="input-form" placeholder="" required>
                 </div>
 
                 <div v-if="user.tipo == 4">
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Conta</label>
-                    <select v-model="formData.conta" class="edit-form">
+                    <label class="label-form">Conta</label>
+                    <select v-model="formData.conta" class="input-form">
                         <option value="" disabled selected>Escolha a conta</option>
                         <option v-for="c in contas" :key="c.id" :value="c.conta">{{ c.conta }}
                         </option>
                     </select>
                 </div>
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descrição</label>
-                    <textarea rows="4" v-model="formData.descricao" class="edit-form" placeholder=""></textarea>
+                    <label class="label-form">Descrição</label>
+                    <textarea rows="4" v-model="formData.descricao" class="input-form" placeholder=""></textarea>
                 </div>
 
             </div>
