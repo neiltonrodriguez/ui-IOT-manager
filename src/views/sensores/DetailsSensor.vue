@@ -41,15 +41,13 @@
                                 <form class="row g-3" v-on:submit.prevent="store(sensor)">
                                     <div class="grid gap-6 mb-6 md:grid-cols-2">
                                         <div>
-                                            <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nome</label>
+                                            <label class="block mb-2 text-sm font-medium text-gray-900 ">Nome</label>
                                             <input type="text" v-model="sensor.nome" v-on:keyup="habilitarSalvar()"
-                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 disabled:bg-red-50"
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  disabled:bg-red-50"
                                                 placeholder="" required>
                                         </div>
                                         <div v-if="user.tipo == 4">
-                                            <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Conta</label>
+                                            <label class="block mb-2 text-sm font-medium text-gray-900 ">Conta</label>
                                             <select v-model="sensor.conta" disabled class="edit-form">
                                                 <option value="" disabled selected>Escolha a conta</option>
                                                 <option v-for="c in contas" :key="c.id" :value="c.conta">{{ c.conta }}
@@ -58,37 +56,33 @@
                                         </div>
                                         <div>
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descrição</label>
+                                                class="block mb-2 text-sm font-medium text-gray-900 ">Descrição</label>
                                             <textarea rows="4" v-model="sensor.descricao" v-on:keyup="habilitarSalvar()"
-                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 disabled:bg-red-50"
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  disabled:bg-red-50"
                                                 placeholder=""></textarea>
                                         </div>
                                         <div>
-                                            <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Serial</label>
+                                            <label class="block mb-2 text-sm font-medium text-gray-900 ">Serial</label>
                                             <input type="text" v-model="sensor.serial" v-on:keyup="habilitarSalvar()"
-                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 disabled:bg-red-50"
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  disabled:bg-red-50"
                                                 placeholder="">
                                         </div>
                                         <div v-if="user.tipo == 4">
-                                            <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Criado
+                                            <label class="block mb-2 text-sm font-medium text-gray-900 ">Criado
                                                 por</label>
                                             <input type="text" v-model="sensor.criadopor" disabled
-                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 disabled:bg-red-50"
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  disabled:bg-red-50"
                                                 placeholder="">
                                         </div>
                                         <div v-if="user.tipo == 4">
-                                            <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Modificado
+                                            <label class="block mb-2 text-sm font-medium text-gray-900 ">Modificado
                                                 por</label>
                                             <input type="text" v-model="sensor.modificadopor" disabled
-                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 disabled:bg-red-50"
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  disabled:bg-red-50"
                                                 placeholder="" required>
                                         </div>
                                         <div>
-                                            <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Empresa</label>
+                                            <label class="block mb-2 text-sm font-medium text-gray-900 ">Empresa</label>
                                             <select class="edit-form" v-model="sensor.empresa"
                                                 @change="habilitarSalvar()">
                                                 <option value="" disabled>Escolha uma empresa</option>
@@ -102,7 +96,7 @@
 
                                         <div>
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Departamento</label>
+                                                class="block mb-2 text-sm font-medium text-gray-900 ">Departamento</label>
                                             <select v-model="sensor.departamento" @change="habilitarSalvar()"
                                                 class="edit-form">
                                                 <option value="" disabled selected>Escolha a conta</option>
@@ -114,7 +108,7 @@
                                         </div>
                                         <div>
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fabricante</label>
+                                                class="block mb-2 text-sm font-medium text-gray-900 ">Fabricante</label>
                                             <select v-model="sensor.fabricante" @change="habilitarSalvar()"
                                                 class="edit-form">
                                                 <option value="" disabled selected>Escolha a conta</option>
@@ -124,8 +118,7 @@
                                             </select>
                                         </div>
                                         <div>
-                                            <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Modelo</label>
+                                            <label class="block mb-2 text-sm font-medium text-gray-900 ">Modelo</label>
                                             <select v-model="sensor.modelo" @change="habilitarSalvar()"
                                                 class="edit-form">
                                                 <option value="" disabled selected>Escolha a conta</option>
@@ -135,8 +128,7 @@
                                         </div>
 
                                         <div>
-                                            <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ativos</label>
+                                            <label class="block mb-2 text-sm font-medium text-gray-900 ">Ativos</label>
                                             <select v-model="sensor.ativo" class="edit-form"
                                                 @change="habilitarSalvar()">
                                                 <option value="" disabled selected>Escolha um</option>
@@ -147,7 +139,7 @@
                                         </div>
                                         <div>
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Habilitado</label>
+                                                class="block mb-2 text-sm font-medium text-gray-900 ">Habilitado</label>
                                             <select class="edit-form" v-model="sensor.is_active"
                                                 @change="habilitarSalvar()">
                                                 <option :value="true">Sim</option>
@@ -155,8 +147,7 @@
                                             </select>
                                         </div>
                                         <div>
-                                            <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Sensor
+                                            <label class="block mb-2 text-sm font-medium text-gray-900 ">Sensor
                                                 em alerta</label>
                                             <select class="edit-form" v-model="sensor.sensoremalerta"
                                                 @change="habilitarSalvar()">
@@ -166,8 +157,7 @@
                                         </div>
 
                                         <div>
-                                            <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Grupo
+                                            <label class="block mb-2 text-sm font-medium text-gray-900 ">Grupo
                                                 do sensor</label>
                                             <select class="edit-form" v-model="sensor.grupo"
                                                 @change="habilitarSalvar()">
@@ -179,8 +169,7 @@
                                         </div>
 
                                         <div>
-                                            <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tipo</label>
+                                            <label class="block mb-2 text-sm font-medium text-gray-900 ">Tipo</label>
                                             <select disabled v-model="sensor.tipo" @change="habilitarSalvar()"
                                                 class="edit-form">
                                                 <option value="" disabled selected>Escolha a conta</option>
@@ -189,8 +178,7 @@
                                             </select>
                                         </div>
                                         <div>
-                                            <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gateway
+                                            <label class="block mb-2 text-sm font-medium text-gray-900 ">Gateway
                                                 IOT</label>
                                             <select required v-model="sensor.gatewayiot" @change="habilitarSalvar()"
                                                 class="edit-form">
@@ -200,72 +188,62 @@
                                             </select>
                                         </div>
                                         <div v-if="sensor.atributos.valor_ref1">
-                                            <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{
-                                                    sensor.atributos.valor_ref1.label }}</label>
+                                            <label class="block mb-2 text-sm font-medium text-gray-900 ">{{
+                                                sensor.atributos.valor_ref1.label }}</label>
                                             <input type="text" v-model="sensor.valor_ref1" class="edit-form"
                                                 placeholder="" required>
                                         </div>
                                         <div v-if="sensor.atributos.valor_ref2">
-                                            <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{
-                                                    sensor.atributos.valor_ref2.label }}</label>
+                                            <label class="block mb-2 text-sm font-medium text-gray-900 ">{{
+                                                sensor.atributos.valor_ref2.label }}</label>
                                             <input type="text" v-model="sensor.valor_ref2" class="edit-form"
                                                 placeholder="" required>
                                         </div>
                                         <div v-if="sensor.atributos.valor_ref3">
-                                            <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{
-                                                    sensor.atributos.valor_ref3.label }}</label>
+                                            <label class="block mb-2 text-sm font-medium text-gray-900 ">{{
+                                                sensor.atributos.valor_ref3.label }}</label>
                                             <input type="text" v-model="sensor.valor_ref3" class="edit-form"
                                                 placeholder="" required>
                                         </div>
                                         <div v-if="sensor.atributos.valor_ref4">
-                                            <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{
-                                                    sensor.atributos.valor_ref4.label }}</label>
+                                            <label class="block mb-2 text-sm font-medium text-gray-900 ">{{
+                                                sensor.atributos.valor_ref4.label }}</label>
                                             <input type="text" v-model="sensor.valor_ref4" class="edit-form"
                                                 placeholder="" required>
                                         </div>
                                         <div v-if="sensor.atributos.valor_ref5">
-                                            <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{
-                                                    sensor.atributos.valor_ref5.label }}</label>
+                                            <label class="block mb-2 text-sm font-medium text-gray-900 ">{{
+                                                sensor.atributos.valor_ref5.label }}</label>
                                             <input type="text" v-model="sensor.valor_ref5" class="edit-form"
                                                 placeholder="" required>
                                         </div>
                                         <div v-if="sensor.atributos.valor_ref6">
-                                            <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{
-                                                    sensor.atributos.valor_ref6.label }}</label>
+                                            <label class="block mb-2 text-sm font-medium text-gray-900 ">{{
+                                                sensor.atributos.valor_ref6.label }}</label>
                                             <input type="text" v-model="sensor.valor_ref6" class="edit-form"
                                                 placeholder="" required>
                                         </div>
                                         <div v-if="sensor.atributos.valor_ref7">
-                                            <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{
-                                                    sensor.atributos.valor_ref7.label }}</label>
+                                            <label class="block mb-2 text-sm font-medium text-gray-900 ">{{
+                                                sensor.atributos.valor_ref7.label }}</label>
                                             <input type="text" v-model="sensor.valor_ref7" class="edit-form"
                                                 placeholder="" required>
                                         </div>
                                         <div v-if="sensor.atributos.valor_ref8">
-                                            <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{
-                                                    sensor.atributos.valor_ref8.label }}</label>
+                                            <label class="block mb-2 text-sm font-medium text-gray-900 ">{{
+                                                sensor.atributos.valor_ref8.label }}</label>
                                             <input type="text" v-model="sensor.valor_ref8" class="edit-form"
                                                 placeholder="" required>
                                         </div>
                                         <div v-if="sensor.atributos.valor_ref9">
-                                            <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{
-                                                    sensor.atributos.valor_ref9.label }}</label>
+                                            <label class="block mb-2 text-sm font-medium text-gray-900 ">{{
+                                                sensor.atributos.valor_ref9.label }}</label>
                                             <input type="text" v-model="sensor.valor_ref9" class="edit-form"
                                                 placeholder="" required>
                                         </div>
                                         <div v-if="sensor.atributos.valor_ref10">
-                                            <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{
-                                                    sensor.atributos.valor_ref10.label }}</label>
+                                            <label class="block mb-2 text-sm font-medium text-gray-900 ">{{
+                                                sensor.atributos.valor_ref10.label }}</label>
                                             <input type="text" v-model="sensor.valor_ref10" class="edit-form"
                                                 placeholder="" required>
                                         </div>
@@ -286,9 +264,9 @@
 
                                     </div>
                                     <button type="submit" v-bind:disabled="isDisabled"
-                                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 disabled:bg-gray-300">Salvar</button>
+                                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center  disabled:bg-gray-300">Salvar</button>
                                     <button type="button" @click="cancelar()"
-                                        class="text-white bg-red-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mx-3">Cancelar</button>
+                                        class="text-white bg-red-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center  mx-3">Cancelar</button>
                                 </form>
                             </div>
                             <div v-bind:class="{ 'hidden': openTab !== 2, 'block': openTab === 2 }">
@@ -304,14 +282,14 @@
                                         <div class="grid gap-6 mb-6 md:grid-cols-2">
                                             <div>
                                                 <label
-                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Título</label>
+                                                    class="block mb-2 text-sm font-medium text-gray-900 ">Título</label>
                                                 <input v-on:keyup="habilitarSalvar()" type="text" v-model="sc.titulo"
                                                     class="edit-form" placeholder="" required>
 
                                             </div>
                                             <div>
                                                 <label
-                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Regra</label>
+                                                    class="block mb-2 text-sm font-medium text-gray-900 ">Regra</label>
                                                 <textarea rows="4" v-on:keyup="habilitarSalvar()" type="text"
                                                     v-model="sc.regra" class="edit-form" placeholder=""
                                                     required></textarea>
@@ -319,14 +297,14 @@
                                             </div>
                                             <div>
                                                 <label
-                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ação</label>
+                                                    class="block mb-2 text-sm font-medium text-gray-900 ">Ação</label>
                                                 <input v-on:keyup="habilitarSalvar()" type="text" v-model="sc.acao"
                                                     class="edit-form" placeholder="" required>
 
                                             </div>
                                             <div>
                                                 <label
-                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descrição</label>
+                                                    class="block mb-2 text-sm font-medium text-gray-900 ">Descrição</label>
                                                 <textarea rows="4" v-on:keyup="habilitarSalvar()" type="text"
                                                     v-model="sc.descricao" class="edit-form" placeholders=""></textarea>
 
@@ -335,7 +313,7 @@
 
                                             <div v-if="sc.id">
                                                 <label
-                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Habilitado</label>
+                                                    class="block mb-2 text-sm font-medium text-gray-900 ">Habilitado</label>
                                                 <select class="edit-form" v-model="sc.is_active"
                                                     @change="habilitarSalvar()">
                                                     <option :value="true">Sim</option>
@@ -343,8 +321,7 @@
                                                 </select>
                                             </div>
                                             <div>
-                                                <label
-                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Enviar
+                                                <label class="block mb-2 text-sm font-medium text-gray-900 ">Enviar
                                                     Notificação</label>
                                                 <select @change="listarNotificacoes()" class="edit-form"
                                                     v-model="sc.enviar_notificacao">
@@ -354,7 +331,7 @@
                                             </div>
                                             <div v-if="mostrarNotificacoes">
                                                 <label
-                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Notificações</label>
+                                                    class="block mb-2 text-sm font-medium text-gray-900 ">Notificações</label>
                                                 <select v-model="sc.notificacao" @change="habilitarSalvar()"
                                                     class="edit-form">
                                                     <option value="" disabled selected>Escolha a conta</option>
@@ -365,7 +342,7 @@
                                             </div>
                                             <div>
                                                 <label
-                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Alerta</label>
+                                                    class="block mb-2 text-sm font-medium text-gray-900 ">Alerta</label>
                                                 <select class="edit-form" @change="habilitarSalvar()"
                                                     v-model="sc.alerta">
                                                     <option :value="0">Não alterar</option>
@@ -377,9 +354,9 @@
 
 
                                         <button type="submit" :disabled="isDisabled"
-                                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 disabled:bg-gray-300">salvar</button>
+                                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center  disabled:bg-gray-300">salvar</button>
                                         <button type=" button" @click="mostrarFormScript()"
-                                            class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 mx-3 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">fechar</button>
+                                            class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 mx-3 text-center ">fechar</button>
 
 
 
@@ -390,40 +367,40 @@
                                         <tr>
 
                                             <th
-                                                class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
+                                                class="border-b  font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 text-left">
                                                 Título</th>
                                             <th
-                                                class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
+                                                class="border-b  font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 text-left">
                                                 Regra</th>
                                             <th
-                                                class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
+                                                class="border-b  font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 text-left">
                                                 Ação</th>
                                             <th
-                                                class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
+                                                class="border-b  font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 text-left">
                                                 Habilitado</th>
                                             <th
-                                                class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
+                                                class="border-b  font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 text-left">
                                                 Ação</th>
                                         </tr>
                                     </thead>
-                                    <tbody class="bg-white dark:bg-slate-800">
+                                    <tbody class="bg-white">
                                         <tr class="hover:bg-gray-100 cursor-pointer duration-200"
                                             v-for="u in sensorscripts" :key="u.id">
                                             <td @click="detailsSC(u.id)"
-                                                class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                                                class="border-b border-slate-100  p-4 pr-8 text-slate-500 ">
                                                 {{ u.titulo }}
                                             </td>
                                             <td @click="detailsSC(u.id)"
-                                                class="border-b border-slate-100  dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400 ">
+                                                class="border-b border-slate-100   p-4 pr-8 text-slate-500  ">
                                                 {{ u.regra }}
                                             </td>
                                             <td @click="detailsSC(u.id)"
-                                                class="border-b border-slate-100  dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400 ">
+                                                class="border-b border-slate-100   p-4 pr-8 text-slate-500  ">
                                                 {{ u.acao }}
                                             </td>
 
                                             <td @click="detailsSC(u.id)"
-                                                class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                                                class="border-b border-slate-100  p-4 pr-8 text-slate-500 ">
                                                 <template v-if="u.is_active">
                                                     <div class="flex items-center">
                                                         <div class="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div>
@@ -436,8 +413,7 @@
                                                     </div>
                                                 </template>
                                             </td>
-                                            <td
-                                                class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                                            <td class="border-b border-slate-100  p-4 pr-8 text-slate-500 ">
                                                 <button @click="detailsSC(u.id)" class="btn">
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                         viewBox="0 0 24 24" stroke-width="1" stroke="currentColor"
@@ -472,15 +448,26 @@
                                         total }}
                                 </div>
                                 <button type="button" @click="cancelar()"
-                                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Voltar</button>
+                                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Voltar</button>
                             </div>
                             <div v-bind:class="{ 'hidden': openTab !== 3, 'block': openTab === 3 }">
 
                                 <div class="w-full mb-2">
-                                    <button type="button" @click="getDadosLidos()"
-                                        class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mb-3">Atualizar
-                                        lista
-                                    </button>
+                                    <div class="flex items-center gap-5 mb-3">
+                                        <div v-if="sensor.tipo == 3">
+                                            <a class="cursor-pointer" @click="mostrarModalMapa()"><img
+                                                    src="../../assets/img/map.png"
+                                                    class="duration-200 h-12 hover:scale-110"></a>
+
+                                        </div>
+                                        <div>
+                                            <button type="button" @click="getDadosLidos()"
+                                                class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center  mb-3">Atualizar
+                                                lista
+                                            </button>
+                                        </div>
+                                        
+                                    </div>
                                     <div class="bg-slate-200 p-2 duration-200
                                         rounded-md">
 
@@ -490,25 +477,23 @@
                                             <table class="border-collapse table-fixed w-full">
 
                                                 <tr v-if="index === 0">
-                                                    <td
-                                                        class="border-b dark:border-slate-600 font-medium text-slate-400 dark:text-slate-200 text-left">
+                                                    <td class="border-b  font-medium text-slate-400 text-left">
                                                         Hora do registro</td>
                                                     <td v-for="x in d.leituras" :key="x"
-                                                        class="border-b dark:border-slate-600 font-medium text-slate-400 dark:text-slate-200 text-left">
+                                                        class="border-b  font-medium text-slate-400 text-left">
                                                         {{ x.label }}</td>
 
                                                 </tr>
 
-                                                <tbody class="bg-white dark:bg-slate-800">
+                                                <tbody class="bg-white">
                                                     <tr :class="d.alerta ? 'bg-red-300' : ''">
-                                                        <td
-                                                            class="border-b border-slate-100 dark:border-slate-700 text-slate-500 dark:text-slate-400">
+                                                        <td class="border-b border-slate-100  text-slate-500 ">
 
                                                             {{ d.horaregistro }}
 
                                                         </td>
                                                         <td v-for="x in d.leituras" :key="x"
-                                                            class="border-b border-slate-100 dark:border-slate-700 text-slate-500 dark:text-slate-400">
+                                                            class="border-b border-slate-100  text-slate-500 ">
 
                                                             <template v-if="x.label == 'Link'">
                                                                 <a class="text-red-600" target="_blank"
@@ -542,7 +527,8 @@
                                         <template v-else>
                                             <button
                                                 class="px-3 mx-1 py-2 text-sm bg-blue-700 hover:bg-blue-900 focus:bg-violet-700 text-white"
-                                                :class="page === atual ? 'bg-violet-700': 'bg-blue-700'" @click="changePage1(page)">
+                                                :class="page === atual ? 'bg-violet-700' : 'bg-blue-700'"
+                                                @click="changePage1(page)">
                                                 {{ page }}
                                             </button>
                                         </template>
@@ -559,6 +545,12 @@
                                         total1 }}
                                 </div>
                                 <hr>
+                                <div v-if="modal" class="mb-3">
+                                        <div>
+                                            <Iframe :link="sensor.mapa" />
+                                        </div>
+
+                                    </div>
 
                             </div>
                         </div>
@@ -834,9 +826,9 @@ export default {
                 this.getDadosLidos(i / this.limit1);
                 this.atual = i / this.limit1 + 1;
             }
-           
+
         },
-        
+
         abreviarPages() {
             const qty = this.pages1.length; // quantidade total de páginas
             const firstPages = 15; // número de páginas para manter no início
@@ -887,14 +879,14 @@ export default {
 
         },
         changePage1(i) {
-            if(i == 1){
+            if (i == 1) {
                 this.getDadosLidos(0);
                 this.atual = 1;
             } else {
-                this.getDadosLidos(i-1);
+                this.getDadosLidos(i - 1);
                 this.atual = i;
             }
-            
+
             this.offset1 = 0;
 
         },
@@ -910,6 +902,7 @@ export default {
             if (tabNumber == 3) {
                 this.getDadosLidos();
                 this.montarDadosLidos();
+                this.modal = false
                 this.openTab = tabNumber
             }
         },
