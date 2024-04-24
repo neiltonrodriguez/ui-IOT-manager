@@ -2,9 +2,7 @@
     <div>
         <h3 class="text-start">DETALHES DA EMPRESA</h3>
     </div>
-    <div class="divide-x my-5">
-        <hr>
-    </div>
+  
     <div class="container-fluid p-5">
         <div>
         </div>
@@ -96,10 +94,19 @@
                 </div>
                 <div>
                     <label class="label-form">Contato</label>
-                    <input type="contato" v-model="empresa.contato" class="input-form" placeholder="pessoa para contato"
+                    <input type="text" v-model="empresa.contato" class="input-form" placeholder="pessoa para contato"
                         v-on:keyup="habilitarSalvar()" required>
                 </div>
+                
 
+            </div>
+            <div class="grid gap-6 mb-6 md:grid-cols-3">
+                <div>
+                    <label class="label-form">E-mail</label>
+                    <input type="email" v-model="empresa.email"
+                        class="input-form"
+                        placeholder="email de contato">
+                </div>
             </div>
             <div class="grid gap-6 mb-6 md:grid-cols-2">
 
@@ -233,6 +240,9 @@ export default {
             formData.append('numero', formD.numero)
             if (formD.complemento != "" && formD.complemento != null) {
                 formData.append('complemento', formD.complemento)
+            }
+            if (formD.email != "" && formD.email != null) {
+                formData.append('email', formD.email)
             }
             const headers = { 'Content-Type': 'multipart/form-data' };
             http.put('/empresas/' + this.empresa.id + '/', formData, { headers })

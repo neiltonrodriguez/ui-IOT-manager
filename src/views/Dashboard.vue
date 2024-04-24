@@ -55,8 +55,8 @@
                     </div>
                 </div>
             </div>
-            <div class="bg-gray-50 dark:bg-slate-800 p-[20px] h-screen">
-                <div class="border border-gray-300 rounded-md p-[20px] h-[700px] overflow-y-auto">
+            <div class="bg-gray-50 dark:bg-slate-800 p-[10px] h-screen">
+                <div class="border border-gray-300 rounded-md p-[10px] h-[900px] overflow-y-auto">
                     <router-view ></router-view>
                 </div>
             </div>

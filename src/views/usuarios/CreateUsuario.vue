@@ -2,9 +2,7 @@
     <div>
         <h3 class="detalhes">CADASTRO DE USUARIO</h3>
     </div>
-    <div class="divide-x my-5">
-        <hr>
-    </div>
+  
     <div class="container-fluid p-5">
         <form class="row g-3" v-on:submit.prevent="createUsuario(formD)">
             <div class="grid gap-6 mb-6 md:grid-cols-2">

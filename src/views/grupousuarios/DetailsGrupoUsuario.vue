@@ -2,13 +2,11 @@
     <div>
         <h3 class="detalhes">DETALHES DE GRUPO DE USUÁRIO</h3>
     </div>
-    <div class="divide-x my-5">
-        <hr>
-    </div>
+  
     <div class="container-fluid p-5">
         <div class="flex flex-wrap">
             <div class="w-full">
-                <ul class="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row">
+                <ul class="flex mb-0 list-none flex-wrap flex-row">
                     <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
                         <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal"
                             v-on:click="toggleTabs(1)"
@@ -541,8 +539,9 @@ export default {
             contas.push(...this.contasStr)
             const u = {
                 is_active: this.grupousuario.is_active,
-                contasgerenciadas: this.contasStr
+                contasgerenciadas: contas
             }
+
             http.put('/usuariogrupos/' + this.grupousuario.id + '/', u)
                 .then(res => {
                     this.setGrupo();
@@ -564,10 +563,6 @@ export default {
             http.get(url)
                 .then(res => {
                     this.contasdisponiveis = res.data.results.contasdisponiveis
-                    // this.total1 = res.data.count
-                    // const qty = Math.ceil(this.total1 / this.limit1);
-                    // if (qty <= 1) return [1];
-                    // this.pages1 = Array.from(Array(qty).keys(), (i) => i + 1);
                 })
                 .catch(e => {
                     this.$swal("Oops...", e.response.data.detail, "error");

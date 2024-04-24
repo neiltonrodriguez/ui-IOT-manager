@@ -2,9 +2,7 @@
     <div>
         <h3 class="detalhes">DETALHES GATEWAY IOT</h3>
     </div>
-    <div class="divide-x my-5">
-        <hr>
-    </div>
+  
     <div class="container-fluid p-5">
         <div>
         </div>

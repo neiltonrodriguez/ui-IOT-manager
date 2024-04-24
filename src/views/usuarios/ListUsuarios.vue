@@ -3,8 +3,8 @@
         <Filtro @meu-evento="filtrar" :filterConta="true" :filterUf="true" :filterTipoUsuario="true"
             :filterEmpresa="true" :filterGrupoSensor="false" :filterDepartamentoUsuario="true" :filterStatus="true" />
     </div>
-    <div class="shadow-sm my-8">
-        <div class="py-4">
+    <div class="shadow-sm overflow-hidden my-2">
+        <div class="pb-2">
             <button type="button" @click="accessRoute('create-usuario')"
                 class="px-4 py-2 font-semibold text-sm bg-blue-700  hover:bg-blue-900 text-white rounded-md shadow-sm">Novo
                 Usuário</button>

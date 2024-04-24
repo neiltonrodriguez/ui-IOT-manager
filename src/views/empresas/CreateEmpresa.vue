@@ -2,9 +2,7 @@
     <div>
         <h3 class="detalhes">CADASTRO DE EMPRESAS</h3>
     </div>
-    <div class="divide-x my-5">
-        <hr>
-    </div>
+  
     <div class="container-fluid p-5">
 
         <form class="row g-3" v-on:submit.prevent="createEmpresa(formD)">
@@ -91,9 +89,15 @@
                 </div>
                 <div>
                     <label class="label-form">Contato</label>
-                    <input type="contato" v-model="formD.contato"
+                    <input type="text" v-model="formD.contato"
                         class="input-form"
                         placeholder="pessoa para contato" required>
+                </div>
+                <div>
+                    <label class="label-form">E-mail</label>
+                    <input type="email" v-model="formD.email"
+                        class="input-form"
+                        placeholder="email de contato">
                 </div>
 
             </div>
@@ -216,6 +220,9 @@ export default {
             formData.append('nome', formD.nome)
             if (this.user.tipo == 4) {
                 formData.append('conta', formD.conta)
+            }
+            if(formD.email != ""){
+                formData.append('email', formD.email)
             }
             formData.append('razaosocial', formD.razaosocial)
             formData.append('cnpj', formD.cnpj)

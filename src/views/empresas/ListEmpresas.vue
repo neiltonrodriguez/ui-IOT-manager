@@ -3,7 +3,7 @@
         <Filtro @meu-evento="filtrar" :filterConta="true" :filterUf="true" :filterEmpresa="false"
             :filterGrupoSensor="false" :filterDepartamento="false" :filterStatus="true" :filterTipo="false" />
     </div>
-    <div class="shadow-sm overflow-hidden my-8">
+    <div class="shadow-sm overflow-hidden my-2">
         <div class="py-4">
             <button @click="accessRoute('create-empresa')"
                 class="px-4 py-2 font-semibold text-sm bg-blue-800 text-white rounded-md shadow-sm">Nova
