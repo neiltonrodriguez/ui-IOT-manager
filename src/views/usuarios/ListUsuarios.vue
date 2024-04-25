@@ -176,7 +176,6 @@ export default {
     methods: {
         nextPage(n) {
             let i = 0;
-
             if (n === "next") {
                 let n = this.next1.substring(this.next1.indexOf("&"), 100).trim();
                 let a = n.slice(0, -13);
@@ -191,11 +190,12 @@ export default {
                 }
 
             }
-            console.log(i)
+          
             if (i === 0) {
                 this.offset = 0;
-                this.getAll();
                 this.atual = 1;
+                this.getAll();
+                
             } else {
                 this.getAll(i / this.limit);
                 this.atual = i / this.limit + 1;
@@ -240,7 +240,7 @@ export default {
                 is_active = `&is_active=0`
                 this.pages = []
             }
-            console.log(this.filter)
+          
             let tipo = ""
             if (this.filter.tipoUsuario) {
                 tipo = `&tipo=${this.filter.tipoUsuario}`
@@ -259,6 +259,7 @@ export default {
                     const qty = Math.ceil(this.total / this.limit);
                     if (qty <= 1) return [1];
                     this.pages = Array.from(Array(qty).keys(), (i) => i + 1);
+
                     this.next1 = res.data.next;
                     this.prev1 = res.data.previous;
                     this.abreviarPages();
@@ -272,13 +273,14 @@ export default {
         },
         changePage(i) {
             if (i == 1) {
-                this.getAll(0);
+                this.offset = 0;
                 this.atual = 1;
+                this.getAll();
+                
             } else {
                 this.getAll(i - 1);
                 this.atual = i;
             }
-
             this.offset = 0;
 
         },

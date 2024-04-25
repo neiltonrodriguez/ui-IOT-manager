@@ -839,11 +839,12 @@ export default {
                     this.total1 = res.data.count
                     this.next1 = res.data.next;
                     this.prev1 = res.data.previous;
-                    this.abreviarPages();
                     this.montarDadosLidos();
                     const qty = Math.ceil(this.total1 / this.limit1);
                     if (qty <= 1) return [1];
                     this.pages1 = Array.from(Array(qty).keys(), (i) => i + 1);
+
+                    this.abreviarPages();
                     
                 })
                 .catch(e => {
@@ -863,13 +864,14 @@ export default {
         },
         changePage1(i) {
             if (i == 1) {
-                this.getDadosLidos(0);
+                this.offset1 = 0;
                 this.atual = 1;
+                this.getDadosLidos();
+                
             } else {
                 this.getDadosLidos(i - 1);
                 this.atual = i;
             }
-
             this.offset1 = 0;
 
         },

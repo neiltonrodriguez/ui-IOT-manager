@@ -880,13 +880,14 @@ export default {
         },
         changePage1(i) {
             if (i == 1) {
-                this.getDadosLidos(0);
+                this.offset1 = 0;
                 this.atual = 1;
+                this.getDadosLidos();
+                
             } else {
                 this.getDadosLidos(i - 1);
                 this.atual = i;
             }
-
             this.offset1 = 0;
 
         },
