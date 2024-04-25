@@ -754,7 +754,6 @@ export default {
         },
         montarDadosLidos() {
             let arr = []
-            console.log(this.dadosCamera)
             for (let i = 0; i < this.dadosCamera.length; i++) {
 
                 let x = moment(this.dadosCamera[i].horaregistro).format('DD/MM/YYYY HH:mm:ss');

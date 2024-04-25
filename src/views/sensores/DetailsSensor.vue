@@ -61,7 +61,7 @@
                                         </div>
                                         <div>
                                             <label class="label-form ">Serial</label>
-                                            <input type="text" v-model="sensor.serial" v-on:keyup="habilitarSalvar()"
+                                            <input type="text" v-model="sensor.serial" disabled v-on:keyup="habilitarSalvar()"
                                                 class="input-form  "
                                                 placeholder="">
                                         </div>
@@ -450,7 +450,6 @@
                                     </div>
                                     <div class="bg-slate-200 p-2 duration-200
                                         rounded-md">
-
                                         <template v-for="(d, index) in dados" :key="d">
 
 
@@ -697,7 +696,6 @@ export default {
             let formData = new FormData()
             formData.append('nome', formD.nome)
             formData.append('descricao', formD.descricao)
-            formData.append('serial', formD.serial)
             formData.append('is_active', formD.is_active)
             formData.append('sensoremalerta', formD.sensoremalerta)
             formData.append('gatewayiot', formD.gatewayiot)
@@ -831,7 +829,6 @@ export default {
             this.pages1 = pages
         },
         getDadosLidos(i = null) {
-            this.dados = []
             if (i) {
                 this.offset1 = i
             }
@@ -840,14 +837,14 @@ export default {
                 .then(res => {
                     this.dadoslidos = res.data.results
                     this.total1 = res.data.count
-                    const qty = Math.ceil(this.total1 / this.limit1);
-                    if (qty <= 1) return [1];
-                    this.pages1 = Array.from(Array(qty).keys(), (i) => i + 1);
                     this.next1 = res.data.next;
                     this.prev1 = res.data.previous;
                     this.abreviarPages();
                     this.montarDadosLidos();
-
+                    const qty = Math.ceil(this.total1 / this.limit1);
+                    if (qty <= 1) return [1];
+                    this.pages1 = Array.from(Array(qty).keys(), (i) => i + 1);
+                    
                 })
                 .catch(e => {
                     this.$swal("Oops...", e.response.data.detail, "error");
@@ -878,6 +875,7 @@ export default {
         },
 
         toggleTabs: function (tabNumber) {
+            
             if (tabNumber == 1) {
                 this.openTab = tabNumber
             }
@@ -886,8 +884,8 @@ export default {
                 this.openTab = tabNumber
             }
             if (tabNumber == 3) {
+                console.log(tabNumber)
                 this.getDadosLidos();
-                this.montarDadosLidos();
                 this.modal = false
                 this.openTab = tabNumber
             }
@@ -974,7 +972,10 @@ export default {
                 }
                 // arr.push(a);
                 this.dados.push(a)
+                
             }
+            // this.dados = arr
+            
             this.acrescentarLinkMap();
         },
         acrescentarLinkMap() {
