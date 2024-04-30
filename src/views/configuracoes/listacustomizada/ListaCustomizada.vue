@@ -47,7 +47,7 @@
                 </div>
                 <button type="submit"
                     class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Salvar</button>
-                <button :disabled="idsForDelete.length === 0" @click="deleteSelecionados()"
+                <button :disabled="idsForDelete.length === 0" @click="deleteAllSelected()"
                     class="px-4 mx-3 py-2 font-semibold text-sm bg-red-800 disabled:bg-gray-300 text-white rounded-md shadow-sm">Deletar
                     Selecionados</button>
             </form>
@@ -208,12 +208,11 @@ checkAllItems(){
             let arr = []
             if (element.checked){
                 for(let x = 0; x < this.listas.length; x++){
-                    console.log(x);
                    const e = document.getElementById('check' + this.listas[x].id);
                    e.checked = true
                    arr.push(e.value)
                 }
-                // this.idsForDelete = arr
+                
             } else {
                 for(let i = 0; i < this.listas.length; i++){
                    const e = document.getElementById('check' + this.listas[i].id);
@@ -225,7 +224,7 @@ checkAllItems(){
             this.idsForDelete = arr
         },
 
-deleteSelecionados() {
+deleteAllSelected() {
             this.items.items = this.idsForDelete
             this.$swal.fire({
                 title: 'Deseja Realmente Excluir todos os selecionados?',

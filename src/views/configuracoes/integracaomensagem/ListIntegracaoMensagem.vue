@@ -11,7 +11,7 @@
             <button @click="accessRoute('create-integracaomensagem')"
                 class="px-4 py-2 font-semibold text-sm bg-blue-800 text-white rounded-md shadow-sm">Nova integracao de
                 mensagem</button>
-            <button :disabled="idsForDelete.length === 0" @click="deleteSelecionados()"
+            <button :disabled="idsForDelete.length === 0" @click="deleteAllSelected()"
                 class="px-4 mx-3 py-2 font-semibold text-sm bg-red-800 disabled:bg-gray-300 text-white rounded-md shadow-sm">Deletar
                 Selecionados</button>
         </div>
@@ -146,12 +146,11 @@ export default {
             let arr = []
             if (element.checked) {
                 for (let x = 0; x < this.mensagemintegracao.length; x++) {
-                    console.log(x);
                     const e = document.getElementById('check' + this.mensagemintegracao[x].id);
                     e.checked = true
                     arr.push(e.value)
                 }
-                // this.idsForDelete = arr
+                
             } else {
                 for (let i = 0; i < this.mensagemintegracao.length; i++) {
                     const e = document.getElementById('check' + this.mensagemintegracao[i].id);
@@ -163,7 +162,7 @@ export default {
             this.idsForDelete = arr
         },
 
-        deleteSelecionados() {
+        deleteAllSelected() {
             this.items.items = this.idsForDelete
             this.$swal.fire({
                 title: 'Deseja Realmente Excluir todos os selecionados?',
