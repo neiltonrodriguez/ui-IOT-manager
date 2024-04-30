@@ -76,7 +76,7 @@
                             <div v-bind:class="{ 'hidden': openTab !== 1, 'block': openTab === 1 }">
 
                                 <form class="row g-3" v-on:submit.prevent="storeLdap(ldap)">
-                                    <div class="grid gap-6 mb-6 md:grid-cols-2">
+                                    <div class="grid gap-3 mb-3 md:grid-cols-2">
                                         <div>
                                             <label class="label-form">Título</label>
                                             <input type="text" v-model="ldap.titulo" class="input-form"
@@ -173,7 +173,7 @@
                             </div>
                             <div v-bind:class="{ 'hidden': openTab !== 2, 'block': openTab === 2 }">
                                 <form class="row g-3" v-on:submit.prevent="storeConfigurations(ldap)">
-                                    <div class="grid gap-6 mb-6 md:grid-cols-2">
+                                    <div class="grid gap-3 mb-3 md:grid-cols-2">
                                         <div @click="ocultarCalendario()">
                                             <label class="label-form">Agendar Scan</label>
                                             <select v-model="ldap.agendar_scan" class="input-form"
@@ -300,7 +300,7 @@
                                     <form class="row g-3" v-on:submit.prevent="createAtributo(formAtributo)">
                                         <div class="border px-3 py-3 my-3 rounded-lg">
 
-                                            <div class="grid gap-6 mb-6 md:grid-cols-2">
+                                            <div class="grid gap-3 mb-3 md:grid-cols-2">
                                                 <div>
                                                     <label
                                                         class="label-form">Campo
@@ -418,7 +418,7 @@
                                     <form class="row g-3" v-on:submit.prevent="createOUusuario()">
                                         <div class="border px-3 py-3 my-3 rounded-lg">
 
-                                            <div class="grid gap-6 mb-6 md:grid-cols-2">
+                                            <div class="grid gap-3 mb-3 md:grid-cols-2">
                                                 <div>
                                                     <label
                                                         class="label-form">Caminho
@@ -517,7 +517,7 @@
                                     <form class="row g-3" v-on:submit.prevent="createOUgrupo()">
                                         <div class="border px-3 py-3 my-3 rounded-lg">
 
-                                            <div class="grid gap-6 mb-6 md:grid-cols-2">
+                                            <div class="grid gap-3 mb-3 md:grid-cols-2">
                                                 <div>
                                                     <label
                                                         class="label-form">Caminho
@@ -614,7 +614,7 @@
                                     <form class="row g-3" v-on:submit.prevent="createAtributo(formAtributo)">
                                         <div class="border px-3 py-3 my-3 rounded-lg">
 
-                                            <div class="grid gap-6 mb-6 md:grid-cols-2">
+                                            <div class="grid gap-3 mb-3 md:grid-cols-2">
                                                 <div>
                                                     <label
                                                         class="label-form">Campo
@@ -724,7 +724,7 @@
                                         <form class="row g-3" v-on:submit.prevent="createOUsensor()">
                                             <div class="border px-3 py-3 my-3 rounded-lg">
 
-                                                <div class="grid gap-6 mb-6 md:grid-cols-2">
+                                                <div class="grid gap-3 mb-3 md:grid-cols-2">
                                                     <div>
                                                         <label
                                                             class="label-form">Caminho

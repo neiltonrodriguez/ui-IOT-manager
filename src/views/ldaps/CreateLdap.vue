@@ -55,7 +55,7 @@
                         <div class="tab-content tab-space">
                             <div v-bind:class="{ 'hidden': openTab !== 1, 'block': openTab === 1 }">
                                 <form class="row g-3" v-on:submit.prevent="createLdap(formData)">
-                                    <div class="grid gap-6 mb-6 md:grid-cols-2">
+                                    <div class="grid gap-3 mb-3 md:grid-cols-2">
                                         <div>
                                             <label
                                                 class="label-form">Título</label>
@@ -180,7 +180,7 @@
                                     </div>
                                     <div class="grid gap-6 mb-6 md:grid-cols-1">
                                         <div class="flez">
-                                            <div class="grid gap-6 mb-6 md:grid-cols-2">
+                                            <div class="grid gap-3 mb-3 md:grid-cols-2">
 
                                                 <template v-for="i in inputAtributo" :key="i">
                                                     <div>
@@ -226,7 +226,7 @@
                             <div v-bind:class="{ 'hidden': openTab !== 3, 'block': openTab === 3 }">
                                 <form class="row g-3" v-on:submit.prevent="createOUusuario()">
 
-                                    <div class="grid gap-6 mb-6 md:grid-cols-2">
+                                    <div class="grid gap-3 mb-3 md:grid-cols-2">
                                         <div>
                                             <label
                                                 class="label-form">Caminho
@@ -259,7 +259,7 @@
                             </div>
                             <div v-bind:class="{ 'hidden': openTab !== 4, 'block': openTab === 4 }">
                                 <form class="row g-3" v-on:submit.prevent="createOUgrupo()">
-                                    <div class="grid gap-6 mb-6 md:grid-cols-2">
+                                    <div class="grid gap-3 mb-3 md:grid-cols-2">
                                         <div>
 
                                             <label
@@ -304,7 +304,7 @@
                                     </div>
                                     <div class="grid gap-6 mb-6 md:grid-cols-1">
                                         <div class="flez">
-                                            <div class="grid gap-6 mb-6 md:grid-cols-2">
+                                            <div class="grid gap-3 mb-3 md:grid-cols-2">
 
                                                 <template v-for="i in inputAtributoS" :key="i">
                                                     <div>
@@ -348,7 +348,7 @@
                             <div v-bind:class="{ 'hidden': openTab !== 6, 'block': openTab === 6 }">
                                 <form class="row g-3" v-on:submit.prevent="createOUsensor()">
 
-                                    <div class="grid gap-6 mb-6 md:grid-cols-2">
+                                    <div class="grid gap-3 mb-3 md:grid-cols-2">
                                         <div>
                                             <label
                                                 class="label-form">Caminho

@@ -5,7 +5,7 @@
   
     <div class="container-fluid p-5">
         <form class="row g-3" v-on:submit.prevent="createSensorGrupo(formData)">
-            <div class="grid gap-6 mb-6 md:grid-cols-2">
+            <div class="grid gap-3 mb-3 md:grid-cols-2">
 
                 <div v-if="user.tipo == 4">
                     <label class="label-form">Conta</label>

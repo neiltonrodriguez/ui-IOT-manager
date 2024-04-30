@@ -3,7 +3,7 @@
         <h3 class="
 detalhes">DETALHES DE TIPOS DE SENSORES</h3>
     </div>
-  
+
     <div class="container-fluid p-5">
         <div class="w-full">
             <ul class="flex mb-0 list-none flex-wrap flex-row">
@@ -28,22 +28,22 @@ detalhes">DETALHES DE TIPOS DE SENSORES</h3>
                     <div class="tab-content tab-space">
                         <div v-bind:class="{ 'hidden': openTab !== 1, 'block': openTab === 1 }">
                             <form class="row g-3" v-on:submit.prevent="store(sensortipo)">
-                                <div class="grid gap-6 mb-6 md:grid-cols-2">
+                                <div class="grid gap-3 mb-3 md:grid-cols-2">
                                     <div class="flex flex-col items-start">
                                         <div class="flex flex-col items-center justify-center">
                                             <template v-if="sensortipo.icone == null && img == ''">
-                                                <img class="border-2 max-h-36 border-gray-500  shadow-md duration-200"
+                                                <img class="max-h-28 rounded-lg border-gray-500  shadow-md duration-200"
                                                     src="../../assets/img/sem-foto.png">
                                             </template>
                                             <template v-else-if="img">
                                                 <img id="img-empresa"
-                                                    class="border-2 max-h-36 border-gray-500  shadow-md duration-200"
+                                                    class="max-h-28 rounded-lg border-gray-500  shadow-md duration-200"
                                                     :src="imagem">
 
                                             </template>
                                             <template v-else>
-                                                <img class="border-2 max-h-36 border-gray-500  shadow-md duration-200"
-                                                    :src="sensortipo.icone" width="150">
+                                                <img class="max-h-28 rounded-lg border-gray-500  shadow-md duration-200"
+                                                    :src="sensortipo.icone">
 
                                             </template>
                                             <div>
@@ -56,35 +56,30 @@ detalhes">DETALHES DE TIPOS DE SENSORES</h3>
                                                 <input @change="uploadFile()" hidden="" name="inputFoto" type="file"
                                                     ref="file" id="file">
                                             </div>
-                                            {{ img.name ? img.name.slice(0, 15) + '...' : '' }}
+
                                         </div>
                                     </div>
                                 </div>
-                                <div class="grid gap-6 mb-6 md:grid-cols-2">
+                                <div class="grid gap-3 mb-3 md:grid-cols-2">
 
 
                                     <div>
-                                        <label
-                                            class="label-form">Nome</label>
+                                        <label class="label-form">Nome</label>
                                         <input type="text" v-model="sensortipo.nome" v-on:keyup="habilitarSalvar()"
-                                            class="input-form"
-                                            placeholder="" required>
+                                            class="input-form" placeholder="" required>
                                     </div>
 
 
 
 
                                     <div v-if="user.tipo == 4">
-                                        <label
-                                            class="label-form">Conta</label>
-                                        <input type="text" v-model="sensortipo.conta" disabled
-                                            class="input-form"
+                                        <label class="label-form">Conta</label>
+                                        <input type="text" v-model="sensortipo.conta" disabled class="input-form"
                                             placeholder="" required>
                                     </div>
 
                                     <div>
-                                        <label
-                                            class="label-form">Habilitado</label>
+                                        <label class="label-form">Habilitado</label>
                                         <select class="input-form" v-model="sensortipo.is_active"
                                             @change="habilitarSalvar()">
                                             <option :value="true">Sim</option>
@@ -92,19 +87,16 @@ detalhes">DETALHES DE TIPOS DE SENSORES</h3>
                                         </select>
                                     </div>
                                     <div>
-                                        <label
-                                            class="label-form">Geolocalização</label>
+                                        <label class="label-form">Geolocalização</label>
                                         <select class="input-form" v-model="sensortipo.geolocalizacao" disabled>
                                             <option :value="true">Sim</option>
                                             <option :value="false">Não</option>
                                         </select>
                                     </div>
                                     <div>
-                                        <label
-                                            class="label-form">Descrição</label>
+                                        <label class="label-form">Descrição</label>
                                         <textarea rows="4" v-model="sensortipo.descricao" v-on:keyup="habilitarSalvar()"
-                                            class="input-form"
-                                            placeholder=""></textarea>
+                                            class="input-form" placeholder=""></textarea>
                                     </div>
                                 </div>
 
@@ -116,185 +108,145 @@ detalhes">DETALHES DE TIPOS DE SENSORES</h3>
                         </div>
                         <div v-bind:class="{ 'hidden': openTab !== 2, 'block': openTab === 2 }">
                             <form class="row g-3" v-on:submit.prevent="updateTipoSensor(sensortipo)">
-                                <div class="grid gap-6 mb-6 md:grid-cols-2">
+                                <div class="grid gap-3 mb-3 md:grid-cols-2">
                                     <div>
-                                        <label
-                                            class="label-form">Label</label>
+                                        <label class="label-form">Label</label>
                                         <input type="text" v-on:keyup="habilitarSalvar()"
-                                            v-model="sensortipo.atributos.valor_ref1.label"
-                                            class="input-form"
+                                            v-model="sensortipo.atributos.valor_ref1.label" class="input-form"
                                             placeholder="">
                                     </div>
                                     <div>
-                                        <label
-                                            class="label-form">Parâmetro</label>
+                                        <label class="label-form">Parâmetro</label>
                                         <input type="text" v-on:keyup="habilitarSalvar()"
-                                            v-model="sensortipo.atributos.valor_ref1.parametro"
-                                            class="input-form"
+                                            v-model="sensortipo.atributos.valor_ref1.parametro" class="input-form"
                                             placeholder="">
                                     </div>
                                 </div>
-                                <div class="grid gap-6 mb-6 md:grid-cols-2">
+                                <div class="grid gap-3 mb-3 md:grid-cols-2">
 
                                     <div>
-                                        <label
-                                            class="label-form">Label</label>
+                                        <label class="label-form">Label</label>
                                         <input type="text" v-on:keyup="habilitarSalvar()"
-                                            v-model="sensortipo.atributos.valor_ref2.label"
-                                            class="input-form"
+                                            v-model="sensortipo.atributos.valor_ref2.label" class="input-form"
                                             placeholder="">
                                     </div>
                                     <div>
-                                        <label
-                                            class="label-form">Parâmetro</label>
+                                        <label class="label-form">Parâmetro</label>
                                         <input type="text" v-on:keyup="habilitarSalvar()"
-                                            v-model="sensortipo.atributos.valor_ref2.parametro"
-                                            class="input-form"
+                                            v-model="sensortipo.atributos.valor_ref2.parametro" class="input-form"
                                             placeholder="">
                                     </div>
                                 </div>
-                                <div class="grid gap-6 mb-6 md:grid-cols-2">
+                                <div class="grid gap-3 mb-3 md:grid-cols-2">
 
                                     <div>
-                                        <label
-                                            class="label-form">Label</label>
+                                        <label class="label-form">Label</label>
                                         <input type="text" v-on:keyup="habilitarSalvar()"
-                                            v-model="sensortipo.atributos.valor_ref3.label"
-                                            class="input-form"
+                                            v-model="sensortipo.atributos.valor_ref3.label" class="input-form"
                                             placeholder="">
                                     </div>
                                     <div>
-                                        <label
-                                            class="label-form">Parâmetro</label>
+                                        <label class="label-form">Parâmetro</label>
                                         <input type="text" v-on:keyup="habilitarSalvar()"
-                                            v-model="sensortipo.atributos.valor_ref3.parametro"
-                                            class="input-form"
+                                            v-model="sensortipo.atributos.valor_ref3.parametro" class="input-form"
                                             placeholder="">
                                     </div>
                                 </div>
-                                <div class="grid gap-6 mb-6 md:grid-cols-2">
+                                <div class="grid gap-3 mb-3 md:grid-cols-2">
                                     <div>
-                                        <label
-                                            class="label-form">Label</label>
+                                        <label class="label-form">Label</label>
                                         <input type="text" v-on:keyup="habilitarSalvar()"
-                                            v-model="sensortipo.atributos.valor_ref4.label"
-                                            class="input-form"
+                                            v-model="sensortipo.atributos.valor_ref4.label" class="input-form"
                                             placeholder="">
                                     </div>
                                     <div>
-                                        <label
-                                            class="label-form">Parâmetro</label>
+                                        <label class="label-form">Parâmetro</label>
                                         <input type="text" v-on:keyup="habilitarSalvar()"
-                                            v-model="sensortipo.atributos.valor_ref4.parametro"
-                                            class="input-form"
+                                            v-model="sensortipo.atributos.valor_ref4.parametro" class="input-form"
                                             placeholder="">
                                     </div>
                                 </div>
-                                <div class="grid gap-6 mb-6 md:grid-cols-2">
+                                <div class="grid gap-3 mb-3 md:grid-cols-2">
                                     <div>
-                                        <label
-                                            class="label-form">Label</label>
+                                        <label class="label-form">Label</label>
                                         <input type="text" v-on:keyup="habilitarSalvar()"
-                                            v-model="sensortipo.atributos.valor_ref5.label"
-                                            class="input-form"
+                                            v-model="sensortipo.atributos.valor_ref5.label" class="input-form"
                                             placeholder="">
                                     </div>
                                     <div>
-                                        <label
-                                            class="label-form">Parâmetro</label>
+                                        <label class="label-form">Parâmetro</label>
                                         <input type="text" v-on:keyup="habilitarSalvar()"
-                                            v-model="sensortipo.atributos.valor_ref5.parametro"
-                                            class="input-form"
+                                            v-model="sensortipo.atributos.valor_ref5.parametro" class="input-form"
                                             placeholder="">
                                     </div>
                                 </div>
-                                <div class="grid gap-6 mb-6 md:grid-cols-2">
+                                <div class="grid gap-3 mb-3 md:grid-cols-2">
                                     <div>
-                                        <label
-                                            class="label-form">Label</label>
+                                        <label class="label-form">Label</label>
                                         <input type="text" v-on:keyup="habilitarSalvar()"
-                                            v-model="sensortipo.atributos.valor_ref6.label"
-                                            class="input-form"
+                                            v-model="sensortipo.atributos.valor_ref6.label" class="input-form"
                                             placeholder="">
                                     </div>
                                     <div>
-                                        <label
-                                            class="label-form">Parâmetro</label>
+                                        <label class="label-form">Parâmetro</label>
                                         <input type="text" v-on:keyup="habilitarSalvar()"
-                                            v-model="sensortipo.atributos.valor_ref6.parametro"
-                                            class="input-form"
+                                            v-model="sensortipo.atributos.valor_ref6.parametro" class="input-form"
                                             placeholder="">
                                     </div>
                                 </div>
-                                <div class="grid gap-6 mb-6 md:grid-cols-2">
+                                <div class="grid gap-3 mb-3 md:grid-cols-2">
                                     <div>
-                                        <label
-                                            class="label-form">Label</label>
+                                        <label class="label-form">Label</label>
                                         <input type="text" v-on:keyup="habilitarSalvar()"
-                                            v-model="sensortipo.atributos.valor_ref7.label"
-                                            class="input-form"
+                                            v-model="sensortipo.atributos.valor_ref7.label" class="input-form"
                                             placeholder="">
                                     </div>
                                     <div>
-                                        <label
-                                            class="label-form">Parâmetro</label>
+                                        <label class="label-form">Parâmetro</label>
                                         <input type="text" v-on:keyup="habilitarSalvar()"
-                                            v-model="sensortipo.atributos.valor_ref7.parametro"
-                                            class="input-form"
+                                            v-model="sensortipo.atributos.valor_ref7.parametro" class="input-form"
                                             placeholder="">
                                     </div>
                                 </div>
-                                <div class="grid gap-6 mb-6 md:grid-cols-2">
+                                <div class="grid gap-3 mb-3 md:grid-cols-2">
                                     <div>
-                                        <label
-                                            class="label-form">Label</label>
+                                        <label class="label-form">Label</label>
                                         <input type="text" v-on:keyup="habilitarSalvar()"
-                                            v-model="sensortipo.atributos.valor_ref8.label"
-                                            class="input-form"
+                                            v-model="sensortipo.atributos.valor_ref8.label" class="input-form"
                                             placeholder="">
                                     </div>
                                     <div>
-                                        <label
-                                            class="label-form">Parâmetro</label>
+                                        <label class="label-form">Parâmetro</label>
                                         <input type="text" v-on:keyup="habilitarSalvar()"
-                                            v-model="sensortipo.atributos.valor_ref8.parametro"
-                                            class="input-form"
+                                            v-model="sensortipo.atributos.valor_ref8.parametro" class="input-form"
                                             placeholder="">
                                     </div>
                                 </div>
-                                <div class="grid gap-6 mb-6 md:grid-cols-2">
+                                <div class="grid gap-3 mb-3 md:grid-cols-2">
                                     <div>
-                                        <label
-                                            class="label-form">Label</label>
+                                        <label class="label-form">Label</label>
                                         <input type="text" v-on:keyup="habilitarSalvar()"
-                                            v-model="sensortipo.atributos.valor_ref9.label"
-                                            class="input-form"
+                                            v-model="sensortipo.atributos.valor_ref9.label" class="input-form"
                                             placeholder="">
                                     </div>
                                     <div>
-                                        <label
-                                            class="label-form">Parâmetro</label>
+                                        <label class="label-form">Parâmetro</label>
                                         <input type="text" v-on:keyup="habilitarSalvar()"
-                                            v-model="sensortipo.atributos.valor_ref9.parametro"
-                                            class="input-form"
+                                            v-model="sensortipo.atributos.valor_ref9.parametro" class="input-form"
                                             placeholder="">
                                     </div>
                                 </div>
-                                <div class="grid gap-6 mb-6 md:grid-cols-2">
+                                <div class="grid gap-3 mb-3 md:grid-cols-2">
                                     <div>
-                                        <label
-                                            class="label-form">Label</label>
+                                        <label class="label-form">Label</label>
                                         <input type="text" v-on:keyup="habilitarSalvar()"
-                                            v-model="sensortipo.atributos.valor_ref10.label"
-                                            class="input-form"
+                                            v-model="sensortipo.atributos.valor_ref10.label" class="input-form"
                                             placeholder="">
                                     </div>
                                     <div>
-                                        <label
-                                            class="label-form">Parâmetro</label>
+                                        <label class="label-form">Parâmetro</label>
                                         <input type="text" v-on:keyup="habilitarSalvar()"
-                                            v-model="sensortipo.atributos.valor_ref10.parametro"
-                                            class="input-form"
+                                            v-model="sensortipo.atributos.valor_ref10.parametro" class="input-form"
                                             placeholder="">
                                     </div>
                                 </div>
@@ -386,6 +338,7 @@ export default {
 
         },
         uploadFile() {
+            this.isDisabled = false
             this.img = this.$refs.file.files[0];
             var reader = new FileReader();
             reader.onload = (e) => {

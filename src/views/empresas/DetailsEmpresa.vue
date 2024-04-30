@@ -7,37 +7,35 @@
         <div>
         </div>
         <form class="row g-3" v-on:submit.prevent="store(empresa)">
-            <div class="grid gap-6 mb-6 md:grid-cols-2">
+            <div class="grid gap-3 mb-3 md:grid-cols-2">
                 <div class="flex flex-col items-start">
                     <div class="flex flex-col items-center justify-center">
-                        <template v-if="empresa.foto == null && img == ''">
-                            <img class="border-2 max-h-36 border-gray-500  shadow-md duration-200"
+                        <template v-if="empresa.logo == null && img == ''">
+                            <img class="max-h-28 rounded-lg border-gray-500  shadow-md duration-200"
                                 src="../../assets/img/sem-foto.png">
                         </template>
                         <template v-else-if="img">
-                            <img id="img-empresa" class="border-2 max-h-36 border-gray-500  shadow-md duration-200"
+                            <img id="img-empresa" class="max-h-28 rounded-lg border-gray-500  shadow-md duration-200"
                                 :src="imagem">
 
                         </template>
                         <template v-else>
-                            <img class="border-2 max-h-36 border-gray-500  shadow-md duration-200" :src="empresa.foto"
-                                width="150">
+                            <img class="max-h-28 rounded-lg border-gray-500  shadow-md duration-200" :src="empresa.logo">
 
                         </template>
                         <div>
-                            <label title="Click to upload" for="file"
-                                class="bg-gray-200 py-1 text-sm font-semibold rounded-md px-5 cursor-pointer hover:bg-gray-300 duration-200">
+                            <label title="Click to upload" for="file"                              class="bg-gray-200 py-1 text-sm font-semibold rounded-md px-5 cursor-pointer hover:bg-gray-300 duration-200">
                                 Escolher imagem
                             </label>
 
 
                             <input @change="uploadFile()" hidden="" name="inputFoto" type="file" ref="file" id="file">
                         </div>
-                        {{ img.name ? img.name.slice(0, 15) + '...' : '' }}
+                        
                     </div>
                 </div>
             </div>
-            <div class="grid gap-6 mb-6 md:grid-cols-2">
+            <div class="grid gap-3 mb-3 md:grid-cols-2">
 
 
                 <div>
@@ -79,7 +77,7 @@
                 </div>
             </div>
 
-            <div class="grid gap-6 mb-6 md:grid-cols-3">
+            <div class="grid gap-3 mb-3 md:grid-cols-3">
                 <div>
                     <label class="label-form">Telefone
                         1</label>
@@ -100,7 +98,7 @@
                 
 
             </div>
-            <div class="grid gap-6 mb-6 md:grid-cols-3">
+            <div class="grid gap-3 mb-3 md:grid-cols-3">
                 <div>
                     <label class="label-form">E-mail</label>
                     <input type="email" v-model="empresa.email"
@@ -108,7 +106,7 @@
                         placeholder="email de contato">
                 </div>
             </div>
-            <div class="grid gap-6 mb-6 md:grid-cols-2">
+            <div class="grid gap-3 mb-3 md:grid-cols-2">
 
                 <div>
                     <label class="label-form">Cep</label>
@@ -121,7 +119,7 @@
                         v-on:keyup="habilitarSalvar()">
                 </div>
             </div>
-            <div class="grid gap-6 mb-6 md:grid-cols-3">
+            <div class="grid gap-3 mb-3 md:grid-cols-3">
                 <div>
                     <label class="label-form">Bairro</label>
                     <input type="text" v-model="empresa.bairro" v-on:keyup="habilitarSalvar()" class="input-form"
@@ -166,7 +164,7 @@
                     </select>
                 </div>
             </div>
-            <div class="grid gap-6 mb-6 md:grid-cols-2">
+            <div class="grid gap-3 mb-3 md:grid-cols-2">
                 <div>
                     <label class="label-form">Complemento</label>
                     <select v-model="empresa.complemento" @change="habilitarSalvar()" class="input-form">
@@ -211,6 +209,7 @@ export default {
     },
     methods: {
         uploadFile() {
+            this.isDisabled = false
             this.img = this.$refs.file.files[0];
             var reader = new FileReader();
             reader.onload = (e) => {

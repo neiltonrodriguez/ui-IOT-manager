@@ -34,7 +34,7 @@
                     <div class="tab-content tab-space">
                         <div v-bind:class="{ 'hidden': openTab !== 1, 'block': openTab === 1 }">
                             <form class="row g-3" v-on:submit.prevent="store(camera)">
-                                <div class="grid gap-6 mb-6 md:grid-cols-2">
+                                <div class="grid gap-3 mb-3 md:grid-cols-2">
                                     <div v-if="user.tipo == 4">
                                         <label
                                             class="label-form">Conta</label>
@@ -280,7 +280,7 @@
 
                             <div v-if="mostrarFormAgenda">
                                 <form class="row g-3" v-on:submit.prevent="updateAgendamento(agenda)">
-                                    <div class="grid gap-6 mb-6 md:grid-cols-2">
+                                    <div class="grid gap-3 mb-3 md:grid-cols-2">
                                         <div v-if="user.tipo == 4">
                                             <label
                                                 class="label-form">Conta</label>

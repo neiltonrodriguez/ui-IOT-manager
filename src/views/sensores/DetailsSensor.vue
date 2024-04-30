@@ -2,7 +2,7 @@
     <div>
         <h3 class="detalhes">DETALHES SENSORES</h3>
     </div>
-  
+
     <div class="container-fluid p-5">
         <div class="flex flex-wrap">
             <div class="w-full">
@@ -38,12 +38,11 @@
                             <div v-bind:class="{ 'hidden': openTab !== 1, 'block': openTab === 1 }">
 
                                 <form class="row g-3" v-on:submit.prevent="store(sensor)">
-                                    <div class="grid gap-6 mb-6 md:grid-cols-2">
+                                    <div class="grid gap-3 mb-3 md:grid-cols-2">
                                         <div>
                                             <label class="label-form">Nome</label>
                                             <input type="text" v-model="sensor.nome" v-on:keyup="habilitarSalvar()"
-                                                class="input-form  "
-                                                placeholder="" required>
+                                                class="input-form  " placeholder="" required>
                                         </div>
                                         <div v-if="user.tipo == 4">
                                             <label class="label-form ">Conta</label>
@@ -56,28 +55,24 @@
                                         <div>
                                             <label class="label-form ">Descrição</label>
                                             <textarea rows="4" v-model="sensor.descricao" v-on:keyup="habilitarSalvar()"
-                                                class="input-form  "
-                                                placeholder=""></textarea>
+                                                class="input-form  " placeholder=""></textarea>
                                         </div>
                                         <div>
                                             <label class="label-form ">Serial</label>
-                                            <input type="text" v-model="sensor.serial" disabled v-on:keyup="habilitarSalvar()"
-                                                class="input-form  "
-                                                placeholder="">
+                                            <input type="text" v-model="sensor.serial" disabled
+                                                v-on:keyup="habilitarSalvar()" class="input-form  " placeholder="">
                                         </div>
                                         <div v-if="user.tipo == 4">
                                             <label class="label-form ">Criado
                                                 por</label>
-                                            <input type="text" v-model="sensor.criadopor" disabled
-                                                class="input-form  "
+                                            <input type="text" v-model="sensor.criadopor" disabled class="input-form  "
                                                 placeholder="">
                                         </div>
                                         <div v-if="user.tipo == 4">
                                             <label class="label-form ">Modificado
                                                 por</label>
                                             <input type="text" v-model="sensor.modificadopor" disabled
-                                                class="input-form"
-                                                placeholder="" required>
+                                                class="input-form" placeholder="" required>
                                         </div>
                                         <div>
                                             <label class="label-form ">Empresa</label>
@@ -87,7 +82,7 @@
                                                 <template v-for="e in empresas" :key="e.id">
                                                     <option selected v-if="e.id == sensor.empresa" :value="e.id">{{
                                                         e.nome
-                                                    }}</option>
+                                                        }}</option>
                                                 </template>
                                             </select>
                                         </div>
@@ -99,7 +94,7 @@
                                                 <option value="" disabled selected>Escolha a conta</option>
                                                 <option v-for="dp in departamentos" :key="dp.id" :value="dp.id">{{
                                                     dp.titulo
-                                                }}
+                                                    }}
                                                 </option>
                                             </select>
                                         </div>
@@ -159,7 +154,7 @@
                                                 <option selected value="" disabled>Escolha um grupo</option>
                                                 <option v-for="sg in sensorgrupos" :value="sg.id" :key="sg.id">{{
                                                     sg.nome
-                                                }}</option>
+                                                    }}</option>
                                             </select>
                                         </div>
 
@@ -270,21 +265,92 @@
                                 </div>
                                 <div v-if="mostrarFormSC">
                                     <form class="row g-3" v-on:submit.prevent="createSensorScript(sc)">
+                                        <div v-for="c in cont" class="border p-2 rounded-lg bg-slate-200">
+                                            <div v-if="cont >= 2 && c != 1" class="grid gap-3 mb-3 md:grid-cols-3">
+                                                <div></div>
+                                                <div>
+                                                    <label class="label-form">Conectores lógicos</label>
+                                                    <select class="input-form" required>
+                                                        <option selected value="AND"> AND </option>
+                                                        <option value="AND"> OR </option>
 
-                                        <div class="grid gap-6 mb-6 md:grid-cols-2">
+                                                    </select>
+                                                </div>
+                                                <div></div>
+                                            </div>
+                                            <div class="grid gap-3 mb-3 md:grid-cols-3">
+                                                <div>
+                                                    <label class="label-form">Condicional IF/ELSE</label>
+                                                    <select class="input-form">
+                                                        <option value="" selected disabled>escolher parâmetro
+                                                        </option>
+                                                        <option v-for="(a, index) in atributos" :key="index"
+                                                            :value="a.nome">{{ a.label }}</option>
+
+
+                                                    </select>
+                                                </div>
+                                                <div>
+                                                    <label class="label-form">tipo de condição</label>
+                                                    <select class="input-form">
+                                                        <option value="" selected disabled>(numero)
+                                                        </option>
+                                                        <option v-for="(o, index) in operatorNumber" :key="index"
+                                                            :value="o.value">{{ o.label }}
+                                                        </option>
+
+                                                    </select>
+                                                </div>
+
+                                                <div>
+                                                    <label class="label-form">Valor</label>
+                                                    <input type="text" class="input-form" placeholder="">
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- <div v-if="cont == 2" class="grid gap-3 mb-3 md:grid-cols-3">
+                                                <div>
+                                                    <label class="label-form">Condicional IF/ELSE</label>
+                                                    <select class="input-form">
+                                                        <option value="" selected disabled>escolher parâmetro
+                                                        </option>
+                                                        <option v-for="(a, index) in atributos" :key="index"
+                                                            :value="a.nome">{{ a.label }}</option>
+
+
+                                                    </select>
+                                                </div>
+                                                <div>
+                                                    <label class="label-form">tipo de condição</label>
+                                                    <select class="input-form">
+                                                        <option value="" selected disabled>(numero)
+                                                        </option>
+                                                        <option v-for="(o, index) in operatorNumber" :key="index"
+                                                            :value="o.value">{{ o.label }}
+                                                        </option>
+
+                                                    </select>
+                                                </div>
+
+                                                <div>
+                                                    <label class="label-form">Valor</label>
+                                                    <input type="text" class="input-form" placeholder="">
+                                                </div>
+                                            </div> -->
+                                            
+
+                                        </div>
+                                        <button type="button" @click="cont++"
+                                                class="text-white mt-3 mb-5 bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">adicionar
+                                                mais condiçao</button>
+                                        <div class="grid gap-3 mb-3 md:grid-cols-2">
                                             <div>
                                                 <label class="label-form ">Título</label>
                                                 <input v-on:keyup="habilitarSalvar()" type="text" v-model="sc.titulo"
                                                     class="input-form" placeholder="" required>
 
                                             </div>
-                                            <div>
-                                                <label class="label-form ">Regra</label>
-                                                <textarea rows="4" v-on:keyup="habilitarSalvar()" type="text"
-                                                    v-model="sc.regra" class="input-form" placeholder=""
-                                                    required></textarea>
 
-                                            </div>
                                             <div>
                                                 <label class="label-form ">Ação</label>
                                                 <input v-on:keyup="habilitarSalvar()" type="text" v-model="sc.acao"
@@ -561,6 +627,49 @@ export default {
     },
     data() {
         return {
+            operatorNumber: [
+                {
+                    label: "maior que",
+                    value: ">"
+                },
+                {
+                    label: "menor que",
+                    value: "<"
+                },
+                {
+                    label: "igual a",
+                    value: "=="
+                }
+            ],
+            atributos: [
+                {
+                    label: "Temperatura",
+                    parametro: "temperatura",
+                    nome: "valor_ref1"
+                },
+                {
+                    label: "Umidade",
+                    parametro: "umidade",
+                    nome: "valor_ref2"
+                },
+                {
+                    label: "Frio",
+                    parametro: "frio",
+                    nome: "valor_ref3"
+                },
+                {
+                    label: "Frieza",
+                    parametro: "frieza",
+                    nome: "valor_ref4"
+                },
+                {
+                    label: "Quintura",
+                    parametro: "quintura",
+                    nome: "valor_ref5"
+                }
+            ],
+            cont: 1,
+            operador: "",
             atual: 1,
             modal: false,
             contas: [],
@@ -845,7 +954,7 @@ export default {
                     this.pages1 = Array.from(Array(qty).keys(), (i) => i + 1);
 
                     this.abreviarPages();
-                    
+
                 })
                 .catch(e => {
                     this.$swal("Oops...", e.response.data.detail, "error");
@@ -867,7 +976,7 @@ export default {
                 this.offset1 = 0;
                 this.atual = 1;
                 this.getDadosLidos();
-                
+
             } else {
                 this.getDadosLidos(i - 1);
                 this.atual = i;
@@ -877,7 +986,7 @@ export default {
         },
 
         toggleTabs: function (tabNumber) {
-            
+
             if (tabNumber == 1) {
                 this.openTab = tabNumber
             }
@@ -974,10 +1083,10 @@ export default {
                 }
                 // arr.push(a);
                 this.dados.push(a)
-                
+
             }
             // this.dados = arr
-            
+
             this.acrescentarLinkMap();
         },
         acrescentarLinkMap() {

@@ -5,7 +5,7 @@
   
     <div class="container-fluid p-5">
         <form class="row g-3" v-on:submit.prevent="createIntegracaoEmail(formData)">
-            <div class="grid gap-6 mb-6 md:grid-cols-2">
+            <div class="grid gap-3 mb-3 md:grid-cols-2">
 
                 <div v-if="user.tipo == 4">
                     <label class="label-form">Conta</label>
@@ -48,7 +48,7 @@
 
 
             </div>
-            <div v-if="formData.protocolo == '1'" class="grid gap-6 mb-6 md:grid-cols-2">
+            <div v-if="formData.protocolo == '1'" class="grid gap-3 mb-3 md:grid-cols-2">
                 <div>
                     <label class="label-form">SMTP Host</label>
                     <input type="text" v-model="formData.smpthost"
@@ -62,7 +62,7 @@
                         placeholder="" required>
                 </div>
             </div>
-            <div v-if="formData.protocolo == '1'" class="grid gap-6 mb-6 md:grid-cols-3">
+            <div v-if="formData.protocolo == '1'" class="grid gap-3 mb-3 md:grid-cols-3">
                 <div>
                     <label class="label-form">Criptografia</label>
                     <select v-model="formData.criptografia"
@@ -86,7 +86,7 @@
                         placeholder="" required>
                 </div>
             </div>
-            <div v-if="formData.protocolo == '2'" class="grid gap-6 mb-6 md:grid-cols-3">
+            <div v-if="formData.protocolo == '2'" class="grid gap-3 mb-3 md:grid-cols-3">
                 <div>
                     <label class="label-form">Tenant ID</label>
                     <input type="text" v-model="formData.tenantid"
@@ -108,7 +108,7 @@
 
 
             </div>
-            <div class="grid gap-6 mb-6 md:grid-cols-3">
+            <div class="grid gap-3 mb-3 md:grid-cols-3">
                 <div>
                     <label class="label-form">Encoding</label>
                     <input type="text" v-model="formData.encoding"

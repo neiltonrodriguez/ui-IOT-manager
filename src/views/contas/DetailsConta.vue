@@ -6,38 +6,36 @@
     <div class="container-fluid p-5">
 
         <form class="row g-3" v-on:submit.prevent="store(conta)">
-            <div class="grid gap-6 mb-6 md:grid-cols-2">
+            <div class="grid gap-3 mb-3 md:grid-cols-2">
                 <div class="flex flex-col items-start">
                     <div class="flex flex-col items-center justify-center">
                         <template v-if="conta.logo == null && img == ''">
-                            <img class="border-2 max-h-36 border-gray-500  shadow-md duration-200"
+                            <img class="max-h-28 rounded-lg border-gray-500  shadow-md duration-200"
                                 src="../../assets/img/sem-foto.png">
                         </template>
                         <template v-else-if="img">
-                            <img id="img-empresa" class="border-2 max-h-36 border-gray-500  shadow-md duration-200"
+                            <img id="img-empresa" class="max-h-28 rounded-lg border-gray-500  shadow-md duration-200"
                                 :src="imagem">
 
                         </template>
                         <template v-else>
-                            <img class="border-2 max-h-36 border-gray-500  shadow-md duration-200" :src="conta.logo"
-                                width="150">
+                            <img class="max-h-28 rounded-lg border-gray-500  shadow-md duration-200" :src="conta.logo">
 
                         </template>
                       
                         <div>
-                            <label title="Click to upload" for="file"
-                                class="bg-gray-200 py-1 text-sm font-semibold rounded-md px-5 cursor-pointer hover:bg-gray-300 duration-200">
+                            <label title="Click to upload" for="file"                              class="bg-gray-200 py-1 text-sm font-semibold rounded-md px-5 cursor-pointer hover:bg-gray-300 duration-200">
                                 Escolher imagem
                             </label>
 
 
                             <input @change="uploadFile()" hidden="" name="inputFoto" type="file" ref="file" id="file">
                         </div>
-                        {{ img.name ? img.name.slice(0, 15) + '...' : '' }}
+                        
                     </div>
                 </div>
             </div>
-            <div class="grid gap-6 mb-6 md:grid-cols-2">
+            <div class="grid gap-3 mb-3 md:grid-cols-2">
 
 
                 <div>
@@ -91,7 +89,7 @@
                 </div>
 
             </div>
-            <div class="grid gap-6 mb-6 md:grid-cols-2">
+            <div class="grid gap-3 mb-3 md:grid-cols-2">
                 <div>
                     <label class="label-form">Habilitado</label>
                     <select required v-model="conta.is_active" class="input-form" @change="habilitarSalvar()">
@@ -106,7 +104,7 @@
                 </div>
 
             </div>
-            <div class="grid gap-6 mb-6 md:grid-cols-2">
+            <div class="grid gap-3 mb-3 md:grid-cols-2">
                 <div>
                     <label class="label-form">Cep</label>
                     <input @blur="buscarCep()" type="text" v-model="conta.cep" v-mask="'##.###-###'" class="input-form"
@@ -118,7 +116,7 @@
                         v-on:keyup="habilitarSalvar()">
                 </div>
             </div>
-            <div class="grid gap-6 mb-6 md:grid-cols-3">
+            <div class="grid gap-3 mb-3 md:grid-cols-3">
                 <div>
                     <label class="label-form">Bairro</label>
                     <input type="text" v-model="conta.bairro" class="input-form" v-on:keyup="habilitarSalvar()"
@@ -163,7 +161,7 @@
                     </select>
                 </div>
             </div>
-            <div class="grid gap-6 mb-6 md:grid-cols-2">
+            <div class="grid gap-3 mb-3 md:grid-cols-2">
                 <div>
                     <label class="label-form">Complemento</label>
                     <select v-model="conta.complemento" @change="habilitarSalvar()"
@@ -181,7 +179,8 @@
 
             </div>
             <div class="mb-6">
-                <div class="flex my-5">
+                <label class="label-form">Módulos</label>
+                <div class="flex border items-center rounded-lg p-2 my-1">
 
                     <span class="label-form" v-for="m in modulos" :key="m.id">
                         <input required :id='"check" + m.id' @change="prepareArray()" class="mx-3" :checked="m.is_active"
@@ -239,6 +238,7 @@ export default {
             this.isDisabled = false
         },
         uploadFile() {
+            this.isDisabled = false
             this.img = this.$refs.file.files[0];
             var reader = new FileReader();
             reader.onload = (e) => {
@@ -331,11 +331,21 @@ export default {
         cancelar() {
             this.$router.push('/contas');
         },
+        mudarNomeModulo(){
+            let str = '';
+            for(let i = 0; i < this.modulos.length; i++){
+                str =  this.modulos[i].nome.slice(7);
+               
+                this.modulos[i].nome = str
+            }
+        },
         setConta() {
             http.get('/contas/' + this.$route.params.id)
                 .then(res => {
                     this.conta = res.data
                     this.modulos = res.data.modulos
+                    this.mudarNomeModulo();
+                    
 
                 })
                 .catch(e => {

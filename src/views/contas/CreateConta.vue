@@ -6,29 +6,28 @@
     <div class="container-fluid p-5">
 
         <form class="row g-3" v-on:submit.prevent="createConta(formD)">
-            <div class="grid gap-6 mb-6 md:grid-cols-2">
+            <div class="grid gap-3 mb-3 md:grid-cols-2">
                 <div class="flex flex-col items-start">
                     <div class="flex flex-col items-center justify-center">
                         <template v-if="img">
-                            <img id="img-empresa" class="border-2 max-h-36 border-gray-500  shadow-md duration-200"
+                            <img id="img-empresa" class="border-2 max-h-28 border-gray-500  shadow-md duration-200"
                                 :src="imagem">
                         </template>
                         <template v-else="">
-                            <img class="border-2 max-h-36 border-gray-500  shadow-md duration-200"
+                            <img class="border-2 max-h-28 border-gray-500  shadow-md duration-200"
                                 src="../../assets/img/sem-foto.png">
                         </template>
                         <div>
-                            <label title="Click to upload" for="file"
-                                class="bg-gray-200 py-1 text-sm font-semibold rounded-md px-5 cursor-pointer hover:bg-gray-300 duration-200">
+                            <label title="Click to upload" for="file"                              class="bg-gray-200 py-1 text-sm font-semibold rounded-md px-5 cursor-pointer hover:bg-gray-300 duration-200">
                                 Escolher imagem
                             </label>
                             <input @change="uploadFile()" hidden="" name="inputFoto" type="file" ref="file" id="file">
                         </div>
-                        {{ img.name ? img.name.slice(0, 15) + '...' : '' }}
+                        
                     </div>
                 </div>
             </div>
-            <div class="grid gap-6 mb-6 md:grid-cols-2">
+            <div class="grid gap-3 mb-3 md:grid-cols-2">
                 <div>
                     <label class="label-form">Titulo</label>
                     <input type="text" v-model="formD.titulo"
@@ -100,7 +99,7 @@
 
             </div>
 
-            <div class="grid gap-6 mb-6 md:grid-cols-2">
+            <div class="grid gap-3 mb-3 md:grid-cols-2">
                 <div>
                     <label class="label-form">Cep</label>
                     <input @blur="buscarCep()" type="text" v-model="formD.cep" v-mask="'##.###-###'"
@@ -115,7 +114,7 @@
                 </div>
 
             </div>
-            <div class="grid gap-6 mb-6 md:grid-cols-3">
+            <div class="grid gap-3 mb-3 md:grid-cols-3">
                 <div>
                     <label class="label-form">Bairro</label>
                     <input type="text" v-model="formD.bairro"
@@ -163,7 +162,7 @@
                     </select>
                 </div>
             </div>
-            <div class="grid gap-6 mb-6 md:grid-cols-2">
+            <div class="grid gap-3 mb-3 md:grid-cols-2">
                 <div>
                     <label class="label-form">Complemento</label>
                     <select v-model="formD.complemento"
@@ -181,10 +180,10 @@
                 </div>
             </div>
             <div class="mb-6">
+                <label class="label-form">Módulos</label>
+                <div class="flex border items-center rounded-lg p-2 my-1">
 
-                <div class="flex my-5">
-
-                    <span class="label-form" v-for="m in modulos" :key="m.id"><input @change="prepareArray()"
+                    <span class="label-form " v-for="m in modulos" :key="m.id"><input @change="prepareArray()"
                             class="mx-3" v-model="mod" type="checkbox" :value="m.id">{{ m.nome
                         }}</span>
                         <input required type="hidden"  :value="modString">
@@ -304,10 +303,19 @@ export default {
             }
             this.modString = a
         },
+        mudarNomeModulo(){
+            let str = '';
+            for(let i = 0; i < this.modulos.length; i++){
+                str =  this.modulos[i].nome.slice(7);
+               
+                this.modulos[i].nome = str
+            }
+        },
         getModulos() {
             http.get('/contas/0/modulos/')
                 .then(res => {
                     this.modulos = res.data.modulos
+                    this.mudarNomeModulo();
                 })
                 .catch(e => {
                     this.$swal("Oops...", e.response.data.detail, "error");

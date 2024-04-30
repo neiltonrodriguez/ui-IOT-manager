@@ -6,37 +6,35 @@
     <div class="container-fluid p-5">
 
         <form class="row g-3" v-on:submit.prevent="store(tipoativo)">
-            <div class="grid gap-6 mb-6 md:grid-cols-2">
+            <div class="grid gap-3 mb-3 md:grid-cols-2">
                 <div class="flex flex-col items-start">
                     <div class="flex flex-col items-center justify-center">
                         <template v-if="tipoativo.icone == null && img == ''">
-                            <img class="border-2 max-h-36 border-gray-500  shadow-md duration-200"
+                            <img class="max-h-28 rounded-lg border-gray-500  shadow-md duration-200"
                                 src="../../assets/img/sem-foto.png">
                         </template>
                         <template v-else-if="img">
-                            <img id="img-empresa" class="border-2 max-h-36 border-gray-500  shadow-md duration-200"
+                            <img id="img-empresa" class="max-h-28 rounded-lg border-gray-500  shadow-md duration-200"
                                 :src="imagem">
 
                         </template>
                         <template v-else>
-                            <img class="border-2 max-h-36 border-gray-500  shadow-md duration-200" :src="tipoativo.icone"
-                                width="150">
+                            <img class="max-h-28 rounded-lg border-gray-500  shadow-md duration-200" :src="tipoativo.icone">
 
                         </template>
                         <div>
-                            <label title="Click to upload" for="file"
-                                class="bg-gray-200 py-1 text-sm font-semibold rounded-md px-5 cursor-pointer hover:bg-gray-300 duration-200">
+                            <label title="Click to upload" for="file"                              class="bg-gray-200 py-1 text-sm font-semibold rounded-md px-5 cursor-pointer hover:bg-gray-300 duration-200">
                                 Escolher imagem
                             </label>
 
 
                             <input @change="uploadFile()" hidden="" name="inputFoto" type="file" ref="file" id="file">
                         </div>
-                        {{ img.name ? img.name.slice(0, 15) + '...' : '' }}
+                        
                     </div>
                 </div>
             </div>
-            <div class="grid gap-6 mb-6 md:grid-cols-2">
+            <div class="grid gap-3 mb-3 md:grid-cols-2">
 
 
                 <div>
@@ -97,6 +95,7 @@ export default {
     },
     methods: {
         uploadFile() {
+            this.isDisabled = false
             this.img = this.$refs.file.files[0];
             var reader = new FileReader();
             reader.onload = (e) => {

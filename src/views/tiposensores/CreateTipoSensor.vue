@@ -2,7 +2,7 @@
     <div>
         <h3 class="detalhes">CADASTRO DE TIPO DE SENSORES</h3>
     </div>
-  
+
     <div class="container-fluid p-5">
         <div class="w-full">
 
@@ -28,16 +28,16 @@
                     <div class="tab-content tab-space">
                         <div v-bind:class="{ 'hidden': openTab !== 1, 'block': openTab === 1 }">
                             <form class="row g-3" v-on:submit.prevent="createTipoSensor(formData)">
-                                <div class="grid gap-6 mb-6 md:grid-cols-2">
+                                <div class="grid gap-3 mb-3 md:grid-cols-2">
                                     <div class="flex flex-col items-start">
                                         <div class="flex flex-col items-center justify-center">
                                             <template v-if="img">
                                                 <img id="img-empresa"
-                                                    class="border-2 max-h-36 border-gray-500  shadow-md duration-200"
+                                                    class="border-2 max-h-28 border-gray-500  shadow-md duration-200"
                                                     :src="imagem">
                                             </template>
                                             <template v-else="">
-                                                <img class="border-2 max-h-36 border-gray-500  shadow-md duration-200"
+                                                <img class="border-2 max-h-28 border-gray-500  shadow-md duration-200"
                                                     src="../../assets/img/sem-foto.png">
                                             </template>
                                             <div>
@@ -48,14 +48,13 @@
                                                 <input @change="uploadFile()" hidden="" name="inputFoto" type="file"
                                                     ref="file" id="file">
                                             </div>
-                                            {{ img.name ? img.name.slice(0, 15) + '...' : '' }}
+
                                         </div>
                                     </div>
                                 </div>
-                                <div class="grid gap-6 mb-6 md:grid-cols-2">
+                                <div class="grid gap-3 mb-3 md:grid-cols-2">
                                     <div v-if="user.tipo == 4">
-                                        <label
-                                            class="label-form">Conta</label>
+                                        <label class="label-form">Conta</label>
                                         <select v-model="formData.conta" class="input-form">
                                             <option value="" disabled selected>Escolha a conta</option>
                                             <option v-for="c in contas" :key="c.id" :value="c.conta">{{ c.conta }}
@@ -63,24 +62,21 @@
                                         </select>
                                     </div>
                                     <div>
-                                        <label
-                                            class="label-form">Nome</label>
+                                        <label class="label-form">Nome</label>
                                         <input type="text" v-model="formData.nome" class="input-form" placeholder=""
                                             required>
                                     </div>
 
 
                                     <div>
-                                        <label
-                                            class="label-form">Geolocalização</label>
+                                        <label class="label-form">Geolocalização</label>
                                         <select class="input-form" v-model="formData.geolocalizacao">
                                             <option :value="true">Sim</option>
                                             <option :value="false">Não</option>
                                         </select>
                                     </div>
                                     <div>
-                                        <label
-                                            class="label-form">Descrição</label>
+                                        <label class="label-form">Descrição</label>
                                         <textarea rows="4" v-model="formData.descricao" class="input-form"
                                             placeholder=""></textarea>
                                     </div>
@@ -91,25 +87,23 @@
                                 <button type="button" @click="cancelar()"
                                     class="text-white bg-red-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mx-3">Cancelar</button>
                             </form>
-                            
+
                         </div>
                         <div v-bind:class="{ 'hidden': openTab !== 2, 'block': openTab === 2 }">
 
                             <form class="" v-on:submit.prevent="updateTipoSensor()">
-                               
+
                                 <div class="">
 
 
                                     <div class="flex gap-3 items-center justify-center">
                                         <div class="flex-1">
-                                            <label
-                                                class="label-form">Label</label>
+                                            <label class="label-form">Label</label>
                                             <input type="text" v-model="atributos.valor_ref1.label" class="input-form"
                                                 placeholder="">
                                         </div>
                                         <div class="flex-1">
-                                            <label
-                                                class="label-form">Parametro</label>
+                                            <label class="label-form">Parametro</label>
                                             <input type="text" v-model="atributos.valor_ref1.parametro"
                                                 class="input-form" placeholder="">
                                         </div>
@@ -126,14 +120,12 @@
                                     </div>
                                     <div class="flex gap-3 items-center justify-center">
                                         <div class="flex-1">
-                                            <label
-                                                class="label-form">Label</label>
+                                            <label class="label-form">Label</label>
                                             <input type="text" v-model="atributos.valor_ref2.label" class="input-form"
                                                 placeholder="">
                                         </div>
                                         <div class="flex-1">
-                                            <label
-                                                class="label-form">Parametro</label>
+                                            <label class="label-form">Parametro</label>
                                             <input type="text" v-model="atributos.valor_ref2.parametro"
                                                 class="input-form" placeholder="">
                                         </div>
@@ -150,14 +142,12 @@
                                     </div>
                                     <div class="flex gap-3 items-center justify-center">
                                         <div class="flex-1">
-                                            <label
-                                                class="label-form">Label</label>
+                                            <label class="label-form">Label</label>
                                             <input type="text" v-model="atributos.valor_ref3.label" class="input-form"
                                                 placeholder="">
                                         </div>
                                         <div class="flex-1">
-                                            <label
-                                                class="label-form">Parametro</label>
+                                            <label class="label-form">Parametro</label>
                                             <input type="text" v-model="atributos.valor_ref3.parametro"
                                                 class="input-form" placeholder="">
                                         </div>
@@ -174,14 +164,12 @@
                                     </div>
                                     <div class="flex gap-3 items-center justify-center">
                                         <div class="flex-1">
-                                            <label
-                                                class="label-form">Label</label>
+                                            <label class="label-form">Label</label>
                                             <input type="text" v-model="atributos.valor_ref4.label" class="input-form"
                                                 placeholder="">
                                         </div>
                                         <div class="flex-1">
-                                            <label
-                                                class="label-form">Parametro</label>
+                                            <label class="label-form">Parametro</label>
                                             <input type="text" v-model="atributos.valor_ref4.parametro"
                                                 class="input-form" placeholder="">
                                         </div>
@@ -198,14 +186,12 @@
                                     </div>
                                     <div class="flex gap-3 items-center justify-center">
                                         <div class="flex-1">
-                                            <label
-                                                class="label-form">Label</label>
+                                            <label class="label-form">Label</label>
                                             <input type="text" v-model="atributos.valor_ref5.label" class="input-form"
                                                 placeholder="">
                                         </div>
                                         <div class="flex-1">
-                                            <label
-                                                class="label-form">Parametro</label>
+                                            <label class="label-form">Parametro</label>
                                             <input type="text" v-model="atributos.valor_ref5.parametro"
                                                 class="input-form" placeholder="">
                                         </div>
@@ -222,14 +208,12 @@
                                     </div>
                                     <div class="flex gap-3 items-center justify-center">
                                         <div class="flex-1">
-                                            <label
-                                                class="label-form">Label</label>
+                                            <label class="label-form">Label</label>
                                             <input type="text" v-model="atributos.valor_ref6.label" class="input-form"
                                                 placeholder="">
                                         </div>
                                         <div class="flex-1">
-                                            <label
-                                                class="label-form">Parametro</label>
+                                            <label class="label-form">Parametro</label>
                                             <input type="text" v-model="atributos.valor_ref6.parametro"
                                                 class="input-form" placeholder="">
                                         </div>
@@ -246,14 +230,12 @@
                                     </div>
                                     <div class="flex gap-3 items-center justify-center">
                                         <div class="flex-1">
-                                            <label
-                                                class="label-form">Label</label>
+                                            <label class="label-form">Label</label>
                                             <input type="text" v-model="atributos.valor_ref7.label" class="input-form"
                                                 placeholder="">
                                         </div>
                                         <div class="flex-1">
-                                            <label
-                                                class="label-form">Parametro</label>
+                                            <label class="label-form">Parametro</label>
                                             <input type="text" v-model="atributos.valor_ref7.parametro"
                                                 class="input-form" placeholder="">
                                         </div>
@@ -270,14 +252,12 @@
                                     </div>
                                     <div class="flex gap-3 items-center justify-center">
                                         <div class="flex-1">
-                                            <label
-                                                class="label-form">Label</label>
+                                            <label class="label-form">Label</label>
                                             <input type="text" v-model="atributos.valor_ref8.label" class="input-form"
                                                 placeholder="">
                                         </div>
                                         <div class="flex-1">
-                                            <label
-                                                class="label-form">Parametro</label>
+                                            <label class="label-form">Parametro</label>
                                             <input type="text" v-model="atributos.valor_ref8.parametro"
                                                 class="input-form" placeholder="">
                                         </div>
@@ -294,14 +274,12 @@
                                     </div>
                                     <div class="flex gap-3 items-center justify-center">
                                         <div class="flex-1">
-                                            <label
-                                                class="label-form">Label</label>
+                                            <label class="label-form">Label</label>
                                             <input type="text" v-model="atributos.valor_ref9.label" class="input-form"
                                                 placeholder="">
                                         </div>
                                         <div class="flex-1">
-                                            <label
-                                                class="label-form">Parametro</label>
+                                            <label class="label-form">Parametro</label>
                                             <input type="text" v-model="atributos.valor_ref9.parametro"
                                                 class="input-form" placeholder="">
                                         </div>
@@ -318,14 +296,12 @@
                                     </div>
                                     <div class="flex gap-3 items-center justify-center">
                                         <div class="flex-1">
-                                            <label
-                                                class="label-form">Label</label>
+                                            <label class="label-form">Label</label>
                                             <input type="text" v-model="atributos.valor_ref10.label" class="input-form"
                                                 placeholder="">
                                         </div>
                                         <div class="flex-1">
-                                            <label
-                                                class="label-form">Parametro</label>
+                                            <label class="label-form">Parametro</label>
                                             <input type="text" v-model="atributos.valor_ref10.parametro"
                                                 class="input-form" placeholder="">
                                         </div>

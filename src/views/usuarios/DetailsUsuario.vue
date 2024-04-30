@@ -6,48 +6,45 @@
     <div class="container-fluid p-5">
 
         <form class="row g-3" v-on:submit.prevent="store(usuario)">
-            <div class="grid gap-6 mb-6 md:grid-cols-2">
+            <div class="grid gap-3 mb-3 md:grid-cols-2">
                 <div class="flex flex-col items-start">
                     <div class="flex flex-col items-center justify-center">
                         <template v-if="usuario.foto == null && img == ''">
-                            <img class="border-2 max-h-36 border-gray-500  shadow-md duration-200"
+                            <img class="max-h-28 rounded-lg border-gray-500  shadow-md duration-200"
                                 src="../../assets/img/sem-foto.png">
                         </template>
                         <template v-else-if="img">
-                            <img id="img-empresa" class="border-2 max-h-36 border-gray-500  shadow-md duration-200"
+                            <img id="img-empresa" class="max-h-28 rounded-lg border-gray-500  shadow-md duration-200"
                                 :src="imagem">
 
                         </template>
                         <template v-else>
-                            <img class="border-2 max-h-36 border-gray-500  shadow-md duration-200" :src="usuario.foto"
-                                width="150">
+                            <img class="max-h-28 rounded-lg border-gray-500  shadow-md duration-200" :src="usuario.foto">
 
                         </template>
                         <div>
-                            <label title="Click to upload" for="file"
+                            <label title="Click to upload" for="file" 
                                 class="bg-gray-200 py-1 text-sm font-semibold rounded-md px-5 cursor-pointer hover:bg-gray-300 duration-200">
                                 Escolher imagem
                             </label>
 
 
-                            <input @change="uploadFile()" hidden="" name="inputFoto" type="file" ref="file" id="file">
+                            <input @change="uploadFile()" hidden="" name="inputFoto"
+                                type="file" ref="file" id="file">
                         </div>
-                        {{ img.name ? img.name.slice(0, 15) + '...' : '' }}
+
                     </div>
                 </div>
             </div>
-            <div class="grid gap-6 mb-6 md:grid-cols-2">
+            <div class="grid gap-3 mb-3 md:grid-cols-2">
                 <div>
-                    <label class="label-form">Primeiro
-                        Nome</label>
-                    <input type="text" v-model="usuario.first_name" v-on:keyup="habilitarSalvar()"
-                        class="input-form"
+                    <label class="label-form">Primeiro Nome</label>
+                    <input type="text" v-model="usuario.first_name" v-on:keyup="habilitarSalvar()" class="input-form"
                         placeholder="" required>
                 </div>
                 <div>
                     <label class="label-form">Sobrenome</label>
-                    <input type="text" v-model="usuario.last_name" v-on:keyup="habilitarSalvar()"
-                        class="input-form"
+                    <input type="text" v-model="usuario.last_name" v-on:keyup="habilitarSalvar()" class="input-form"
                         placeholder="">
                 </div>
 
@@ -55,34 +52,28 @@
 
                 <div>
                     <label class="label-form">Email</label>
-                    <input type="email" v-model="usuario.email" v-on:keyup="habilitarSalvar()"
-                        class="input-form"
+                    <input type="email" v-model="usuario.email" v-on:keyup="habilitarSalvar()" class="input-form"
                         placeholder="">
                 </div>
                 <div>
                     <label class="label-form">Login</label>
                     <input type="text" v-model="usuario.usuario" disabled v-on:keyup="habilitarSalvar()"
-                        class="input-form  "
-                        placeholder="">
+                        class="input-form  " placeholder="">
                 </div>
                 <div v-if="usuario.origemusuario !== 'ldap'">
                     <label class="label-form">Senha</label>
-                    <input type="password" v-model="password" v-on:keyup="habilitarSalvar()"
-                        class="input-form  "
+                    <input type="password" v-model="password" v-on:keyup="habilitarSalvar()" class="input-form  "
                         placeholder="">
                 </div>
                 <div>
                     <label class="label-form">CPF</label>
                     <input type="text" v-model="usuario.cpf" v-mask="'###.###.###-##'" v-on:keyup="habilitarSalvar()"
-                        class="input-form  "
-                        placeholder="">
+                        class="input-form  " placeholder="">
                 </div>
 
                 <div v-if="user.tipo == 4">
                     <label class="label-form">Conta</label>
-                    <input type="text" v-model="usuario.conta" disabled
-                        class="input-form  "
-                        placeholder="">
+                    <input type="text" v-model="usuario.conta" disabled class="input-form  " placeholder="">
 
                 </div>
 
@@ -95,7 +86,7 @@
                     </select>
                 </div>
             </div>
-            <div class="grid gap-6 mb-6 md:grid-cols-2">
+            <div class="grid gap-3 mb-3 md:grid-cols-2">
 
                 <div>
                     <label class="label-form">Tipo
@@ -117,58 +108,47 @@
                     </select>
                 </div>
             </div>
-            <div class="grid gap-6 mb-6 md:grid-cols-2">
+            <div class="grid gap-3 mb-3 md:grid-cols-2">
                 <div>
                     <label class="label-form">Telefone
                         1</label>
                     <input type="text" v-model="usuario.telefone1" v-mask="['(##) ####-####', '(##) #####-####']"
-                        v-on:keyup="habilitarSalvar()"
-                        class="input-form  "
-                        placeholder="" required>
+                        v-on:keyup="habilitarSalvar()" class="input-form  " placeholder="" required>
                 </div>
                 <div>
                     <label class="label-form">Telefone
                         2</label>
                     <input type="text" v-model="usuario.telefone2" v-mask="['(##) ####-####', '(##) #####-####']"
-                        v-on:keyup="habilitarSalvar()"
-                        class="input-form  "
-                        placeholder="">
+                        v-on:keyup="habilitarSalvar()" class="input-form  " placeholder="">
                 </div>
 
             </div>
-            <div class="grid gap-6 mb-6 md:grid-cols-2">
+            <div class="grid gap-3 mb-3 md:grid-cols-2">
                 <div>
                     <label class="label-form">Cep</label>
                     <input @blur="buscarCep()" type="text" v-model="usuario.cep" v-mask="'##.###-###'"
-                        v-on:keyup="habilitarSalvar()"
-                        class="input-form  "
-                        placeholder="">
+                        v-on:keyup="habilitarSalvar()" class="input-form  " placeholder="">
                 </div>
                 <div>
                     <label class="label-form">Endereço</label>
-                    <input type="text" v-model="usuario.logradouro" v-on:keyup="habilitarSalvar()"
-                        class="input-form  "
+                    <input type="text" v-model="usuario.logradouro" v-on:keyup="habilitarSalvar()" class="input-form  "
                         placeholder="">
                 </div>
             </div>
-            <div class="grid gap-6 mb-6 md:grid-cols-3">
+            <div class="grid gap-3 mb-3 md:grid-cols-3">
                 <div>
                     <label class="label-form">Bairro</label>
-                    <input type="text" v-model="usuario.bairro" v-on:keyup="habilitarSalvar()"
-                        class="input-form  "
+                    <input type="text" v-model="usuario.bairro" v-on:keyup="habilitarSalvar()" class="input-form  "
                         placeholder="">
                 </div>
                 <div>
                     <label class="label-form">Cidade</label>
-                    <input type="text" v-model="usuario.cidade" v-on:keyup="habilitarSalvar()"
-                        class="input-form  "
+                    <input type="text" v-model="usuario.cidade" v-on:keyup="habilitarSalvar()" class="input-form  "
                         placeholder="">
                 </div>
                 <div>
-                    <label for="confirm_password"
-                        class="label-form">Estado</label>
-                    <select v-model="usuario.uf" @change="habilitarSalvar()"
-                        class="input-form  ">
+                    <label for="confirm_password" class="label-form">Estado</label>
+                    <select v-model="usuario.uf" @change="habilitarSalvar()" class="input-form  ">
                         <option value="" disabled selected>Filtrar por UF</option>
                         <option value="AC">Acre</option>
                         <option value="AL">Alagoas</option>
@@ -208,8 +188,7 @@
                     </select>
                 </div>
                 <div>
-                    <label for="confirm_password"
-                        class="label-form">Número</label>
+                    <label for="confirm_password" class="label-form">Número</label>
                     <input type="text" v-model="usuario.numero" v-on:keyup="habilitarSalvar()" class="input-form"
                         placeholder="">
                 </div>
@@ -279,6 +258,7 @@ export default {
             this.isDisabled = false
         },
         uploadFile() {
+            this.isDisabled = false
             this.img = this.$refs.file.files[0];
             var reader = new FileReader();
             reader.onload = (e) => {
