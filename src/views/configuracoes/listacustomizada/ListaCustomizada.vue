@@ -47,14 +47,21 @@
                 </div>
                 <button type="submit"
                     class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Salvar</button>
+                <button :disabled="idsForDelete.length === 0" @click="deleteSelecionados()"
+                    class="px-4 mx-3 py-2 font-semibold text-sm bg-red-800 disabled:bg-gray-300 text-white rounded-md shadow-sm">Deletar
+                    Selecionados</button>
             </form>
             <table class="border-collapse table-fixed w-full text-sm">
                 <thead>
                     <tr>
                         <th
+                            class="border-b dark:border-slate-600 font-medium p-2 text-slate-400 dark:text-slate-200 text-left">
+                            <input type="checkbox" id="checkAll" @click="checkAllItems()" :value="true">
+                        </th>
+                        <th
                             class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
                             Título</th>
-                        
+
                         <th
                             class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
                             Tipo de lista</th>
@@ -75,13 +82,15 @@
                     </tr>
                 </thead>
                 <tbody class="bg-white dark:bg-slate-800">
-                    <tr class="hover:bg-gray-100 cursor-pointer duration-200" 
-                        v-for="li in  listas" :key="li.id">
-
+                    <tr class="hover:bg-gray-100 cursor-pointer duration-200" v-for="li in listas" :key="li.id">
+                        <td
+                            class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
+                            <input type="checkbox" :id="'check' + li.id" :value="li.id" v-model="idsForDelete">
+                        </td>
                         <td @click="detailsLista(li.id)"
                             class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
                             {{ li.titulo }}</td>
-                       
+
                         <td @click="detailsLista(li.id)"
                             class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
                             {{ li.tipolista }}</td>
@@ -159,6 +168,9 @@ export default {
     },
     data() {
         return {
+            idsForDelete: [],
+            items: {},
+
             titleBtn: "mostrar filtro avançado",
             isVisible: false,
             lista: "",
@@ -189,6 +201,63 @@ export default {
         };
     },
     methods: {
+        
+
+checkAllItems(){
+            const element = document.getElementById('checkAll')
+            let arr = []
+            if (element.checked){
+                for(let x = 0; x < this.listas.length; x++){
+                    console.log(x);
+                   const e = document.getElementById('check' + this.listas[x].id);
+                   e.checked = true
+                   arr.push(e.value)
+                }
+                // this.idsForDelete = arr
+            } else {
+                for(let i = 0; i < this.listas.length; i++){
+                   const e = document.getElementById('check' + this.listas[i].id);
+                   e.checked = false
+                }
+                arr = []
+            }
+
+            this.idsForDelete = arr
+        },
+
+deleteSelecionados() {
+            this.items.items = this.idsForDelete
+            this.$swal.fire({
+                title: 'Deseja Realmente Excluir todos os selecionados?',
+                text: "Essa ação não pode ser revertida!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Cancelar',
+                confirmButtonText: 'Sim, Excluir!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    http.post('/customlistas/itens/delete/', this.items)
+                        .then(res => {
+                            this.getAll();
+                            this.$swal.fire({
+                                icon: 'success',
+                                title: res.data.detail,
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+                        })
+                        .catch(e => {
+                            this.$swal("Oops...", e.response.data.detail, "error");
+                            if (e.response.data.detail == "Você não tem permissão para executar essa ação.") {
+                                this.$router.push('/')
+                            }
+                        });
+                }
+            })
+
+        },
         mostrarLista(lista) {
             this.list = lista
             this.getModulos(this.list);
@@ -276,8 +345,8 @@ export default {
         },
         createLista(formData) {
             let form = ''
-            if (this.user.tipo === 4){
-               form = {
+            if (this.user.tipo === 4) {
+                form = {
                     titulo: formData.titulo,
                     descricao: formData.descricao,
                     conta: formData.conta,
@@ -290,7 +359,7 @@ export default {
                     modulos: this.modString,
                 }
             }
-           
+
             const url = `/customlistas/${this.list}/lista/`
             http.post(url, form)
                 .then(res => {
@@ -326,7 +395,7 @@ export default {
                 });
 
         },
-     
+
         changePage(i) {
             this.getAll(i);
             this.offset = 0
@@ -357,7 +426,7 @@ export default {
         getListaCustomizada() {
             http.get('/customlistas/todos/tipos/')
                 .then(res => {
-                    this.listacustomizada = res.data                
+                    this.listacustomizada = res.data
                 })
                 .catch(e => {
                     this.$swal("Oops...", e.response.data.detail, "error");

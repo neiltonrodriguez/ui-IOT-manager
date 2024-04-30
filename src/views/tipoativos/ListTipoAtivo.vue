@@ -188,7 +188,7 @@ export default {
                 confirmButtonText: 'Sim, Excluir!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    http.delete('/ativotipos/itens/delete/', this.items)
+                    http.post('/ativotipos/itens/delete/', this.items)
                         .then(res => {
                             this.getAll();
                             this.$swal.fire({

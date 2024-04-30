@@ -179,7 +179,7 @@ export default {
                 confirmButtonText: 'Sim, Excluir!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    http.delete('/ativogrupos/itens/delete/', this.items)
+                    http.post('/ativogrupos/itens/delete/', this.items)
                         .then(res => {
                             this.getAll();
                             this.$swal.fire({

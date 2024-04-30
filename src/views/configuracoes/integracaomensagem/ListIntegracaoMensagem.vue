@@ -2,7 +2,7 @@
     <div>
         <button type="button" @click="mostrarSearch()"
             class="px-4 w-full py-2 my-3 font-semibold text-sm bg-blue-700  hover:bg-blue-900 text-white rounded-md shadow-sm">{{
-            titleBtn }}</button>
+                titleBtn }}</button>
         <Filtro @meu-evento="filtrar" :filterConta="false" :filterUf="false" :filterEmpresa="false"
             :filterGrupoSensor="false" :filterDepartamento="false" :filterStatus="true" :filterTipo="false" />
     </div>
@@ -11,17 +11,20 @@
             <button @click="accessRoute('create-integracaomensagem')"
                 class="px-4 py-2 font-semibold text-sm bg-blue-800 text-white rounded-md shadow-sm">Nova integracao de
                 mensagem</button>
+            <button :disabled="idsForDelete.length === 0" @click="deleteSelecionados()"
+                class="px-4 mx-3 py-2 font-semibold text-sm bg-red-800 disabled:bg-gray-300 text-white rounded-md shadow-sm">Deletar
+                Selecionados</button>
         </div>
         <table class="border-collapse table-fixed w-full text-sm">
             <thead>
                 <tr>
-
+                    <th
+                        class="border-b dark:border-slate-600 font-medium p-2 text-slate-400 dark:text-slate-200 text-left">
+                        <input type="checkbox" id="checkAll" @click="checkAllItems()" :value="true">
+                    </th>
                     <th
                         class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
                         Titulo</th>
-
-                    
-
                     <th v-if="user.tipo == 4"
                         class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
                         Criado por</th>
@@ -38,15 +41,13 @@
                 </tr>
             </thead>
             <tbody class="bg-white dark:bg-slate-800">
-                <tr class="hover:bg-gray-100 cursor-pointer duration-200" 
-                    v-for="i in  mensagemintegracao" :key="i.id">
-
-                    <td @click="detailsIntegracaoMensagem(i.id)" class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
-                        {{
-                        i.titulo }}</td>
-
-                    
-
+                <tr class="hover:bg-gray-100 cursor-pointer duration-200" v-for="i in mensagemintegracao" :key="i.id">
+                    <td class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
+                        <input type="checkbox" :id="'check' + i.id" :value="i.id" v-model="idsForDelete">
+                    </td>
+                    <td @click="detailsIntegracaoMensagem(i.id)"
+                        class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
+                        {{ i.titulo }}</td>
                     <td @click="detailsIntegracaoMensagem(i.id)" v-if="user.tipo == 4"
                         class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
                         {{ i.criadopor }}</td>
@@ -66,8 +67,7 @@
                             </div>
                         </template>
                     </td>
-                    <td
-                        class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
+                    <td class="border-b border-slate-100 dark:border-slate-700 p-2 text-slate-500 dark:text-slate-400">
                         <button @click="detailsIntegracaoMensagem(i.id)" class="btn">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1"
                                 stroke="currentColor" class="w-6 h-6">
@@ -117,6 +117,8 @@ export default {
     },
     data() {
         return {
+            idsForDelete: [],
+            items: {},
             titleBtn: "mostrar filtro avançado",
             isVisible: false,
             user: {},
@@ -139,6 +141,61 @@ export default {
         };
     },
     methods: {
+        checkAllItems() {
+            const element = document.getElementById('checkAll')
+            let arr = []
+            if (element.checked) {
+                for (let x = 0; x < this.mensagemintegracao.length; x++) {
+                    console.log(x);
+                    const e = document.getElementById('check' + this.mensagemintegracao[x].id);
+                    e.checked = true
+                    arr.push(e.value)
+                }
+                // this.idsForDelete = arr
+            } else {
+                for (let i = 0; i < this.mensagemintegracao.length; i++) {
+                    const e = document.getElementById('check' + this.mensagemintegracao[i].id);
+                    e.checked = false
+                }
+                arr = []
+            }
+
+            this.idsForDelete = arr
+        },
+
+        deleteSelecionados() {
+            this.items.items = this.idsForDelete
+            this.$swal.fire({
+                title: 'Deseja Realmente Excluir todos os selecionados?',
+                text: "Essa ação não pode ser revertida!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Cancelar',
+                confirmButtonText: 'Sim, Excluir!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    http.post('/mensagemintegracao/itens/delete/', this.items)
+                        .then(res => {
+                            this.getAll();
+                            this.$swal.fire({
+                                icon: 'success',
+                                title: res.data.detail,
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+                        })
+                        .catch(e => {
+                            this.$swal("Oops...", e.response.data.detail, "error");
+                            if (e.response.data.detail == "Você não tem permissão para executar essa ação.") {
+                                this.$router.push('/')
+                            }
+                        });
+                }
+            })
+
+        },
         getAll(i = null) {
             if (i) {
                 this.offset = i
