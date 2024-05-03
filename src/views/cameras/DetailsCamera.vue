@@ -826,7 +826,7 @@ export default {
                 });
         },
         cancelar() {
-            this.$router.push('/tipoativos');
+            this.$router.push('/cameras');
         },
         habilitarSalvar() {
             this.isDisabled = false
