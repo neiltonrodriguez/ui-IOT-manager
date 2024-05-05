@@ -144,7 +144,7 @@
                                         </div>
                                     </div>
                                     <div class="border">
-                                        <table class="border-collapse table-fixed w-full text-sm">
+                                        <table class="border-collapse w-full text-sm">
                                             <thead>
 
                                             </thead>
@@ -235,7 +235,7 @@
                                         </div>
                                     </div>
                                     <div class="border">
-                                        <table class="border-collapse table-fixed w-full text-sm">
+                                        <table class="border-collapse w-full text-sm">
                                             <thead>
 
                                             </thead>

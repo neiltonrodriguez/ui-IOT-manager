@@ -88,7 +88,7 @@
                         placeholder="">
                 </div>
                 <div>
-                    <label class="label-form">Cep</label>
+                    <label class="label-form">CEP</label>
                     <input type="text" v-model="perfil.cep" v-mask="'##.###-###'" v-on:keyup="habilitarSalvar()"
                         class="input-form"
                         placeholder="">
@@ -150,7 +150,7 @@
                     </select>
                 </div>
                 <div>
-                    <label class="label-form">Comlemento</label>
+                    <label class="label-form">Complemento</label>
                     <select v-model="perfil.complemento" @change="habilitarSalvar()"
                         class="input-form">
                         <option value="" disabled selected>Escolha o complemento</option>

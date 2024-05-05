@@ -194,7 +194,7 @@
                                 class="text-white bg-green-700 mb-5 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mx-3">Novo
                                 Agendamento</button>
 
-                            <table class="border-collapse table-fixed w-full text-sm">
+                            <table class="border-collapse w-full text-sm">
                                 <thead>
                                     <tr>
                                         <th
@@ -274,7 +274,7 @@
                                     :class="{ current: page === current }" @click="changePage(index)">
                                     {{ page }}
                                 </button>
-                                <span class="mx-4 text-xd font-semibold text-blue-700">total de registros:</span> {{
+                                <span class="mx-4 text-xd font-semibold text-blue-700">Total:</span> {{
                                     total }}
                             </div>
 
@@ -454,7 +454,7 @@
                                     Próximo
                                 </button>
 
-                                <span class="mx-4 text-xd font-semibold text-blue-700">total: </span> {{
+                                <span class="mx-4 text-xd font-semibold text-blue-700">Total: </span> {{
                                     total1 }}
                             </div>
                         </div>

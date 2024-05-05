@@ -61,7 +61,7 @@
                 </div>
                 <div class="basis-1/2">
                     <div class="border">
-                        <table class="border-collapse table-fixed w-full text-sm">
+                        <table class="border-collapse w-full text-sm">
                             <thead>
 
                             </thead>

@@ -1,8 +1,5 @@
 <template>
     <div>
-        <button type="button" @click="mostrarSearch()"
-            class="px-4 w-full py-2 my-3 font-semibold text-sm bg-blue-700  hover:bg-blue-900 text-white rounded-md shadow-sm">{{
-                titleBtn }}</button>
         <Filtro @meu-evento="filtrar" :filterConta="false" :filterUf="false" :filterEmpresa="false"
             :filterGrupoSensor="false" :filterDepartamento="false" :filterStatus="true" :filterTipo="false" />
     </div>
@@ -11,11 +8,10 @@
             <button @click="accessRoute('create-integracaomensagem')"
                 class="px-4 py-2 font-semibold text-sm bg-blue-800 text-white rounded-md shadow-sm">Nova integracao de
                 mensagem</button>
-            <button :disabled="idsForDelete.length === 0" @click="deleteAllSelected()"
-                class="px-4 mx-3 py-2 font-semibold text-sm bg-red-800 disabled:bg-gray-300 text-white rounded-md shadow-sm">Deletar
-                Selecionados</button>
+            <button :disabled="idsForDelete.length === 0" 
+ @click="deleteAllSelected()" class="px-4 mx-3 py-2 font-semibold text-sm bg-red-800 disabled:bg-gray-300 text-white rounded-md shadow-sm">Excluir Selecionados</button>
         </div>
-        <table class="border-collapse table-fixed w-full text-sm">
+        <table class="border-collapse w-full text-sm">
             <thead>
                 <tr>
                     <th
@@ -97,7 +93,7 @@
                 :class="{ current: page === current }" @click="changePage(index)">
                 {{ page }}
             </button>
-            <span class="mx-4 text-xd font-semibold text-blue-700">total de registros:</span> {{ total }}
+            <span class="mx-4 text-xd font-semibold text-blue-700">Total:</span> {{ total }}
         </div>
     </div>
 </template>

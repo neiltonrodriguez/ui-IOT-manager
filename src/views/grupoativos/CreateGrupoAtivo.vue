@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h3 class="text-start">CADASTRO DE GRUPO DE ATIVOS</h3>
+        <h3 class="detalhes">CADASTRO DE GRUPO DE ATIVOS</h3>
     </div>
   
     <div class="container-fluid p-5">

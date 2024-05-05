@@ -8,9 +8,8 @@
             <button type="button" @click="accessRoute('create-usuario')"
                 class="px-4 py-2 font-semibold text-sm bg-blue-700  hover:bg-blue-900 text-white rounded-md shadow-sm">Novo
                 Usuário</button>
-            <button :disabled="idsForDelete.length === 0" @click="deleteAllSelected()"
-                class="px-4 mx-3 py-2 font-semibold text-sm bg-red-800 disabled:bg-gray-300 text-white rounded-md shadow-sm">Deletar
-                Selecionados</button>
+            <button :disabled="idsForDelete.length === 0" 
+ @click="deleteAllSelected()" class="px-4 mx-3 py-2 font-semibold text-sm bg-red-800 disabled:bg-gray-300 text-white rounded-md shadow-sm">Excluir Selecionados</button>
         </div>
 
         <table class="border-collapse  w-full text-sm">
@@ -23,7 +22,7 @@
 
                     <th
                         class="border-b dark:border-slate-600 font-medium p-4 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
-                        FOTO</th>
+                        Foto</th>
                     <th
                         class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
                         Nome Completo</th>
@@ -134,7 +133,7 @@
                 Próximo
             </button>
 
-            <span class="mx-4 text-xd font-semibold text-blue-700">total: </span> {{
+            <span class="mx-4 text-xd font-semibold text-blue-700">Total: </span> {{
                 total }}
         </div>
 

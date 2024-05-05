@@ -118,7 +118,7 @@
                         placeholder="">
                 </div>
                 <div>
-                    <label class="label-form">Cep</label>
+                    <label class="label-form">CEP</label>
                     <input @blur="buscarCep()" type="text" v-model="formD.cep" v-mask="'##.###-###'"
                         class="input-form"
                         placeholder="">

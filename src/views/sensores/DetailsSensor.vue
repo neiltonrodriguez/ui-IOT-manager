@@ -291,7 +291,7 @@
                                                     </select>
                                                 </div>
                                                 <div>
-                                                    <label class="label-form">tipo de condição</label>
+                                                    <label class="label-form">Tipo de condição</label>
                                                     <select class="input-form">
                                                         <option value="" selected disabled>(numero)
                                                         </option>
@@ -341,8 +341,7 @@
 
                                         </div>
                                         <button type="button" @click="cont++"
-                                                class="text-white mt-3 mb-5 bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">adicionar
-                                                mais condiçao</button>
+                                                class="text-white mt-3 mb-5 bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Adicionar mais condições</button>
                                         <div class="grid gap-3 mb-3 md:grid-cols-2">
                                             <div>
                                                 <label class="label-form ">Título</label>
@@ -496,7 +495,7 @@
                                         :class="{ current: page === current }" @click="changePage(index)">
                                         {{ page }}
                                     </button>
-                                    <span class="mx-4 text-xd font-semibold text-blue-700">total de registros:</span> {{
+                                    <span class="mx-4 text-xd font-semibold text-blue-700">Total:</span> {{
                                         total }}
                                 </div>
                                 <button type="button" @click="cancelar()"
@@ -586,7 +585,7 @@
                                         Próximo
                                     </button>
 
-                                    <span class="mx-4 text-xd font-semibold text-blue-700">total: </span> {{
+                                    <span class="mx-4 text-xd font-semibold text-blue-700">Total: </span> {{
                                         total1 }}
                                 </div>
                                 <hr>
@@ -904,6 +903,7 @@ export default {
             if (n === "next") {
                 let x = this.next1.indexOf("&");
                 i = this.next1.substring(x + 8, 100).trim();
+                
             } else {
                 let x = this.prev1.indexOf("&");
                 if (x != -1) {

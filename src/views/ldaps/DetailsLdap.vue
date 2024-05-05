@@ -276,7 +276,7 @@
                                                 v-on:keyup="habilitarSalvar()" class="input-form" placeholder="">
                                         </div>
                                         <div @click="ocultarCalendario()">
-                                            <label class="label-form">Open Ldap AtributoF Estado DU</label>
+                                            <label class="label-form">Open Ldap Atributo Estado DU</label>
                                             <input type="text" v-model="ldap.open_ldap_atributo_state_du"
                                                 v-on:keyup="habilitarSalvar()" class="input-form" placeholder="">
                                         </div>
@@ -292,7 +292,7 @@
                                 <div>
                                     <button
                                         class="mx-1 my-5 px-4 py-2 font-semibold text-sm bg-green-800 text-white rounded-md shadow-sm"
-                                        @click="btnMostrarAddAtributo()">Adicionar mais Atributos</button>
+                                        @click="btnMostrarAddAtributo()">Adicionar mais atributos</button>
 
                                 </div>
 
@@ -327,7 +327,7 @@
 
                                             </div>
                                             <button type="submit" v-bind:disabled="isDisabled"
-                                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">salvar</button><button
+                                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Salvar</button><button
                                                 type="submit" @click="btnMostrarAddAtributo()"
                                                 class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 mx-3 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">Fechar</button>
                                         </div>
@@ -337,7 +337,7 @@
                                 </div>
                                 <form class="row g-3">
                                     <div class="grid gap-6 mb-6 md:grid-cols-1">
-                                        <table class="border-collapse table-fixed w-full text-sm">
+                                        <table class="border-collapse w-full text-sm">
                                             <thead>
                                                 <tr>
                                                     <th
@@ -443,9 +443,9 @@
                                                 </div>
                                             </div>
                                             <button type="submit" v-bind:disabled="isDisabled"
-                                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">salvar</button><button
+                                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Salvar</button><button
                                                 type="button" @click="btnMostrarAddAtributo()"
-                                                class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 mx-3 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">fechar</button>
+                                                class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 mx-3 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">Fechar</button>
                                         </div>
 
 
@@ -453,7 +453,7 @@
                                 </div>
                                 <form class="row g-3">
                                     <div class="grid gap-6 mb-6 md:grid-cols-1">
-                                        <table class="border-collapse table-fixed w-full text-sm">
+                                        <table class="border-collapse w-full text-sm">
                                             <thead>
                                                 <tr>
 
@@ -542,9 +542,9 @@
                                                 </div>
                                             </div>
                                             <button type="submit" v-bind:disabled="isDisabled"
-                                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">salvar</button>
+                                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Salvar</button>
                                             <button type="button" @click="btnMostrarAddAtributo()"
-                                                class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 mx-3 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">fechar</button>
+                                                class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 mx-3 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">Fechar</button>
                                         </div>
 
 
@@ -552,7 +552,7 @@
                                 </div>
                                 <form class="row g-3">
                                     <div class="grid gap-6 mb-6 md:grid-cols-1">
-                                        <table class="border-collapse table-fixed w-full text-sm">
+                                        <table class="border-collapse w-full text-sm">
                                             <thead>
                                                 <tr>
 
@@ -606,7 +606,7 @@
 
                                     <button
                                         class="mx-1 my-5 px-4 py-2 font-semibold text-sm bg-green-800 text-white rounded-md shadow-sm"
-                                        @click="btnMostrarAddAtributo()">Adicionar mais Atributos</button>
+                                        @click="btnMostrarAddAtributo()">Adicionar mais atributos</button>
 
                                 </div>
 
@@ -641,9 +641,9 @@
                                                 </div>
                                             </div>
                                             <button type="submit" v-bind:disabled="isDisabled"
-                                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">salvar</button>
+                                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Salvar</button>
                                             <button type="submit" @click="btnMostrarAddAtributo()"
-                                                class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 mx-3 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">Cancelar</button>
+                                                class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 mx-3 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">Fecharar</button>
                                         </div>
 
 
@@ -651,7 +651,7 @@
                                 </div>
                                 <form class="row g-3">
                                     <div class="grid gap-6 mb-6 md:grid-cols-1">
-                                        <table class="border-collapse table-fixed w-full text-sm">
+                                        <table class="border-collapse w-full text-sm">
                                             <thead>
                                                 <tr>
 
@@ -719,7 +719,7 @@
                                 <div>
                                     <button
                                         class="mx-1 my-5 px-4 py-2 font-semibold text-sm bg-green-800 text-white rounded-md shadow-sm"
-                                        @click="btnMostrarAddOUsensor()">Adicionar mais Atributos</button>
+                                        @click="btnMostrarAddOUsensor()">Adicionar mais atributos</button>
                                     <div v-if="mostrarAddOUsensor">
                                         <form class="row g-3" v-on:submit.prevent="createOUsensor()">
                                             <div class="border px-3 py-3 my-3 rounded-lg">
@@ -749,9 +749,9 @@
                                                     </div>
                                                 </div>
                                                 <button type="submit" v-bind:disabled="isDisabled"
-                                                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">salvar</button><button
+                                                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Salvar</button><button
                                                     type="button" @click="btnMostrarAddAtributo()"
-                                                    class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 mx-3 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">fechar</button>
+                                                    class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 mx-3 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">Fechar</button>
                                             </div>
 
 
@@ -760,7 +760,7 @@
                                 </div>
                                 <form class="row g-3">
                                     <div class="grid gap-6 mb-6 md:grid-cols-1">
-                                        <table class="border-collapse table-fixed w-full text-sm">
+                                        <table class="border-collapse w-full text-sm">
                                             <thead>
                                                 <tr>
 

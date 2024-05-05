@@ -2,7 +2,7 @@
     <div>
         <h3 class="detalhes">DETALHES DE GRUPO DE USUÁRIO</h3>
     </div>
-  
+
     <div class="container-fluid p-5">
         <div class="flex flex-wrap">
             <div class="w-full">
@@ -72,15 +72,15 @@
                                         </div>
                                         <div>
                                             <label class="label-form">Descrição</label>
-                                            <textarea rows="4" v-model="grupousuario.descricao"
-                                                class="input-form" v-on:keyup="habilitarSalvar()" placeholder=""></textarea>
+                                            <textarea rows="4" v-model="grupousuario.descricao" class="input-form"
+                                                v-on:keyup="habilitarSalvar()" placeholder=""></textarea>
                                         </div>
                                         <div>
                                             <label class="label-form">Habilitado</label>
                                             <select v-model="grupousuario.is_active" required class="input-form"
                                                 @change="habilitarSalvar()">
-                                                <option :value="true">Sim</option>                                      
-                                                <option :value="false">Não</option>                                    
+                                                <option :value="true">Sim</option>
+                                                <option :value="false">Não</option>
                                             </select>
                                         </div>
                                     </div>
@@ -106,64 +106,86 @@
 
                                 <div class="h-full border my-4 rounded-md px-2 py-2 grid grid-cols-2 gap-2">
                                     <div>
-                                        <table class="border-collapse table-fixed w-400 text-sm">
+                                        <table class="border-collapse w-64 text-sm">
                                             <thead>
                                                 <tr>
                                                     <th
-                                                        class="border-b dark:border-slate-600 font-medium p-4 pl-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
+                                                        class="border-b dark:border-slate-600 font-medium p-2 text-slate-400 dark:text-slate-200 text-left">
                                                         #</th>
                                                     <th
-                                                        class="border-b dark:border-slate-600 font-medium p-4 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
+                                                        class="border-b dark:border-slate-600 font-medium p-2 text-slate-400 dark:text-slate-200 text-left">
                                                         ID</th>
                                                     <th
-                                                        class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
-                                                        Nome Completo</th>
+                                                        class="border-b dark:border-slate-600 font-medium p-2 text-slate-400 dark:text-slate-200 text-left">
+                                                        Nome</th>
                                                 </tr>
                                             </thead>
                                             <tbody class="bg-white dark:bg-slate-800">
                                                 <tr v-for="u in usuarios" :key="u.id">
                                                     <td
-                                                        class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">
-                                                        <input v-on:keyup="habilitarSalvar()" type="checkbox" v-model="ids"
-                                                            :value="u.id" />
+                                                        class="border-b border-slate-100 dark:border-slate-700  text-slate-500 dark:text-slate-400">
+                                                        <input v-on:keyup="habilitarSalvar()" type="checkbox"
+                                                            v-model="ids" :value="u.id" />
                                                     </td>
                                                     <td
-                                                        class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
+                                                        class="border-b border-slate-100 dark:border-slate-700  text-slate-500 dark:text-slate-400">
                                                         {{
                                                             u.id }}</td>
                                                     <td
-                                                        class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
-                                                        {{ u.nomecompleto }}</td>
+                                                        class="border-b border-slate-100 dark:border-slate-700 text-slate-500 dark:text-slate-400">
+                                                        {{ u.first_name }}</td>
                                                 </tr>
                                             </tbody>
                                         </table>
                                         <div class="py-4">
-                                            <button v-for="(page, index) in pages" :key="page"
-                                                class="px-3 mx-1 py-2 text-sm bg-blue-700 hover:bg-blue-900 focus:bg-violet-700 text-white"
-                                                :class="{ current: page === current }" @click="changePage(index)">
-                                                {{ page }}
+                                            <button :disabled="prev1 == null" @click="nextPage('previous')"
+                                                class="px-3 mx-1 py-2 text-sm bg-blue-700 hover:bg-blue-900 disabled:bg-gray-300 focus:bg-violet-700 text-white">
+                                                Anterior
                                             </button>
-                                            <span class="mx-4 text-xd font-semibold text-blue-700">total:</span> {{
+                                            <template v-for="(page, index) in pages" :key="page">
+
+                                                <template v-if="page === '.....'">
+                                                    {{ page }}
+                                                </template>
+
+                                                <template v-else>
+                                                    <button
+                                                        class="px-3 mx-1 py-2 text-sm bg-blue-700 hover:bg-blue-900 focus:bg-violet-700 text-white"
+                                                        :class="page === atual ? 'bg-violet-700' : 'bg-blue-700'"
+                                                        @click="changePage(page)">
+                                                        {{ page }}
+                                                    </button>
+                                                </template>
+
+
+                                            </template>
+
+                                            <button :disabled="next1 == null" @click="nextPage('next')"
+                                                class="px-3 mx-1 py-2 text-sm bg-blue-700 hover:bg-blue-900 disabled:bg-gray-300 focus:bg-violet-700 text-white">
+                                                Próximo
+                                            </button>
+
+                                            <span class="mx-4 text-xd font-semibold text-blue-700">Total: </span> {{
                                                 total }}
                                         </div>
                                     </div>
                                     <div class="border">
-                                        <table class="border-collapse table-fixed w-full text-sm">
+                                        <table class="border-collapse w-full text-sm">
                                             <thead>
 
                                             </thead>
                                             <tbody class="bg-white dark:bg-slate-800">
                                                 <tr v-for="u in membros" :key="u.id">
                                                     <td
-                                                        class="border-b border-slate-100 dark:border-slate-700 p-2 pr-3 text-slate-500 dark:text-slate-400">
-                                                        {{ u.nomecompleto }}</td>
+                                                        class="border-b border-slate-100 dark:border-slate-700  text-slate-500 dark:text-slate-400">
+                                                        {{ u.first_name }}</td>
                                                     <td
-                                                        class="border-b text-right border-slate-100 dark:border-slate-700 p-2 pr-3 text-slate-500 dark:text-slate-400">
+                                                        class="border-b text-right border-slate-100 dark:border-slate-700 pr-3 text-slate-500 dark:text-slate-400">
                                                         <button type="button" class="mx-1 px-1"
                                                             @click="removeMembro(u.id)"><svg
                                                                 xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                                class="w-6 h-6 hover:bg-red-100">
+                                                                viewBox="0 0 24 24" stroke-width="1.5"
+                                                                stroke="currentColor" class="w-6 h-6 hover:bg-red-100">
                                                                 <path stroke-linecap="round" stroke-linejoin="round"
                                                                     d="M12 9.75L14.25 12m0 0l2.25 2.25M14.25 12l2.25-2.25M14.25 12L12 14.25m-2.58 4.92l-6.375-6.375a1.125 1.125 0 010-1.59L9.42 4.83c.211-.211.498-.33.796-.33H19.5a2.25 2.25 0 012.25 2.25v10.5a2.25 2.25 0 01-2.25 2.25h-9.284c-.298 0-.585-.119-.796-.33z" />
                                                             </svg>
@@ -226,18 +248,10 @@
                                                 </tr>
                                             </tbody>
                                         </table>
-                                        <!-- <div class="py-4">
-                                                <button v-for="(page, index) in pages" :key="page"
-                                                    class="px-3 mx-1 py-2 text-sm bg-blue-700 hover:bg-blue-900 focus:bg-violet-700 text-white"
-                                                    :class="{ current: page === current }" @click="changePage(index)">
-                                                    {{ page }}
-                                                </button>
-                                                <span class="mx-4 text-xd font-semibold text-blue-700">total:</span> {{
-                                                    total }}
-                                            </div> -->
+                                     
                                     </div>
                                     <div class="border">
-                                        <table class="border-collapse table-fixed w-full text-sm">
+                                        <table class="border-collapse w-full text-sm">
                                             <thead>
 
                                             </thead>
@@ -251,8 +265,8 @@
                                                         <button type="button" class="mx-1 px-1"
                                                             @click="removeContaGerenciadas(index)"><svg
                                                                 xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                                class="w-6 h-6 hover:bg-red-100">
+                                                                viewBox="0 0 24 24" stroke-width="1.5"
+                                                                stroke="currentColor" class="w-6 h-6 hover:bg-red-100">
                                                                 <path stroke-linecap="round" stroke-linejoin="round"
                                                                     d="M12 9.75L14.25 12m0 0l2.25 2.25M14.25 12l2.25-2.25M14.25 12L12 14.25m-2.58 4.92l-6.375-6.375a1.125 1.125 0 010-1.59L9.42 4.83c.211-.211.498-.33.796-.33H19.5a2.25 2.25 0 012.25 2.25v10.5a2.25 2.25 0 01-2.25 2.25h-9.284c-.298 0-.585-.119-.796-.33z" />
                                                             </svg>
@@ -261,7 +275,7 @@
                                                 </tr>
                                             </tbody>
                                         </table>
-                                        
+
                                     </div>
                                 </div>
                             </div>
@@ -287,6 +301,9 @@ export default {
     },
     data() {
         return {
+            atual: 1,
+            next1: null,
+            prev1: null,
             user: {},
             grupousuario: {},
             contasdisponiveis: [],
@@ -302,11 +319,11 @@ export default {
             membros: {},
             isDisabled: true,
             offset: 0,
-            limit: 5,
+            limit: 15,
             pages: [],
             total: 0,
             offsetM: 0,
-            limitM: 5,
+            limitM: 10,
             pagesM: [],
             totalM: 0,
             offset1: 0,
@@ -322,7 +339,7 @@ export default {
     },
     methods: {
         toggleTabs: function (tabNumber) {
-            if(tabNumber == 2){
+            if (tabNumber == 2) {
                 this.setGrupo();
             }
             this.openTab = tabNumber
@@ -364,9 +381,25 @@ export default {
             return this.offset ? this.offset + 1 : 1;
         },
         changePage(i) {
-            this.getUsuarios(i);
-            this.offset = 0
+            if (i == 1) {
+                this.offset = 0;
+                this.atual = 1;
+                this.getUsuarios();
+
+            } else {
+                this.getUsuarios(i - 1);
+                this.atual = i;
+            }
+            this.offset = 0;
+            
+
+            
+
         },
+        // changePage(i) {
+        //     this.getUsuarios(i);
+        //     this.offset = 0
+        // },
         currentM() {
             return this.offsetM ? this.offsetM + 1 : 1;
         },
@@ -374,20 +407,71 @@ export default {
             this.getMembros(i);
             this.offsetM = 0
         },
+        nextPage(n) {
+            let i = 0;
+            if (n === "next") {
+                let x = this.next1.indexOf("&");
+                // console.log(x)
+                let u = this.next1.substring(x + 8, 110).trim();
+
+                i = u.substring(0, u.length - 20);
+            } else {
+                let x = this.prev1.indexOf("&");
+                if (x != -1) {
+                    let u = this.prev1.substring(x + 8, 110).trim();
+                    i = u.substring(0, u.length - 20);
+                    if(i == ''){
+                        this.offset = 0;
+                    }
+                }
+
+            }
+            if (i === 0) {
+                this.offset = 0;
+                this.getUsuarios();
+                this.atual = 1;
+            } else {
+                this.getUsuarios(i / this.limit);
+                this.atual = i / this.limit + 1;
+            }
+            console.log(this.atual)
+
+        },
+
+        abreviarPages() {
+            const qty = this.pages.length; // quantidade total de páginas
+            const firstPages = 7; // número de páginas para manter no início
+            const lastPages = 1; // número de páginas para manter no final
+
+            let pages = [];
+            for (let i = 1; i <= qty; i++) {
+                if (i <= firstPages || i > qty - lastPages) {
+                    pages.push(i);
+                } else if (i === firstPages + 1) {
+                    pages.push(".....");
+                }
+            }
+            this.pages = pages
+        },
         getUsuarios(i = null) {
             if (i) {
                 this.offset = i
             }
             let tipo = `&tipo=${this.grupousuario.tipo}`
 
-            const url = `/usuariogrupos/${this.grupousuario.id}/udisponiveis/?limit=${this.limit}&offset=${this.limit * this.offset}${tipo}&ordering=-id`;
+            const url = `/usuariogrupos/${this.grupousuario.id}/udisponiveis/?limit=${this.limit}${tipo}&offset=${this.limit * this.offset}&ordering=-id`;
             http.get(url)
                 .then(res => {
                     this.usuarios = res.data.results
                     this.total = res.data.count
+                    this.next1 = res.data.next;
+                    this.prev1 = res.data.previous;
+
                     const qty = Math.ceil(this.total / this.limit);
                     if (qty <= 1) return [1];
                     this.pages = Array.from(Array(qty).keys(), (i) => i + 1);
+
+                    this.abreviarPages();
                 })
                 .catch(e => {
                     this.$swal("Oops...", e.response.data.detail, "error");

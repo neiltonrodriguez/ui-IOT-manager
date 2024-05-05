@@ -125,7 +125,7 @@
             </div>
             <div class="grid gap-3 mb-3 md:grid-cols-2">
                 <div>
-                    <label class="label-form">Cep</label>
+                    <label class="label-form">CEP</label>
                     <input @blur="buscarCep()" type="text" v-model="usuario.cep" v-mask="'##.###-###'"
                         v-on:keyup="habilitarSalvar()" class="input-form  " placeholder="">
                 </div>

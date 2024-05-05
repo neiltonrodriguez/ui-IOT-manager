@@ -9,7 +9,7 @@
     <div class="shadow-sm overflow-hidden">
         <div class="py-4">
             <div>
-                <label class="label-form">LISTA CUSTOMIZADA</label>
+                <label class="detalhes">LISTA CUSTOMIZADA</label>
                 <select v-model="lista" class="input-form" @change="mostrarLista(lista)">
                     <option value="" disabled selected>Escolha o tipo de lista</option>
                     <option v-for="list in listacustomizada" :value="list.id" :key="list.id">{{ list.label }}</option>
@@ -51,7 +51,7 @@
                     class="px-4 mx-3 py-2 font-semibold text-sm bg-red-800 disabled:bg-gray-300 text-white rounded-md shadow-sm">Deletar
                     Selecionados</button>
             </form>
-            <table class="border-collapse table-fixed w-full text-sm">
+            <table class="border-collapse w-full text-sm">
                 <thead>
                     <tr>
                         <th
@@ -143,7 +143,7 @@
                     :class="{ current: page === current }" @click="changePage(index)">
                     {{ page }}
                 </button>
-                <span class="mx-4 text-xd font-semibold text-blue-700">total de registros:</span> {{ total }}
+                <span class="mx-4 text-xd font-semibold text-blue-700">Total:</span> {{ total }}
             </div>
         </div>
 
