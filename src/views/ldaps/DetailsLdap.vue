@@ -9,7 +9,7 @@
             <div class="flex items-center justify-center flex-col">
                 <div class='has-tooltip'>
                     <span class='tooltip rounded shadow-lg p-1 bg-gray-100 text-blue-800 -mt-10 -mx-8'>Atualizar base
-                        Ldap</span>
+                        LDAP</span>
                     <button type="button" @click="atualizarBase(formData)"
                         class="text-whit focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto text-center hover:scale-105 duration-200 hover:shadow-md"><img
                             width="50" src="../../assets/img/icone-update.png"></button>
@@ -91,7 +91,7 @@
                                             </select>
                                         </div>
                                         <div>
-                                            <label class="label-form">Ldap Tipo</label>
+                                            <label class="label-form">LDAP Tipo</label>
                                             <select v-model="ldap.ldap_tipo" @change="habilitarSalvar()" class="input-form">
                                                 <option value="">Escolha uma tipo</option>
                                                 <option value="1">Usuarios/Grupos</option>
@@ -271,12 +271,12 @@
                                                 class="input-form" placeholder="">
                                         </div>
                                         <div @click="ocultarCalendario()">
-                                            <label class="label-form">Open Ldap Atributo Estado</label>
+                                            <label class="label-form">Open LDAP Atributo Estado</label>
                                             <input type="text" v-model="ldap.open_ldap_atributo_state"
                                                 v-on:keyup="habilitarSalvar()" class="input-form" placeholder="">
                                         </div>
                                         <div @click="ocultarCalendario()">
-                                            <label class="label-form">Open Ldap Atributo Estado DU</label>
+                                            <label class="label-form">Open LDAP Atributo Estado DU</label>
                                             <input type="text" v-model="ldap.open_ldap_atributo_state_du"
                                                 v-on:keyup="habilitarSalvar()" class="input-form" placeholder="">
                                         </div>
@@ -345,7 +345,7 @@
                                                         ID</th>
                                                     <th
                                                         class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
-                                                        Campo Ldap</th>
+                                                        Campo LDAP</th>
                                                     <th
                                                         class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
                                                         Campo Sistema</th>
@@ -657,7 +657,7 @@
 
                                                     <th
                                                         class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
-                                                        Campo Ldap</th>
+                                                        Campo LDAP</th>
                                                     <th
                                                         class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
                                                         Campo Sistema</th>

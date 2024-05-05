@@ -76,7 +76,7 @@
                                         </div>
                                         <div>
                                             <label
-                                                class="label-form">Ldap
+                                                class="label-form">LDAP
                                                 Tipo</label>
                                             <select v-model="formData.ldap_tipo" required class="input-form">
                                                 <option :value="tipo" selected>{{ tipo == 1 ? 'Usuários/grupos' :
