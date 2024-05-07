@@ -1,6 +1,6 @@
 <template>
     <div class="flex items-center my-auto">
-        <h3 class="detalhes">DETALHES DE LDAP {{  tipo == 1 ? 'USUÁRIOS' : 'SENSORES' }}</h3>
+        <h3 class="detalhes">DETALHES DE LDAP {{ tipo == 1 ? 'USUÁRIOS' : 'SENSORES' }}</h3>
 
     </div>
 
@@ -92,7 +92,8 @@
                                         </div>
                                         <div>
                                             <label class="label-form">LDAP Tipo</label>
-                                            <select v-model="ldap.ldap_tipo" @change="habilitarSalvar()" class="input-form">
+                                            <select v-model="ldap.ldap_tipo" @change="habilitarSalvar()"
+                                                class="input-form">
                                                 <option value="">Escolha uma tipo</option>
                                                 <option value="1">Usuarios/Grupos</option>
                                                 <option value="2">Sensores</option>
@@ -100,7 +101,8 @@
                                         </div>
                                         <div>
                                             <label class="label-form">Empresa</label>
-                                            <select v-model="ldap.empresa" @change="habilitarSalvar()" class="input-form">
+                                            <select v-model="ldap.empresa" @change="habilitarSalvar()"
+                                                class="input-form">
                                                 <option value="" disabled>Escolha a conta</option>
                                                 <option v-for="e in empresas" :key="e.id" :value="e.id">{{ e.nome }}
                                                 </option>
@@ -120,7 +122,8 @@
                                             <label class="label-form">Tipo de Autenticação</label>
                                             <select v-model="ldap.tipo_autenticacao" @change="habilitarSalvar()"
                                                 class="input-form">
-                                                <option value="" disabled selected>Escolha um tipo de autenticação</option>
+                                                <option value="" disabled selected>Escolha um tipo de autenticação
+                                                </option>
                                                 <option value="1">Simples</option>
                                                 <option value="2">Digest-MD5</option>
                                             </select>
@@ -142,7 +145,8 @@
                                         </div>
                                         <div>
                                             <label class="label-form">Provedor</label>
-                                            <select v-model="ldap.provedor" @change="habilitarSalvar()" class="input-form">
+                                            <select v-model="ldap.provedor" @change="habilitarSalvar()"
+                                                class="input-form">
                                                 <option value="" disabled>Escolha um provedor</option>
                                                 <option value="1">Microsoft LDAP</option>
                                                 <option value="2">Open LDAP</option>
@@ -150,16 +154,17 @@
                                         </div>
                                         <div>
                                             <label class="label-form">Habilitado</label>
-                                            <select v-model="ldap.is_active" class="input-form" @change="habilitarSalvar()">
+                                            <select v-model="ldap.is_active" class="input-form"
+                                                @change="habilitarSalvar()">
                                                 <option :value="true">Sim</option>
                                                 <option :value="false">Não</option>
                                             </select>
                                         </div>
                                         <div>
-                                                <label class="label-form">Base DN</label>
-                                                <input type="text" v-model="ldap.base_dn" v-on:keyup="habilitarSalvar()"
-                                                    class="input-form" placeholder="">
-                                            </div>
+                                            <label class="label-form">Base DN</label>
+                                            <input type="text" v-model="ldap.base_dn" v-on:keyup="habilitarSalvar()"
+                                                class="input-form" placeholder="">
+                                        </div>
 
                                     </div>
                                     <button type="submit" v-bind:disabled="isDisabled"
@@ -185,8 +190,8 @@
                                         <div v-if="ldap.agendar_scan === true">
                                             <label class="label-form">Data de início</label>
                                             <input type="text" v-model="ldap.hora_inicio_agenda"
-                                                @click="mostrarCalendario()" @blur="habilitarSalvar()" class="input-form"
-                                                placeholder="">
+                                                @click="mostrarCalendario()" @blur="habilitarSalvar()"
+                                                class="input-form" placeholder="">
                                             <div class="flex" v-if="mostrarCalendar">
                                                 <DatePicker v-model="ldap.hora_inicio_agenda" mode="dateTime"
                                                     v-on:keyup="habilitarSalvar()" is24hr timezone="UTC" />
@@ -241,14 +246,14 @@
 
                                         <div @click="ocultarCalendario()">
                                             <label class="label-form">Filtro Classe</label>
-                                            <input type="text" v-model="ldap.filtro_classe" v-on:keyup="habilitarSalvar()"
-                                                class="input-form" placeholder="">
+                                            <input type="text" v-model="ldap.filtro_classe"
+                                                v-on:keyup="habilitarSalvar()" class="input-form" placeholder="">
                                         </div>
 
                                         <div @click="ocultarCalendario()">
                                             <label class="label-form">Filtro Usuário</label>
-                                            <input type="text" v-model="ldap.filtro_usuario" v-on:keyup="habilitarSalvar()"
-                                                class="input-form" placeholder="">
+                                            <input type="text" v-model="ldap.filtro_usuario"
+                                                v-on:keyup="habilitarSalvar()" class="input-form" placeholder="">
                                         </div>
                                         <div @click="ocultarCalendario()">
                                             <label class="label-form">Atributo CN</label>
@@ -262,8 +267,8 @@
                                         </div>
                                         <div @click="ocultarCalendario()">
                                             <label class="label-form">Atributo Nome</label>
-                                            <input type="text" v-model="ldap.atributo_nome" v-on:keyup="habilitarSalvar()"
-                                                class="input-form" placeholder="">
+                                            <input type="text" v-model="ldap.atributo_nome"
+                                                v-on:keyup="habilitarSalvar()" class="input-form" placeholder="">
                                         </div>
                                         <div @click="ocultarCalendario()">
                                             <label class="label-form">DN Login</label>
@@ -302,20 +307,16 @@
 
                                             <div class="grid gap-3 mb-3 md:grid-cols-2">
                                                 <div>
-                                                    <label
-                                                        class="label-form">Campo
+                                                    <label class="label-form">Campo
                                                         LDAP</label>
                                                     <input v-on:key="habilitarSalvar()" type="text"
-                                                        v-model="formAtributo.campo_ldap"
-                                                        class="input-form"
+                                                        v-model="formAtributo.campo_ldap" class="input-form"
                                                         placeholder="" required>
                                                 </div>
                                                 <div>
-                                                    <label
-                                                        class="label-form">Caminho</label>
+                                                    <label class="label-form">Caminho</label>
                                                     <div class="flex"><select v-model="formAtributo.campo_sistema"
-                                                            @change="habilitarSalvar()"
-                                                            class="input-form">
+                                                            @change="habilitarSalvar()" class="input-form">
                                                             <option value="" disabled selected>Escolha uma opção
                                                             </option>
                                                             <option v-for="cs in camposistema" :key="cs.id"
@@ -387,8 +388,8 @@
 
                                                         <button type="button" class="btn" @click="deleteAtributo(u.id)">
                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                                viewBox="0 0 24 24" stroke-width="1" stroke="currentColor"
-                                                                class="w-6 h-6">
+                                                                viewBox="0 0 24 24" stroke-width="1"
+                                                                stroke="currentColor" class="w-6 h-6">
                                                                 <path stroke-linecap="round" stroke-linejoin="round"
                                                                     d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
                                                             </svg>
@@ -420,13 +421,14 @@
 
                                             <div class="grid gap-3 mb-3 md:grid-cols-2">
                                                 <div>
-                                                    <label
-                                                        class="label-form">Caminho
-                                                        OU usuários<button type="button" @click="inputOUusuario++"
+                                                    <label class="label-form">Caminho OU usuários
+                                                        <button type="button" @click="inputOUusuario++"
                                                             class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 mx-3 py-2.5 text-center">Adicionar
-                                                            mais campos</button></label>
+                                                            mais campos</button>
+                                                    </label>
                                                     <template v-for="i in inputOUusuario" :key="i">
-                                                        <div class="flex"><input v-on:keyup="habilitarSalvar()" type="text"
+                                                        <div class="flex">
+                                                            <input v-on:keyup="habilitarSalvar()" type="text"
                                                                 :id='"itemOUusuario" + i'
                                                                 class="bg-gray-50 border border-gray-300 my-3 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                                 placeholder="" required>
@@ -436,7 +438,8 @@
                                                                     class="w-6 h-6 my-5">
                                                                     <path stroke-linecap="round" stroke-linejoin="round"
                                                                         d="M6 18L18 6M6 6l12 12" />
-                                                                </svg></button>
+                                                                </svg>
+                                                            </button>
                                                         </div>
 
                                                     </template>
@@ -469,13 +472,13 @@
                                                 </tr>
                                             </thead>
                                             <tbody class="bg-white dark:bg-slate-800">
-                                                <tr v-for="u in  ouUsuario" :key="u.id">
+                                                <tr v-for="u in ouUsuario" :key="u.id">
 
                                                     <td
                                                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
-                                                        <input @blur="updateOUusuario(u.id)" type="text" :id='"item" + u.id'
-                                                            :class='"item" + u.id' :value="u.caminho" class="input-form"
-                                                            placeholder="">
+                                                        <input @blur="updateOUusuario(u.id)" type="text"
+                                                            :id='"item" + u.id' :class='"item" + u.id'
+                                                            :value="u.caminho" class="input-form" placeholder="">
                                                     </td>
                                                     <td
                                                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
@@ -485,8 +488,8 @@
 
                                                         <button class="btn" @click="deleteOUusuario(u.id)">
                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                                viewBox="0 0 24 24" stroke-width="1" stroke="currentColor"
-                                                                class="w-6 h-6">
+                                                                viewBox="0 0 24 24" stroke-width="1"
+                                                                stroke="currentColor" class="w-6 h-6">
                                                                 <path stroke-linecap="round" stroke-linejoin="round"
                                                                     d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
                                                             </svg>
@@ -519,14 +522,14 @@
 
                                             <div class="grid gap-3 mb-3 md:grid-cols-2">
                                                 <div>
-                                                    <label
-                                                        class="label-form">Caminho
-                                                        OU usuários<button type="button" @click="inputOUgrupo++"
+                                                    <label class="label-form">Caminho OU usuários
+                                                        <button type="button" @click="inputOUgrupo++"
                                                             class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 mx-3 py-2.5 text-center">Adicionar
-                                                            mais campos</button></label>
+                                                            mais campos</button>
+                                                    </label>
                                                     <template v-for="i in inputOUgrupo" :key="i">
-                                                        <div class="flex"><input v-on:keyup="habilitarSalvar()" type="text"
-                                                                :id='"itemOUgrupo" + i'
+                                                        <div class="flex"><input v-on:keyup="habilitarSalvar()"
+                                                                type="text" :id='"itemOUgrupo" + i'
                                                                 class="bg-gray-50 border border-gray-300 my-3 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                                 placeholder="" required>
                                                             <button type="button" @click="inputOUgrupo--"><svg
@@ -568,13 +571,13 @@
                                                 </tr>
                                             </thead>
                                             <tbody class="bg-white dark:bg-slate-800">
-                                                <tr v-for="u in  ouGrupo" :key="u.id">
+                                                <tr v-for="u in ouGrupo" :key="u.id">
 
                                                     <td
                                                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
-                                                        <input @blur="updateOUgrupo(u.id)" type="text" :id='"item" + u.id'
-                                                            :class='"item" + u.id' :value="u.caminho" class="input-form"
-                                                            placeholder="">
+                                                        <input @blur="updateOUgrupo(u.id)" type="text"
+                                                            :id='"item" + u.id' :class='"item" + u.id'
+                                                            :value="u.caminho" class="input-form" placeholder="">
                                                     </td>
                                                     <td
                                                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
@@ -584,8 +587,8 @@
 
                                                         <button class="btn" @click="deleteOUgrupo(u.id)">
                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                                viewBox="0 0 24 24" stroke-width="1" stroke="currentColor"
-                                                                class="w-6 h-6">
+                                                                viewBox="0 0 24 24" stroke-width="1"
+                                                                stroke="currentColor" class="w-6 h-6">
                                                                 <path stroke-linecap="round" stroke-linejoin="round"
                                                                     d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
                                                             </svg>
@@ -616,26 +619,23 @@
 
                                             <div class="grid gap-3 mb-3 md:grid-cols-2">
                                                 <div>
-                                                    <label
-                                                        class="label-form">Campo
+                                                    <label class="label-form">Campo
                                                         LDAP</label>
                                                     <input v-on:keyup="habilitarSalvar()" type="text"
-                                                        v-model="formAtributo.campo_ldap"
-                                                        class="input-form"
+                                                        v-model="formAtributo.campo_ldap" class="input-form"
                                                         placeholder="" required>
                                                 </div>
 
                                                 <div>
-                                                    <label
-                                                        class="label-form">Campo
+                                                    <label class="label-form">Campo
                                                         Sensor</label>
                                                     <div class="flex"><select v-model="formAtributo.campo_sistema"
-                                                            @change="habilitarSalvar()"
-                                                            class="input-form">
+                                                            @change="habilitarSalvar()" class="input-form">
                                                             <option value="" disabled selected>Escolha uma opção
                                                             </option>
                                                             <option v-for="cs in camposensor" :key="cs.id"
-                                                                :value="cs.idcampoform">{{ cs.label }}</option>
+                                                                :value="cs.idcampoform">{{ cs.label }}
+                                                            </option>
 
                                                         </select></div>
                                                 </div>
@@ -686,7 +686,8 @@
                                                             <option value="" disabled selected>Escolha uma opção
                                                             </option>
                                                             <option v-for="cs in camposensor" :key="cs.id"
-                                                                :value="cs.idcampoform">{{ cs.label }}</option>
+                                                                :value="cs.idcampoform">{{ cs.label }}
+                                                            </option>
 
                                                         </select>
                                                     </td>
@@ -698,8 +699,8 @@
 
                                                         <button type="button" class="btn" @click="deleteAtributo(u.id)">
                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                                viewBox="0 0 24 24" stroke-width="1" stroke="currentColor"
-                                                                class="w-6 h-6">
+                                                                viewBox="0 0 24 24" stroke-width="1"
+                                                                stroke="currentColor" class="w-6 h-6">
                                                                 <path stroke-linecap="round" stroke-linejoin="round"
                                                                     d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
                                                             </svg>
@@ -722,39 +723,46 @@
                                         @click="btnMostrarAddOUsensor()">Adicionar mais atributos</button>
                                     <div v-if="mostrarAddOUsensor">
                                         <form class="row g-3" v-on:submit.prevent="createOUsensor()">
-                                            <div class="border px-3 py-3 my-3 rounded-lg">
-
+                                            <label class="label-form">Caminho OU sensor
+                                                <button type="button" @click="inputOUsensor++"
+                                                    class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 mx-3 mb-3 py-2.5 text-center">Adicionar
+                                                    mais campos
+                                                </button>
+                                            </label>
+                                            <template v-for="i in inputOUsensor" :key="i">
                                                 <div class="grid gap-3 mb-3 md:grid-cols-2">
-                                                    <div>
-                                                        <label
-                                                            class="label-form">Caminho
-                                                            OU usuários<button type="button" @click="inputOUgrupo++"
-                                                                class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 mx-3 py-2.5 text-center">Adicionar
-                                                                mais campos</button></label>
-                                                        <template v-for="i in inputOUsensor" :key="i">
-                                                            <div class="flex"><input v-on:keyup="habilitarSalvar()"
-                                                                    type="text" :id='"itemOUsensor" + i'
-                                                                    class="bg-gray-50 border border-gray-300 my-3 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                                    placeholder="" required>
-                                                                <button type="button" @click="inputOUsensor--"><svg
-                                                                        xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="red"
-                                                                        class="w-6 h-6 my-5">
-                                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                                            d="M6 18L18 6M6 6l12 12" />
-                                                                    </svg></button>
-                                                            </div>
 
-                                                        </template>
+                                                    <div>
+                                                        <input v-on:keyup="habilitarSalvar()" type="text"
+                                                            :id='"itemOUsensor" + i' class="input-form" placeholder=""
+                                                            required>
+
+                                                    </div>
+                                                    <div class="flex">
+
+                                                        <select :id='"campoSensorGateway" + i' class="input-form">
+                                                            <option value="" disabled selected>Escolha uma GatewayIoT
+                                                            </option>
+                                                            <option v-for="gt in gatewayiot" :key="gt.id"
+                                                                :value="gt.id">{{ gt.titulo }}
+                                                            </option>
+
+                                                        </select>
+                                                        <button type="button" @click="inputOUsensor--">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                                viewBox="0 0 24 24" stroke-width="1.5" stroke="red"
+                                                                class="w-6 h-6">
+                                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                                    d="M6 18L18 6M6 6l12 12" />
+                                                            </svg>
+                                                        </button>
                                                     </div>
                                                 </div>
-                                                <button type="submit" v-bind:disabled="isDisabled"
-                                                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Salvar</button><button
-                                                    type="button" @click="btnMostrarAddAtributo()"
-                                                    class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 mx-3 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">Fechar</button>
-                                            </div>
-
-
+                                            </template>
+                                            <button type="submit" v-bind:disabled="isDisabled"
+                                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Salvar</button><button
+                                                type="button" @click="btnMostrarAddAtributo()"
+                                                class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 mx-3 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">Fechar</button>
                                         </form>
                                     </div>
                                 </div>
@@ -769,6 +777,9 @@
                                                         Caminho</th>
                                                     <th
                                                         class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
+                                                        GatewayIoT</th>
+                                                    <th
+                                                        class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
                                                         Conta</th>
                                                     <th
                                                         class="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
@@ -776,13 +787,23 @@
                                                 </tr>
                                             </thead>
                                             <tbody class="bg-white dark:bg-slate-800">
-                                                <tr v-for="s in  ouSensores" :key="s.id">
+                                                <tr v-for="s in ouSensores" :key="s.id">
 
                                                     <td
                                                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
-                                                        <input @blur="updateOUsensor(s.id)" type="text" :id='"itemS" + s.id'
-                                                            :class='"itemS" + s.id' :value="s.caminho" class="input-form"
-                                                            placeholder="">
+                                                        <input @blur="updateOUsensor(s.id)" type="text"
+                                                            :id='"itemS" + s.id' :class='"itemS" + s.id'
+                                                            :value="s.caminho" class="input-form" placeholder="">
+                                                    </td>
+                                                    <td
+                                                        class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                                                        <select @change="updateOUsensor(s.id)" :id='"itemGateway" + s.id' class="input-form">
+                                                            <option value="" disabled selected>Escolha uma GatewayIoT
+                                                            </option>
+                                                            <option v-for="gt in gatewayiot" :key="gt.id"
+                                                                :value="s.gatewayiot">{{ gt.titulo }}
+                                                            </option>
+                                                        </select>
                                                     </td>
                                                     <td
                                                         class="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
@@ -792,8 +813,8 @@
 
                                                         <button class="btn" @click="deleteOUsensor(s.id)">
                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                                viewBox="0 0 24 24" stroke-width="1" stroke="currentColor"
-                                                                class="w-6 h-6">
+                                                                viewBox="0 0 24 24" stroke-width="1"
+                                                                stroke="currentColor" class="w-6 h-6">
                                                                 <path stroke-linecap="round" stroke-linejoin="round"
                                                                     d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
                                                             </svg>
@@ -914,7 +935,8 @@ export default {
             mostrarAddOUusuario: false,
             mostrarAddOUgrupo: false,
             mostrarAddOUsensor: false,
-            teste: ""
+            teste: "",
+            gatewayiot: []
         };
     },
     methods: {
@@ -1127,7 +1149,7 @@ export default {
         },
         atualizarBase() {
             let tipo = "usuariosupdate"
-            if (this.$route.params.tipo == 2){
+            if (this.$route.params.tipo == 2) {
                 tipo = "sensoresupdate"
             }
             const url = `/ldaps/${this.ldap.id}/${tipo}/`
@@ -1412,8 +1434,10 @@ export default {
         },
         updateOUsensor(id) {
             const v = document.getElementById('itemS' + id)
+            const g = document.getElementById('itemGateway' + id)
             const s = {
-                caminho: v.value
+                caminho: v.value,
+                gatewayiot: g.value
             }
             http.put('/ldaps/' + this.ldap.id + '/ousensores/' + id + '/', s)
                 .then(res => {
@@ -1425,8 +1449,9 @@ export default {
                     })
                 })
                 .catch(e => {
-                    this.$swal("Oops...", e.response.data.detail, "error");
-                    if (e.response.data.detail == "Você não tem permissão para executar essa ação.") {
+                    console.log(e)
+                    this.$swal("Oops...", e.response.data.detail[0], "error");
+                    if (e.response.data.detail[0] == "Você não tem permissão para executar essa ação.") {
                         this.$router.push('/')
                     }
                 });
@@ -1577,30 +1602,48 @@ export default {
             try {
                 for (let i = 1; i <= this.inputOUsensor; i++) {
                     const caminho = document.getElementById('itemOUsensor' + i);
+                    const gateway = document.getElementById('campoSensorGateway' + i);
                     const u = {
-                        caminho: caminho.value
+                        caminho: caminho.value,
+                        gatewayiot: gateway.value
                     }
+
                     http.post('/ldaps/' + this.ldap.id + '/ousensores/', u)
                         .then(res => {
                             this.getOUsensores(this.ldap.id)
+
                         })
                         .catch(e => {
-                            console.log(e);
+                            this.$swal("Oops...", e.response.data.detail[0], "error");
                         });
                 }
 
-                this.$swal.fire({
-                    icon: 'success',
-                    title: 'Criado com sucesso',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
             } catch (error) {
-                this.$swal("Oops...", e.response.data.detail, "error");
-                if (e.response.data.detail == "Você não tem permissão para executar essa ação.") {
+
+                this.$swal("Oops...", error.response.data.detail[0], "error");
+                if (error.response.data.detail[0] == "Você não tem permissão para executar essa ação.") {
                     this.$router.push('/')
                 }
             }
+
+        },
+        getGatewayIoT() {
+            let query = '?'
+            if (this.user.tipo == 4) {
+                query = `?conta=${this.ldap.conta}&`
+            }
+
+            const url = `/listaitens/gatewayiot/lista/${query}so_ativos=true`;
+            http.get(url)
+                .then(res => {
+                    this.gatewayiot = res.data.results
+                })
+                .catch(e => {
+                    this.$swal("Oops...", e.response.data.detail, "error");
+                    if (e.response.data.detail == "Você não tem permissão para executar essa ação.") {
+                        this.$router.push('/')
+                    }
+                });
 
         },
         setLdap() {
@@ -1615,6 +1658,7 @@ export default {
                     this.getCampoSistema();
                     this.getCampoSensor();
                     this.setarDia();
+                    this.getGatewayIoT();
                     // this.getAtributo(this.ldap.id);
                 })
                 .catch(e => {

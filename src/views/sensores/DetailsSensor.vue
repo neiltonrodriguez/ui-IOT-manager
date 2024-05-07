@@ -265,6 +265,9 @@
                                 </div>
                                 <div v-if="mostrarFormSC">
                                     <form class="row g-3" v-on:submit.prevent="createSensorScript(sc)">
+
+
+
                                         <div v-for="c in cont" class="border p-2 rounded-lg bg-slate-200">
                                             <div v-if="cont >= 2 && c != 1" class="grid gap-3 mb-3 md:grid-cols-3">
                                                 <div></div>
@@ -278,14 +281,27 @@
                                                 </div>
                                                 <div></div>
                                             </div>
-                                            <div class="grid gap-3 mb-3 md:grid-cols-3">
+                                            <div class="grid gap-3 mb-3 md:grid-cols-4">
+                                                <div>
+                                                    <label class="label-form">Sensor</label>
+                                                    <select class="input-form" :disabled="c == 1"
+                                                        @change="listarAtributos()">
+
+                                                        <option v-for="se in atributos" :id="'sensorSelected'+se.id"
+                                                            :selected="se.id == this.$route.params.id ? true : false"
+                                                            :key="se.id" :value="se.serial">{{ se.nome }}
+                                                        </option>
+
+                                                    </select>
+                                                </div>
+                                                <!-- {{ listaDeAtributos }} -->
                                                 <div>
                                                     <label class="label-form">Condicional IF/ELSE</label>
                                                     <select class="input-form">
                                                         <option value="" selected disabled>escolher parâmetro
                                                         </option>
-                                                        <option v-for="(a, index) in atributos" :key="index"
-                                                            :value="a.nome">{{ a.label }}</option>
+                                                        <option v-for="a in listaDeAtributos" :key="a.nome" :value="a.nome">{{
+                                                            a.label }}</option>
 
 
                                                     </select>
@@ -295,7 +311,7 @@
                                                     <select class="input-form">
                                                         <option value="" selected disabled>(numero)
                                                         </option>
-                                                        <option v-for="(o, index) in operatorNumber" :key="index"
+                                                        <option v-for="(o, index) in operadores" :key="index"
                                                             :value="o.value">{{ o.label }}
                                                         </option>
 
@@ -307,41 +323,13 @@
                                                     <input type="text" class="input-form" placeholder="">
                                                 </div>
                                             </div>
-                                            
-                                            <!-- <div v-if="cont == 2" class="grid gap-3 mb-3 md:grid-cols-3">
-                                                <div>
-                                                    <label class="label-form">Condicional IF/ELSE</label>
-                                                    <select class="input-form">
-                                                        <option value="" selected disabled>escolher parâmetro
-                                                        </option>
-                                                        <option v-for="(a, index) in atributos" :key="index"
-                                                            :value="a.nome">{{ a.label }}</option>
-
-
-                                                    </select>
-                                                </div>
-                                                <div>
-                                                    <label class="label-form">tipo de condição</label>
-                                                    <select class="input-form">
-                                                        <option value="" selected disabled>(numero)
-                                                        </option>
-                                                        <option v-for="(o, index) in operatorNumber" :key="index"
-                                                            :value="o.value">{{ o.label }}
-                                                        </option>
-
-                                                    </select>
-                                                </div>
-
-                                                <div>
-                                                    <label class="label-form">Valor</label>
-                                                    <input type="text" class="input-form" placeholder="">
-                                                </div>
-                                            </div> -->
-                                            
 
                                         </div>
+
+
                                         <button type="button" @click="cont++"
-                                                class="text-white mt-3 mb-5 bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Adicionar mais condições</button>
+                                            class="text-white mt-3 mb-5 bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Adicionar
+                                            mais condições</button>
                                         <div class="grid gap-3 mb-3 md:grid-cols-2">
                                             <div>
                                                 <label class="label-form ">Título</label>
@@ -626,47 +614,64 @@ export default {
     },
     data() {
         return {
-            operatorNumber: [
+            operadores: [
                 {
-                    label: "maior que",
-                    value: ">"
+                    label: "Diferente de",
+                    value: "diferente_de",
+                    tipo: 'number'
                 },
                 {
-                    label: "menor que",
-                    value: "<"
+                    label: "Entre",
+                    value: "entre",
+                    tipo: 'number'
                 },
                 {
-                    label: "igual a",
-                    value: "=="
+                    label: "Igual a",
+                    value: "igual_a",
+                    tipo: 'number'
+                },
+                {
+                    label: "Maior que",
+                    value: "maior_que",
+                    tipo: 'number'
+                },
+                {
+                    label: "Menor que",
+                    value: "menor_que",
+                    tipo: 'number'
+                },
+                {
+                    label: "False",
+                    value: 'false',
+                    tipo: 'boolean'
+                },
+                {
+                    label: "Verdadeiro",
+                    value: 'true',
+                    tipo: 'boolean'
+                },
+                {
+                    label: "Contém",
+                    value: "contem",
+                    tipo: 'text'
+                },
+                {
+                    label: "Não Contém",
+                    value: "nao_contem",
+                    tipo: 'text'
+                },
+                {
+                    label: "Diferente de",
+                    value: "diferente_de",
+                    tipo: 'text'
+                },
+                {
+                    label: "Igual a",
+                    value: "igual_a",
+                    tipo: 'text'
                 }
             ],
-            atributos: [
-                {
-                    label: "Temperatura",
-                    parametro: "temperatura",
-                    nome: "valor_ref1"
-                },
-                {
-                    label: "Umidade",
-                    parametro: "umidade",
-                    nome: "valor_ref2"
-                },
-                {
-                    label: "Frio",
-                    parametro: "frio",
-                    nome: "valor_ref3"
-                },
-                {
-                    label: "Frieza",
-                    parametro: "frieza",
-                    nome: "valor_ref4"
-                },
-                {
-                    label: "Quintura",
-                    parametro: "quintura",
-                    nome: "valor_ref5"
-                }
-            ],
+            atributos: [],
             cont: 1,
             operador: "",
             atual: 1,
@@ -742,6 +747,7 @@ export default {
                 gatewayiot: ""
             },
             sensorgrupos: [],
+            sensoresgruposcript: [],
             departamentos: [],
             tipos: [],
             fabricantes: [],
@@ -766,10 +772,27 @@ export default {
             gatewayiot: [],
             dados: [],
             mostrarLeituras: false,
-            mostrarNotificacoes: false
+            mostrarNotificacoes: false,
+            listaDeAtributos: []
         };
     },
     methods: {
+        listarAtributos() {
+            // console.log(this.atributos)
+            let arr = []
+            for (let i = 0; i < this.atributos.length; i++) {
+                var a = document.getElementById('sensorSelected'+ this.atributos[i].id)
+                console.log(a)
+                if (a.selected && this.atributos[i].id != this.$route.params.id) {
+                    // arr = this.atributos[i].atributos;
+                    console.log(a.value)
+                }
+                this.listaDeAtributos.push(arr);
+            }
+            
+
+            // console.log(this.listaDeAtributos)
+        },
         listarNotificacoes() {
             if (this.sc.enviar_notificacao) {
                 this.mostrarNotificacoes = true
@@ -903,7 +926,7 @@ export default {
             if (n === "next") {
                 let x = this.next1.indexOf("&");
                 i = this.next1.substring(x + 8, 100).trim();
-                
+
             } else {
                 let x = this.prev1.indexOf("&");
                 if (x != -1) {
@@ -1000,6 +1023,67 @@ export default {
                 this.modal = false
                 this.openTab = tabNumber
             }
+        },
+        retornaNomeDaChave(p) {
+
+            if (p.includes('valor_lido1')) {
+                return 'valor_lido1';
+            } else if (p.includes('valor_lido2')) {
+                return 'valor_lido2';
+            }
+            else if (p.includes('valor_lido3')) {
+                return 'valor_lido3';
+            }
+
+        },
+        montarAtributosSensores() {
+            // console.log(this.sensoresgruposcript)
+            let arr = []
+            let a = {}
+            // let j = {}
+
+            for (let i = 0; i < this.sensoresgruposcript.length; i++) {
+                let b = []
+                // console.log(this.sensoresgruposcript[i].atributos)
+                const y = this.sensoresgruposcript[i].atributos;
+                for (let x = 0; x < this.sensoresgruposcript[i].atributos.length; x++) {
+                    const j = [...Object.values(this.sensoresgruposcript[i].atributos[x])];
+                    a = {
+                        parametro: j[0].parametro,
+                        label: j[0].label,
+                        datatype: j[0].datatype,
+                        nome: 'valor_lido' + (x + 1)
+                    }
+                    b.push(a);
+
+                }
+                const z = {
+                    id: this.sensoresgruposcript[i].id,
+                    nome: this.sensoresgruposcript[i].nome,
+                    serial: this.sensoresgruposcript[i].serial,
+                    atributos: b
+                }
+                arr.push(z)
+
+
+            }
+            this.atributos = arr;
+
+        },
+        getDadosParaAsRegras() {
+            const url = `/sensores/${this.$route.params.id}/sensoresgruposcript/`;
+            http.get(url)
+                .then(res => {
+                    this.sensoresgruposcript = res.data
+                    this.montarAtributosSensores();
+                })
+                .catch(e => {
+                    this.$swal("Oops...", e.response.data.detail, "error");
+                    if (e.response.data.detail == "Você não tem permissão para executar essa ação.") {
+                        this.$router.push('/')
+                    }
+                });
+
         },
         montarDadosLidos() {
             this.dados = []
@@ -1246,6 +1330,7 @@ export default {
             const url = `/sensores/${this.$route.params.id}/sensorscripts/?limit=${this.limit}&offset=${this.limit * this.offset}&ordering=-id`
             http.get(url)
                 .then(res => {
+                    this.getDadosParaAsRegras();
                     this.sensorscripts = res.data.results
                     this.total = res.data.count
                     const qty = Math.ceil(this.total / this.limit);
