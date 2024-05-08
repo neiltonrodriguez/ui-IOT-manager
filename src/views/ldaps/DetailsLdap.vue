@@ -740,7 +740,7 @@
                                                     </div>
                                                     <div class="flex">
 
-                                                        <select :id='"campoSensorGateway" + i' class="input-form">
+                                                        <select :id='"campoSensorGateway" + i' class="input-form" required>
                                                             <option value="" disabled selected>Escolha uma GatewayIoT
                                                             </option>
                                                             <option v-for="gt in gatewayiot" :key="gt.id"
@@ -800,8 +800,8 @@
                                                         <select @change="updateOUsensor(s.id)" :id='"itemGateway" + s.id' class="input-form">
                                                             <option value="" disabled selected>Escolha uma GatewayIoT
                                                             </option>
-                                                            <option v-for="gt in gatewayiot" :key="gt.id"
-                                                                :value="s.gatewayiot">{{ gt.titulo }}
+                                                            <option v-for="gt in gatewayiot" :selected="gt.id == s.gatewayiot" :key="gt.id"
+                                                                :value="gt.id">{{ gt.titulo }}
                                                             </option>
                                                         </select>
                                                     </td>
