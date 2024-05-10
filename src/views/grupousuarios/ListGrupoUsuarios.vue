@@ -123,11 +123,11 @@ export default {
             tipos_usuario: [
                 {
                     id: 1,
-                    nome: 'Comun',
+                    nome: 'Monitor',
                 },
                 {
                     id: 2,
-                    nome: 'Monitor',
+                    nome: 'Coordenador',
                 },
                 {
                     id: 3,

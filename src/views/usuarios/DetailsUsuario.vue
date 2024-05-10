@@ -93,8 +93,8 @@
                         de usuário</label>
                     <select v-model="usuario.tipo" required @change="habilitarSalvar()" class="input-form">
                         <option value="0" disabled selected>Tipo de usuário</option>
-                        <option value="1">Comun</option>
-                        <option value="2">Monitor</option>
+                        <option value="1">Monitor</option>
+                        <option value="2">Coordenador</option>
                         <option value="3">Gerente</option>
                         <option value="4">Administrador</option>
 

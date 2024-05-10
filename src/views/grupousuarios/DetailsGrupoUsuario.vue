@@ -63,8 +63,8 @@
                                             <select v-model="grupousuario.tipo" disabled class="input-form"
                                                 @change="habilitarSalvar()">
                                                 <option value="0" selected>Tipo de usuário</option>
-                                                <option value="1">Comun</option>
-                                                <option value="2">Monitor</option>
+                                                <option value="1">Monitor</option>
+                                                <option value="2">Coordenador</option>
                                                 <option value="3">Gerente</option>
                                                 <option value="4">Administrador</option>
 

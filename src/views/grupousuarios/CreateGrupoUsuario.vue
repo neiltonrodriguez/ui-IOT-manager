@@ -67,8 +67,8 @@
                                             <select v-model="formData.tipo" v-bind:disabled="isDisabled" required
                                                 class="input-form">
                                                 <option value="0" disabled selected>Tipo de usuário</option>
-                                                <option value="1">Comun</option>
-                                                <option value="2">Monitor</option>
+                                                <option value="1">Monitor</option>
+                                                <option value="2">Coordenador</option>
                                                 <option value="3">Gerente</option>
                                                 <option v-if="user.tipo == 4" value="4">Administrador</option>
 
