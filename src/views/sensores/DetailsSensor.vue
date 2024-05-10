@@ -264,6 +264,7 @@
                                         @click="mostrarFormScript()">Adicionar scripts</button>
                                 </div>
                                 <div v-if="mostrarFormSC">
+                                    
                                     <form class="row g-3" v-on:submit.prevent="createSensorScript(sc)">
 
 
