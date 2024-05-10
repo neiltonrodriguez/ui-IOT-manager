@@ -82,7 +82,7 @@
                                                 <template v-for="e in empresas" :key="e.id">
                                                     <option selected v-if="e.id == sensor.empresa" :value="e.id">{{
                                                         e.nome
-                                                        }}</option>
+                                                    }}</option>
                                                 </template>
                                             </select>
                                         </div>
@@ -94,7 +94,7 @@
                                                 <option value="" disabled selected>Escolha a conta</option>
                                                 <option v-for="dp in departamentos" :key="dp.id" :value="dp.id">{{
                                                     dp.titulo
-                                                    }}
+                                                }}
                                                 </option>
                                             </select>
                                         </div>
@@ -154,7 +154,7 @@
                                                 <option selected value="" disabled>Escolha um grupo</option>
                                                 <option v-for="sg in sensorgrupos" :value="sg.id" :key="sg.id">{{
                                                     sg.nome
-                                                    }}</option>
+                                                }}</option>
                                             </select>
                                         </div>
 
@@ -264,13 +264,36 @@
                                         @click="mostrarFormScript()">Adicionar scripts</button>
                                 </div>
                                 <div v-if="mostrarFormSC">
-                                    
+
                                     <form class="row g-3" v-on:submit.prevent="createSensorScript(sc)">
 
-
-
-                                        <div v-for="c in cont" class="border p-2 rounded-lg bg-slate-200">
-                                            <div v-if="cont >= 2 && c != 1" class="grid gap-3 mb-3 md:grid-cols-3">
+                                        <!-- <div v-for="(condition, index) in conditions" :key="index">
+                                            <select v-model="condition.sensor">
+                                                <option v-for="sensor in atributos" :value="sensor.id">{{ sensor.nome }}
+                                                </option>
+                                            </select>
+                                            <select v-model="condition.attribute">
+                                                <option v-for="attribute in selectedSensorAttributes(condition.sensor)"
+                                                    :value="attribute.parametro">{{ attribute.label }}</option>
+                                            </select>
+                                            <select v-model="condition.operator">
+                                                <option value="==">Igual a</option>
+                                                <option value="!=">Diferente de</option>
+                                                <option value=">">Maior que</option>
+                                                <option value="<">Menor que</option>
+                                                
+                                            </select>
+                                            <input type="text" v-model="condition.value" placeholder="Valor">
+                                            <select v-model="condition.connector">
+                                                <option value="AND">E</option>
+                                                <option value="OR">OU</option>
+                                            </select>
+                                            <button @click="removeCondition(index)">Remover</button>
+                                        </div>
+                                        <button @click="addCondition">Adicionar Condição</button> -->
+                                        {{ tipooperador }}
+                                        <div v-for="(c, index) in sensores" :key="index" class="p-2 rounded-lg">
+                                            <div v-if="index >= 1" class="grid gap-3 mb-3 md:grid-cols-3">
                                                 <div></div>
                                                 <div>
                                                     <label class="label-form">Conectores lógicos</label>
@@ -282,39 +305,32 @@
                                                 </div>
                                                 <div></div>
                                             </div>
-                                            <div class="grid gap-3 mb-3 md:grid-cols-4">
+                                            <div class="grid gap-3 mb-3 md:grid-cols-4 border bg-slate-200 p-2">
                                                 <div>
                                                     <label class="label-form">Sensor</label>
-                                                    <select class="input-form" :disabled="c == 1"
-                                                        @change="listarAtributos()">
-
-                                                        <option v-for="se in atributos" :id="'sensorSelected'+se.id"
-                                                            :selected="se.id == this.$route.params.id ? true : false"
-                                                            :key="se.id" :value="se.serial">{{ se.nome }}
+                                                    <select class="input-form" :id="'sensor'+c.id" @change="selectedSensorAttributes(c.serial)">
+                                                        <option v-for="se in sensores" :key="se.id" :value="se.serial" >{{ se.nome }}
                                                         </option>
 
                                                     </select>
                                                 </div>
-                                                <!-- {{ listaDeAtributos }} -->
+                                               
                                                 <div>
                                                     <label class="label-form">Condicional IF/ELSE</label>
-                                                    <select class="input-form">
-                                                        <option value="" selected disabled>escolher parâmetro
-                                                        </option>
-                                                        <option v-for="a in listaDeAtributos" :key="a.nome" :value="a.nome">{{
-                                                            a.label }}</option>
-
+                                                    <select class="input-form" @change="selectedSensorOperator()" :id="'atributos'+c.id">
+                                                        <option v-for="attr in atributes" :key="attr.nome"
+                                                    :value="attr.parametro">{{ attr.label }}</option>
 
                                                     </select>
                                                 </div>
+                                               
                                                 <div>
                                                     <label class="label-form">Tipo de condição</label>
                                                     <select class="input-form">
-                                                        <option value="" selected disabled>(numero)
+                                                        <option value="0" selected disabled>escolha um
                                                         </option>
                                                         <option v-for="(o, index) in operadores" :key="index"
-                                                            :value="o.value">{{ o.label }}
-                                                        </option>
+                                                    :value="o.value">{{ o.label }}</option>
 
                                                     </select>
                                                 </div>
@@ -328,9 +344,9 @@
                                         </div>
 
 
-                                        <button type="button" @click="cont++"
+                                        <!-- <button type="button" @click="cont++"
                                             class="text-white mt-3 mb-5 bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Adicionar
-                                            mais condições</button>
+                                            mais condições</button> -->
                                         <div class="grid gap-3 mb-3 md:grid-cols-2">
                                             <div>
                                                 <label class="label-form ">Título</label>
@@ -615,6 +631,8 @@ export default {
     },
     data() {
         return {
+            conditions: [],
+            operators: [],
             operadores: [
                 {
                     label: "Diferente de",
@@ -672,7 +690,9 @@ export default {
                     tipo: 'text'
                 }
             ],
-            atributos: [],
+            sensores: [
+
+            ],
             cont: 1,
             operador: "",
             atual: 1,
@@ -774,25 +794,54 @@ export default {
             dados: [],
             mostrarLeituras: false,
             mostrarNotificacoes: false,
-            listaDeAtributos: []
+            listaDeAtributos: [],
+            atributes: [],
+            tipooperador: ''
         };
     },
     methods: {
+        selectedSensorAttributes(serial) {
+            // const sensor = document.getElementById('sensor')
+            console.log(serial);
+            const sensores = this.sensores.find(sensor => sensor.serial === serial);
+            // this.atributes.serial = serial;
+            this.atributes = sensores.atributos;
+
+        },
+        selectedSensorOperator(serial, atributo) {
+            // console.log(atributo);
+            const selectedSensor = this.sensores.find(sensor => sensor.serial === serial);
+            const selectedAtribute = selectedSensor.atributos.find(op => op.parametro === atributo);
+            // console.log(selectedAtribute)
+            // const selectedOperador = this.operadores.find(operador => operador.tipo === selectedAtribute.datatype);
+            this.tipooperador = selectedAtribute.datatype;
+            // let arr = []
+            // for(let i = 0; i < selectedSensor.atributos.length; i++){
+            //     // console.log(selectedSensor.atributos[i]);
+            //     if(selectedSensor.atributos[i].paramentro === atributo){
+            //         console.log(selectedSensor.atributos[i]);
+            //         const selectedOperador = this.operadores.find(operador => operador.tipo === selectedSensor.atributos[i].datatype);
+            //         // console.log(selectedOperador);
+            //         arr = selectedOperador;
+            //     }
+            // }
+           
+        },
         listarAtributos() {
             // console.log(this.atributos)
             let arr = []
-            for (let i = 0; i < this.atributos.length; i++) {
-                var a = document.getElementById('sensorSelected'+ this.atributos[i].id)
+            for (let i = 0; i < this.sensores.length; i++) {
+                var a = document.getElementById('sensorSelected' + this.sensores[i].id)
                 console.log(a)
-                if (a.selected && this.atributos[i].id != this.$route.params.id) {
-                    // arr = this.atributos[i].atributos;
+                if (a.selected && this.sensores[i].id != this.$route.params.id) {
+                    arr = this.sensores[i].atributos;
                     console.log(a.value)
                 }
                 this.listaDeAtributos.push(arr);
             }
-            
 
-            // console.log(this.listaDeAtributos)
+
+            console.log(this.listaDeAtributos)
         },
         listarNotificacoes() {
             if (this.sc.enviar_notificacao) {
@@ -1068,7 +1117,8 @@ export default {
 
 
             }
-            this.atributos = arr;
+            this.sensores = arr;
+    
 
         },
         getDadosParaAsRegras() {
