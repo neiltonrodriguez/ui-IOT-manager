@@ -266,87 +266,6 @@
                                 <div v-if="mostrarFormSC">
 
                                     <form class="row g-3" v-on:submit.prevent="createSensorScript(sc)">
-
-                                        <!-- <div v-for="(condition, index) in conditions" :key="index">
-                                            <select v-model="condition.sensor">
-                                                <option v-for="sensor in atributos" :value="sensor.id">{{ sensor.nome }}
-                                                </option>
-                                            </select>
-                                            <select v-model="condition.attribute">
-                                                <option v-for="attribute in selectedSensorAttributes(condition.sensor)"
-                                                    :value="attribute.parametro">{{ attribute.label }}</option>
-                                            </select>
-                                            <select v-model="condition.operator">
-                                                <option value="==">Igual a</option>
-                                                <option value="!=">Diferente de</option>
-                                                <option value=">">Maior que</option>
-                                                <option value="<">Menor que</option>
-                                                
-                                            </select>
-                                            <input type="text" v-model="condition.value" placeholder="Valor">
-                                            <select v-model="condition.connector">
-                                                <option value="AND">E</option>
-                                                <option value="OR">OU</option>
-                                            </select>
-                                            <button @click="removeCondition(index)">Remover</button>
-                                        </div>
-                                        <button @click="addCondition">Adicionar Condição</button> -->
-                                        {{ tipooperador }}
-                                        <div v-for="(c, index) in sensores" :key="index" class="p-2 rounded-lg">
-                                            <div v-if="index >= 1" class="grid gap-3 mb-3 md:grid-cols-3">
-                                                <div></div>
-                                                <div>
-                                                    <label class="label-form">Conectores lógicos</label>
-                                                    <select class="input-form" required>
-                                                        <option selected value="AND"> AND </option>
-                                                        <option value="AND"> OR </option>
-
-                                                    </select>
-                                                </div>
-                                                <div></div>
-                                            </div>
-                                            <div class="grid gap-3 mb-3 md:grid-cols-4 border bg-slate-200 p-2">
-                                                <div>
-                                                    <label class="label-form">Sensor</label>
-                                                    <select class="input-form" :id="'sensor'+c.id" @change="selectedSensorAttributes(c.serial)">
-                                                        <option v-for="se in sensores" :key="se.id" :value="se.serial" >{{ se.nome }}
-                                                        </option>
-
-                                                    </select>
-                                                </div>
-                                               
-                                                <div>
-                                                    <label class="label-form">Condicional IF/ELSE</label>
-                                                    <select class="input-form" @change="selectedSensorOperator()" :id="'atributos'+c.id">
-                                                        <option v-for="attr in atributes" :key="attr.nome"
-                                                    :value="attr.parametro">{{ attr.label }}</option>
-
-                                                    </select>
-                                                </div>
-                                               
-                                                <div>
-                                                    <label class="label-form">Tipo de condição</label>
-                                                    <select class="input-form">
-                                                        <option value="0" selected disabled>escolha um
-                                                        </option>
-                                                        <option v-for="(o, index) in operadores" :key="index"
-                                                    :value="o.value">{{ o.label }}</option>
-
-                                                    </select>
-                                                </div>
-
-                                                <div>
-                                                    <label class="label-form">Valor</label>
-                                                    <input type="text" class="input-form" placeholder="">
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-
-                                        <!-- <button type="button" @click="cont++"
-                                            class="text-white mt-3 mb-5 bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Adicionar
-                                            mais condições</button> -->
                                         <div class="grid gap-3 mb-3 md:grid-cols-2">
                                             <div>
                                                 <label class="label-form ">Título</label>
@@ -355,12 +274,7 @@
 
                                             </div>
 
-                                            <div>
-                                                <label class="label-form ">Ação</label>
-                                                <input v-on:keyup="habilitarSalvar()" type="text" v-model="sc.acao"
-                                                    class="input-form" placeholder="" required>
 
-                                            </div>
                                             <div>
                                                 <label class="label-form ">Descrição</label>
                                                 <textarea rows="4" v-on:keyup="habilitarSalvar()" type="text"
@@ -406,6 +320,99 @@
                                                     <option :value="2">Remover alerta</option>
                                                 </select>
                                             </div>
+                                            <div>
+
+                                                <button type="button" @click="mostrarDivRegra()"
+                                                    class="text-white w-full mt-3 mb-5 bg-green-800 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">Criar
+                                                    Regra</button>
+
+                                            </div>
+                                            <div>
+                                                <label class="label-form ">Ação</label>
+                                                <input v-on:keyup="habilitarSalvar()" type="text" v-model="sc.acao"
+                                                    class="input-form" placeholder="" required>
+
+                                            </div>
+                                        </div>
+
+                                        <div v-if="showDivRegra">
+                                            <div v-for="(c, index) in cont" :key="index" class="p-2 rounded-lg">
+                                                <div v-if="index >= 1" class="grid gap-3 mb-3 md:grid-cols-3">
+                                                    <div></div>
+                                                    <div class="text-center">
+                                                        <label class="label-form">Conectores lógicos</label>
+                                                        <select class="input-form text-center" required>
+                                                            <option selected value="AND">E</option>
+                                                            <option value="OR">OU</option>
+
+                                                        </select>
+                                                    </div>
+                                                    <div></div>
+                                                </div>
+
+                                                <div class="grid gap-3 mb-3 md:grid-cols-4 border bg-slate-200 p-2">
+
+                                                    <div>
+                                                        <label class="label-form">Sensor</label>
+                                                        <select class="input-form" :id="'sensor' + c"
+                                                            @change="selectedSensorAttributes(c)">
+                                                            <option v-for="se in sensores" :key="se.id"
+                                                                :value="se.serial" :selected="se.id === sensor.id">
+                                                                {{ se.nome }}
+                                                            </option>
+
+                                                        </select>
+                                                    </div>
+
+                                                    <div>
+                                                        <label class="label-form">Parâmetro</label>
+                                                        <select class="input-form" :id="'atributos' + c"
+                                                            @change="selectedSensorOperator(c)">
+
+
+                                                        </select>
+                                                    </div>
+
+                                                    <div>
+                                                        <label class="label-form">Condição</label>
+                                                        <select class="input-form" :id="'operador' + c"
+                                                            @change="verificaCondicao(c)">
+
+                                                        </select>
+                                                    </div>
+
+                                                    <div :id="'mostrarValue' + c">
+                                                        <div>
+                                                            <label class="label-form">Valor</label>
+                                                            <input type="text" class="input-form" placeholder="">
+                                                        </div>
+                                                    </div>
+                                                    <div :id="'mostrarValueEntre' + c" class="hidden">
+                                                        <div class="grid gap-3 md:grid-cols-2 border bg-slate-200">
+                                                            <div>
+                                                                <label class="label-form">valor 1</label>
+                                                                <input type="text" class="input-form" placeholder="">
+                                                            </div>
+
+                                                            <div>
+                                                                <label class="label-form">valor 2</label>
+                                                                <input type="text" class="input-form" placeholder="">
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                                
+                                            </div>
+                                            <div v-if="cont >= 1">
+                                                    <button type="button" @click="cont++"
+                                                        class="text-white mt-3 mb-5 bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Adicionar
+                                                        mais condições</button>
+                                                    <button type="button" @click="finalizarRegra()"
+                                                        class="text-white mt-3 ml-3 mb-5 bg-blue-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Finalizar
+                                                        regra</button>
+                                                </div>
                                         </div>
 
 
@@ -427,10 +434,13 @@
                                                 Título</th>
                                             <th
                                                 class="border-b  font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 text-left">
-                                                Regra</th>
+                                                Alerta</th>
                                             <th
                                                 class="border-b  font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 text-left">
-                                                Ação</th>
+                                                Enviar Notificação</th>
+                                            <th
+                                                class="border-b  font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 text-left">
+                                                Notificação</th>
                                             <th
                                                 class="border-b  font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 text-left">
                                                 Habilitado</th>
@@ -446,13 +456,37 @@
                                                 class="border-b border-slate-100  p-4 pr-8 text-slate-500 ">
                                                 {{ u.titulo }}
                                             </td>
+
                                             <td @click="detailsSC(u.id)"
                                                 class="border-b border-slate-100   p-4 pr-8 text-slate-500  ">
-                                                {{ u.regra }}
+                                                <template v-if="u.alerta == 0">
+                                                    Não alterar
+                                                </template>
+                                                <template v-if="u.alerta == 1">
+                                                    Gerar alerta
+                                                </template>
+                                                <template v-else>
+                                                    remover alerta
+                                                </template>
                                             </td>
                                             <td @click="detailsSC(u.id)"
                                                 class="border-b border-slate-100   p-4 pr-8 text-slate-500  ">
-                                                {{ u.acao }}
+                                                <template v-if="u.enviar_notificacao">
+                                                    <div class="flex items-center">
+                                                        <div class="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div>
+                                                        Sim
+                                                    </div>
+                                                </template>
+                                                <template v-else>
+                                                    <div class="flex items-center">
+                                                        <div class="h-2.5 w-2.5 rounded-full bg-red-500 mr-2"></div> Não
+                                                    </div>
+                                                </template>
+                                            </td>
+                                            <td @click="detailsSC(u.id)"
+                                                class="border-b border-slate-100   p-4 pr-8 text-slate-500  ">
+                                                <span v-for="n in notificacoes" :key="n.id">{{ u.notificacao == n.id ?
+                                                    n.titulo : '' }}</span>
                                             </td>
 
                                             <td @click="detailsSC(u.id)"
@@ -631,7 +665,10 @@ export default {
     },
     data() {
         return {
+            showDivRegra: false,
+            tipoCondicao: '',
             conditions: [],
+            notificacoes: [],
             operators: [],
             operadores: [
                 {
@@ -693,7 +730,7 @@ export default {
             sensores: [
 
             ],
-            cont: 1,
+            cont: 0,
             operador: "",
             atual: 1,
             modal: false,
@@ -800,35 +837,68 @@ export default {
         };
     },
     methods: {
-        selectedSensorAttributes(serial) {
-            // const sensor = document.getElementById('sensor')
-            console.log(serial);
-            const sensores = this.sensores.find(sensor => sensor.serial === serial);
-            // this.atributes.serial = serial;
-            this.atributes = sensores.atributos;
+      
+        mostrarDivRegra() {
+            if (!this.showDivRegra) {
+                this.showDivRegra = true;
+                this.cont = 1;
+                this.selectedSensorAttributes(1)
+            }
 
         },
-        selectedSensorOperator(serial, atributo) {
-            // console.log(atributo);
-            const selectedSensor = this.sensores.find(sensor => sensor.serial === serial);
-            const selectedAtribute = selectedSensor.atributos.find(op => op.parametro === atributo);
-            // console.log(selectedAtribute)
-            // const selectedOperador = this.operadores.find(operador => operador.tipo === selectedAtribute.datatype);
-            this.tipooperador = selectedAtribute.datatype;
-            // let arr = []
-            // for(let i = 0; i < selectedSensor.atributos.length; i++){
-            //     // console.log(selectedSensor.atributos[i]);
-            //     if(selectedSensor.atributos[i].paramentro === atributo){
-            //         console.log(selectedSensor.atributos[i]);
-            //         const selectedOperador = this.operadores.find(operador => operador.tipo === selectedSensor.atributos[i].datatype);
-            //         // console.log(selectedOperador);
-            //         arr = selectedOperador;
-            //     }
-            // }
-           
+        finalizarRegra() {
+            this.showDivRegra = false;
+
+        },
+        verificaCondicao(i) {
+            const condi = document.getElementById('operador' + i);
+            if (condi.value == 'entre') {
+                document.getElementById('mostrarValueEntre' + i).style.display = 'block';
+                document.getElementById('mostrarValue' + i).style.display = 'none';
+            } else {
+                document.getElementById('mostrarValueEntre' + i).style.display = 'none';
+                document.getElementById('mostrarValue' + i).style.display = 'block';
+            }
+
+            return true;
+
+
+        },
+        selectedSensorAttributes(i) {
+
+            const sen = document.getElementById('sensor' + i);
+            const sensores = this.sensores.find(sensor => sensor.serial === sen.value);
+            const att = document.getElementById('atributos' + i);
+            let opt = ''
+            for (let x = 0; x < sensores.atributos.length; x++) {
+                opt += `<option value="${sensores.atributos[x].parametro}">${sensores.atributos[x].label}</option>`
+            }
+            att.innerHTML = opt
+
+            this.selectedSensorOperator(i);
+
+        },
+        selectedSensorOperator(i) {
+
+            const sen = document.getElementById('sensor' + i);
+            const selectedSensor = this.sensores.find(sensor => sensor.serial === sen.value);
+            const param = document.getElementById('atributos' + i);
+
+            const typeOperator = selectedSensor.atributos.find(op => op.parametro === param.value);
+
+
+            const optOperador = document.getElementById('operador' + i)
+            let op = ''
+            for (let y = 0; y < this.operadores.length; y++) {
+                if (this.operadores[y].tipo == typeOperator.datatype) {
+                    op += `<option value="${this.operadores[y].value}">${this.operadores[y].label}</option>`
+                }
+
+            }
+            optOperador.innerHTML = op
+
         },
         listarAtributos() {
-            // console.log(this.atributos)
             let arr = []
             for (let i = 0; i < this.sensores.length; i++) {
                 var a = document.getElementById('sensorSelected' + this.sensores[i].id)
@@ -1117,8 +1187,9 @@ export default {
 
 
             }
+
             this.sensores = arr;
-    
+
 
         },
         getDadosParaAsRegras() {
@@ -1383,6 +1454,7 @@ export default {
                 .then(res => {
                     this.getDadosParaAsRegras();
                     this.sensorscripts = res.data.results
+                    this.getNotificacoes();
                     this.total = res.data.count
                     const qty = Math.ceil(this.total / this.limit);
                     if (qty <= 1) return [1];

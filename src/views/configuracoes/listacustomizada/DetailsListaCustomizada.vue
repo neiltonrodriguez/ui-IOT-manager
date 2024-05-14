@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h3 class="detalhes">DETALHES DO {{ this.$route.params.lista }}</h3>
+        <h3 class="detalhes">DETALHES DO {{ this.$route.params.lista.toUpperCase() }}</h3>
     </div>
   
     <div class="container-fluid p-5">
