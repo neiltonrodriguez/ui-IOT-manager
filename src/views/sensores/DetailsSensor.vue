@@ -334,7 +334,6 @@
 
                                             </div>
                                         </div>
-
                                         <div v-if="showDivRegra">
                                             <div v-for="(c, index) in cont" :key="index" class="p-2 rounded-lg">
                                                 <div v-if="index >= 1" class="grid gap-3 mb-3 md:grid-cols-3">
@@ -853,7 +852,6 @@ export default {
             }
         },
         finalizarRegra() {
-            // this.showDivRegra = false;
             let regra = [];
             for (let i = 1; i <= this.cont; i++) {
                 let s = null
