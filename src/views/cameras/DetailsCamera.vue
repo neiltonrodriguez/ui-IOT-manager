@@ -24,7 +24,7 @@
                     <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal"
                         v-on:click="toggleTabs(3)"
                         v-bind:class="{ 'text-gray-800 bg-gray-300': openTab !== 3, 'text-white bg-gray-800': openTab === 3 }">
-                        dados lidos
+                        Histórico de gravações
                     </a>
                 </li>
 
@@ -281,7 +281,7 @@
                             <div v-if="mostrarFormAgenda">
                                 <form class="row g-3" v-on:submit.prevent="updateAgendamento(agenda)">
                                     <div class="grid gap-3 mb-3 md:grid-cols-2">
-                                        <div v-if="user.tipo == 4">
+                                        <!-- <div v-if="user.tipo == 4">
                                             <label
                                                 class="label-form">Conta</label>
                                             <select v-model="agenda.conta" class="input-form" @change="escolherConta()"
@@ -297,7 +297,7 @@
                                                 Camera</label>
                                             <input disabled type="text" v-model="agenda.camera" class="input-form"
                                                 placeholder="" required>
-                                        </div>
+                                        </div> -->
 
                                         <div>
                                             <label

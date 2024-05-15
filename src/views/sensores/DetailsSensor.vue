@@ -341,7 +341,7 @@
                                                     <div></div>
                                                     <div class="text-center">
                                                         <label class="label-form">Conectores lógicos</label>
-                                                        <select class="input-form text-center" required>
+                                                        <select class="input-form text-center" :id="'conector' + c" required>
                                                             <option selected value="AND">E</option>
                                                             <option value="OR">OU</option>
 
@@ -354,20 +354,23 @@
 
                                                     <div>
                                                         <label class="label-form">Sensor</label>
-                                                        <select class="input-form" :id="'sensor' + c"
-                                                            @change="selectedSensorAttributes(c)">
+                                                        <select class="input-form" :id="'sensor' + c" :disabled="c == 1"
+                                                            @change="selectedSensorAtributes(c)">
                                                             <option v-for="se in sensores" :key="se.id"
-                                                                :value="se.serial" :selected="se.id === sensor.id">
+                                                                :value="se.serial" required :selected="se.id === sensor.id">
                                                                 {{ se.nome }}
                                                             </option>
-
                                                         </select>
                                                     </div>
 
                                                     <div>
                                                         <label class="label-form">Parâmetro</label>
-                                                        <select class="input-form" :id="'atributos' + c"
+                                                        <select class="input-form" required :id="'atributos' + c"
                                                             @change="selectedSensorOperator(c)">
+                                                            <option v-for="a in buscarParametros()" :key="a.id"
+                                                                :value="a.parametro">
+                                                                {{ a.label }}
+                                                            </option>
 
 
                                                         </select>
@@ -375,8 +378,9 @@
 
                                                     <div>
                                                         <label class="label-form">Condição</label>
-                                                        <select class="input-form" :id="'operador' + c"
+                                                        <select class="input-form" required :id="'operador' + c"
                                                             @change="verificaCondicao(c)">
+                                                            <option value="" selected>escolha</option>
 
                                                         </select>
                                                     </div>
@@ -384,35 +388,38 @@
                                                     <div :id="'mostrarValue' + c">
                                                         <div>
                                                             <label class="label-form">Valor</label>
-                                                            <input type="text" class="input-form" placeholder="">
+                                                            <input type="text" required :id="'value' + c" class="input-form"
+                                                                placeholder="">
                                                         </div>
                                                     </div>
                                                     <div :id="'mostrarValueEntre' + c" class="hidden">
                                                         <div class="grid gap-3 md:grid-cols-2 border bg-slate-200">
                                                             <div>
                                                                 <label class="label-form">valor 1</label>
-                                                                <input type="text" class="input-form" placeholder="">
+                                                                <input type="text" required :id="'value1Entre' + c"
+                                                                    class="input-form" placeholder="">
                                                             </div>
 
                                                             <div>
                                                                 <label class="label-form">valor 2</label>
-                                                                <input type="text" class="input-form" placeholder="">
+                                                                <input type="text" required :id="'value2Entre' + c"
+                                                                    class="input-form" placeholder="">
                                                             </div>
                                                         </div>
 
                                                     </div>
 
                                                 </div>
-                                                
+
                                             </div>
                                             <div v-if="cont >= 1">
-                                                    <button type="button" @click="cont++"
-                                                        class="text-white mt-3 mb-5 bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Adicionar
-                                                        mais condições</button>
-                                                    <button type="button" @click="finalizarRegra()"
-                                                        class="text-white mt-3 ml-3 mb-5 bg-blue-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Finalizar
-                                                        regra</button>
-                                                </div>
+                                                <button type="button" @click="cont++"
+                                                    class="text-white mt-3 mb-5 bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Adicionar
+                                                    mais condições</button>
+                                                <button type="button" @click="finalizarRegra()"
+                                                    class="text-white mt-3 ml-3 mb-5 bg-blue-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Finalizar
+                                                    regra</button>
+                                            </div>
                                         </div>
 
 
@@ -833,20 +840,51 @@ export default {
             mostrarNotificacoes: false,
             listaDeAtributos: [],
             atributes: [],
-            tipooperador: ''
+            tipooperador: '',
+            regra: ''
         };
     },
     methods: {
-      
         mostrarDivRegra() {
             if (!this.showDivRegra) {
                 this.showDivRegra = true;
                 this.cont = 1;
-                this.selectedSensorAttributes(1)
-            }
 
+            }
         },
         finalizarRegra() {
+            // this.showDivRegra = false;
+            let regra = [];
+            for (let i = 1; i <= this.cont; i++) {
+                let s = null
+                if (this.cont === 1) {
+                    s = this.sensores.find((sensor) => sensor.serial === this.sensor.serial);
+                } else {
+                    const sen = document.getElementById('sensor' + i);
+                    s = this.sensores.find(sensor => sensor.serial === sen.value);
+                }
+                
+                let parametro = document.getElementById('atributos' + i).value;
+                let operador = document.getElementById('operador' + i).value;
+                let valor = document.getElementById('value' + i).value != '' ? document.getElementById('value' + i).value : null;
+                let valorEntre1 = document.getElementById('value1Entre' + i).value != '' ? document.getElementById('value1Entre' + i).value : null;
+                let valorEntre2 = document.getElementById('value2Entre' + i).value != '' ? document.getElementById('value2Entre' + i).value: null;
+                let conector = document.getElementById('conector' + i) ? document.getElementById('conector' + i).value : null
+                const x = {
+                    sensor: s.serial,
+                    parametro: parametro,
+                    operador: operador,
+                    valor: operador === 'entre' ? null : valor,
+                    valorEntre1: operador === 'entre' ? valorEntre1 : null,
+                    valorEntre2: operador === 'entre' ? valorEntre2 : null,
+                    conector: conector
+                }
+
+                // const y = `"${s.serial}":"${document.getElementById('atributos' + i).value} '${document.getElementById('operador' + i).value}' ${document.getElementById('value' + i).value}"`
+
+                regra.push(x);
+            }
+            this.regra = JSON.stringify(regra)
             this.showDivRegra = false;
 
         },
@@ -860,11 +898,15 @@ export default {
                 document.getElementById('mostrarValue' + i).style.display = 'block';
             }
 
-            return true;
-
+        },
+        buscarParametros() {
+            const sensoress = this.sensores.find((sensor) => sensor.serial === this.sensor.serial);
+            this.selectedSensorOperator(1);
+            return sensoress.atributos;
 
         },
-        selectedSensorAttributes(i) {
+
+        selectedSensorAtributes(i) {
 
             const sen = document.getElementById('sensor' + i);
             const sensores = this.sensores.find(sensor => sensor.serial === sen.value);
@@ -879,24 +921,27 @@ export default {
 
         },
         selectedSensorOperator(i) {
+            let selectedSensor = null
+            if (this.cont === 1) {
+                selectedSensor = this.sensores.find(sensor => sensor.serial === this.sensor.serial);
 
-            const sen = document.getElementById('sensor' + i);
-            const selectedSensor = this.sensores.find(sensor => sensor.serial === sen.value);
-            const param = document.getElementById('atributos' + i);
-
-            const typeOperator = selectedSensor.atributos.find(op => op.parametro === param.value);
-
-
-            const optOperador = document.getElementById('operador' + i)
-            let op = ''
-            for (let y = 0; y < this.operadores.length; y++) {
-                if (this.operadores[y].tipo == typeOperator.datatype) {
-                    op += `<option value="${this.operadores[y].value}">${this.operadores[y].label}</option>`
-                }
-
+            } else {
+                const sen = document.getElementById('sensor' + i);
+                selectedSensor = this.sensores.find(sensor => sensor.serial === sen.value);
             }
-            optOperador.innerHTML = op
+            let op = ''
+            setTimeout(function () {
+                const param = document.getElementById('atributos' + i);
+                const typeOperator = selectedSensor.atributos.find(op => op.parametro === param.value);
 
+                for (let y = 0; y < this.operadores.length; y++) {
+                    if (this.operadores[y].tipo == typeOperator.datatype) {
+                        op += `<option value="${this.operadores[y].value}">${this.operadores[y].label}</option>`
+                    }
+                }
+                const optOperador = document.getElementById('operador' + i)
+                optOperador.innerHTML = op
+            }.bind(this), 2000);
         },
         listarAtributos() {
             let arr = []
@@ -909,8 +954,6 @@ export default {
                 }
                 this.listaDeAtributos.push(arr);
             }
-
-
             console.log(this.listaDeAtributos)
         },
         listarNotificacoes() {
@@ -1144,27 +1187,12 @@ export default {
                 this.openTab = tabNumber
             }
         },
-        retornaNomeDaChave(p) {
-
-            if (p.includes('valor_lido1')) {
-                return 'valor_lido1';
-            } else if (p.includes('valor_lido2')) {
-                return 'valor_lido2';
-            }
-            else if (p.includes('valor_lido3')) {
-                return 'valor_lido3';
-            }
-
-        },
         montarAtributosSensores() {
-            // console.log(this.sensoresgruposcript)
             let arr = []
             let a = {}
-            // let j = {}
 
             for (let i = 0; i < this.sensoresgruposcript.length; i++) {
                 let b = []
-                // console.log(this.sensoresgruposcript[i].atributos)
                 const y = this.sensoresgruposcript[i].atributos;
                 for (let x = 0; x < this.sensoresgruposcript[i].atributos.length; x++) {
                     const j = [...Object.values(this.sensoresgruposcript[i].atributos[x])];
@@ -1175,7 +1203,6 @@ export default {
                         nome: 'valor_lido' + (x + 1)
                     }
                     b.push(a);
-
                 }
                 const z = {
                     id: this.sensoresgruposcript[i].id,
@@ -1184,7 +1211,6 @@ export default {
                     atributos: b
                 }
                 arr.push(z)
-
 
             }
 
@@ -1473,7 +1499,7 @@ export default {
                 is_active: form.is_active,
                 titulo: form.titulo,
                 descricao: form.descricao,
-                regra: form.regra,
+                regra: this.regra,
                 acao: form.acao,
                 alerta: form.alerta,
                 enviar_notificacao: form.enviar_notificacao,
@@ -1628,6 +1654,7 @@ export default {
         this.setSensor();
     },
     mounted() {
+
         this.setUser();
         this.chamadasGet();
         this.getEmpresas();
