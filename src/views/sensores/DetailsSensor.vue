@@ -82,7 +82,7 @@
                                                 <template v-for="e in empresas" :key="e.id">
                                                     <option selected v-if="e.id == sensor.empresa" :value="e.id">{{
                                                         e.nome
-                                                    }}</option>
+                                                        }}</option>
                                                 </template>
                                             </select>
                                         </div>
@@ -94,7 +94,7 @@
                                                 <option value="" disabled selected>Escolha a conta</option>
                                                 <option v-for="dp in departamentos" :key="dp.id" :value="dp.id">{{
                                                     dp.titulo
-                                                }}
+                                                    }}
                                                 </option>
                                             </select>
                                         </div>
@@ -154,7 +154,7 @@
                                                 <option selected value="" disabled>Escolha um grupo</option>
                                                 <option v-for="sg in sensorgrupos" :value="sg.id" :key="sg.id">{{
                                                     sg.nome
-                                                }}</option>
+                                                    }}</option>
                                             </select>
                                         </div>
 
@@ -323,104 +323,17 @@
                                             <div>
 
                                                 <button type="button" @click="mostrarDivRegra()"
-                                                    class="text-white w-full mt-3 mb-5 bg-green-800 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">Criar
+                                                    class="text-white w-full mt-3 mb-5 bg-green-800 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">
                                                     Regra</button>
 
                                             </div>
                                             <div>
-                                                <label class="label-form ">Ação</label>
-                                                <input v-on:keyup="habilitarSalvar()" type="text" v-model="sc.acao"
-                                                    class="input-form" placeholder="" required>
+                                                <button type="button" @click="mostrarDivAcao()"
+                                                    class="text-white w-full mt-3 mb-5 bg-green-800 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">
+                                                    Ação</button>
 
                                             </div>
                                         </div>
-                                        <div v-if="showDivRegra">
-                                            <div v-for="(c, index) in cont" :key="index" class="p-2 rounded-lg">
-                                                <div v-if="index >= 1" class="grid gap-3 mb-3 md:grid-cols-3">
-                                                    <div></div>
-                                                    <div class="text-center">
-                                                        <label class="label-form">Conectores lógicos</label>
-                                                        <select class="input-form text-center" :id="'conector' + c" required>
-                                                            <option selected value="AND">E</option>
-                                                            <option value="OR">OU</option>
-
-                                                        </select>
-                                                    </div>
-                                                    <div></div>
-                                                </div>
-
-                                                <div class="grid gap-3 mb-3 md:grid-cols-4 border bg-slate-200 p-2">
-
-                                                    <div>
-                                                        <label class="label-form">Sensor</label>
-                                                        <select class="input-form" :id="'sensor' + c" :disabled="c == 1"
-                                                            @change="selectedSensorAtributes(c)">
-                                                            <option v-for="se in sensores" :key="se.id"
-                                                                :value="se.serial" required :selected="se.id === sensor.id">
-                                                                {{ se.nome }}
-                                                            </option>
-                                                        </select>
-                                                    </div>
-
-                                                    <div>
-                                                        <label class="label-form">Parâmetro</label>
-                                                        <select class="input-form" required :id="'atributos' + c"
-                                                            @change="selectedSensorOperator(c)">
-                                                            <option v-for="a in buscarParametros()" :key="a.id"
-                                                                :value="a.parametro">
-                                                                {{ a.label }}
-                                                            </option>
-
-
-                                                        </select>
-                                                    </div>
-
-                                                    <div>
-                                                        <label class="label-form">Condição</label>
-                                                        <select class="input-form" required :id="'operador' + c"
-                                                            @change="verificaCondicao(c)">
-                                                            <option value="" selected>escolha</option>
-
-                                                        </select>
-                                                    </div>
-
-                                                    <div :id="'mostrarValue' + c">
-                                                        <div>
-                                                            <label class="label-form">Valor</label>
-                                                            <input type="text" required :id="'value' + c" class="input-form"
-                                                                placeholder="">
-                                                        </div>
-                                                    </div>
-                                                    <div :id="'mostrarValueEntre' + c" class="hidden">
-                                                        <div class="grid gap-3 md:grid-cols-2 border bg-slate-200">
-                                                            <div>
-                                                                <label class="label-form">valor 1</label>
-                                                                <input type="text" required :id="'value1Entre' + c"
-                                                                    class="input-form" placeholder="">
-                                                            </div>
-
-                                                            <div>
-                                                                <label class="label-form">valor 2</label>
-                                                                <input type="text" required :id="'value2Entre' + c"
-                                                                    class="input-form" placeholder="">
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-
-                                                </div>
-
-                                            </div>
-                                            <div v-if="cont >= 1">
-                                                <button type="button" @click="cont++"
-                                                    class="text-white mt-3 mb-5 bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Adicionar
-                                                    mais condições</button>
-                                                <button type="button" @click="finalizarRegra()"
-                                                    class="text-white mt-3 ml-3 mb-5 bg-blue-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Finalizar
-                                                    regra</button>
-                                            </div>
-                                        </div>
-
 
                                         <button type="submit" :disabled="isDisabled"
                                             class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center  disabled:bg-gray-300">salvar</button>
@@ -431,27 +344,27 @@
 
                                     </form>
                                 </div>
-                                <table class="border-collapse table-fixed w-full">
+                                <table class="border-collapse w-full">
                                     <thead>
                                         <tr>
 
                                             <th
-                                                class="border-b  font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 text-left">
+                                                class="border-b  font-medium p-2 text-slate-400 text-left">
                                                 Título</th>
                                             <th
-                                                class="border-b  font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 text-left">
+                                                class="border-b  font-medium p-2 text-slate-400 text-left">
                                                 Alerta</th>
                                             <th
-                                                class="border-b  font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 text-left">
+                                                class="border-b  font-medium p-2 text-slate-400 text-left">
                                                 Enviar Notificação</th>
                                             <th
-                                                class="border-b  font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 text-left">
+                                                class="border-b  font-medium p-2 text-slate-400 text-left">
                                                 Notificação</th>
                                             <th
-                                                class="border-b  font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 text-left">
+                                                class="border-b  font-medium p-2 text-slate-400 text-left">
                                                 Habilitado</th>
                                             <th
-                                                class="border-b  font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 text-left">
+                                                class="border-b  font-medium p-2 text-slate-400 text-left">
                                                 Ação</th>
                                         </tr>
                                     </thead>
@@ -459,12 +372,12 @@
                                         <tr class="hover:bg-gray-100 cursor-pointer duration-200"
                                             v-for="u in sensorscripts" :key="u.id">
                                             <td @click="detailsSC(u.id)"
-                                                class="border-b border-slate-100  p-4 pr-8 text-slate-500 ">
+                                                class="border-b border-slate-100  p-2 text-slate-500 ">
                                                 {{ u.titulo }}
                                             </td>
 
                                             <td @click="detailsSC(u.id)"
-                                                class="border-b border-slate-100   p-4 pr-8 text-slate-500  ">
+                                                class="border-b border-slate-100   p-2 text-slate-500  ">
                                                 <template v-if="u.alerta == 0">
                                                     Não alterar
                                                 </template>
@@ -476,7 +389,7 @@
                                                 </template>
                                             </td>
                                             <td @click="detailsSC(u.id)"
-                                                class="border-b border-slate-100   p-4 pr-8 text-slate-500  ">
+                                                class="border-b border-slate-100   p-2 text-slate-500  ">
                                                 <template v-if="u.enviar_notificacao">
                                                     <div class="flex items-center">
                                                         <div class="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div>
@@ -490,13 +403,13 @@
                                                 </template>
                                             </td>
                                             <td @click="detailsSC(u.id)"
-                                                class="border-b border-slate-100   p-4 pr-8 text-slate-500  ">
+                                                class="border-b border-slate-100   p-2 text-slate-500  ">
                                                 <span v-for="n in notificacoes" :key="n.id">{{ u.notificacao == n.id ?
                                                     n.titulo : '' }}</span>
                                             </td>
 
                                             <td @click="detailsSC(u.id)"
-                                                class="border-b border-slate-100  p-4 pr-8 text-slate-500 ">
+                                                class="border-b border-slate-100  p-2 text-slate-500 ">
                                                 <template v-if="u.is_active">
                                                     <div class="flex items-center">
                                                         <div class="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div>
@@ -509,7 +422,7 @@
                                                     </div>
                                                 </template>
                                             </td>
-                                            <td class="border-b border-slate-100  p-4 pr-8 text-slate-500 ">
+                                            <td class="border-b border-slate-100  p-2 text-slate-500 ">
                                                 <button @click="detailsSC(u.id)" class="btn">
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                         viewBox="0 0 24 24" stroke-width="1" stroke="currentColor"
@@ -545,6 +458,129 @@
                                 </div>
                                 <button type="button" @click="cancelar()"
                                     class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Voltar</button>
+
+                                <div v-if="showDivRegra" :class="cont > 2 ? 'h-[400px]' : ''" class="overflow-y-auto rounded-lg mt-3  bg-slate-200">
+                                    <div v-for="(c, index) in cont" :key="index" class="p-2 rounded-lg">
+                                        <div v-if="index >= 1" class="grid gap-3 mb-3 md:grid-cols-3">
+                                            <div></div>
+                                            <div class="text-center">
+                                                <label class="label-form">Conectores lógicos</label>
+                                                <select class="input-form text-center" :id="'conector' + c" required>
+                                                    <option selected value="AND">E</option>
+                                                    <option value="OR">OU</option>
+
+                                                </select>
+                                            </div>
+                                            <div></div>
+                                        </div>
+
+                                        <div class="grid gap-3 mb-3 md:grid-cols-4 border bg-slate-200 p-2">
+
+                                            <div>
+                                                <label class="label-form">Sensor</label>
+                                                <select class="input-form" :id="'sensor' + c" :disabled="c == 1"
+                                                    @change="selectedSensorAtributes(c)">
+                                                    <option v-for="se in sensores" :key="se.id" :value="se.serial"
+                                                        required :selected="se.id === sensor.id">
+                                                        {{ se.nome }}
+                                                    </option>
+                                                </select>
+                                            </div>
+
+                                            <div>
+                                                <label class="label-form">Parâmetro</label>
+                                                <select class="input-form" required :id="'atributos' + c"
+                                                    @change="selectedSensorOperator(c)">
+                                                    <option v-for="a in buscarParametros()" :key="a.id"
+                                                        :value="a.parametro">
+                                                        {{ a.label }}
+                                                    </option>
+
+
+                                                </select>
+                                            </div>
+
+                                            <div>
+                                                <label class="label-form">Condição</label>
+                                                <select class="input-form" required :id="'operador' + c"
+                                                    @change="verificaCondicao(c)">
+                                                    <option value="" selected>escolha</option>
+
+                                                </select>
+                                            </div>
+
+                                            <div :id="'mostrarValue' + c">
+                                                <div>
+                                                    <label class="label-form">Valor</label>
+                                                    <input type="text" required :id="'value' + c" class="input-form"
+                                                        placeholder="">
+                                                </div>
+                                            </div>
+                                            <div :id="'mostrarValueEntre' + c" class="hidden">
+                                                <div class="grid gap-3 md:grid-cols-2 border bg-slate-200">
+                                                    <div>
+                                                        <label class="label-form">valor 1</label>
+                                                        <input type="text" required :id="'value1Entre' + c"
+                                                            class="input-form" placeholder="">
+                                                    </div>
+
+                                                    <div>
+                                                        <label class="label-form">valor 2</label>
+                                                        <input type="text" required :id="'value2Entre' + c"
+                                                            class="input-form" placeholder="">
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    <div v-if="cont >= 1">
+                                        <button type="button" @click="cont++"
+                                            class="text-white mt-3 mb-5 bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Adicionar
+                                            mais condições</button>
+                                        <button type="button" @click="finalizarRegra()"
+                                            class="text-white mt-3 ml-3 mb-5 bg-blue-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Finalizar
+                                            regra</button>
+                                    </div>
+                                </div>
+                                <div v-if="showDivAcao" :class="cont2 > 2 ? 'h-[400px]' : ''" class="overflow-y-auto rounded-lg mt-3  bg-slate-200">
+                                    <div v-for="(c, index) in cont2" :key="index" class="p-2 rounded-lg">
+                                        <div class="grid gap-3 mb-3 md:grid-cols-4 border bg-slate-200 p-2">
+
+                                            <div>
+                                                <label class="label-form">Sensor</label>
+                                                <select class="input-form" :id="'sensorAcao' + c" :disabled="c == 1"
+                                                    @change="selectedSensorAtributes(c)">
+                                                    <option v-for="se in sensores" :key="se.id" :value="se.serial"
+                                                        required :selected="se.id === sensor.id">
+                                                        {{ se.nome }}
+                                                    </option>
+                                                </select>
+                                            </div>
+
+                                            <div>
+                                                <div>
+                                                    <label class="label-form">Valor</label>
+                                                    <input type="text" required :id="'valueAcao' + c" class="input-form"
+                                                        placeholder="">
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+
+                                    </div>
+                                    <div v-if="cont2 >= 1">
+                                        <button type="button" @click="cont2++"
+                                            class="text-white mt-3 mb-5 bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Adicionar
+                                            mais ações</button>
+                                        <button type="button" @click="finalizarAcao()"
+                                            class="text-white mt-3 ml-3 mb-5 bg-blue-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Finalizar
+                                            ação</button>
+                                    </div>
+                                </div>
                             </div>
                             <div v-bind:class="{ 'hidden': openTab !== 3, 'block': openTab === 3 }">
 
@@ -671,6 +707,7 @@ export default {
     },
     data() {
         return {
+            cont2: 0,
             showDivRegra: false,
             tipoCondicao: '',
             conditions: [],
@@ -840,16 +877,54 @@ export default {
             listaDeAtributos: [],
             atributes: [],
             tipooperador: '',
-            regra: ''
+            regra: '',
+            acao: '',
+            showDivAcao: false
         };
     },
     methods: {
         mostrarDivRegra() {
             if (!this.showDivRegra) {
                 this.showDivRegra = true;
+                this.showDivAcao = false;
                 this.cont = 1;
 
             }
+        },
+        mostrarDivAcao() {
+            if (!this.showDivAcao) {
+                this.showDivAcao = true;
+                this.showDivRegra = false;
+                this.cont2 = 1;
+
+            }
+        },
+        finalizarAcao() {
+            let acao = [];
+            for (let i = 1; i <= this.cont2; i++) {
+                let s = null
+                if (this.cont2 === 1) {
+                    s = this.sensores.find((sensor) => sensor.serial === this.sensor.serial);
+                } else {
+                    const sen = document.getElementById('sensorAcao' + i);
+                    s = this.sensores.find(sensor => sensor.serial === sen.value);
+                }
+
+                let valor = document.getElementById('valueAcao' + i).value != '' ? document.getElementById('valueAcao' + i).value : null;
+                
+                const x = {
+                    sensor: s.serial,
+                    acao: valor,
+                }
+
+                // const y = `"${s.serial}":"${document.getElementById('atributos' + i).value} '${document.getElementById('operador' + i).value}' ${document.getElementById('value' + i).value}"`
+
+                acao.push(x);
+            }
+            this.acao = JSON.stringify(acao)
+            console.log(this.acao)
+            this.showDivAcao = false;
+
         },
         finalizarRegra() {
             let regra = [];
@@ -861,12 +936,12 @@ export default {
                     const sen = document.getElementById('sensor' + i);
                     s = this.sensores.find(sensor => sensor.serial === sen.value);
                 }
-                
+
                 let parametro = document.getElementById('atributos' + i).value;
                 let operador = document.getElementById('operador' + i).value;
                 let valor = document.getElementById('value' + i).value != '' ? document.getElementById('value' + i).value : null;
                 let valorEntre1 = document.getElementById('value1Entre' + i).value != '' ? document.getElementById('value1Entre' + i).value : null;
-                let valorEntre2 = document.getElementById('value2Entre' + i).value != '' ? document.getElementById('value2Entre' + i).value: null;
+                let valorEntre2 = document.getElementById('value2Entre' + i).value != '' ? document.getElementById('value2Entre' + i).value : null;
                 let conector = document.getElementById('conector' + i) ? document.getElementById('conector' + i).value : null
                 const x = {
                     sensor: s.serial,
@@ -1492,13 +1567,12 @@ export default {
                 });
         },
         updateSensorScripts(form) {
-
             const u = {
                 is_active: form.is_active,
                 titulo: form.titulo,
                 descricao: form.descricao,
                 regra: this.regra,
-                acao: form.acao,
+                acao: this.acao,
                 alerta: form.alerta,
                 enviar_notificacao: form.enviar_notificacao,
                 notificacao: form.notificacao
