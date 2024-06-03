@@ -53,7 +53,7 @@
                 </div>
                 <div v-if="perfil.origemusuario != 'ldap'">
                     <label class="label-form">Login</label>
-                    <input type="password" v-model="perfil.password" disabled
+                    <input type="password" v-model="perfil.password" :disabled="perfil.origemusuario == 'ldap'"
                         class="input-form"
                         placeholder="">
                 </div>
