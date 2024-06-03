@@ -578,7 +578,7 @@
                                                     <div>
                                                         <label class="label-form">Sensor</label>
                                                         <select class="input-form" :id="'sensorAcao' + c"
-                                                            :disabled="c == 1" @change="selectedSensorAtributes(c)">
+                                                             @change="selectedSensorAtributes(c)">
                                                             <option v-for="se in sensores" :key="se.id"
                                                                 :value="se.serial" required
                                                                 :selected="se.id === sensor.id">
@@ -610,7 +610,7 @@
                                         </div>
 
                                         <button type="submit" :disabled="isDisabled"
-                                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center mt-3 disabled:bg-gray-300">salvarr</button>
+                                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center mt-3 disabled:bg-gray-300">Salvar</button>
 
                                     </form>
                                 </div>
