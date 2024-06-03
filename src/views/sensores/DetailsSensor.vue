@@ -82,7 +82,7 @@
                                                 <template v-for="e in empresas" :key="e.id">
                                                     <option selected v-if="e.id == sensor.empresa" :value="e.id">{{
                                                         e.nome
-                                                    }}</option>
+                                                        }}</option>
                                                 </template>
                                             </select>
                                         </div>
@@ -94,7 +94,7 @@
                                                 <option value="" disabled selected>Escolha a conta</option>
                                                 <option v-for="dp in departamentos" :key="dp.id" :value="dp.id">{{
                                                     dp.titulo
-                                                }}
+                                                    }}
                                                 </option>
                                             </select>
                                         </div>
@@ -154,7 +154,7 @@
                                                 <option selected value="" disabled>Escolha um grupo</option>
                                                 <option v-for="sg in sensorgrupos" :value="sg.id" :key="sg.id">{{
                                                     sg.nome
-                                                }}</option>
+                                                    }}</option>
                                             </select>
                                         </div>
 
@@ -465,7 +465,7 @@
                                                     Ação</button>
                                             </div>
                                         </div>
-                                        
+
                                         <div v-if="showDivRegra" :class="cont > 2 ? 'h-[400px]' : ''"
                                             class="overflow-y-auto rounded-lg mt-3  bg-slate-300">
                                             <div class="flex mb-3 items-center justify-between">
@@ -610,16 +610,11 @@
                                         </div>
 
                                         <button type="submit" :disabled="isDisabled"
-                                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center mt-3 disabled:bg-gray-300">salvar</button>
-
-
-                                        <!-- <button type="button" @click="cancelar()"
-                                            class="text-white ml-3 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Voltar</button> -->
-
-
+                                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center mt-3 disabled:bg-gray-300">salvarr</button>
 
                                     </form>
                                 </div>
+
                             </div>
                             <div v-bind:class="{ 'hidden': openTab !== 3, 'block': openTab === 3 }">
 
@@ -1030,7 +1025,7 @@ export default {
             }
 
         },
-        
+
         buscarParametros() {
             const sensoress = this.sensores.find((sensor) => sensor.serial === this.sensor.serial);
             this.selectedSensorOperator(1);
@@ -1519,7 +1514,17 @@ export default {
             if (sc.id) {
                 this.updateSensorScripts(sc);
             } else {
-                http.post('/sensores/' + this.sensor.id + '/sensorscripts/', sc)
+                const u = {
+                    is_active: sc.is_active,
+                    titulo: sc.titulo,
+                    descricao: sc.descricao,
+                    regra: this.regra,
+                    acao: this.acao,
+                    alerta: sc.alerta,
+                    enviar_notificacao: sc.enviar_notificacao,
+                    notificacao: sc.notificacao
+                }
+                http.post('/sensores/' + this.sensor.id + '/sensorscripts/', u)
                     .then(res => {
                         this.$swal.fire({
                             icon: 'success',
