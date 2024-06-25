@@ -1,7 +1,7 @@
 <template>
     <div class="w-full bg-gray-800 flex">
         <!-- Side bar -->
-        <Sidebar :showSide="showSide" :conta="modulos.conta" :ativo="modulos.ativo" :configuracao="modulos.configuracao"
+        <Sidebar @click="closeDrop()" :showSide="showSide" :conta="modulos.conta" :ativo="modulos.ativo" :configuracao="modulos.configuracao"
             :empresa="modulos.empresa" :sensor="modulos.sensor" :cldap="modulos.cldap" :usuario="modulos.usuario"
             :usuariogrupo="modulos.usuariogrupo" :camera="modulos.camera" />
         <div class="w-full bg-gray-400">
@@ -22,7 +22,7 @@
 
                     </div>
                     <!-- User login -->
-                    <div class="w-[200px] ">
+                    <div class="w-[200px]">
                         <div class="flex items-center justify-start space-x-4" @click="toggleDrop">
                             <template v-if="user.foto == null">
                                 <img class="w-10 h-10 rounded-full border-2 border-gray-50"
@@ -46,7 +46,7 @@
                                 <a href="#" @click="destroy()"
                                     class="text-gray-700 hover:bg-slate-200 block px-4 py-2 text-sm" role="menuitem"
                                     tabindex="-1" id="menu-item-2">Sair do sistema</a>
-                                <router-link to="/perfil"
+                                <router-link to="/perfil" @click="closeDrop()"
                                     class="text-gray-700  hover:bg-slate-200 block px-4 py-2 text-sm">
                                     Perfil</router-link>
 
@@ -56,7 +56,7 @@
                 </div>
             </div>
             <div class="bg-gray-50 dark:bg-slate-800 p-[10px] h-screen">
-                <div class="border border-gray-300 rounded-md p-[10px] h-[900px] overflow-y-auto">
+                <div class="border border-gray-300 rounded-md p-[10px] h-[900px] overflow-y-auto" @click="closeDrop()">
                     <router-view ></router-view>
                 </div>
             </div>
@@ -96,6 +96,10 @@ export default {
         },
         toggleDrop() {
             this.showDropDown = !this.showDropDown
+
+        },
+        closeDrop() {
+            this.showDropDown = false
 
         },
         destroy() {
