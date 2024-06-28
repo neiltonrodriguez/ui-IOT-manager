@@ -178,7 +178,7 @@
                                                 <tr v-for="u in membros" :key="u.id">
                                                     <td
                                                         class="border-b border-slate-100 dark:border-slate-700  text-slate-500 dark:text-slate-400">
-                                                        {{ u.first_name }}</td>
+                                                        {{ u.first_name ? u.first_name : u.nomecompleto }}</td>
                                                     <td
                                                         class="border-b text-right border-slate-100 dark:border-slate-700 pr-3 text-slate-500 dark:text-slate-400">
                                                         <button type="button" class="mx-1 px-1"
@@ -248,7 +248,7 @@
                                                 </tr>
                                             </tbody>
                                         </table>
-                                     
+
                                     </div>
                                     <div class="border">
                                         <table class="border-collapse w-full text-sm">
@@ -355,7 +355,13 @@ export default {
             console.log(g)
             http.put('/usuariogrupos/' + this.grupousuario.id + '/', g)
                 .then(res => {
-                    this.toggleTabs(2);
+                    // this.toggleTabs(2);
+                    this.$swal.fire({
+                        icon: 'success',
+                        title: 'Alterado com sucesso',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
                     this.setGrupo();
                 })
                 .catch(e => {
@@ -391,9 +397,9 @@ export default {
                 this.atual = i;
             }
             this.offset = 0;
-            
 
-            
+
+
 
         },
         // changePage(i) {
@@ -420,7 +426,7 @@ export default {
                 if (x != -1) {
                     let u = this.prev1.substring(x + 8, 110).trim();
                     i = u.substring(0, u.length - 20);
-                    if(i == ''){
+                    if (i == '') {
                         this.offset = 0;
                     }
                 }
@@ -499,6 +505,7 @@ export default {
                         usuarios: []
                     }
                     u.usuarios.push(id)
+                    this.ids = []
                     http.put('/usuariogrupos/' + this.grupousuario.id + '/membros/remove/', u)
                         .then(res => {
                             this.getMembros(0);
@@ -687,7 +694,7 @@ export default {
                         showConfirmButton: false,
                         timer: 1500
                     })
-                    this.toggleTabs(4)
+                    // this.toggleTabs(4)
                 })
                 .catch(e => {
                     this.$swal("Oops...", e.response.data.detail, "error");

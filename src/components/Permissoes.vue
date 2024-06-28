@@ -384,7 +384,8 @@ export default {
             let origim = this.permissoes
             for (let i = 0; i < arr.length; i++) {
 
-                arr[i].is_active = true
+                // arr[i].is_active = true
+                arr[i].is_active = !arr[i].is_active 
 
             }
             switch (name) {
@@ -424,6 +425,7 @@ export default {
             }
 
         },
+       
         habilitarSalvar() {
             this.isDisabled = false
         },

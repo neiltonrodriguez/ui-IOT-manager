@@ -183,7 +183,7 @@
                 <div class="flex border items-center rounded-lg p-2 my-1">
 
                     <span class="label-form" v-for="m in modulos" :key="m.id">
-                        <input required :id='"check" + m.id' @change="prepareArray()" class="mx-3" :checked="m.is_active"
+                        <input :id='"check" + m.id' @change="prepareArray()" class="mx-3" :checked="m.is_active"
                             type="checkbox" :value="m.id">{{ m.nome
                         }}
                     </span>
@@ -265,7 +265,9 @@ export default {
             formData.append('logradouro', formD.logradouro)
             formData.append('bairro', formD.bairro)
             formData.append('cidade', formD.cidade)
-            formData.append('uf', formD.uf)
+            if (formD.uf != "" && formD.uf != null) {
+                formData.append('uf', formD.uf)
+            }
             formData.append('numero', formD.numero)
             formData.append('is_active', formD.is_active)
             formData.append('modulos', this.modString)
