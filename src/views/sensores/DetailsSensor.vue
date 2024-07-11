@@ -578,7 +578,7 @@
                                                     <div>
                                                         <label class="label-form">Sensor</label>
                                                         <select class="input-form" :id="'sensorAcao' + c"
-                                                             @change="selectedSensorAtributes(c)">
+                                                            @change="selectedSensorAtributes(c)">
                                                             <option v-for="se in sensores" :key="se.id"
                                                                 :value="se.serial" required
                                                                 :selected="se.id === sensor.id">
@@ -733,6 +733,7 @@ import { useAuth } from '../../stores/auth.js'
 import Iframe from '../../components/Iframe.vue'
 import moment from 'moment'
 import axios from 'axios'
+import { watchEffect } from 'vue'
 
 const auth = useAuth();
 
@@ -926,7 +927,7 @@ export default {
             acao: '',
             showDivAcao: false,
             sensoresgruposcriptTeste: [],
-            low: {}
+            low: {},
         };
     },
     methods: {
@@ -937,10 +938,51 @@ export default {
             this.showDivAcao = false;
         },
         mostrarDivRegra() {
+
+
             if (!this.showDivRegra) {
                 this.showDivRegra = true;
                 this.showDivAcao = false;
                 this.cont = 1;
+
+            }
+
+
+            if (this.sc.regra) {
+                const detailsRegra = JSON.parse(this.sc.regra)
+
+                const regra = []
+                const x = {
+                    sensor: this.sc.sensor,
+                    parametro: detailsRegra[0].parametro,
+                    operador: detailsRegra[0].operador,
+                    valor: detailsRegra[0].operador === 'between' ? null : detailsRegra[0].valor,
+                    valorEntre1: detailsRegra[0].operador === 'between' ? detailsRegra[0].valorEntre1 : null,
+                    valorEntre2: detailsRegra[0].operador === 'between' ? detailsRegra[0].valorEntre2 : null,
+                    conector: detailsRegra[0].conector
+                }
+
+
+                regra.push(x)
+
+                this.regra = JSON.stringify(x)
+
+                
+                
+                //TODO: Esse setTimeout e para aguardar renderizar dos elementos que e chamada na função selectedSensorOperator
+                setTimeout(() => {
+                    this.verificaCondicao(1, x.operador)
+                    document.getElementById("atributos1").value = x.parametro;
+                    document.getElementById('value1').value = x.valor;
+                    document.getElementById('value1Entre1').value = x.valorEntre1;
+                    document.getElementById('value2Entre1').value = x.valorEntre2;
+
+                    //TODO: Esta vindo null verificar o que esta acontecendo
+                    document.getElementById('conector1').value = x.conector
+                }, 2500)
+
+
+
 
             }
         },
@@ -985,6 +1027,7 @@ export default {
                 let s = null
                 if (this.cont === 1) {
                     s = this.sensores.find((sensor) => sensor.serial === this.sensor.serial);
+                    console.log(s)
                 } else {
                     const sen = document.getElementById('sensor' + i);
                     s = this.sensores.find(sensor => sensor.serial === sen.value);
@@ -1014,9 +1057,17 @@ export default {
             this.showDivRegra = false;
 
         },
-        verificaCondicao(i) {
+        verificaCondicao(i, condicao) {
+
             const condi = document.getElementById('operador' + i);
-            if (condi.value == 'between') {
+
+            
+            //TODO: Verificar condição quando vem no detalhe da regra
+            if (condicao) {
+                document.getElementById('operador' + i).value = condicao
+            }
+
+            if (condi.value === 'between' || condicao === "between") {
                 document.getElementById('mostrarValueEntre' + i).style.display = 'block';
                 document.getElementById('mostrarValue' + i).style.display = 'none';
             } else {
@@ -1045,7 +1096,6 @@ export default {
             att.innerHTML = opt
 
             this.selectedSensorOperator(i);
-
         },
         selectedSensorOperator(i) {
             let selectedSensor = null
@@ -1068,6 +1118,7 @@ export default {
                 }
                 const optOperador = document.getElementById('operador' + i)
                 optOperador.innerHTML = op
+
             }.bind(this), 2000);
         },
         listarAtributos() {
@@ -1648,6 +1699,14 @@ export default {
             }
             http.put('sensores/' + this.$route.params.id + '/sensorscripts/' + form.id + '/', u)
                 .then(res => {
+  
+                    this.$swal.fire({
+                        icon: 'success',
+                        title: 'Alteração feita com sucesso',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+
                     this.getSensorScripts();
                     this.sc = {}
                     this.mostrarFormSC = false
@@ -1660,12 +1719,14 @@ export default {
                 });
         },
         detailsSC(id) {
-
             http.get('sensores/' + this.$route.params.id + '/sensorscripts/' + id)
                 .then(res => {
                     this.mostrarFormSC = true
                     this.sc = res.data
-                    this.listarNotificacoes();
+                    this.listarNotificacoes(); 
+
+                    //TODO: fecha regra
+                    this.fecharRegra()
                 })
                 .catch(e => {
                     this.$swal("Oops...", e.response.data.detail, "error");
@@ -1800,7 +1861,8 @@ export default {
         this.chamadasGet();
         this.getEmpresas();
 
-    }
+
+    },
 }
 
 </script>
