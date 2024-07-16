@@ -82,7 +82,7 @@
                                                 <template v-for="e in empresas" :key="e.id">
                                                     <option selected v-if="e.id == sensor.empresa" :value="e.id">{{
                                                         e.nome
-                                                    }}</option>
+                                                        }}</option>
                                                 </template>
                                             </select>
                                         </div>
@@ -94,7 +94,7 @@
                                                 <option value="" disabled selected>Escolha a conta</option>
                                                 <option v-for="dp in departamentos" :key="dp.id" :value="dp.id">{{
                                                     dp.titulo
-                                                }}
+                                                    }}
                                                 </option>
                                             </select>
                                         </div>
@@ -154,7 +154,7 @@
                                                 <option selected value="" disabled>Escolha um grupo</option>
                                                 <option v-for="sg in sensorgrupos" :value="sg.id" :key="sg.id">{{
                                                     sg.nome
-                                                }}</option>
+                                                    }}</option>
                                             </select>
                                         </div>
 
@@ -485,14 +485,14 @@
                                                         <label class="label-form">Conectores lógicos</label>
                                                         <select class="input-form text-center" :id="'conector' + c"
                                                             required>
-                                                            <option value="AND">E</option>
-                                                            <option value="OR">OU</option>
+                                                            <option value="and">E</option>
+                                                            <option value="or">OU</option>
 
                                                         </select>
                                                     </div>
                                                     <div></div>
                                                 </div>
-
+                                                
                                                 <div class="grid gap-3 mb-3 md:grid-cols-4  p-2">
 
                                                     <div>
@@ -581,8 +581,7 @@
 
                                                     <div>
                                                         <label class="label-form">Sensor</label>
-                                                        <select class="input-form" :id="'sensorAcao' + c"
-                                                            :disabled="c == 1">
+                                                        <select class="input-form" :id="'sensorAcao' + c">
                                                             <option v-for="se in sensores" :key="se.id"
                                                                 :value="se.serial" required
                                                                 :selected="se.id === sensor.id">
@@ -791,22 +790,22 @@ export default {
                 },
                 {
                     label: "É",
-                    value: 'IS',
+                    value: 'is',
                     tipo: 'boolean'
                 },
                 {
                     label: "Não é",
-                    value: 'IS NOT',
+                    value: 'is not',
                     tipo: 'boolean'
                 },
                 {
                     label: "Contém",
-                    value: "IN",
+                    value: "in",
                     tipo: 'text'
                 },
                 {
                     label: "Não Contém",
-                    value: "NOT IN",
+                    value: "not in",
                     tipo: 'text'
                 },
                 {
@@ -950,7 +949,7 @@ export default {
                 let tam = JSON.parse(this.sc.regra);
                 cont = tam.length
             }
-           
+
             if (!this.showDivRegra) {
                 this.showDivRegra = true;
                 this.showDivAcao = false;
@@ -981,14 +980,11 @@ export default {
                 setTimeout(() => {
                     if (detailsRegra.length > 1) {
                         this.cont = detailsRegra.length
-
                     }
 
                     regra.forEach((x, index) => {
 
                         const i = index + 1; // Assumindo que os ids começam em 1
-
-
                         setTimeout(() => {
                             document.getElementById(`sensor${i}`).value = x.sensor;
 
@@ -1008,16 +1004,14 @@ export default {
                         if (i > 1) {
                             setTimeout(() => {
                                 this.selectedSensorAtributes(i)
+                                // this.verificaCondicao(i, x.operador);
 
                             }, 2500);
                         } else {
                             this.selectedSensorAtributes(i)
-
                         }
-
                     });
                 }, 2500);
-
             }
         },
         mostrarDivAcao() {
@@ -1029,9 +1023,7 @@ export default {
             }
             if (this.sc.acao) {
                 const detailsAcao = JSON.parse(this.sc.acao);
-
                 const acao = [];
-
                 detailsAcao.forEach((detail, index) => {
                     const x = {
                         sensor: detail.sensor,
@@ -1043,35 +1035,18 @@ export default {
 
                 this.acao = JSON.stringify(acao);
 
-                console.log(this.acao)
-
                 setTimeout(() => {
                     if (detailsAcao.length > 1) {
                         this.cont2 = detailsAcao.length
-
                     }
 
                     acao.forEach((x, index) => {
-
                         const i = index + 1; // Assumindo que os ids começam em 1
-
-
                         setTimeout(() => {
                             document.getElementById(`sensorAcao${i}`).value = x.sensor;
-
                             document.getElementById(`valueAcao${i}`).value = x.acao;
 
-
                         }, 2000);
-                        // if (i > 1) {
-                        //     setTimeout(() => {
-                        //         this.selectedSensorAtributes(i)
-
-                        //     }, 2500);
-                        // } else {
-                        //     this.selectedSensorAtributes(i)
-
-                        // }
 
                     });
                 }, 2000);
@@ -1101,7 +1076,6 @@ export default {
             }
             this.acao = JSON.stringify(acao)
             this.showDivAcao = false;
-
         },
         finalizarRegra() {
             this.habilitarSalvar();
@@ -1169,7 +1143,6 @@ export default {
 
 
         buscarParametros(s = null) {
-            console.log(this.cont + ' - fffddf')
             if (this.cont == 1) {
                 const sensoress = this.sensores.find((sensor) => sensor.serial === this.sensor.serial);
                 // this.selectedSensorAtributes(1)
@@ -1187,24 +1160,13 @@ export default {
                 return sensoress.atributos
             }
 
-
         },
         selecionarParametro() {
-
-
         },
 
         selectedSensorAcao(i) {
             const sen = document.getElementById('sensorAcao' + i);
             const sensores = this.sensores.find(sensor => sensor.serial === sen.value);
-            // const att = document.getElementById('atributos' + i);
-            // let opt = ''
-            // for (let x = 0; x < sensores.atributos.length; x++) {
-            //     opt += `<option value="${sensores.atributos[x].parametro}">${sensores.atributos[x].label}</option>`
-            // }
-            // att.innerHTML = opt
-
-
         },
 
         selectedSensorAtributes(i) {
@@ -1213,14 +1175,13 @@ export default {
             if (i > 1 && this.regra != undefined && this.regra != '') {
                 reg = JSON.parse(this.regra);
                 ok = true
-
             }
 
             const sen = document.getElementById('sensor' + i);
             const sensores = this.sensores.find(sensor => sensor.serial === sen.value);
             const att = document.getElementById('atributos' + i);
             let opt = ''
-            console.log(sensores)
+            // console.log(sensores)
             for (let x = 0; x < sensores.atributos.length; x++) {
                 if (ok && this.cont == reg.length) {
                     opt += `<option ${sensores.atributos[x].parametro === reg[i - 1].parametro ? 'selected' : ''} value="${sensores.atributos[x].parametro}">${sensores.atributos[x].label}</option>`
@@ -1229,15 +1190,15 @@ export default {
                 }
             }
             att.innerHTML = opt
-
+            console.log(i + ' --kdkk')
             this.selectedSensorOperator(i);
         },
         selectedSensorOperator(i) {
-            // console.log(i)
+            console.log(i + ' aqui')
             // console.log(this.regra)
             let ok = false
             let reg = []
-            if (i > 1 && this.regra != undefined && this.regra != '') {
+            if (this.regra != undefined && this.regra != '') {
                 reg = JSON.parse(this.regra);
                 ok = true
             }
@@ -1252,6 +1213,7 @@ export default {
                 }, 2000);
             }
             let op = ''
+            // console.log(selectedSensor)
             setTimeout(() => {
                 const param = document.getElementById('atributos' + i);
 
@@ -1262,9 +1224,10 @@ export default {
                     if (this.operadores[y].tipo == typeOperator.datatype) {
 
                         if (ok && this.cont == reg.length) {
-                            // console.log(reg.length + ' --- ' + this.cont + ' --- ' + reg[i - 1].operador)
+                            this.verificaCondicao(i, reg[i - 1].operador);
                             op += `<option ${this.operadores[y].value === reg[i - 1].operador ? 'selected' : ''} value="${this.operadores[y].value}">${this.operadores[y].label}</option>`
                         } else {
+                            // console.log(reg.length + ' --kk- ' + this.cont + ' --kkk- ' + reg[i].operador)
                             op += `<option value="${this.operadores[y].value}">${this.operadores[y].label}</option>`
                         }
 
@@ -1689,6 +1652,7 @@ export default {
         mostrarFormScript() {
             this.mostrarFormSC = !this.mostrarFormSC
             this.sc = {}
+            this.cont = 0
             this.sc.enviar_notificacao = false;
             this.sc.notificacao = null;
             this.showDivAcao = false;
@@ -1746,6 +1710,7 @@ export default {
                             descricao: "",
                             enviar_notificacao: false
                         }
+                        this.cont = 0
                     })
                     .catch(e => {
                         this.$swal("Oops...", e.response.data.detail, "error");
@@ -1867,6 +1832,7 @@ export default {
                     this.getSensorScripts();
                     this.sc = {}
                     this.mostrarFormSC = false
+                    this.cont = 0
                 })
                 .catch(e => {
                     this.$swal("Oops...", e.response.data.detail, "error");
