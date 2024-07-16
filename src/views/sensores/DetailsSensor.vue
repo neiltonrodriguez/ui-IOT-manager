@@ -450,6 +450,7 @@
 
 
                                             </div>
+                                          
                                             <div>
 
                                                 <button type="button" @click="mostrarDivRegra()"
@@ -477,7 +478,7 @@
                                             </div>
 
                                             <div v-for="(c, index) in cont" :key="index" class="p-2 rounded-lg">
-                                                {{ c }}
+                                                
                                                 <div v-if="c > 1" class="grid gap-3 mb-3 md:grid-cols-3">
                                                     <div></div>
                                                     <div class="text-center">
@@ -580,8 +581,7 @@
 
                                                     <div>
                                                         <label class="label-form">Sensor</label>
-                                                        <select class="input-form" :id="'sensorAcao' + c"
-                                                            @change="selectedSensorAtributes(c)">
+                                                        <select class="input-form" :id="'sensorAcao' + c" :disabled="c == 1">
                                                             <option v-for="se in sensores" :key="se.id"
                                                                 :value="se.serial" required
                                                                 :selected="se.id === sensor.id">
@@ -997,19 +997,19 @@ export default {
 
                             document.getElementById(`conector${i}`).value = x.conector;
                             this.verificaCondicao(i, x.operador);
-                        }, 2500);
+                        }, 2000);
                         if (i > 1) {
                             setTimeout(() => {
                                 this.selectedSensorAtributes(i)
 
-                            }, 2500);
+                            }, 2000);
                         } else {
                             this.selectedSensorAtributes(i)
 
                         }
 
                     });
-                }, 2500);
+                }, 2000);
 
             }
         },
@@ -1020,8 +1020,59 @@ export default {
                 this.cont2 = 1;
 
             }
+            if (this.sc.acao) {
+                const detailsAcao = JSON.parse(this.sc.acao);
+
+                const acao = [];
+
+                detailsAcao.forEach((detail, index) => {
+                    const x = {
+                        sensor: detail.sensor,
+                        acao: detail.acao,
+                    };
+
+                    acao.push(x);
+                });
+
+                this.acao = JSON.stringify(acao);
+
+                console.log(this.acao)
+
+                setTimeout(() => {
+                    if (detailsAcao.length > 1) {
+                        this.cont2 = detailsAcao.length
+
+                    }
+
+                    acao.forEach((x, index) => {
+
+                        const i = index + 1; // Assumindo que os ids começam em 1
+
+
+                        setTimeout(() => {
+                            document.getElementById(`sensorAcao${i}`).value = x.sensor;
+
+                            document.getElementById(`valueAcao${i}`).value = x.acao;
+
+                            
+                        }, 2000);
+                        // if (i > 1) {
+                        //     setTimeout(() => {
+                        //         this.selectedSensorAtributes(i)
+
+                        //     }, 2500);
+                        // } else {
+                        //     this.selectedSensorAtributes(i)
+
+                        // }
+
+                    });
+                }, 2000);
+
+            }
         },
         finalizarAcao() {
+            this.habilitarSalvar();
             let acao = [];
             for (let i = 1; i <= this.cont2; i++) {
                 let s = null
@@ -1125,6 +1176,19 @@ export default {
                 this.selectedSensorOperator(this.cont);
                 return sensoress.atributos
             }
+
+
+        },
+
+        selectedSensorAcao(i) {
+            const sen = document.getElementById('sensorAcao' + i);
+            const sensores = this.sensores.find(sensor => sensor.serial === sen.value);
+            // const att = document.getElementById('atributos' + i);
+            // let opt = ''
+            // for (let x = 0; x < sensores.atributos.length; x++) {
+            //     opt += `<option value="${sensores.atributos[x].parametro}">${sensores.atributos[x].label}</option>`
+            // }
+            // att.innerHTML = opt
 
 
         },
@@ -1730,6 +1794,8 @@ export default {
                 .then(res => {
                     this.getDadosParaAsRegras();
                     this.sensorscripts = res.data.results
+                    this.regra = res.data.results.regra
+                    this.acao = res.data.results.acao
                     this.getNotificacoes();
                     this.total = res.data.count
                     const qty = Math.ceil(this.total / this.limit);
