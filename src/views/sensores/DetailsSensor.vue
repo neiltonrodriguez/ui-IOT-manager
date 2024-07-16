@@ -475,14 +475,16 @@
                                                     X
                                                 </div>
                                             </div>
+
                                             <div v-for="(c, index) in cont" :key="index" class="p-2 rounded-lg">
-                                                <div v-if="index >= 1" class="grid gap-3 mb-3 md:grid-cols-3">
+                                                {{ c }}
+                                                <div v-if="c > 1" class="grid gap-3 mb-3 md:grid-cols-3">
                                                     <div></div>
                                                     <div class="text-center">
                                                         <label class="label-form">Conectores lógicos</label>
                                                         <select class="input-form text-center" :id="'conector' + c"
                                                             required>
-                                                            <option selected value="AND">E</option>
+                                                            <option value="AND">E</option>
                                                             <option value="OR">OU</option>
 
                                                         </select>
@@ -553,10 +555,11 @@
                                                 </div>
 
                                             </div>
+
                                             <div v-if="cont >= 1">
                                                 <button type="button" @click="cont++"
                                                     class="text-white mt-3 mb-5 bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 ml-3 py-2.5 text-center ">Adicionar
-                                                    mais condições</button>
+                                                    mais condições </button>
                                                 <button type="button" @click="finalizarRegra()"
                                                     class="text-white mt-3 ml-3 mb-5 bg-blue-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Salvar
                                                     regra</button>
@@ -937,52 +940,76 @@ export default {
         fecharAcao() {
             this.showDivAcao = false;
         },
+        maisCondicao() {
+            this.cont++;
+        },
         mostrarDivRegra() {
-
-
             if (!this.showDivRegra) {
                 this.showDivRegra = true;
                 this.showDivAcao = false;
                 this.cont = 1;
-
             }
 
-
             if (this.sc.regra) {
-                const detailsRegra = JSON.parse(this.sc.regra)
+                const detailsRegra = JSON.parse(this.sc.regra);
 
-                const regra = []
-                const x = {
-                    sensor: this.sc.sensor,
-                    parametro: detailsRegra[0].parametro,
-                    operador: detailsRegra[0].operador,
-                    valor: detailsRegra[0].operador === 'between' ? null : detailsRegra[0].valor,
-                    valorEntre1: detailsRegra[0].operador === 'between' ? detailsRegra[0].valorEntre1 : null,
-                    valorEntre2: detailsRegra[0].operador === 'between' ? detailsRegra[0].valorEntre2 : null,
-                    conector: detailsRegra[0].conector
-                }
+                const regra = [];
 
+                detailsRegra.forEach((detail, index) => {
+                    const x = {
+                        sensor: detail.sensor,
+                        parametro: detail.parametro,
+                        operador: detail.operador,
+                        valor: detail.operador === 'between' ? null : detail.valor,
+                        valorEntre1: detail.operador === 'between' ? detail.valorEntre1 : null,
+                        valorEntre2: detail.operador === 'between' ? detail.valorEntre2 : null,
+                        conector: detail.conector
+                    };
 
-                regra.push(x)
+                    regra.push(x);
+                });
 
-                this.regra = JSON.stringify(x)
+                this.regra = JSON.stringify(regra);
 
-                
-                
-                //TODO: Esse setTimeout e para aguardar renderizar dos elementos que e chamada na função selectedSensorOperator
                 setTimeout(() => {
-                    this.verificaCondicao(1, x.operador)
-                    document.getElementById("atributos1").value = x.parametro;
-                    document.getElementById('value1').value = x.valor;
-                    document.getElementById('value1Entre1').value = x.valorEntre1;
-                    document.getElementById('value2Entre1').value = x.valorEntre2;
+                    if (detailsRegra.length > 1) {
+                        this.cont = detailsRegra.length
 
-                    //TODO: Esta vindo null verificar o que esta acontecendo
-                    document.getElementById('conector1').value = x.conector
-                }, 2500)
+                    }
 
+                    regra.forEach((x, index) => {
+
+                        const i = index + 1; // Assumindo que os ids começam em 1
 
 
+                        setTimeout(() => {
+                            document.getElementById(`sensor${i}`).value = x.sensor;
+
+                            document.getElementById(`atributos${i}`).value = x.parametro;
+
+                            document.getElementById(`operador${i}`).value = x.operador;
+
+                            document.getElementById(`value${i}`).value = x.valor;
+
+                            document.getElementById(`value1Entre${i}`).value = x.valorEntre1;
+
+                            document.getElementById(`value2Entre${i}`).value = x.valorEntre2;
+
+                            document.getElementById(`conector${i}`).value = x.conector;
+                            this.verificaCondicao(i, x.operador);
+                        }, 2500);
+                        if (i > 1) {
+                            setTimeout(() => {
+                                this.selectedSensorAtributes(i)
+
+                            }, 2500);
+                        } else {
+                            this.selectedSensorAtributes(i)
+
+                        }
+
+                    });
+                }, 2500);
 
             }
         },
@@ -1012,22 +1039,19 @@ export default {
                     acao: valor,
                 }
 
-                // const y = `"${s.serial}":"${document.getElementById('atributos' + i).value} '${document.getElementById('operador' + i).value}' ${document.getElementById('value' + i).value}"`
-
                 acao.push(x);
             }
             this.acao = JSON.stringify(acao)
-            console.log(this.acao)
             this.showDivAcao = false;
 
         },
         finalizarRegra() {
+            this.habilitarSalvar();
             let regra = [];
             for (let i = 1; i <= this.cont; i++) {
                 let s = null
                 if (this.cont === 1) {
                     s = this.sensores.find((sensor) => sensor.serial === this.sensor.serial);
-                    console.log(s)
                 } else {
                     const sen = document.getElementById('sensor' + i);
                     s = this.sensores.find(sensor => sensor.serial === sen.value);
@@ -1049,8 +1073,6 @@ export default {
                     conector: conector
                 }
 
-                // const y = `"${s.serial}":"${document.getElementById('atributos' + i).value} '${document.getElementById('operador' + i).value}' ${document.getElementById('value' + i).value}"`
-
                 regra.push(x);
             }
             this.regra = JSON.stringify(regra)
@@ -1058,34 +1080,56 @@ export default {
 
         },
         verificaCondicao(i, condicao) {
+            const operadorElem = document.getElementById('operador' + i);
+            const mostrarValueEntreElem = document.getElementById('mostrarValueEntre' + i);
+            const mostrarValueElem = document.getElementById('mostrarValue' + i);
 
-            const condi = document.getElementById('operador' + i);
+            if (operadorElem) {
+                if (condicao) {
+                    operadorElem.value = condicao;
+                }
 
-            
-            //TODO: Verificar condição quando vem no detalhe da regra
-            if (condicao) {
-                document.getElementById('operador' + i).value = condicao
+                const condiValue = operadorElem.value;
+
+                if (condiValue === 'between' || condicao === 'between') {
+                    if (mostrarValueEntreElem) {
+                        mostrarValueEntreElem.style.display = 'block';
+                    }
+                    if (mostrarValueElem) {
+                        mostrarValueElem.style.display = 'none';
+                    }
+                } else {
+                    if (mostrarValueEntreElem) {
+                        mostrarValueEntreElem.style.display = 'none';
+                    }
+                    if (mostrarValueElem) {
+                        mostrarValueElem.style.display = 'block';
+                    }
+                }
             }
-
-            if (condi.value === 'between' || condicao === "between") {
-                document.getElementById('mostrarValueEntre' + i).style.display = 'block';
-                document.getElementById('mostrarValue' + i).style.display = 'none';
-            } else {
-                document.getElementById('mostrarValueEntre' + i).style.display = 'none';
-                document.getElementById('mostrarValue' + i).style.display = 'block';
-            }
-
         },
 
-        buscarParametros() {
-            const sensoress = this.sensores.find((sensor) => sensor.serial === this.sensor.serial);
-            this.selectedSensorOperator(1);
-            return sensoress.atributos;
+
+        buscarParametros(s = null) {
+            if (this.cont == 1) {
+                const sensoress = this.sensores.find((sensor) => sensor.serial === this.sensor.serial);
+                // this.selectedSensorAtributes(1)
+                this.selectedSensorOperator(1);
+                return sensoress.atributos;
+            } else if (this.cont > 1 && s != null) {
+                const sensoress = this.sensores.find((sensor) => sensor.serial === s);
+                this.selectedSensorOperator(this.cont);
+                return sensoress.atributos;
+            } else {
+                const sensoress = this.sensores.find((sensor) => sensor.serial === this.sensor.serial);
+                this.selectedSensorOperator(this.cont);
+                return sensoress.atributos
+            }
+
 
         },
 
         selectedSensorAtributes(i) {
-
             const sen = document.getElementById('sensor' + i);
             const sensores = this.sensores.find(sensor => sensor.serial === sen.value);
             const att = document.getElementById('atributos' + i);
@@ -1098,41 +1142,54 @@ export default {
             this.selectedSensorOperator(i);
         },
         selectedSensorOperator(i) {
+            let ok = false
+            let reg = null
+            if (i > 1) {
+                reg = JSON.parse(this.regra);
+                ok = true
+            }
             let selectedSensor = null
             if (this.cont === 1) {
                 selectedSensor = this.sensores.find(sensor => sensor.serial === this.sensor.serial);
 
             } else {
-                const sen = document.getElementById('sensor' + i);
-                selectedSensor = this.sensores.find(sensor => sensor.serial === sen.value);
+                setTimeout(() => {
+                    const sen = document.getElementById('sensor' + i);
+                    selectedSensor = this.sensores.find(sensor => sensor.serial === sen.value);
+                }, 2000);
             }
             let op = ''
-            setTimeout(function () {
+            setTimeout(() => {
                 const param = document.getElementById('atributos' + i);
                 const typeOperator = selectedSensor.atributos.find(op => op.parametro === param.value);
-
                 for (let y = 0; y < this.operadores.length; y++) {
                     if (this.operadores[y].tipo == typeOperator.datatype) {
-                        op += `<option value="${this.operadores[y].value}">${this.operadores[y].label}</option>`
+                        if (ok) {
+                            op += `<option ${this.operadores[y].value === reg[i - 1].operador ? 'selected' : ''} value="${this.operadores[y].value}">${this.operadores[y].label}</option>`
+                        } else {
+                            op += `<option value="${this.operadores[y].value}">${this.operadores[y].label}</option>`
+                        }
+
+
+
                     }
+
                 }
                 const optOperador = document.getElementById('operador' + i)
                 optOperador.innerHTML = op
 
-            }.bind(this), 2000);
+            }, 2500);
         },
         listarAtributos() {
             let arr = []
             for (let i = 0; i < this.sensores.length; i++) {
                 var a = document.getElementById('sensorSelected' + this.sensores[i].id)
-                console.log(a)
                 if (a.selected && this.sensores[i].id != this.$route.params.id) {
                     arr = this.sensores[i].atributos;
-                    console.log(a.value)
                 }
                 this.listaDeAtributos.push(arr);
             }
-            console.log(this.listaDeAtributos)
+
         },
         listarNotificacoes() {
             if (this.sc.enviar_notificacao) {
@@ -1359,7 +1416,6 @@ export default {
                 this.openTab = tabNumber
             }
             if (tabNumber == 3) {
-                console.log(tabNumber)
                 this.getDadosLidos();
                 this.modal = false
                 this.openTab = tabNumber
@@ -1393,6 +1449,7 @@ export default {
             }
 
             this.sensores = arr;
+
 
 
         },
@@ -1699,7 +1756,7 @@ export default {
             }
             http.put('sensores/' + this.$route.params.id + '/sensorscripts/' + form.id + '/', u)
                 .then(res => {
-  
+
                     this.$swal.fire({
                         icon: 'success',
                         title: 'Alteração feita com sucesso',
@@ -1723,7 +1780,7 @@ export default {
                 .then(res => {
                     this.mostrarFormSC = true
                     this.sc = res.data
-                    this.listarNotificacoes(); 
+                    this.listarNotificacoes();
 
                     //TODO: fecha regra
                     this.fecharRegra()
