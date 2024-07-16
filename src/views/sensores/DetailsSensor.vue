@@ -82,7 +82,7 @@
                                                 <template v-for="e in empresas" :key="e.id">
                                                     <option selected v-if="e.id == sensor.empresa" :value="e.id">{{
                                                         e.nome
-                                                        }}</option>
+                                                    }}</option>
                                                 </template>
                                             </select>
                                         </div>
@@ -94,7 +94,7 @@
                                                 <option value="" disabled selected>Escolha a conta</option>
                                                 <option v-for="dp in departamentos" :key="dp.id" :value="dp.id">{{
                                                     dp.titulo
-                                                    }}
+                                                }}
                                                 </option>
                                             </select>
                                         </div>
@@ -154,7 +154,7 @@
                                                 <option selected value="" disabled>Escolha um grupo</option>
                                                 <option v-for="sg in sensorgrupos" :value="sg.id" :key="sg.id">{{
                                                     sg.nome
-                                                    }}</option>
+                                                }}</option>
                                             </select>
                                         </div>
 
@@ -450,7 +450,7 @@
 
 
                                             </div>
-                                          
+
                                             <div>
 
                                                 <button type="button" @click="mostrarDivRegra()"
@@ -478,7 +478,7 @@
                                             </div>
 
                                             <div v-for="(c, index) in cont" :key="index" class="p-2 rounded-lg">
-                                                
+
                                                 <div v-if="c > 1" class="grid gap-3 mb-3 md:grid-cols-3">
                                                     <div></div>
                                                     <div class="text-center">
@@ -581,7 +581,8 @@
 
                                                     <div>
                                                         <label class="label-form">Sensor</label>
-                                                        <select class="input-form" :id="'sensorAcao' + c" :disabled="c == 1">
+                                                        <select class="input-form" :id="'sensorAcao' + c"
+                                                            :disabled="c == 1">
                                                             <option v-for="se in sensores" :key="se.id"
                                                                 :value="se.serial" required
                                                                 :selected="se.id === sensor.id">
@@ -944,10 +945,16 @@ export default {
             this.cont++;
         },
         mostrarDivRegra() {
+            let cont = 1
+            if (this.cont != 0) {
+                let tam = JSON.parse(this.sc.regra);
+                cont = tam.length
+            }
+           
             if (!this.showDivRegra) {
                 this.showDivRegra = true;
                 this.showDivAcao = false;
-                this.cont = 1;
+                this.cont = cont;
             }
 
             if (this.sc.regra) {
@@ -997,19 +1004,19 @@ export default {
 
                             document.getElementById(`conector${i}`).value = x.conector;
                             this.verificaCondicao(i, x.operador);
-                        }, 2000);
+                        }, 2500);
                         if (i > 1) {
                             setTimeout(() => {
                                 this.selectedSensorAtributes(i)
 
-                            }, 2000);
+                            }, 2500);
                         } else {
                             this.selectedSensorAtributes(i)
 
                         }
 
                     });
-                }, 2000);
+                }, 2500);
 
             }
         },
@@ -1054,7 +1061,7 @@ export default {
 
                             document.getElementById(`valueAcao${i}`).value = x.acao;
 
-                            
+
                         }, 2000);
                         // if (i > 1) {
                         //     setTimeout(() => {
@@ -1162,6 +1169,7 @@ export default {
 
 
         buscarParametros(s = null) {
+            console.log(this.cont + ' - fffddf')
             if (this.cont == 1) {
                 const sensoress = this.sensores.find((sensor) => sensor.serial === this.sensor.serial);
                 // this.selectedSensorAtributes(1)
@@ -1169,13 +1177,19 @@ export default {
                 return sensoress.atributos;
             } else if (this.cont > 1 && s != null) {
                 const sensoress = this.sensores.find((sensor) => sensor.serial === s);
+                this.selectedSensorAtributes(this.cont);
                 this.selectedSensorOperator(this.cont);
+
                 return sensoress.atributos;
             } else {
                 const sensoress = this.sensores.find((sensor) => sensor.serial === this.sensor.serial);
                 this.selectedSensorOperator(this.cont);
                 return sensoress.atributos
             }
+
+
+        },
+        selecionarParametro() {
 
 
         },
@@ -1194,21 +1208,36 @@ export default {
         },
 
         selectedSensorAtributes(i) {
+            let ok = false
+            let reg = []
+            if (i > 1 && this.regra != undefined && this.regra != '') {
+                reg = JSON.parse(this.regra);
+                ok = true
+
+            }
+
             const sen = document.getElementById('sensor' + i);
             const sensores = this.sensores.find(sensor => sensor.serial === sen.value);
             const att = document.getElementById('atributos' + i);
             let opt = ''
+            console.log(sensores)
             for (let x = 0; x < sensores.atributos.length; x++) {
-                opt += `<option value="${sensores.atributos[x].parametro}">${sensores.atributos[x].label}</option>`
+                if (ok && this.cont == reg.length) {
+                    opt += `<option ${sensores.atributos[x].parametro === reg[i - 1].parametro ? 'selected' : ''} value="${sensores.atributos[x].parametro}">${sensores.atributos[x].label}</option>`
+                } else {
+                    opt += `<option value="${sensores.atributos[x].parametro}">${sensores.atributos[x].label}</option>`
+                }
             }
             att.innerHTML = opt
 
             this.selectedSensorOperator(i);
         },
         selectedSensorOperator(i) {
+            // console.log(i)
+            // console.log(this.regra)
             let ok = false
-            let reg = null
-            if (i > 1) {
+            let reg = []
+            if (i > 1 && this.regra != undefined && this.regra != '') {
                 reg = JSON.parse(this.regra);
                 ok = true
             }
@@ -1225,10 +1254,15 @@ export default {
             let op = ''
             setTimeout(() => {
                 const param = document.getElementById('atributos' + i);
+
                 const typeOperator = selectedSensor.atributos.find(op => op.parametro === param.value);
                 for (let y = 0; y < this.operadores.length; y++) {
+
+
                     if (this.operadores[y].tipo == typeOperator.datatype) {
-                        if (ok) {
+
+                        if (ok && this.cont == reg.length) {
+                            // console.log(reg.length + ' --- ' + this.cont + ' --- ' + reg[i - 1].operador)
                             op += `<option ${this.operadores[y].value === reg[i - 1].operador ? 'selected' : ''} value="${this.operadores[y].value}">${this.operadores[y].label}</option>`
                         } else {
                             op += `<option value="${this.operadores[y].value}">${this.operadores[y].label}</option>`
