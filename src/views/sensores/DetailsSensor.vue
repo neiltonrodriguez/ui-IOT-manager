@@ -998,7 +998,9 @@ export default {
 
                             document.getElementById(`value2Entre${i}`).value = x.valorEntre2;
 
-                            document.getElementById(`conector${i}`).value = x.conector;
+                            if(x.conector != null) {
+                                document.getElementById(`conector${i}`).value = x.conector;
+                            }
                             this.verificaCondicao(i, x.operador);
                         }, 2500);
                         if (i > 1) {
@@ -1181,7 +1183,6 @@ export default {
             const sensores = this.sensores.find(sensor => sensor.serial === sen.value);
             const att = document.getElementById('atributos' + i);
             let opt = ''
-            // console.log(sensores)
             for (let x = 0; x < sensores.atributos.length; x++) {
                 if (ok && this.cont == reg.length) {
                     opt += `<option ${sensores.atributos[x].parametro === reg[i - 1].parametro ? 'selected' : ''} value="${sensores.atributos[x].parametro}">${sensores.atributos[x].label}</option>`
@@ -1190,12 +1191,9 @@ export default {
                 }
             }
             att.innerHTML = opt
-            console.log(i + ' --kdkk')
             this.selectedSensorOperator(i);
         },
         selectedSensorOperator(i) {
-            console.log(i + ' aqui')
-            // console.log(this.regra)
             let ok = false
             let reg = []
             if (this.regra != undefined && this.regra != '') {
@@ -1213,7 +1211,6 @@ export default {
                 }, 2000);
             }
             let op = ''
-            // console.log(selectedSensor)
             setTimeout(() => {
                 const param = document.getElementById('atributos' + i);
 
@@ -1227,7 +1224,6 @@ export default {
                             this.verificaCondicao(i, reg[i - 1].operador);
                             op += `<option ${this.operadores[y].value === reg[i - 1].operador ? 'selected' : ''} value="${this.operadores[y].value}">${this.operadores[y].label}</option>`
                         } else {
-                            // console.log(reg.length + ' --kk- ' + this.cont + ' --kkk- ' + reg[i].operador)
                             op += `<option value="${this.operadores[y].value}">${this.operadores[y].label}</option>`
                         }
 
