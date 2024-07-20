@@ -82,7 +82,7 @@
                                                 <template v-for="e in empresas" :key="e.id">
                                                     <option selected v-if="e.id == sensor.empresa" :value="e.id">{{
                                                         e.nome
-                                                        }}</option>
+                                                    }}</option>
                                                 </template>
                                             </select>
                                         </div>
@@ -94,7 +94,7 @@
                                                 <option value="" disabled selected>Escolha a conta</option>
                                                 <option v-for="dp in departamentos" :key="dp.id" :value="dp.id">{{
                                                     dp.titulo
-                                                    }}
+                                                }}
                                                 </option>
                                             </select>
                                         </div>
@@ -154,7 +154,7 @@
                                                 <option selected value="" disabled>Escolha um grupo</option>
                                                 <option v-for="sg in sensorgrupos" :value="sg.id" :key="sg.id">{{
                                                     sg.nome
-                                                    }}</option>
+                                                }}</option>
                                             </select>
                                         </div>
 
@@ -492,7 +492,7 @@
                                                     </div>
                                                     <div></div>
                                                 </div>
-                                                
+
                                                 <div class="grid gap-3 mb-3 md:grid-cols-4  p-2">
 
                                                     <div>
@@ -737,6 +737,7 @@ import Iframe from '../../components/Iframe.vue'
 import moment from 'moment'
 import axios from 'axios'
 import { watchEffect } from 'vue'
+import { nextTick } from 'vue';
 
 const auth = useAuth();
 
@@ -943,11 +944,11 @@ export default {
         maisCondicao() {
             this.cont++;
         },
-        mostrarDivRegra() {
+        async mostrarDivRegra() {
             let cont = 1
-            if (this.cont != 0) {
-                let tam = JSON.parse(this.sc.regra);
-                cont = tam.length
+            if (this.cont > 0) {
+                const tam = JSON.parse(this.sc.regra);
+                this.cont = tam.length;
             }
 
             if (!this.showDivRegra) {
@@ -956,67 +957,52 @@ export default {
                 this.cont = cont;
             }
 
-            if (this.sc.regra) {
+            if (this.sc.regra != undefined && this.sc.regra.length > 5) {
                 const detailsRegra = JSON.parse(this.sc.regra);
+                const regraList = detailsRegra.map(detail => ({
+                    sensor: detail.sensor,
+                    parametro: detail.parametro,
+                    operador: detail.operador,
+                    valor: detail.operador === 'between' ? null : detail.valor,
+                    valorEntre1: detail.operador === 'between' ? detail.valorEntre1 : null,
+                    valorEntre2: detail.operador === 'between' ? detail.valorEntre2 : null,
+                    conector: detail.conector,
+                }));
 
-                const regra = [];
+                this.regra = JSON.stringify(regraList);
 
-                detailsRegra.forEach((detail, index) => {
-                    const x = {
-                        sensor: detail.sensor,
-                        parametro: detail.parametro,
-                        operador: detail.operador,
-                        valor: detail.operador === 'between' ? null : detail.valor,
-                        valorEntre1: detail.operador === 'between' ? detail.valorEntre1 : null,
-                        valorEntre2: detail.operador === 'between' ? detail.valorEntre2 : null,
-                        conector: detail.conector
-                    };
+                await nextTick();
 
-                    regra.push(x);
-                });
+                if (detailsRegra.length > 1) {
+                    this.cont = detailsRegra.length;
+                }
 
-                this.regra = JSON.stringify(regra);
+                for (const [index, x] of regraList.entries()) {
+                    const i = index + 1;
+                    await nextTick();
+                    document.getElementById(`sensor${i}`).value = x.sensor;
+                    document.getElementById(`atributos${i}`).value = x.parametro;
+                    document.getElementById(`operador${i}`).value = x.operador;
+                    document.getElementById(`value${i}`).value = x.valor;
+                    document.getElementById(`value1Entre${i}`).value = x.valorEntre1;
+                    document.getElementById(`value2Entre${i}`).value = x.valorEntre2;
 
-                setTimeout(() => {
-                    if (detailsRegra.length > 1) {
-                        this.cont = detailsRegra.length
+                    if (x.conector !== null) {
+                        document.getElementById(`conector${i}`).value = x.conector;
                     }
 
-                    regra.forEach((x, index) => {
+                    this.verificaCondicao(i, x.operador);
 
-                        const i = index + 1; // Assumindo que os ids começam em 1
-                        setTimeout(() => {
-                            document.getElementById(`sensor${i}`).value = x.sensor;
-
-                            document.getElementById(`atributos${i}`).value = x.parametro;
-
-                            document.getElementById(`operador${i}`).value = x.operador;
-
-                            document.getElementById(`value${i}`).value = x.valor;
-
-                            document.getElementById(`value1Entre${i}`).value = x.valorEntre1;
-
-                            document.getElementById(`value2Entre${i}`).value = x.valorEntre2;
-
-                            if(x.conector != null) {
-                                document.getElementById(`conector${i}`).value = x.conector;
-                            }
-                            this.verificaCondicao(i, x.operador);
-                        }, 2500);
-                        if (i > 1) {
-                            setTimeout(() => {
-                                this.selectedSensorAtributes(i)
-                                // this.verificaCondicao(i, x.operador);
-
-                            }, 2500);
-                        } else {
-                            this.selectedSensorAtributes(i)
-                        }
-                    });
-                }, 2500);
+                    if (i > 1) {
+                        await nextTick();
+                        this.selectedSensorAtributes(i);
+                    } else {
+                        this.selectedSensorAtributes(i);
+                    }
+                }
             }
         },
-        mostrarDivAcao() {
+        async mostrarDivAcao() {
             if (!this.showDivAcao) {
                 this.showDivAcao = true;
                 this.showDivRegra = false;
@@ -1037,21 +1023,21 @@ export default {
 
                 this.acao = JSON.stringify(acao);
 
-                setTimeout(() => {
-                    if (detailsAcao.length > 1) {
-                        this.cont2 = detailsAcao.length
-                    }
+                await nextTick();
+                if (detailsAcao.length > 1) {
+                    this.cont2 = detailsAcao.length
+                }
 
-                    acao.forEach((x, index) => {
-                        const i = index + 1; // Assumindo que os ids começam em 1
-                        setTimeout(() => {
-                            document.getElementById(`sensorAcao${i}`).value = x.sensor;
-                            document.getElementById(`valueAcao${i}`).value = x.acao;
+                for (const [index, x] of acao.entries()) {
+                    const i = index + 1; // Assumindo que os ids começam em 1
+                    await nextTick();
+                    document.getElementById(`sensorAcao${i}`).value = x.sensor;
+                    document.getElementById(`valueAcao${i}`).value = x.acao;
 
-                        }, 2000);
 
-                    });
-                }, 2000);
+
+                };
+
 
             }
         },
@@ -1143,11 +1129,9 @@ export default {
             }
         },
 
-
         buscarParametros(s = null) {
             if (this.cont == 1) {
                 const sensoress = this.sensores.find((sensor) => sensor.serial === this.sensor.serial);
-                // this.selectedSensorAtributes(1)
                 this.selectedSensorOperator(1);
                 return sensoress.atributos;
             } else if (this.cont > 1 && s != null) {
@@ -1163,8 +1147,6 @@ export default {
             }
 
         },
-        selecionarParametro() {
-        },
 
         selectedSensorAcao(i) {
             const sen = document.getElementById('sensorAcao' + i);
@@ -1174,7 +1156,7 @@ export default {
         selectedSensorAtributes(i) {
             let ok = false
             let reg = []
-            if (i > 1 && this.regra != undefined && this.regra != '') {
+            if (i >= 1 && this.regra != undefined && this.regra != '') {
                 reg = JSON.parse(this.regra);
                 ok = true
             }
@@ -1193,7 +1175,7 @@ export default {
             att.innerHTML = opt
             this.selectedSensorOperator(i);
         },
-        selectedSensorOperator(i) {
+        async selectedSensorOperator(i) {
             let ok = false
             let reg = []
             if (this.regra != undefined && this.regra != '') {
@@ -1205,37 +1187,37 @@ export default {
                 selectedSensor = this.sensores.find(sensor => sensor.serial === this.sensor.serial);
 
             } else {
-                setTimeout(() => {
-                    const sen = document.getElementById('sensor' + i);
-                    selectedSensor = this.sensores.find(sensor => sensor.serial === sen.value);
-                }, 2000);
+                await nextTick();
+                const sen = document.getElementById('sensor' + i);
+                selectedSensor = this.sensores.find(sensor => sensor.serial === sen.value);
+
             }
             let op = ''
-            setTimeout(() => {
-                const param = document.getElementById('atributos' + i);
+            await nextTick();
+            const param = document.getElementById('atributos' + i);
 
-                const typeOperator = selectedSensor.atributos.find(op => op.parametro === param.value);
-                for (let y = 0; y < this.operadores.length; y++) {
-
-
-                    if (this.operadores[y].tipo == typeOperator.datatype) {
-
-                        if (ok && this.cont == reg.length) {
-                            this.verificaCondicao(i, reg[i - 1].operador);
-                            op += `<option ${this.operadores[y].value === reg[i - 1].operador ? 'selected' : ''} value="${this.operadores[y].value}">${this.operadores[y].label}</option>`
-                        } else {
-                            op += `<option value="${this.operadores[y].value}">${this.operadores[y].label}</option>`
-                        }
+            const typeOperator = selectedSensor.atributos.find(op => op.parametro === param.value);
+            for (let y = 0; y < this.operadores.length; y++) {
 
 
+                if (this.operadores[y].tipo == typeOperator.datatype) {
 
+                    if (ok && this.cont == reg.length) {
+                        this.verificaCondicao(i, reg[i - 1].operador);
+                        op += `<option ${this.operadores[y].value === reg[i - 1].operador ? 'selected' : ''} value="${this.operadores[y].value}">${this.operadores[y].label}</option>`
+                    } else {
+                        op += `<option value="${this.operadores[y].value}">${this.operadores[y].label}</option>`
                     }
 
-                }
-                const optOperador = document.getElementById('operador' + i)
-                optOperador.innerHTML = op
 
-            }, 2500);
+
+                }
+
+            }
+            const optOperador = document.getElementById('operador' + i)
+            optOperador.innerHTML = op
+
+
         },
         listarAtributos() {
             let arr = []
@@ -1846,6 +1828,8 @@ export default {
 
                     //TODO: fecha regra
                     this.fecharRegra()
+                    this.fecharAcao()
+                    // this.mostrarDivRegra();
                 })
                 .catch(e => {
                     this.$swal("Oops...", e.response.data.detail, "error");
