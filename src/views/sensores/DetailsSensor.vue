@@ -567,38 +567,46 @@
 
                                             </div>
                                         </div>
+                                        <!-- {{ acao }} -->
                                         <div v-if="showDivAcao" :class="cont2 > 2 ? 'h-[400px]' : ''"
                                             class="overflow-y-auto bg-slate-300 rounded-lg mt-3">
                                             <div class="flex mb-3 items-center justify-between">
                                                 <h3 class="detalhes2">AÇÃO</h3>
                                                 <div @click="fecharAcao()"
-                                                    class="text-right text-red-600 font-bold cursor-pointer hover:text-red-400 duration-200 mr-3">
-                                                    X
+                                                    class="text-right px-2 my-2 rounded-md bg-slate-600 text-slate-200 font-bold cursor-pointer hover:bg-slate-400 duration-200 mr-3">
+                                                    Fechar
                                                 </div>
                                             </div>
                                             <div v-for="(c, index) in cont2" :key="index" class="p-2 rounded-lg">
-                                                <div class="grid gap-3 mb-3 md:grid-cols-4  p-2">
+                                                <div class="flex mb-3 items-center justify-between">
+                                                    <div class="grid gap-3 mb-3 md:grid-cols-4  p-2">
 
-                                                    <div>
-                                                        <label class="label-form">Sensor</label>
-                                                        <select class="input-form" :id="'sensorAcao' + c">
-                                                            <option v-for="se in sensores" :key="se.id"
-                                                                :value="se.serial" required
-                                                                :selected="se.id === sensor.id">
-                                                                {{ se.nome }}
-                                                            </option>
-                                                        </select>
-                                                    </div>
-
-                                                    <div>
                                                         <div>
-                                                            <label class="label-form">Valor</label>
-                                                            <input type="text" required :id="'valueAcao' + c"
-                                                                class="input-form" placeholder="">
+                                                            <label class="label-form">Sensor</label>
+                                                            <select class="input-form" :id="'sensorAcao' + c">
+                                                                <option v-for="se in sensores" :key="se.id"
+                                                                    :value="se.serial" required
+                                                                    :selected="se.id === sensor.id">
+                                                                    {{ se.nome }}
+                                                                </option>
+                                                            </select>
                                                         </div>
+
+                                                        <div>
+                                                            <div>
+                                                                <label class="label-form">Valor</label>
+                                                                <input @keyup="finalizarAcao(0)" type="text" required
+                                                                    :id="'valueAcao' + c" class="input-form"
+                                                                    placeholder="">
+                                                            </div>
+                                                        </div>
+
+
                                                     </div>
-
-
+                                                    <div @click="excluirAcao(index)"
+                                                        class="text-right bg-red-500 px-2 rounded-md text-white font-bold cursor-pointer hover:bg-red-700 duration-200 mr-3">
+                                                        X
+                                                    </div>
                                                 </div>
 
                                             </div>
@@ -606,9 +614,9 @@
                                                 <button type="button" @click="cont2++"
                                                     class="text-white mt-3 mb-5 bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 ml-3 py-2.5 text-center ">Adicionar
                                                     mais ações</button>
-                                                <button type="button" @click="finalizarAcao()"
-                                                    class="text-white mt-3 ml-3 mb-5 bg-blue-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Salvar
-                                                    ação</button>
+                                                <button type="button" :disabled="isDisabledAcao" @click="finalizarAcao()"
+                                                    class="text-white mt-3 ml-3 mb-5 bg-blue-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center disabled:bg-gray-400">Salvar
+                                                    ação </button>
                                             </div>
                                         </div>
 
@@ -749,6 +757,7 @@ export default {
         return {
             cont2: 0,
             showDivRegra: false,
+            isDisabledAcao: true,
             tipoCondicao: '',
             conditions: [],
             notificacoes: [],
@@ -941,6 +950,48 @@ export default {
         fecharAcao() {
             this.showDivAcao = false;
         },
+        excluirAcao(index) {
+            this.finalizarAcao(0);
+            if (this.sc.acao != undefined && this.sc.acao.length > 5) {
+                console.log('aaaaa');
+                let acao = JSON.parse(this.sc.acao);
+
+                
+                const novaAcao = JSON.parse(this.acao);
+                if(novaAcao.length > acao.length){
+                    acao = novaAcao
+                }
+                acao.splice(index, 1);
+                this.sc.acao = JSON.stringify(acao);
+                this.mostrarDivAcao();
+                console.log(acao);
+                this.cont2 = acao.length;
+                this.habilitarSalvar();
+                if (acao.length == 0) {
+                    this.acao = "{}";
+                    this.finalizarAcao();
+                    this.showDivAcao = false;
+                }
+            } else if (this.acao.length > 5) {
+                console.log('hahaha');
+
+                const acao = JSON.parse(this.acao);
+
+                acao.splice(index, 1);
+                this.sc.acao = JSON.stringify(acao);
+                this.mostrarDivAcao();
+                console.log(acao);
+                this.cont2 = acao.length;
+                this.habilitarSalvar();
+                if (acao.length == 0) {
+                    this.acao = "{}";
+                    this.finalizarAcao();
+                    this.showDivAcao = false;
+                }
+            }
+            console.log('kkkk');
+
+        },
         maisCondicao() {
             this.cont++;
         },
@@ -1009,7 +1060,8 @@ export default {
                 this.cont2 = 1;
 
             }
-            if (this.sc.acao) {
+            // this.sc.regra != undefined && this.sc.regra.length > 5
+            if (this.sc.acao != undefined && this.sc.acao.length > 5) {
                 const detailsAcao = JSON.parse(this.sc.acao);
                 const acao = [];
                 detailsAcao.forEach((detail, index) => {
@@ -1041,8 +1093,9 @@ export default {
 
             }
         },
-        finalizarAcao() {
+        finalizarAcao(n = 1) {
             this.habilitarSalvar();
+            this.isDisabledAcao = false
             let acao = [];
             for (let i = 1; i <= this.cont2; i++) {
                 let s = null
@@ -1062,8 +1115,15 @@ export default {
 
                 acao.push(x);
             }
-            this.acao = JSON.stringify(acao)
-            this.showDivAcao = false;
+            if (acao.length > 0) {
+                this.acao = JSON.stringify(acao)
+            } else {
+                this.acao = "{}"
+            }
+
+            if (n == 1) {
+                this.showDivAcao = false;
+            }
         },
         finalizarRegra() {
             this.habilitarSalvar();
