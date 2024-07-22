@@ -953,10 +953,8 @@ export default {
         excluirAcao(index) {
             this.finalizarAcao(0);
             if (this.sc.acao != undefined && this.sc.acao.length > 5) {
-                console.log('aaaaa');
                 let acao = JSON.parse(this.sc.acao);
 
-                
                 const novaAcao = JSON.parse(this.acao);
                 if(novaAcao.length > acao.length){
                     acao = novaAcao
@@ -964,7 +962,7 @@ export default {
                 acao.splice(index, 1);
                 this.sc.acao = JSON.stringify(acao);
                 this.mostrarDivAcao();
-                console.log(acao);
+
                 this.cont2 = acao.length;
                 this.habilitarSalvar();
                 if (acao.length == 0) {
@@ -973,14 +971,11 @@ export default {
                     this.showDivAcao = false;
                 }
             } else if (this.acao.length > 5) {
-                console.log('hahaha');
-
                 const acao = JSON.parse(this.acao);
 
                 acao.splice(index, 1);
                 this.sc.acao = JSON.stringify(acao);
                 this.mostrarDivAcao();
-                console.log(acao);
                 this.cont2 = acao.length;
                 this.habilitarSalvar();
                 if (acao.length == 0) {
@@ -989,7 +984,6 @@ export default {
                     this.showDivAcao = false;
                 }
             }
-            console.log('kkkk');
 
         },
         maisCondicao() {
