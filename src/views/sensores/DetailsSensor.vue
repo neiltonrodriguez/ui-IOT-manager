@@ -82,7 +82,7 @@
                                                 <template v-for="e in empresas" :key="e.id">
                                                     <option selected v-if="e.id == sensor.empresa" :value="e.id">{{
                                                         e.nome
-                                                    }}</option>
+                                                        }}</option>
                                                 </template>
                                             </select>
                                         </div>
@@ -94,7 +94,7 @@
                                                 <option value="" disabled selected>Escolha a conta</option>
                                                 <option v-for="dp in departamentos" :key="dp.id" :value="dp.id">{{
                                                     dp.titulo
-                                                }}
+                                                    }}
                                                 </option>
                                             </select>
                                         </div>
@@ -154,7 +154,7 @@
                                                 <option selected value="" disabled>Escolha um grupo</option>
                                                 <option v-for="sg in sensorgrupos" :value="sg.id" :key="sg.id">{{
                                                     sg.nome
-                                                }}</option>
+                                                    }}</option>
                                             </select>
                                         </div>
 
@@ -466,14 +466,14 @@
                                                     Ação</button>
                                             </div>
                                         </div>
-
+                                        <!-- {{ regra }} -->
                                         <div v-if="showDivRegra" :class="cont > 2 ? 'h-[400px]' : ''"
                                             class="overflow-y-auto rounded-lg mt-3  bg-slate-300">
                                             <div class="flex mb-3 items-center justify-between">
                                                 <h3 class="detalhes2">REGRA</h3>
                                                 <div @click="fecharRegra()"
-                                                    class="text-right text-red-600 font-bold cursor-pointer hover:text-red-400 duration-200 mr-3">
-                                                    X
+                                                    class="text-right px-2 my-2 rounded-md bg-slate-600 text-slate-200 font-bold cursor-pointer hover:bg-slate-400 duration-200 mr-3">
+                                                    Fechar
                                                 </div>
                                             </div>
 
@@ -483,7 +483,7 @@
                                                     <div></div>
                                                     <div class="text-center">
                                                         <label class="label-form">Conectores lógicos</label>
-                                                        <select class="input-form text-center" :id="'conector' + c"
+                                                        <select @keyup="habilitarSalvar()" class="input-form text-center" :id="'conector' + c"
                                                             required>
                                                             <option value="and">E</option>
                                                             <option value="or">OU</option>
@@ -492,68 +492,74 @@
                                                     </div>
                                                     <div></div>
                                                 </div>
+                                                <div class="flex mb-3 items-center justify-between">
+                                                    <div class="grid gap-3 mb-3 md:grid-cols-4 flex-1 p-2">
 
-                                                <div class="grid gap-3 mb-3 md:grid-cols-4  p-2">
-
-                                                    <div>
-                                                        <label class="label-form">Sensor</label>
-                                                        <select class="input-form" :id="'sensor' + c" :disabled="c == 1"
-                                                            @change="selectedSensorAtributes(c)">
-                                                            <option v-for="se in sensores" :key="se.id"
-                                                                :value="se.serial" required
-                                                                :selected="se.id === sensor.id">
-                                                                {{ se.nome }}
-                                                            </option>
-                                                        </select>
-                                                    </div>
-
-                                                    <div>
-                                                        <label class="label-form">Parâmetro</label>
-                                                        <select class="input-form" required :id="'atributos' + c"
-                                                            @change="selectedSensorOperator(c)">
-                                                            <option v-for="a in buscarParametros()" :key="a.id"
-                                                                :value="a.parametro">
-                                                                {{ a.label }}
-                                                            </option>
-
-
-                                                        </select>
-                                                    </div>
-
-                                                    <div>
-                                                        <label class="label-form">Condição</label>
-                                                        <select class="input-form" required :id="'operador' + c"
-                                                            @change="verificaCondicao(c)">
-                                                            <option value="" selected>escolha</option>
-
-                                                        </select>
-                                                    </div>
-
-                                                    <div :id="'mostrarValue' + c">
                                                         <div>
-                                                            <label class="label-form">Valor</label>
-                                                            <input type="text" required :id="'value' + c"
-                                                                class="input-form" placeholder="">
-                                                        </div>
-                                                    </div>
-                                                    <div :id="'mostrarValueEntre' + c" class="hidden">
-                                                        <div class="grid gap-3 md:grid-cols-2 ">
-                                                            <div>
-                                                                <label class="label-form">valor 1</label>
-                                                                <input type="text" required :id="'value1Entre' + c"
-                                                                    class="input-form" placeholder="">
-                                                            </div>
-
-                                                            <div>
-                                                                <label class="label-form">valor 2</label>
-                                                                <input type="text" required :id="'value2Entre' + c"
-                                                                    class="input-form" placeholder="">
-                                                            </div>
+                                                            <label class="label-form">Sensor</label>
+                                                            <select class="input-form" :id="'sensor' + c"
+                                                                :disabled="c == 1" @change="selectedSensorAtributes(c)">
+                                                                <option v-for="se in sensores" :key="se.id"
+                                                                    :value="se.serial" required
+                                                                    :selected="se.id === sensor.id">
+                                                                    {{ se.nome }}
+                                                                </option>
+                                                            </select>
                                                         </div>
 
-                                                    </div>
+                                                        <div>
+                                                            <label class="label-form">Parâmetro</label>
+                                                            <select class="input-form" required :id="'atributos' + c"
+                                                                @change="selectedSensorOperator(c)">
+                                                                <option v-for="a in buscarParametros()" :key="a.id"
+                                                                    :value="a.parametro">
+                                                                    {{ a.label }}
+                                                                </option>
 
+
+                                                            </select>
+                                                        </div>
+
+                                                        <div>
+                                                            <label class="label-form">Condição</label>
+                                                            <select class="input-form" required :id="'operador' + c"
+                                                                @change="verificaCondicao(c)">
+                                                                <option value="" selected>escolha</option>
+
+                                                            </select>
+                                                        </div>
+
+                                                        <div :id="'mostrarValue' + c">
+                                                            <div>
+                                                                <label class="label-form">Valor</label>
+                                                                <input @keyup="habilitarSalvar()" type="text" required :id="'value' + c"
+                                                                    class="input-form" placeholder="">
+                                                            </div>
+                                                        </div>
+                                                        <div :id="'mostrarValueEntre' + c" class="hidden">
+                                                            <div class="grid gap-3 md:grid-cols-2 ">
+                                                                <div>
+                                                                    <label class="label-form">valor 1</label>
+                                                                    <input @keyup="habilitarSalvar()" type="text" :id="'value1Entre' + c"
+                                                                        class="input-form" placeholder="">
+                                                                </div>
+
+                                                                <div>
+                                                                    <label class="label-form">valor 2</label>
+                                                                    <input @keyup="habilitarSalvar()" type="text" :id="'value2Entre' + c"
+                                                                        class="input-form" placeholder="">
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+                                                    <div @click="excluirRegra(index)"
+                                                        class="text-right mt-2 bg-red-500 px-2 rounded-md text-white font-bold cursor-pointer hover:bg-red-700 duration-200 mr-3">
+                                                        X
+                                                    </div>
                                                 </div>
+
 
                                             </div>
 
@@ -579,7 +585,7 @@
                                             </div>
                                             <div v-for="(c, index) in cont2" :key="index" class="p-2 rounded-lg">
                                                 <div class="flex mb-3 items-center justify-between">
-                                                    <div class="grid gap-3 mb-3 md:grid-cols-4  p-2">
+                                                    <div class="grid gap-3 mb-3 md:grid-cols-2 p-2">
 
                                                         <div>
                                                             <label class="label-form">Sensor</label>
@@ -614,7 +620,8 @@
                                                 <button type="button" @click="cont2++"
                                                     class="text-white mt-3 mb-5 bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 ml-3 py-2.5 text-center ">Adicionar
                                                     mais ações</button>
-                                                <button type="button" :disabled="isDisabledAcao" @click="finalizarAcao()"
+                                                <button type="button" :disabled="isDisabledAcao"
+                                                    @click="finalizarAcao()"
                                                     class="text-white mt-3 ml-3 mb-5 bg-blue-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center disabled:bg-gray-400">Salvar
                                                     ação </button>
                                             </div>
@@ -956,7 +963,7 @@ export default {
                 let acao = JSON.parse(this.sc.acao);
 
                 const novaAcao = JSON.parse(this.acao);
-                if(novaAcao.length > acao.length){
+                if (novaAcao.length > acao.length) {
                     acao = novaAcao
                 }
                 acao.splice(index, 1);
@@ -982,6 +989,42 @@ export default {
                     this.acao = "{}";
                     this.finalizarAcao();
                     this.showDivAcao = false;
+                }
+            }
+
+        },
+        excluirRegra(index) {
+            this.finalizarRegra(0);
+            if (this.sc.regra != undefined && this.sc.regra.length > 5) {
+                let regra = JSON.parse(this.sc.regra);
+
+                const novaRegra = JSON.parse(this.regra);
+                if (novaRegra.length > regra.length) {
+                    regra = novaRegra
+                }
+                regra.splice(index, 1);
+                this.sc.regra = JSON.stringify(regra);
+                this.mostrarDivRegra();
+
+                this.cont = regra.length;
+                this.habilitarSalvar();
+                if (regra.length == 0) {
+                    this.regra = "{}";
+                    this.finalizarRegra(0);
+                    this.showDivRegra = false;
+                }
+            } else if (this.regra.length > 5) {
+                const regra = JSON.parse(this.regra);
+
+                regra.splice(index, 1);
+                this.sc.regra = JSON.stringify(regra);
+                this.mostrarDivRegra();
+                this.cont = regra.length;
+                this.habilitarSalvar();
+                if (regra.length == 0) {
+                    this.regra = "{}";
+                    this.finalizarRegra(0);
+                    this.showDivRegra = false;
                 }
             }
 
@@ -1119,7 +1162,7 @@ export default {
                 this.showDivAcao = false;
             }
         },
-        finalizarRegra() {
+        finalizarRegra(n = 1) {
             this.habilitarSalvar();
             let regra = [];
             for (let i = 1; i <= this.cont; i++) {
@@ -1137,6 +1180,13 @@ export default {
                 let valorEntre1 = document.getElementById('value1Entre' + i).value != '' ? document.getElementById('value1Entre' + i).value : null;
                 let valorEntre2 = document.getElementById('value2Entre' + i).value != '' ? document.getElementById('value2Entre' + i).value : null;
                 let conector = document.getElementById('conector' + i) ? document.getElementById('conector' + i).value : null
+                // if(operador === 'between' && (valorEntre1 == null || valorEntre2 == null)){
+                //     this.$swal("Oops...", 'você não preencheu o valor 1 e valor 2', "error");
+                //     return;
+                // } else if(operador != 'between' && valor == null){
+                //     this.$swal("Oops...", 'você não preencheu o valor da condição', "error");
+                //     return;
+                // }
                 const x = {
                     sensor: s.serial,
                     parametro: parametro,
@@ -1149,11 +1199,21 @@ export default {
 
                 regra.push(x);
             }
-            this.regra = JSON.stringify(regra)
-            this.showDivRegra = false;
+            if (regra.length > 0) {
+                this.regra = JSON.stringify(regra)
+            } else {
+                this.regra = "{}"
+            }
+
+            if (n == 1) {
+                this.showDivRegra = false;
+            }
+            // this.regra = JSON.stringify(regra)
+            // this.showDivRegra = false;
 
         },
         verificaCondicao(i, condicao) {
+            // this.finalizarRegra(0);
             const operadorElem = document.getElementById('operador' + i);
             const mostrarValueEntreElem = document.getElementById('mostrarValueEntre' + i);
             const mostrarValueElem = document.getElementById('mostrarValue' + i);
@@ -1208,6 +1268,7 @@ export default {
         },
 
         selectedSensorAtributes(i) {
+            // this.finalizarRegra(0);
             let ok = false
             let reg = []
             if (i >= 1 && this.regra != undefined && this.regra != '') {
@@ -1230,6 +1291,7 @@ export default {
             this.selectedSensorOperator(i);
         },
         async selectedSensorOperator(i) {
+            // this.finalizarRegra(0)
             let ok = false
             let reg = []
             if (this.regra != undefined && this.regra != '') {
@@ -1713,6 +1775,21 @@ export default {
                 });
         },
         createSensorScript(sc) {
+            const novaRegra = JSON.parse(this.regra);
+            let err = false
+            for(let x = 0; x < novaRegra.length; x++){
+                if (this.regra.length > 5 && novaRegra[x].operador === 'between' && (novaRegra[x].valorEntre1 === null || novaRegra[x].valorEntre2 === null)) { 
+                   err = true
+                } else if (this.regra.length > 5 && novaRegra[x].operador !== 'between' && novaRegra[x].valor === null){
+                    err = true
+                }
+            }
+
+            if(err){
+                this.$swal("Oops...", 'valor da condição não preenchido', "error");
+                return;
+            }
+                
             if (sc.id) {
                 this.updateSensorScripts(sc);
             } else {
@@ -1841,6 +1918,7 @@ export default {
                 });
         },
         updateSensorScripts(form) {
+            // this.finalizarRegra();
             const u = {
                 is_active: form.is_active,
                 titulo: form.titulo,
