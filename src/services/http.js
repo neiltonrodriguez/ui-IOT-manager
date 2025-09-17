@@ -2,7 +2,6 @@ import axios from 'axios'
 
 
 const axiosInstance = axios.create({
-    baseURL: 'http://trulyiot.isgsa.com.br:8000/api/v1'
     // baseURL: 'http://10.61.30.186/api/v1'
 });
 
